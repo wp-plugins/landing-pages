@@ -45,6 +45,8 @@ $date_picker = lp_get_value($post, $key, 'date-picker');
 $wysiwyg_id = lp_get_value($post, $key, 'wysiwyg-id');
 // File/Image Upload Label: Text field Description. Defined in config.php on line 97
 $media_id = lp_get_value($post, $key, 'media-id');
+// The wordpress content if you want to show default placeholders. See line 107
+$content = get_the_content();
 
 
 // alternatively you can use default wordpress get_post_meta.
@@ -102,13 +104,12 @@ $media_id = lp_get_value($post, $key, 'media-id');
 
   <h3><?php echo $sub_headline;?></h3>
 
-         <?php the_content(); // Display Main Landing Page Content ?>
-
-         <?php // If the main content area is not empty
-         if ($content != "") {
-          // show the content!
-            the_content();
+         <?php 
+          // Conditional check for main content placeholder
+          if ($content != "") {
+            the_content(); // show the content!
           } else {
+          // Fill empty the_content(); area with placeholder html.
           echo "<p>This is the default content from the main wordpress editor screen. If it's empty, this content will show (a.k.a. fill in some content!)</p>"; 
           } ?>
       

@@ -1,6 +1,10 @@
 === WordPress Landing Pages ===Contributors: David Wells, Hudson AtwellDonate link: mailto:Hudson.Atwell@gmail.comLicense: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.htmlTags: landing pages, inbound marketing, conversion pages, split testing, a b test, a b testing, a/b test, a/b testing, coming soon page, email list, landing page, list building, maintenance page, squeeze page, inbound now, landing-pages, splash pages, cpa, click tracking, goal tracking, analyticsRequires at least: 3.3Tested up to: 3.5Stable tag: 1.0.1Create landing pages for your WordPress site. Monitor and improve conversion rates, run A/B split tests, customize your own templates and more.
-== Description ==This plugin creates landing pages for your WordPress site, allow users to monitor and track conversion rates, and run a/b or multivariate tests on those landing pages.The landing page plugin was specifically designed with inbound marketing best practices in mind and will help you drive & convert more leads on your site.= Highlights =
+== Description ==This plugin creates landing pages (a.k.a. conversion or splash pages) for your WordPress site. It gives site owners the ability to monitor and track conversion rates, run a/b or multivariate split tests on landing pages, and most importantly increase lead capture!
+
+The landing page plugin was specifically designed with inbound marketing best practices in mind and will help you drive & convert more leads on your site.
+
+Landing pages are an ideal way to convert more of your passive website visitors into active leads or list subscribers.= Highlights =
 * Create beautiful Landing Pages on your WordPress site.* Track conversion rates on your landing pages for continual optimization.* Easily clone existing landing pages and run A/B Split tests on variations.* Use your current WordPress theme or choose from our library of custom landing page designs.* Extend functionality with our growing repository of third party add ons.* Easily implement your own custom landing page design.
 
 This plugin is form agnostic meaning it will work with any form system you use.

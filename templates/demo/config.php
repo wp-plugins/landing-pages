@@ -54,14 +54,14 @@ $lp_data[$key]['options'][] =
 // Add a colorpicker option to your template's options panel. 
 // This is called in the template's index.php file with lp_get_value($post, $key, 'color-picker-id'); 
 $lp_data[$key]['options'][] = 
-	lp_add_option($key,"colorpicker","color-picker-id","ffffff","Template body color","Use this setting to change the template's body color", $options=null);
+	lp_add_option($key,"colorpicker","color-picker-id","ffffff","ColorPicker Label","Colorpicker field description", $options=null);
 
 /* Radio Button Example */
 // Add a radio button option to your theme's options panel.	
 // This is called in the template's index.php file with lp_get_value($post, $key, 'display-navigation'); 
 $options = array('1' => 'on','0'=>'off');
 $lp_data[$key]['options'][] = 
-	lp_add_option($key,"radio","display-navigation","1","Display navigation","Toggle navigation block on and off", $options);
+	lp_add_option($key,"radio","radio-id-here","1","Radio Label","Radio field description", $options);
 
 /* Checkbox Example */
 // Add a checkbox option to your theme's option panel.
@@ -89,7 +89,7 @@ $lp_data[$key]['options'][] =
 // Add visual/html editor to landing page options	
 // This is called in the template's index.php file with lp_get_value($post, $key, 'wysiwyg-id'); 
 $lp_data[$key]['options'][] = 
-	lp_add_option($key,"wysiwyg","wysiwyg-id","","Main Content Box 2","Main Content Box 2", $options=null);
+	lp_add_option($key,"wysiwyg","wysiwyg-id","Default WYSIWYG content","Main Content Box 2","Main Content Box 2", $options=null);
 
 /* Media Uploaded Example */
 // Add a media uploader field to your landing page options	

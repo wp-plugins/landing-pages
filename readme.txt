@@ -12,4 +12,6 @@ Recommended form plugins (Gravity forms or contact form 7)
 You can quickly take your existing designs and implement them using our <a href="http://plugins.inboundnow.com/docs/dev/">templating framework</a>.
 
 The plugin is also fully extendable and has a number of actions, filters, and hooks available for use.
-== Installation ==1. Upload `landing-pages` folder to the `/wp-content/plugins/` directory1. Activate the plugin through the 'Plugins' menu in WordPress== Frequently Asked Questions ==*Can I create my own landing page designs?,*Yes! You can learn how to <a href="http://plugins.inboundnow.com/docs/dev/creating-templates/">create your own landing page template here</a>.== Screenshots ==1. Landing Page Custom Post Type2. Manage Split Testing Page== Changelog === 1.1 =Released
+== Installation ==1. Upload `landing-pages` folder to the `/wp-content/plugins/` directory1. Activate the plugin through the 'Plugins' menu in WordPress== Frequently Asked Questions ==*Can I create my own landing page designs?,*Yes! You can learn how to <a href="http://plugins.inboundnow.com/docs/dev/creating-templates/">create your own landing page template here</a>.== Screenshots ==1. Landing Page Custom Post Type
+2. Track conversion rates and continuously improve your landing pages3. Manage Split Testing Page
+4. Choose from a ton of pre-made templates, use your existing design, or design your own theme!== Changelog === 1.1 =Released

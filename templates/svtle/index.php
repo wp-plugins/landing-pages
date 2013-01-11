@@ -7,6 +7,9 @@
  * @since    1.0
  */
 
+/* Include Shareme Library */
+include_once(LANDINGPAGES_PATH.'libraries/library.shareme.php');
+
 /* Declare Template Key */
 $key = lp_get_parent_directory(dirname(__FILE__)); 
 $path = LANDINGPAGES_URLPATH.'templates/'.$key.'/';

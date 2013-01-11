@@ -6,13 +6,13 @@ function resizer() {
     }
 
     this.init = function(element) {
-	$('#resizeroo').remove();
+	jQuery('#resizeroo').remove();
 	this.tester = element.clone();
 	this.tester.css('display', 'none');
 	this.tester.css('position', 'absolute');
 	this.tester.css('height', 'auto');
 	this.tester.css('width', 'auto');
-	$('body').append(this.tester);
+	jQuery('body').append(this.tester);
 	this.size = 1;
 	this.tester.css('font-size', this.size + 'px');
     }
@@ -74,7 +74,7 @@ function resizer() {
               $.extend( settings, options );
 	  }
 	  r = new resizer();
-	  r.resize($(this), settings.width);
+	  r.resize(jQuery(this), settings.width);
       });
   };
 })( jQuery );

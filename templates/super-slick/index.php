@@ -4,6 +4,9 @@
 // Plugin: Landing Pages - Inboundnow.com
 /*****************************************/
 
+/* Include Sharrreme Library */
+include_once(LANDINGPAGES_PATH.'libraries/library.shareme.php');
+
 /* Declare Template Key */
 $key = lp_get_parent_directory(dirname(__FILE__)); 
 $path = LANDINGPAGES_URLPATH.'templates/'.$key.'/';
@@ -70,7 +73,6 @@ $blue = $RBG_array["b"];
 <link rel="stylesheet" href="<?php echo $path; ?>assets/css/style.css" type="text/css" media="screen">
 
 <link rel="stylesheet" id="farbtastic-css" href="<?php echo $path; ?>assets/css/farbtastic.css" type="text/css" media="all">
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>	
 <style type="text/css">
 .recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}
   #logotopend { width: 940px;}
@@ -111,17 +113,17 @@ $blue = $RBG_array["b"];
   <script src="<?php echo $path; ?>assets/js/poetry.js"></script>
 
 <script>
-$(document).ready(
+jQuery(document).ready(
     function() {
-     render_minis($('.mini_verse'));
-     $('#hi p').widtherize({'width': 200});
-     $('#logotopend h1').widtherize({'width': 980});
+     render_minis(jQuery('.mini_verse'));
+     jQuery('#hi p').widtherize({'width': 200});
+     jQuery('#logotopend h1').widtherize({'width': 980});
      
-     var lineheight = parseInt($('#logotopend h1').css("font-size"));
+     var lineheight = parseInt(jQuery('#logotopend h1').css("font-size"));
      var newlineheight = lineheight * .851;
-     $('#logotopend h1').css("line-height", newlineheight + "px" );
+     jQuery('#logotopend h1').css("line-height", newlineheight + "px" );
      var newfontsize = lineheight * .766;
-     $('#tagline').css("font-size", newfontsize + "px");
+     jQuery('#tagline').css("font-size", newfontsize + "px");
 
 }
 );
@@ -131,7 +133,8 @@ $(document).ready(
 <body class="home blog slick-lander"> 
 <div id="body_wrapper">		
 <div id="header">
-    
+     
+   
 	<div class="social">
 		
 		<div class="social-icon-rss">	
@@ -152,9 +155,7 @@ $(document).ready(
 	
 
 <div id="slideshow-inner">
- <?php if ($social_display==="1" ) { // Show Social Media Icons?>
-            <?php lp_social_media_vertical(); // print out social media buttons?>
-        <?php  } ?>		
+
 	<div id="slideshow-inleft">
 
 <?php lp_conversion_area(); /* echos out form/conversion area content */ ?>
@@ -173,10 +174,40 @@ $(document).ready(
 		  
 		</div>
 	</div> 
-	
+<?php if ($social_display==="1" ) { // Show Social Media Icons?>
+	<?php lp_social_media(); // print out social media buttons?>
+	<style type="text/css">
+	#lp-social-buttons {clear: both;
+	margin: auto;
+	width: 460px;}
+	  #lp-social-buttons {width: 517px;
+margin: auto;
+}
+.sharrre .googleplus {
+width: 90px !important;
+}
+.sharrre .pinterest {
+    width: 75px !important;
+}
+.twitter {
+    width: 111px;
+}
+.sharrre .button {
+width: 106px;}
+.linkedin {
+margin-right: -14px;}
+	#slideshow-inner {
+	margin-left: auto;
+	margin-right: auto;
+	padding-top: 15px;
+	width: 960px;
+	padding-bottom: 10px;
+	}
+	</style> 	
+<?php  } ?>	
+
 	</div>
 
-	
 </div> <!-- end body_wrapper -->
 	 
 

@@ -4,6 +4,9 @@
 // Plugin: Landing Pages - Inboundnow.com
 /*****************************************/
 
+/* Include Shareme Library */
+include_once(LANDINGPAGES_PATH.'libraries/library.shareme.php');
+
 /* Declare Template Key */
 $key = lp_get_parent_directory(dirname(__FILE__)); 
 $path = LANDINGPAGES_URLPATH.'templates/'.$key.'/';
@@ -103,12 +106,15 @@ $blue = $RBG_array["b"];
 
 </head>
 <body>
+     
 <div class="container">
+         
 
 <div id="content-wrapper">
+
  <?php if ($social_display==="1" ) { // Show Social Media Icons?>
-            <?php lp_social_media_vertical(); // print out social media buttons?>
-        <?php  } ?>
+    <?php lp_social_media("vertical"); // print out social media buttons?>
+ <?php  } ?>
 
 
 <div id="right">
@@ -123,7 +129,13 @@ $blue = $RBG_array["b"];
 <?php the_content();?>
 	</div> <!-- end left-content -->
 </div> <!-- end left -->
+ <style type="text/css">
 
+ .sharrre .button {
+width: 60px;
+padding: 4px;
+}
+</style> 
 
 </div><!-- end content-wrapper -->
 

@@ -4,6 +4,9 @@
 // Plugin: Landing Pages - Inboundnow.com
 /*****************************************/
 
+/* Include Shareme Library */
+include_once(LANDINGPAGES_PATH.'libraries/library.shareme.php');
+
 /* Declare Template Key */
 $key = lp_get_parent_directory(dirname(__FILE__)); 
 $path = LANDINGPAGES_URLPATH.'templates/'.$key.'/';
@@ -67,18 +70,20 @@ $blue = $RBG_array["b"];
         <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300" />
         <link rel="stylesheet" href="<?php echo $path; ?>assets/css/styles.css" />
         <link rel="stylesheet" href="<?php echo $path; ?>assets/countdown/jquery.countdown.css" />
-        <?php // wp_enqueue_script('sharrre', LANDINGPAGES_URLPATH . 'js/sharrre/jquery.sharrre-1.3.3.min.js'); ?>
  <style type="text/css">
+   #content-background{ width: 550px; padding-top: 20px; padding-bottom:20px;border-radius: 6px; margin: auto; }
+
 <?php if ($bg_image != "") { ?>
     html { background: none;}
-    #content-background{ width: 550px; padding-top: 20px; padding-bottom:20px;border-radius: 6px; margin: auto; }
+  
 body {  background: url(<?php echo $bg_image; ?>) no-repeat center center fixed; 
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
     filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='<?php echo $bg_image; ?>', sizingMethod='scale');
--ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='<?php echo $bg_image; ?>', sizingMethod='scale');"}
+text-indent: -9999px;
+    ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='<?php echo $bg_image; ?>', sizingMethod='scale');"}
 <?php } ?>
 
 <?php if ($text_color != "") { echo "p, #note, label  { color: #$text_color;} "; } ?> 
@@ -102,10 +107,11 @@ body {  background: url(<?php echo $bg_image; ?>) no-repeat center center fixed;
     </head>
     
     <body <?php lp_body_class();?>>
-<div id="page-wrapper">        
+<div id="page-wrapper">     
 <div id="heading-area">
     <h1><?php the_title(); ?></h1>
 </div>
+<div id="content-wrapper">
 <div id="content-background">
 
 		<div id="countdown"></div>
@@ -114,28 +120,51 @@ body {  background: url(<?php echo $bg_image; ?>) no-repeat center center fixed;
         <div id="form-area">
         <?php lp_conversion_area(); /* Print out form content */ ?>
         <div id="content-area">
+
             <?php the_content();?>
         </div> <!-- end content area -->
         </div>
-</div>        
+</div>  
+</div>  
+  <?php if ($social_display==="1" ) { // Show Social Media Icons?>    
         <footer>
-	      <?php lp_social_media(); // print out social media buttons?>
+
+
+	    <?php lp_social_media(); // print out social media buttons?>   
+  <style type="text/css">
+  #lp-social-buttons {width: 517px;
+margin: auto;
+}
+.sharrre .googleplus {
+width: 90px !important;
+}
+.sharrre .pinterest {
+    width: 75px !important;
+}
+.twitter {
+    width: 111px;
+}
+.sharrre .button {
+width: 106px;}
+.linkedin {
+margin-right: -14px;
+}</style>
         </footer>
-        
+   <?php } ?>     
         <!-- JavaScript includes -->
-		<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+		
 		<script src="<?php echo $path; ?>assets/countdown/jquery.countdown.js"></script>
   
 		<script>
-$(function(){
+jQuery(function(){
     
-    var note = $('#note'),
+    var note = jQuery('#note'),
     // year, month-1, date
         ts = new Date(<?php $date = new DateTime("$date_picker");
                 echo $date->format("Y, n-1, j");?>),
         newYear = false;
    
-    $('#countdown').countdown({
+    jQuery('#countdown').countdown({
         timestamp   : ts,
         callback    : function(days, hours, minutes, seconds){
             
@@ -160,13 +189,13 @@ $(function(){
 });
 /*jQuery.fn.center = function () {
     this.css("position","absolute");
-    this.css("top", Math.max(0, (($(window).height() - this.outerHeight()) / 2) + 
-                                                $(window).scrollTop()) + "px");
-    this.css("left", Math.max(0, (($(window).width() - this.outerWidth()) / 2) + 
-                                                $(window).scrollLeft()) + "px");
+    this.css("top", Math.max(0, ((jQuery(window).height() - this.outerHeight()) / 2) + 
+                                                jQuery(window).scrollTop()) + "px");
+    this.css("left", Math.max(0, ((jQuery(window).width() - this.outerWidth()) / 2) + 
+                                                jQuery(window).scrollLeft()) + "px");
     return this;
 }
-$('#lp_container').center();*/
+jQuery('#lp_container').center();*/
         </script>
 <?php 
 endwhile; endif; 

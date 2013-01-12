@@ -82,8 +82,7 @@ body {  background: url(<?php echo $bg_image; ?>) no-repeat center center fixed;
     -o-background-size: cover;
     background-size: cover;
     filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='<?php echo $bg_image; ?>', sizingMethod='scale');
-text-indent: -9999px;
-    ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='<?php echo $bg_image; ?>', sizingMethod='scale');"}
+    ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='<?php echo $bg_image; ?>', sizingMethod='scale')";}
 <?php } ?>
 
 <?php if ($text_color != "") { echo "p, #note, label  { color: #$text_color;} "; } ?> 

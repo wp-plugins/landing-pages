@@ -19,7 +19,6 @@ if (have_posts()) : while (have_posts()) : the_post();
 	$text_color = lp_get_value($post, $key, 'text-color');
 	$headline_color = lp_get_value($post, $key, 'headline-color'); 
 	$form_text_color = lp_get_value($post, $key, 'form-text-color'); 
-	$form_headline = lp_get_value($post, $key, 'form-headline');
 	$social_display = lp_get_value($post, $key, 'display-social');
 	$sidebar = lp_get_value($post, $key, 'sidebar'); 
 	$sub_headline = lp_get_value($post, $key, 'sub-headline'); 
@@ -96,10 +95,6 @@ if (have_posts()) : while (have_posts()) : the_post();
             </div>
             <div id="wrap">
                 <div id="form_wrap">
-                    <div id="form-header">
-                        	<h2><?php echo $form_headline; ?></h2>
-
-                    </div>
                     <?php lp_conversion_area(); /* Print out form content */ ?>
                 </div>
             </div>

@@ -51,10 +51,6 @@ $options = array('1' => 'on','0'=>'off');
 $lp_data[$key]['options'][] = 
 	lp_add_option($key,"radio","display-social","1","Display Social Media Share Buttons","Toggle social sharing on and off", $options);
 
-// Add Textfield Metabox
-$lp_data[$key]['options'][] = 
-	lp_add_option($key,"text","form-headline","Form Header","Text Above Form","Text above form", $options=null);
-
 // Add a dropdown toggle to the landing page options panel	
 $options = array('right'=>'Envelope on right', 'left'=>'Envelope on left');
 $lp_data[$key]['options'][] = 

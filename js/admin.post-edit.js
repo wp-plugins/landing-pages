@@ -128,6 +128,14 @@ jQuery(document).ready(function ($) {
 		//alert(template);
 		//alert(label);
 	});
+
+    jQuery('#lp-cancel-selection').click(function(){
+        jQuery(".lp-template-selector-container").fadeOut(500,function(){
+            jQuery(".wrap").fadeIn(500, function(){
+            });
+        });
+    
+    });
 	// Colorpicker fix
     jQuery('.jpicker').one('mouseenter', function () {
         jQuery(this).jPicker({
@@ -166,6 +174,7 @@ jQuery(document).ready(function ($) {
 			jQuery('#templates-container').isotope();
 			jQuery(".lp-template-selector-container").fadeIn(500, function(){
                 jQuery(".currently_selected").show();
+                jQuery('#lp-cancel-selection').show();
 			});
             jQuery("#template-filter li a").first().click();
 		});

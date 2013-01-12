@@ -135,6 +135,9 @@ color: white;
 opacity: 0.5;
 border-radius: 7px;
 }
+.lp-selection-heading{width: 89%; margin-top: 20px;}
+.lp-selection-heading h1 {display: inline;}
+#lp-cancel-selection {display: inline; float: right;}
 /*david*/
 /*hudson*/
 .lp_template_wrapper ul li ul li .extended ul.smallNav li a:hover { 

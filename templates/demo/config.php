@@ -21,9 +21,9 @@ $lp_data[$key]['category'] = "miscellaneous";
 // Add description visible to the user
 $lp_data[$key]['description'] = "This is your template's description.."; 
 // Add a live demo link to illustration the page functionality to the user
-$lp_data[$key]['features'][] = lp_list_feature("Demo Link","Link To Demo Page"); 
+$lp_data[$key]['features'][] = lp_list_feature("Demo Link","http://demo.inboundnow.com/go/demo-template-preview/"); 
 // Description of the landing page visible to the user.
-$lp_data[$key]['features'][] = lp_list_feature("Study this template to learn about Landing Page Plugin's templating system and to assist in building new templates."); 
+$lp_data[$key]['features'][] = lp_list_feature("The Demo theme is here to help developers and designs implment thier own designs into the landing page plugin. Study this template to learn about Landing Page Plugin's templating system and to assist in building new templates."); 
 //EDIT - END
 
 //DO NOT EDIT - adds template to template selection dropdown 

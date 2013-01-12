@@ -19,8 +19,8 @@ $key = lp_get_parent_directory(dirname(__FILE__));
 //EDIT - START - defines template information - helps categorizae template and provides additional popup information
 $lp_data[$key]['category'] = "miscellaneous"; 
 $lp_data[$key]['description'] = "RSVP Envelope Template"; 
-$lp_data[$key]['features'][] = lp_list_feature("Demo Link","../wp-content/plugins/landing-pages/templates/demo/demo.html"); 
-$lp_data[$key]['features'][] = lp_list_feature("Different description"); 
+$lp_data[$key]['features'][] = lp_list_feature("Demo Link","http://demo.inboundnow.com/go/rsvp-envelope-lander-preview/"); 
+$lp_data[$key]['features'][] = lp_list_feature("This template is great for sending out invitations to events."); 
 
 
 //DO NOT EDIT - adds template to template selection dropdown 

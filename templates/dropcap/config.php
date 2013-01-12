@@ -16,8 +16,8 @@ $key = lp_get_parent_directory(dirname(__FILE__));
 //EDIT - START - defines template information - helps categorizae template and provides additional popup information
 $lp_data[$key]['category'] = "miscellaneous"; 
 $lp_data[$key]['description'] = "This template illustrates capabilities of this plugin's templating system.."; 
-$lp_data[$key]['features'][] = lp_list_feature("Demo Link","http://inboundsoon.wpengine.com/copy-of-brand-new-page/"); 
-$lp_data[$key]['features'][] = lp_list_feature("Study this template to learn about Landing Page Plugin's templating system and to assist in building new templates."); 
+$lp_data[$key]['features'][] = lp_list_feature("Demo Link","http://demo.inboundnow.com/go/dropcap-lander-preview/"); 
+$lp_data[$key]['features'][] = lp_list_feature("Dropcap is a template for a simple landing page with a large headline callout."); 
 
 
 //DO NOT EDIT - adds template to template selection dropdown 

@@ -19,7 +19,7 @@ $key = lp_get_parent_directory(dirname(__FILE__));
 //EDIT - START - defines template information - helps categorizae template and provides additional popup information
 $lp_data[$key]['category'] = "video"; 
 $lp_data[$key]['description'] = "Tubelar Template"; 
-$lp_data[$key]['features'][] = lp_list_feature("Demo Link","http://inboundsoon.wpengine.com/tubelar/"); 
+$lp_data[$key]['features'][] = lp_list_feature("Demo Link","http://demo.inboundnow.com/go/tubelar-lander-lander-preview/"); 
 $lp_data[$key]['features'][] = lp_list_feature("The Tubelar Template allows you to use any youtube video as the background for your landing page"); 
 
 

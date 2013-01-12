@@ -21,9 +21,9 @@ $lp_data[$key]['category'] = "miscellaneous";
 // Add Landing Page to a specific category. 
 $lp_data[$key]['description'] = "This template illustrates capabilities of this plugin's templating system.."; 
 // Add description visible to the user
-$lp_data[$key]['features'][] = lp_list_feature("Demo Link","http://inboundsoon.wpengine.com/simple-two-column-b/"); 
+$lp_data[$key]['features'][] = lp_list_feature("Demo Link","http://demo.inboundnow.com/go/simple-two-column-lander-preview/"); 
 // Add a live demo link to illustration the page functionality to the user
-$lp_data[$key]['features'][] = lp_list_feature("Study this template to learn about Landing Page Plugin's templating system and to assist in building new templates."); 
+$lp_data[$key]['features'][] = lp_list_feature("This is a standard template with a main content area and a sidebar for a conversion form. There are numerous options to change the color scheme to fit your brand."); 
 // Description of the landing page visible to the user.
 
 

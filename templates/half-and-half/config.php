@@ -21,9 +21,9 @@ $lp_data[$key]['category'] = "miscellaneous";
 // Add Landing Page to a specific category. 
 $lp_data[$key]['description'] = "This template illustrates capabilities of this plugin's templating system.."; 
 // Add description visible to the user
-$lp_data[$key]['features'][] = lp_list_feature("Demo Link","http://inboundsoon.wpengine.com/copy-of-half-and-half-template/"); 
+$lp_data[$key]['features'][] = lp_list_feature("Demo Link","http://demo.inboundnow.com/go/half-and-half-lander-preview/"); 
 // Add a live demo link to illustration the page functionality to the user
-$lp_data[$key]['features'][] = lp_list_feature("Study this template to learn about Landing Page Plugin's templating system and to assist in building new templates."); 
+$lp_data[$key]['features'][] = lp_list_feature("Half and Half is a template with two content areas on each side of the page. One side has your conversion area and the other your content on the page."); 
 // Description of the landing page visible to the user.
 
 

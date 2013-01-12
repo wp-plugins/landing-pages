@@ -85,7 +85,9 @@ body {  background: url(<?php echo $bg_image; ?>) no-repeat center center fixed;
     ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='<?php echo $bg_image; ?>', sizingMethod='scale')";}
 <?php } ?>
 
-<?php if ($text_color != "") { echo "p, #note, label  { color: #$text_color;} "; } ?> 
+<?php if ($text_color != "") { echo "p, #note, label, #lp_container  { color: #$text_color;} 
+                                        .countDiv::before, .countDiv::after {
+                                        background-color: #$text_color;} "; } ?> 
 <?php if ($headline_color != "") { echo "h1 {color: #$headline_color;}"; } ?> 
 <?php if ($background_on === "on") { echo "#content-background{background: url('".$path."image.php?hex=$content_color');}"; }?>
  <?php if ($submit_button_color != "") {

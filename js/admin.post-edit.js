@@ -208,19 +208,22 @@ jQuery(document).ready(function ($) {
         if (input == 'color') {
             jQuery('.current_lander tr.background-color').show();
             jQuery('.current_lander tr.background-image').hide();
-        } else {
+            jQuery('.background_tip').hide();
+        } 
+        else if (input == 'default') {
             jQuery('.current_lander tr.background-color').hide();
-            jQuery('.current_lander tr.background-image').show();
-        }
-
-        if (input == 'custom') {
+            jQuery('.current_lander tr.background-image').hide();
+            jQuery('.background_tip').hide();
+        } 
+        else if (input == 'custom') {
             var obj = jQuery(".current_lander tr.background-style td .lp_tooltip");
             obj.removeClass("lp_tooltip").addClass("background_tip").html("Use the custom css block at the bottom of this page to set up custom CSS rules");
             jQuery('.background_tip').show();
-
-        } else {
+        }
+        else {
+            jQuery('.current_lander tr.background-color').hide();
+            jQuery('.current_lander tr.background-image').show();
             jQuery('.background_tip').hide();
-
         }
 
     });
@@ -235,6 +238,9 @@ jQuery(document).ready(function ($) {
             var obj = jQuery(".current_lander tr.background-style td .lp_tooltip");
             obj.removeClass("lp_tooltip").addClass("background_tip").html("Use the custom css block at the bottom of this page to set up custom CSS rules");
             jQuery('.background_tip').show();
+        } else if (input2 == 'default') {
+            jQuery('.current_lander tr.background-color').hide();
+            jQuery('.current_lander tr.background-image').hide();   
         } else {
             jQuery('.current_lander tr.background-color').hide();
             jQuery('.current_lander tr.background-image').show();

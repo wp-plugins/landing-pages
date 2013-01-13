@@ -417,8 +417,22 @@ function lp_split_testing_options_popup_display()
 			</div>
 		</div>
 	</div>
-
-		
+<?php if (isset($_GET['start-group'])) { ?>
+<script type="text/javascript">
+	jQuery(document).ready(function () {
+		jQuery("#create-new-group").click();
+    });
+</script>
+<?php } ?>
+<script type="text/javascript">
+	jQuery(document).ready(function () {
+     	if (jQuery('#edit-group-div #landing_page_categorychecklist li').length == 0) {
+		jQuery("#edit-group-div .split-page-list").hide();
+		jQuery(".manage-split").html('No Test Groups Found!<br><br><a href="#top#create-new-group" id="create-new-group">Start New Split Test</a>');
+        jQuery("#edit-group-div input").hide();
+}
+    });
+</script>		
 	<?php
 }	
 
@@ -501,7 +515,7 @@ function lp_split_testing_clone_popup_display()
 	<div class="metabox-holder split-test-ui">
 		<h2 id="lp-st-tabs" class="nav-tab-wrapper">				
 				<a href="/wp-content/plugins/landing-pages/modules/module.split-testing-splash.php?post_id=<?php echo $lp_post_id;?>" id="edit-group" class="nav-tab">Split Test Groups</a>				
-				<a href="/wp-content/plugins/landing-pages/modules/module.split-testing-splash.php?post_id=<?php echo $lp_post_id;?>" id="create-new-group" class="nav-tab ">Start New Split Test</a>
+				<a href="/wp-content/plugins/landing-pages/modules/module.split-testing-splash.php?post_id=<?php echo $lp_post_id;?>&start-group=1" id="create-new-group" class="nav-tab ">Start New Split Test</a>
 				<a href="" id="clone-option" class="nav-tab nav-tab-active">Clone Current Page</a>
 			</h2>
 		<div class="lp-st-div" id="edit-group-div">
@@ -575,7 +589,7 @@ function lp_split_testing_clone_popup_display()
 jQuery(document).ready(function () {
      	if (jQuery('.clone-post-options #landing_page_categorychecklist li').length == 0) {
 		jQuery(".clone-post-options .split-page-list").hide();
-		jQuery(".clone_description").html("Clone Page");
+		jQuery(".clone_description").html("Click the Button to Clone this page");
 }
     });
 </script>		

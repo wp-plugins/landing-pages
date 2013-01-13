@@ -428,6 +428,7 @@ function lp_split_testing_options_popup_display()
 	jQuery(document).ready(function () {
      	if (jQuery('#edit-group-div #landing_page_categorychecklist li').length == 0) {
 		jQuery("#edit-group-div .split-page-list").hide();
+		jQuery("#create-new-group").click();
 		jQuery(".manage-split").html('No Test Groups Found!<br><br><a href="#top#create-new-group" id="create-new-group">Start New Split Test</a>');
         jQuery("#edit-group-div input").hide();
 }

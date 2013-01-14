@@ -32,6 +32,10 @@ This plugin is form agnostic meaning it will work with any form system you use.
 
 Recommended form plugins (Gravity forms or contact form 7)
 
+= About the Plugin =
+
+http://www.youtube.com/watch?v=BzcD6PgvLP4
+
 = Developers & Designers = 
 
 We built the landing page plugin as a framework! You can use it add value to your existing clients.

@@ -5,8 +5,6 @@
 *
 * @package  WordPress Landing Pages
 * @author 	David Wells
-* @version 	1.0
-* @since    1.0
 */
 
 lp_global_config(); // The lp_global_config function is for global code added by 3rd party extensions
@@ -14,10 +12,9 @@ lp_global_config(); // The lp_global_config function is for global code added by
 //gets template directory name to use as identifier - do not edit - include in all template files
 $key = lp_get_parent_directory(dirname(__FILE__)); 
 
-//adds template data to global array for use with landing page plugin - edit theme category and description only. 
-
 //EDIT - START - defines template information - helps categorizae template and provides additional popup information
 $lp_data[$key]['category'] = "miscellaneous"; 
+$lp_data[$key]['version'] = "1.0.0.1"; 
 $lp_data[$key]['description'] = "Countdown Lander Template"; 
 $lp_data[$key]['features'][] = lp_list_feature("Demo Link","http://demo.inboundnow.com/go/countdown-lander-preview/"); 
 $lp_data[$key]['features'][] = lp_list_feature("The countdown lander template is for counting down to events or limited time offers."); 

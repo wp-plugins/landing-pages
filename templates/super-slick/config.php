@@ -5,8 +5,6 @@
 *
 * @package  WordPress Landing Pages
 * @author 	David Wells
-* @version 	1.0
-* @since    1.0
 */
 
 lp_global_config(); // The lp_global_config function is for global code added by 3rd party extensions
@@ -19,6 +17,7 @@ $key = lp_get_parent_directory(dirname(__FILE__));
 //EDIT - START - defines template information - helps categorizae template and provides additional popup information
 $lp_data[$key]['category'] = "miscellaneous"; 
 $lp_data[$key]['description'] = "Super Slick Template"; 
+$lp_data[$key]['version'] = "1.0.0.1"; 
 $lp_data[$key]['features'][] = lp_list_feature("Demo Link","http://demo.inboundnow.com/go/super-slick-lander-preview/"); 
 $lp_data[$key]['features'][] = lp_list_feature("SuperSlick is great for showcasing a hero image or video on your landing page."); 
 

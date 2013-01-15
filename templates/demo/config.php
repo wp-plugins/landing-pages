@@ -5,8 +5,7 @@
 *
 * @package  WordPress Landing Pages
 * @author 	David Wells
-* @version 	1.0
-* @since    1.0
+
 */
 
 lp_global_config(); // The lp_global_config function is for global code added by 3rd party extensions
@@ -18,6 +17,8 @@ $key = lp_get_parent_directory(dirname(__FILE__));
 //EDIT - START - defines template information - helps categorize template and provides additional popup information
 // Add Landing Page to a specific category. 
 $lp_data[$key]['category'] = "miscellaneous"; 
+// Add version control to your template.
+$lp_data[$key]['version'] = "1.0.0.1"; 
 // Add description visible to the user
 $lp_data[$key]['description'] = "This is your template's description.."; 
 // Add a live demo link to illustration the page functionality to the user

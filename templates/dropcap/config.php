@@ -3,9 +3,6 @@
  * Template Name: Dropcap
  * @package  WordPress Landing Pages
  * @author   Your Name Here!
- * @example  example.com/landing-page
- * @version  1.0
- * @since    1.0
  */
 
 //gets template directory name to use as identifier - do not edit - include in all template files
@@ -15,6 +12,7 @@ $key = lp_get_parent_directory(dirname(__FILE__));
 
 //EDIT - START - defines template information - helps categorizae template and provides additional popup information
 $lp_data[$key]['category'] = "miscellaneous"; 
+$lp_data[$key]['version'] = "1.0.0.1"; 
 $lp_data[$key]['description'] = "This template illustrates capabilities of this plugin's templating system.."; 
 $lp_data[$key]['features'][] = lp_list_feature("Demo Link","http://demo.inboundnow.com/go/dropcap-lander-preview/"); 
 $lp_data[$key]['features'][] = lp_list_feature("Dropcap is a template for a simple landing page with a large headline callout."); 

@@ -37,7 +37,7 @@ if (have_posts()) : while (have_posts()) : the_post();
 	$submit_button_color = lp_get_value($post, $key, 'submit-button-color');   
 
 	// Convert Hex to RGB Value for submit button
-function Hex_2_RGB($hex) {
+function lp_Hex_2_RGB($hex) {
         $hex = ereg_replace("#", "", $hex);
         $color = array();
  
@@ -55,7 +55,7 @@ function Hex_2_RGB($hex) {
         return $color;
         
 }
-$RBG_array = Hex_2_RGB($submit_button_color);
+$RBG_array = lp_Hex_2_RGB($submit_button_color);
 $red = $RBG_array['r'];
 $green = $RBG_array["g"];
 $blue = $RBG_array["b"];

@@ -3,15 +3,16 @@
 Plugin Name: Landing Pages
 Plugin URI: http://plugins.inboundnow.com
 Description: The first true all-in-one Landing Page solution for WordPress, including ongoing conversion metrics, a/b split testing, unlimited design options and so much more!
-Version: 1.0.2.4
+Version: 1.0.3.1
 Author: David Wells (@inboundnow), Hudson Atwell (@atwellpub)
 Author URI: http://www.inboundnow.com/
 */
 
-define('LANDINGPAGES_CURRENT_VERSION', '1.0.2.4' );
+define('LANDINGPAGES_CURRENT_VERSION', '1.0.3.1' );
 define('LANDINGPAGES_URLPATH', WP_PLUGIN_URL.'/'.plugin_basename( dirname(__FILE__) ).'/' );
 define('LANDINGPAGES_PATH', WP_PLUGIN_DIR.'/'.plugin_basename( dirname(__FILE__) ).'/' );
 define('LANDINGPAGES_PLUGIN_SLUG', 'landing-pages' );
+define('LANDINGPAGES_STORE_URL', 'http://plugins.inboundnow.com' ); 
 
 if (is_admin())
 {
@@ -47,9 +48,8 @@ function landing_page_activate()
 /*********PREPARE LANDING PAGE OPTIONS***************/
 /****************************************************/
 /****************************************************/
-
 if (is_admin())
-{		
+{
 	//load current url in global variable
 	$current_url = "http://".$_SERVER["HTTP_HOST"].$_SERVER["REQUEST_URI"]."";
 	
@@ -211,10 +211,11 @@ function landing_pages_add_conversion_area($content)
 }
 
 
-
-
 if (is_admin())
 {
+	include_once('modules/module.split-testing.php');
+	include_once('modules/module.templates.php');
+	include_once('modules/module.store.php');
 	/**********************************************************/
 	/******************CREATE SETTINGS SUBMENU*****************/
 
@@ -225,16 +226,15 @@ if (is_admin())
 		//echo 1; exit;
 		if (current_user_can('manage_options'))
 		{
-			include_once('modules/module.split-testing.php');
+
 			add_submenu_page('edit.php?post_type=landing-page', 'Split Tests', 'Split Tests', 'manage_options', 'lp_split_testing','lp_split_testing_display');	
 			
-			include_once('modules/module.store.php');
+			add_submenu_page('edit.php?post_type=landing-page', 'Templates', 'Templates', 'manage_options', 'lp_manage_templates','lp_manage_templates',100);	
+				
 			add_submenu_page('edit.php?post_type=landing-page', 'Get Addons', 'Get Addons', 'manage_options', 'lp_store','lp_store_display',100);	
 			
 			add_submenu_page('edit.php?post_type=landing-page', 'Global Settings', 'Global Settings', 'manage_options', 'lp_global_settings','lp_display_global_settings');
 			
-			//include_once('modules/module.addon.php');
-			//add_submenu_page('edit.php?post_type=landing-page', 'Addons', 'Add-Ons', 'manage_options', 'lp_addons','lp_addon_display');	
 		}
 	}
 	

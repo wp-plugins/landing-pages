@@ -1,4 +1,4 @@
-<?php
+// <?php
 if (isset($_GET['page'])&&($_GET['page']=='lp_templates_upload'||$_GET['page']=='lp_templates_update'||$_GET['page']=='lp_templates_search'))
 {
 	add_action('admin_enqueue_scripts','lp_templates_admin_enqueue');
@@ -328,7 +328,7 @@ else if (isset($_GET['page'])&&$_GET['page']=='lp_manage_templates')
 		$zip = new PclZip( $file_path );	
 		//echo is_writable(LANDINGPAGES_PATH.'templates/'.$slug);exit;
 		
-		$result = $zip->extract(PCLZIP_OPT_PATH, LANDINGPAGES_PATH.'templates/' );
+		$result = $zip->extract(PCLZIP_OPT_REMOVE_PATH, $slug,PCLZIP_OPT_PATH, LANDINGPAGES_PATH.'templates/' );
 
 		if (!$result) 
 		{

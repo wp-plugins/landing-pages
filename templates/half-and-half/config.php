@@ -47,10 +47,6 @@ $options = array('right'=>'Conversion Area on right','left'=>'Conversion Area on
 $lp_data[$key]['options'][] = 
 	lp_add_option($key,"dropdown","sidebar","right","Page Layout","Align Conversion/Form Area to the left or the right", $options);	
 
-// Add a media uploader field to your landing page options	
-$lp_data[$key]['options'][] = 
-	lp_add_option($key,"media","logo","/wp-content/plugins/landing-pages/templates/svtle/assets/images/inbound-logo.png","Logo Image","Upload Your Logo (300x110px)", $options=null);
-
 // Add Colorpicker
 $lp_data[$key]['options'][] = 
 	lp_add_option($key,"colorpicker","content-color","ffffff","Content Background Color","Use this setting to change the template's main content area color", $options=null);

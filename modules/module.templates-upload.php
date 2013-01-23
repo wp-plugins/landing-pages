@@ -65,9 +65,14 @@ function lp_templates_upload_execute()
 {
 	// verify nonce
 	//print_r($_POST);
-	//print_r($_FILES);
+	//print_r($_FILES);exit;
 	if ($_FILES)
 	{		
+		$name = $_FILES['templatezip']['name'];
+		$name = preg_replace('/\((.*?)\)/','',$name);
+		$name = str_replace(array(' ','.zip'),'',$name);
+		$name = trim($name);
+		//echo $name;exit;
 		//echo $_FILES['templatezip']["tmp_name"];exit;
 		if (!wp_verify_nonce($_POST["lp_wpnonce"], 'lp-nonce'))
 		{
@@ -77,7 +82,18 @@ function lp_templates_upload_execute()
 		include_once(ABSPATH . 'wp-admin/includes/class-pclzip.php');
 		
 		$zip = new PclZip( $_FILES['templatezip']["tmp_name"]);
-		if ($zip->extract(PCLZIP_OPT_PATH, LANDINGPAGES_PATH.'templates/') == 0) 
+		
+		$uploads = wp_upload_dir();
+		$uploads_path = $uploads['basedir'];
+		$extended_path = $uploads_path.'/landing-pages/templates/';	
+		if (!is_dir($extended_path))
+		{
+			wp_mkdir_p( $extended_path );
+		}
+		
+		$result = $zip->extract(PCLZIP_OPT_PATH, $extended_path );
+		
+		if ($result = $zip->extract(PCLZIP_OPT_PATH, $extended_path ,  PCLZIP_OPT_REPLACE_NEWER  ) == 0) 
 		{
 			die("There was a problem. Please try again!");
 		} else 

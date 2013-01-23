@@ -16,7 +16,8 @@ $lp_data[$key]['version'] = "1.0.0.1";
 $lp_data[$key]['description'] = "This template illustrates capabilities of this plugin's templating system.."; 
 $lp_data[$key]['features'][] = lp_list_feature("Demo Link","http://demo.inboundnow.com/go/dropcap-lander-preview/"); 
 $lp_data[$key]['features'][] = lp_list_feature("Dropcap is a template for a simple landing page with a large headline callout."); 
-
+$lp_data[$key]['thumbnail'] = LANDINGPAGES_URLPATH.'templates/'.$key.'/thumbnail.png'; 
+//thumbnail
 
 //DO NOT EDIT - adds template to template selection dropdown 
 $lp_data[$key]['value'] = $key; //do not edit this

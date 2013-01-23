@@ -20,6 +20,7 @@ $lp_data[$key]['description'] = "RSVP Envelope Template";
 $lp_data[$key]['version'] = "1.0.0.1"; 
 $lp_data[$key]['features'][] = lp_list_feature("Demo Link","http://demo.inboundnow.com/go/rsvp-envelope-lander-preview/"); 
 $lp_data[$key]['features'][] = lp_list_feature("This template is great for sending out invitations to events."); 
+$lp_data[$key]['thumbnail'] = LANDINGPAGES_URLPATH.'templates/'.$key.'/thumbnail.png'; 
 
 
 //DO NOT EDIT - adds template to template selection dropdown 

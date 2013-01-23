@@ -53,12 +53,12 @@ else if (isset($_GET['page'])&&$_GET['page']=='lp_manage_templates')
 					if (stristr($value['category'],'Theme Integrated'))
 						continue;
 					
-					if (isset($data['thumbnail']))
-						$thumbnail = $data['thumbnail'];
+					if (isset($value['thumbnail']))
+						$thumbnail = $value['thumbnail'];
 					else if ($key=='default')
 						$thumbnail =  get_bloginfo('template_directory')."/screenshot.png";									
 					else
-					$thumbnail = LANDINGPAGES_URLPATH."templates/".$key."/thumbnail.png";
+						$thumbnail = LANDINGPAGES_UPLOADS_URLPATH.$key."/thumbnail.png";
 				
 					$this_data['ID']  = $key;
 					$this_data['template']  = $key;
@@ -298,10 +298,12 @@ else if (isset($_GET['page'])&&$_GET['page']=='lp_manage_templates')
 		$item['category']  = $data['category'];
 		$item['description']  = $data['description'];
 		
+		//print_r($item);exit;
+		
 		$response = lp_template_api_request( $item );
 		$package = $response['package'];
 		IF (!isset($package)||empty($package)) return;
-		
+		//echo $package;exit;
 		$zip_array = wp_remote_get($package,null);
 		($zip_array['response']['code']==200) ? $zip = $zip_array['body'] : die("<div class='error'><p>{$slug}: Invalid download location (Version control not provided).</p></div>");
 
@@ -327,15 +329,25 @@ else if (isset($_GET['page'])&&$_GET['page']=='lp_manage_templates')
 		
 		$zip = new PclZip( $file_path );	
 		//echo is_writable(LANDINGPAGES_PATH.'templates/'.$slug);exit;
+		$uploads = wp_upload_dir();
+		$uploads_path = $uploads['basedir'];
+		$extended_path = $uploads_path.'/landing-pages/templates/';
 		
-		$result = $zip->extract(PCLZIP_OPT_REMOVE_PATH, $slug,PCLZIP_OPT_PATH, LANDINGPAGES_PATH.'templates/',PCLZIP_OPT_REPLACE_NEWER );
+		
+		if (!is_dir($extended_path))
+		{
+			wp_mkdir_p( $extended_path );
+		}
+		
+		$result = $zip->extract(PCLZIP_OPT_PATH, $extended_path , PCLZIP_OPT_REPLACE_NEWER );
 
 		if (!$result) 
 		{
 			die("There was a problem. Please try again!");
 		} 
 		else 
-		{
+		{	
+			//print_r($result);exit;
 			unlink($file_path);
 			echo '<div class="updated"><p>'.$data['label'].' upgraded successfully!</div>';
 		}

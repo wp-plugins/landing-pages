@@ -20,7 +20,7 @@ $lp_data[$key]['description'] = "Tubelar Template";
 $lp_data[$key]['version'] = "1.0.0.1"; 
 $lp_data[$key]['features'][] = lp_list_feature("Demo Link","http://demo.inboundnow.com/go/tubelar-lander-lander-preview/"); 
 $lp_data[$key]['features'][] = lp_list_feature("The Tubelar Template allows you to use any youtube video as the background for your landing page"); 
-
+$lp_data[$key]['thumbnail'] = LANDINGPAGES_URLPATH.'templates/'.$key.'/thumbnail.png'; 
 
 //DO NOT EDIT - adds template to template selection dropdown 
 $lp_data[$key]['value'] = $key; 

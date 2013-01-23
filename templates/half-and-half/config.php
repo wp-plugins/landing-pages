@@ -25,7 +25,8 @@ $lp_data[$key]['features'][] = lp_list_feature("Demo Link","http://demo.inboundn
 // Add a live demo link to illustration the page functionality to the user
 $lp_data[$key]['features'][] = lp_list_feature("Half and Half is a template with two content areas on each side of the page. One side has your conversion area and the other your content on the page."); 
 // Description of the landing page visible to the user.
-
+$lp_data[$key]['thumbnail'] = LANDINGPAGES_URLPATH.'templates/'.$key.'/thumbnail.png'; 
+//thumbnail
 
 //DO NOT EDIT - adds template to template selection dropdown 
 $lp_data[$key]['value'] = $key; //do not edit this

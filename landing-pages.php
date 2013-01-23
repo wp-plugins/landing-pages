@@ -3,16 +3,19 @@
 Plugin Name: Landing Pages
 Plugin URI: http://plugins.inboundnow.com
 Description: The first true all-in-one Landing Page solution for WordPress, including ongoing conversion metrics, a/b split testing, unlimited design options and so much more!
-Version: 1.0.3.3
+Version: 1.0.3.5
 Author: David Wells (@inboundnow), Hudson Atwell (@atwellpub)
 Author URI: http://www.inboundnow.com/
 */
-
-define('LANDINGPAGES_CURRENT_VERSION', '1.0.3.3' );
+					
+define('LANDINGPAGES_CURRENT_VERSION', '1.0.3.5' );
 define('LANDINGPAGES_URLPATH', WP_PLUGIN_URL.'/'.plugin_basename( dirname(__FILE__) ).'/' );
 define('LANDINGPAGES_PATH', WP_PLUGIN_DIR.'/'.plugin_basename( dirname(__FILE__) ).'/' );
 define('LANDINGPAGES_PLUGIN_SLUG', 'landing-pages' );
 define('LANDINGPAGES_STORE_URL', 'http://plugins.inboundnow.com' ); 
+$uploads = wp_upload_dir();
+define('LANDINGPAGES_UPLOADS_PATH', $uploads['basedir'].'/landing-pages/templates/' ); 
+define('LANDINGPAGES_UPLOADS_URLPATH', $uploads['baseurl'].'/landing-pages/templates/' ); 
 
 if (is_admin())
 {
@@ -53,7 +56,39 @@ if (is_admin())
 	//load current url in global variable
 	$current_url = "http://".$_SERVER["HTTP_HOST"].$_SERVER["REQUEST_URI"]."";
 	
-	$template_paths = lp_get_template_paths();	
+	$template_paths = lp_get_core_template_paths();	
+	
+	//Now load all config.php files with their custom meta data
+	if (count($template_paths)>0)
+	{
+		foreach ($template_paths as $name)
+		{		
+			include_once(LANDINGPAGES_PATH."/templates/$name/config.php"); 	
+		}		
+	}
+	
+	$template_paths = lp_get_extended_template_paths();	
+	$uploads = wp_upload_dir();
+	$uploads_path = $uploads['basedir'];
+	//print_r($template_paths);exit;
+	$extended_templates_path = $uploads_path.'/landing-pages/templates/';
+	
+	if (count($template_paths)>0)
+	{
+		foreach ($template_paths as $name)
+		{			
+			include_once($extended_templates_path."$name/config.php"); 	
+		}		
+	}
+	
+	$template_data = lp_get_template_data();
+	if (isset($template_data))
+	{
+		$template_data_cats = lp_get_template_data_cats($template_data);
+	}
+	
+	
+	$template_paths = lp_get_core_template_paths();	
 	//print_r($template_paths);
 	
 	//Now load all config.php files with their custom meta data
@@ -287,7 +322,14 @@ function lp_custom_template($single) {
 				//echo $template; exit;
 				$template = str_replace('_','-',$template);
 				//echo LANDINGPAGES_URLPATH.'templates/'.$template.'/index.php'; exit;
-				return LANDINGPAGES_PATH.'templates/'.$template.'/index.php';
+				if (file_exists(LANDINGPAGES_PATH.'templates/'.$template.'/index.php'))
+				{
+					return LANDINGPAGES_PATH.'templates/'.$template.'/index.php';
+				}
+				else
+				{			
+					return LANDINGPAGES_UPLOADS_PATH.$template.'/index.php';
+				}
 			}
 		}
 	}

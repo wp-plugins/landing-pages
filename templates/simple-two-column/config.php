@@ -25,6 +25,8 @@ $lp_data[$key]['features'][] = lp_list_feature("Demo Link","http://demo.inboundn
 // Add a live demo link to illustration the page functionality to the user
 $lp_data[$key]['features'][] = lp_list_feature("This is a standard template with a main content area and a sidebar for a conversion form. There are numerous options to change the color scheme to fit your brand."); 
 // Description of the landing page visible to the user.
+$lp_data[$key]['thumbnail'] = LANDINGPAGES_URLPATH.'templates/'.$key.'/thumbnail.png'; 
+// Thumbnail
 
 
 //DO NOT EDIT - adds template to template selection dropdown 

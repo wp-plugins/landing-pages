@@ -56,70 +56,72 @@ function lp_split_testing_options_save()
 		$lp_id = $_POST['lp_post_id'];
 		$group_ids = $_POST['lp_group_ids'];
 		
-		$args=array(
-		  'post_type' => 'landing-page-group',
-		  'post_satus'=>'publish'
-		);
-		
-		$my_query = null;
-		$my_query = new WP_Query($args);
-		
-		if( $my_query->have_posts() ) 
+		if (isset($_POST['lp_group_ids']))
 		{
-			$i=1;				
-			while ($my_query->have_posts()) : $my_query->the_post(); 
-				$group_id = get_the_ID();
-				$group_data = get_the_content();
-				$group_data = json_decode($group_data,true);
-				
-				$lp_ids = array();
-				foreach ($group_data as $key=>$value)
-				{
-					$lp_ids[] = $key;
-				}
+			$args=array(
+			  'post_type' => 'landing-page-group',
+			  'post_satus'=>'publish'
+			);
+			
+			$my_query = null;
+			$my_query = new WP_Query($args);
+			
+			if( $my_query->have_posts() ) 
+			{
+				$i=1;				
+				while ($my_query->have_posts()) : $my_query->the_post(); 
+					$group_id = get_the_ID();
+					$group_data = get_the_content();
+					$group_data = json_decode($group_data,true);
+					
+					$lp_ids = array();
+					foreach ($group_data as $key=>$value)
+					{
+						$lp_ids[] = $key;
+					}
 
-				if (in_array($lp_id,$lp_ids)&&!in_array($group_id,$group_ids))
-				{
-					unset($group_data[$lp_id]);
-					//echo 1; exit;
-					$this_data = json_encode($group_data);
-					//print_r($this_data);
-					$new_post = array(
-						'ID' => $group_id,
-						'post_title' => get_the_title(),
-						'post_content' => $this_data,
-						'post_status' => 'publish',
-						'post_date' => date('Y-m-d H:i:s'),
-						'post_author' => 1,
-						'post_type' => 'landing-page-group'
-					);	
-					//print_r($new_post);
-					$post_id = wp_update_post($new_post);
-				}
-				else if (!in_array($lp_id,$lp_ids)&&in_array($group_id,$group_ids))
-				{
-					//echo 2; exit;
-					$group_data[$lp_id]['id'] = $lp_id;
-					$group_data[$lp_id]['status'] = 'active';
-					$this_data = json_encode($group_data);
+					if (in_array($lp_id,$lp_ids)&&!in_array($group_id,$group_ids))
+					{
+						unset($group_data[$lp_id]);
+						//echo 1; exit;
+						$this_data = json_encode($group_data);
+						//print_r($this_data);
+						$new_post = array(
+							'ID' => $group_id,
+							'post_title' => get_the_title(),
+							'post_content' => $this_data,
+							'post_status' => 'publish',
+							'post_date' => date('Y-m-d H:i:s'),
+							'post_author' => 1,
+							'post_type' => 'landing-page-group'
+						);	
+						//print_r($new_post);
+						$post_id = wp_update_post($new_post);
+					}
+					else if (!in_array($lp_id,$lp_ids)&&in_array($group_id,$group_ids))
+					{
+						//echo 2; exit;
+						$group_data[$lp_id]['id'] = $lp_id;
+						$group_data[$lp_id]['status'] = 'active';
+						$this_data = json_encode($group_data);
 
-					$new_post = array(
-						'ID' => $group_id,
-						'post_title' => get_the_title(),
-						'post_content' => $this_data,
-						'post_status' => 'publish',
-						'post_date' => date('Y-m-d H:i:s'),
-						'post_author' => 1,
-						'post_type' => 'landing-page-group'
-					);	
-					//print_r($new_post);
-					$post_id = wp_update_post($new_post);
-				}
-				
-				$i++;
-			endwhile;
-		}	
-		
+						$new_post = array(
+							'ID' => $group_id,
+							'post_title' => get_the_title(),
+							'post_content' => $this_data,
+							'post_status' => 'publish',
+							'post_date' => date('Y-m-d H:i:s'),
+							'post_author' => 1,
+							'post_type' => 'landing-page-group'
+						);	
+						//print_r($new_post);
+						$post_id = wp_update_post($new_post);
+					}
+					
+					$i++;
+				endwhile;
+			}	
+		}
 		
 		//display success and options
 		lp_display_success("Saved!");
@@ -586,14 +588,14 @@ function lp_split_testing_clone_popup_display()
 			</form>
 		</div>
 	</div>
-<script type="text/javascript">
-jQuery(document).ready(function () {
-     	if (jQuery('.clone-post-options #landing_page_categorychecklist li').length == 0) {
-		jQuery(".clone-post-options .split-page-list").hide();
-		jQuery(".clone_description").html("Click the Button to Clone this page");
-}
-    });
-</script>		
+	<script type="text/javascript">
+	jQuery(document).ready(function () {
+			if (jQuery('.clone-post-options #landing_page_categorychecklist li').length == 0) {
+			jQuery(".clone-post-options .split-page-list").hide();
+			jQuery(".clone_description").html("Click the Button to Clone this page");
+	}
+		});
+	</script>		
 		
 	<?php
 }	

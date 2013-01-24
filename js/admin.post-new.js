@@ -1,5 +1,11 @@
 jQuery(document).ready(function ($) {
 
+    jQuery('.lp_select_template').click(function(){
+    jQuery(".mceIframeContainer iframe#content_ifr").css("height", "100%");
+    jQuery("#wp-content-editor-container .mceStatusbar").css("display", "none");
+    });
+
+
 jQuery("#template-box a").live('click', function () {
 
 	setTimeout(function() {

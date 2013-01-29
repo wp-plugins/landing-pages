@@ -53,7 +53,7 @@ function lp_replace_sidebars()
 		$stop=0;
 		foreach ($original_widgets as $key=>$val)
 		{
-			
+			//$disable = apply_filters('lp_disable_sidebar_removal', false);
 			if (stristr($key,'header')||stristr($key,'footer')||stristr($key,'lp_sidebar')||stristr($key,'wp_inactive_widgets')||stristr($key,'wp_inactive_widgets')||stristr($key,'array_version'))
 			{
 

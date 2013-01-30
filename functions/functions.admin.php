@@ -70,10 +70,19 @@ function lp_admin_enqueue($hook)
 			wp_enqueue_script('jquery-tinymce', LANDINGPAGES_URLPATH . 'js/tiny_mce/jquery.tinymce.js');
 
 			//zebra datedicker
-			wp_enqueue_script('zebra_datepicker', LANDINGPAGES_URLPATH . 'js/zebra-datepicker/javascript/zebra_datepicker.src.js');
-			wp_enqueue_script('zebra_functions', LANDINGPAGES_URLPATH . 'js/zebra-datepicker/javascript/zebra_functions.js');
-			wp_localize_script( 'zebra_datepicker', 'zebra_datepicker', array( 'thispath' => LANDINGPAGES_URLPATH.'js/zebra-datepicker/css' ));
-			wp_enqueue_style('zebra_datapicker.css', LANDINGPAGES_URLPATH . 'js/zebra-datepicker/css/zebra_datepicker.css');	
+			//wp_enqueue_script('zebra_datepicker', LANDINGPAGES_URLPATH . 'js/zebra-datepicker/javascript/zebra_datepicker.src.js');
+			//wp_enqueue_script('zebra_functions', LANDINGPAGES_URLPATH . 'js/zebra-datepicker/javascript/zebra_functions.js');
+			//wp_localize_script( 'zebra_datepicker', 'zebra_datepicker', array( 'thispath' => LANDINGPAGES_URLPATH.'js/zebra-datepicker/css' ));
+			//wp_enqueue_style('zebra_datapicker.css', LANDINGPAGES_URLPATH . 'js/zebra-datepicker/css/zebra_datepicker.css');
+
+			// jquery datepicker
+			wp_enqueue_script('jquery_datepicker', LANDINGPAGES_URLPATH . 'js/jquery-datepicker/jquery.timepicker.min.js');
+			wp_enqueue_script('jquery_datepicker_functions', LANDINGPAGES_URLPATH . 'js/jquery-datepicker/picker_functions.js');
+			wp_enqueue_script('jquery_datepicker_base', LANDINGPAGES_URLPATH . 'js/jquery-datepicker/lib/base.js');
+			wp_enqueue_script('jquery_datepicker_datepair', LANDINGPAGES_URLPATH . 'js/jquery-datepicker/lib/datepair.js');
+			wp_localize_script( 'jquery_datepicker', 'jquery_datepicker', array( 'thispath' => LANDINGPAGES_URLPATH.'js/jquery-datepicker/' ));
+			wp_enqueue_style('jquery.timepicker.css', LANDINGPAGES_URLPATH . 'js/jquery-datepicker/jquery.timepicker.css');
+			wp_enqueue_style('base.css', LANDINGPAGES_URLPATH . 'js/jquery-datepicker/lib/base.css');		
 		}
 	}
 }
@@ -437,8 +446,13 @@ function lp_render_metabox($key,$custom_fields,$post)
 								<div class="lp_tooltip tool_color" title="'.$field['desc'].'"></div>';
 						break;
 					case 'datepicker':
-						echo '<input id="datepicker-example2" class="Zebra_DatePicker_Icon datepicker" type="text" name="'.$field['id'].'" id="'.$field['id'].'" value="'.$meta.'" size="8" />
-								<div class="lp_tooltip tool_date" title="'.$field['desc'].'"></div><p class="description">'.$field['desc'].'</p>';
+						echo '<div class="example">	
+						<span class="datepair" data-language="javascript">	
+									Date: <input type="text" id="date-picker" class="date start" /></span>
+									Time: <input id="time-picker" type="text" class="time" />
+									<input type="hidden" name="'.$field['id'].'" id="'.$field['id'].'" value="'.$meta.'" class="new-date" value="" >
+									<p class="description">'.$field['desc'].'</p>
+							</div>';		
 						break;	
 					case 'text':
 						echo '<input type="text" name="'.$field['id'].'" id="'.$field['id'].'" value="'.$meta.'" size="30" />

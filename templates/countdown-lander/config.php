@@ -14,7 +14,7 @@ $key = lp_get_parent_directory(dirname(__FILE__));
 
 //EDIT - START - defines template information - helps categorizae template and provides additional popup information
 $lp_data[$key]['category'] = "miscellaneous"; 
-$lp_data[$key]['version'] = "1.0.0.2"; 
+$lp_data[$key]['version'] = "1.0.0.3"; 
 $lp_data[$key]['description'] = "Countdown Lander Template"; 
 $lp_data[$key]['features'][] = lp_list_feature("Demo Link","http://demo.inboundnow.com/go/countdown-lander-preview/"); 
 $lp_data[$key]['features'][] = lp_list_feature("The countdown lander template is for counting down to events or limited time offers."); 
@@ -31,7 +31,7 @@ $lp_data[$key]['label'] = ucwords(str_replace('-',' ',$key));
 // Date Picker Example
 // Add a colorpicker option to your theme's options panel. 
 $lp_data[$key]['options'][] = 
-	lp_add_option($key,"datepicker","date-picker","2012-12-27","Countdown Date","What date are we counting down to?", $options=null);
+	lp_add_option($key,"datepicker","date-picker","2013-1-31 13:00","Countdown Date","What date are we counting down to?", $options=null);
 
 // Add Colorpicker
 $lp_data[$key]['options'][] = 

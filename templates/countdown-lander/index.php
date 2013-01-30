@@ -29,9 +29,15 @@ if (have_posts()) : while (have_posts()) : the_post();
     $countdown_message = lp_get_value($post, $key, 'countdown-message'); 
     $bg_image = lp_get_value($post, $key, 'bg-image');
     $submit_button_color = lp_get_value($post, $key, 'submit-button-color'); 
-    
+// Date Formatting
+$new_value = str_replace('-',' ', $date_picker);
+$js_date = str_replace(':',' ', $new_value);
+$res = preg_replace('/[^a-z0-9åäö\s]/ui', '', $js_date);
+$arr = preg_split('/\s+/', $res, 6);
+$imploded = implode(',', array_slice($arr, 0, 5));
+$date_array = explode(",", $imploded);
 // Convert Hex to RGB Value for submit button
-function Hex_2_RGB($hex) {
+function lp_Hex_2_RGB($hex) {
         $hex = ereg_replace("#", "", $hex);
         $color = array();
  
@@ -49,11 +55,11 @@ function Hex_2_RGB($hex) {
         return $color;
         
 }
-$RBG_array = Hex_2_RGB($submit_button_color);
+$RBG_array = lp_Hex_2_RGB($submit_button_color);
 $red = $RBG_array['r'];
 $green = $RBG_array["g"];
 $blue = $RBG_array["b"];
-     
+
 ?>
 
 <!DOCTYPE html>
@@ -115,13 +121,12 @@ body {  background: url(<?php echo $bg_image; ?>) no-repeat center center fixed;
 <div id="content-wrapper">
 <div id="content-background">
 
-		<div id="countdown"></div>
-		<p id="note"></p>
+        <div id="countdown"></div>
+        <p id="note"></p>
 <!-- Show or hide form area -->
         <div id="form-area">
         <?php lp_conversion_area(); /* Print out form content */ ?>
         <div id="content-area">
-
             <?php the_content();?>
         </div> <!-- end content area -->
         </div>
@@ -131,7 +136,7 @@ body {  background: url(<?php echo $bg_image; ?>) no-repeat center center fixed;
         <footer>
 
 
-	    <?php lp_social_media(); // print out social media buttons?>   
+        <?php lp_social_media(); // print out social media buttons?>   
   <style type="text/css">
   #lp-social-buttons {width: 517px;
 margin: auto;
@@ -153,16 +158,15 @@ margin-right: -14px;
         </footer>
    <?php } ?>     
         <!-- JavaScript includes -->
-		
-		<script src="<?php echo $path; ?>assets/countdown/jquery.countdown.js"></script>
+        
+        <script src="<?php echo $path; ?>assets/countdown/jquery.countdown.js"></script>
   
-		<script>
+        <script>
 jQuery(function(){
     
     var note = jQuery('#note'),
     // year, month-1, date
-        ts = new Date(<?php $date = new DateTime("$date_picker");
-                echo $date->format("Y, n-1, j");?>),
+        ts = new Date(<?php if (isset($date_array[0])) { echo $date_array[0] ; } ?>,<?php if (isset($date_array[1])) { echo $date_array[1] - 1 ; } ?>,<?php if (isset($date_array[2])) { echo $date_array[2] ; } ?><?php if ($date_array[3] != "") { echo "," . $date_array[3] ; } ?>),
         newYear = false;
    
     jQuery('#countdown').countdown({
@@ -209,4 +213,3 @@ wp_footer();
 
     </body>
 </html>
-

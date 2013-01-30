@@ -74,4 +74,4 @@ Bug Fix: 'Clear Stats' button.
 = 1.0.3.7 =
 
 Debugging cross browser impressions and conversion tracking. Implemented soltion for url-to-postid conversions that's compatible with the /slug/ removal extension for landing pages plugin.
-
+Added email validation check to prevent false positives when form standardization is turned on.

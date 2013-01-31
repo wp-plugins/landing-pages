@@ -16,7 +16,7 @@ $key = lp_get_parent_directory(dirname(__FILE__));
 // Add in global templata data
 //EDIT - START - defines template information - helps categorize template and provides additional popup information
 // Add Landing Page to a specific category. 
-$lp_data[$key]['category'] = "miscellaneous"; 
+$lp_data[$key]['category'] = "Miscellaneous"; 
 // Add version control to your template.
 $lp_data[$key]['version'] = "1.0.0.1"; 
 // Add description visible to the user

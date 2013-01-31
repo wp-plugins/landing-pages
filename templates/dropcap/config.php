@@ -11,7 +11,7 @@ $key = lp_get_parent_directory(dirname(__FILE__));
 //adds template data to global array for use with landing page plugin - edit theme category and description only. 
 
 //EDIT - START - defines template information - helps categorizae template and provides additional popup information
-$lp_data[$key]['category'] = "miscellaneous"; 
+$lp_data[$key]['category'] = "Miscellaneous"; 
 $lp_data[$key]['version'] = "1.0.0.1"; 
 $lp_data[$key]['description'] = "This template illustrates capabilities of this plugin's templating system.."; 
 $lp_data[$key]['features'][] = lp_list_feature("Demo Link","http://demo.inboundnow.com/go/dropcap-lander-preview/"); 

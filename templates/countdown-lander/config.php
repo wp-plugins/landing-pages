@@ -13,7 +13,7 @@ lp_global_config(); // The lp_global_config function is for global code added by
 $key = lp_get_parent_directory(dirname(__FILE__)); 
 
 //EDIT - START - defines template information - helps categorizae template and provides additional popup information
-$lp_data[$key]['category'] = "countdown"; 
+$lp_data[$key]['category'] = "Countdown"; 
 $lp_data[$key]['version'] = "1.0.0.3"; 
 $lp_data[$key]['description'] = "Countdown Lander Template"; 
 $lp_data[$key]['features'][] = lp_list_feature("Demo Link","http://demo.inboundnow.com/go/countdown-lander-preview/"); 

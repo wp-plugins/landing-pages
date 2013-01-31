@@ -15,7 +15,7 @@ $key = lp_get_parent_directory(dirname(__FILE__));
 //adds template data to global array for use with landing page plugin - edit theme category and description only. 
 
 //EDIT - START - defines template information - helps categorizae template and provides additional popup information
-$lp_data[$key]['category'] = "miscellaneous"; 
+$lp_data[$key]['category'] = "Miscellaneous"; 
 // Add Landing Page to a specific category. 
 $lp_data[$key]['version'] = "1.0.0.1"; 
 // Add version control to your template.

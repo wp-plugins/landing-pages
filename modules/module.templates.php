@@ -40,7 +40,7 @@ else if (isset($_GET['page'])&&$_GET['page']=='lp_manage_templates')
 			global $lp_data; 
 			foreach ($lp_data as $key=>$value)
 			{
-				if ($key!='lp'&&$key!='main')
+				if ($key!='lp'&&$key!='main'&&$key!='main'&&substr($key,0,4)!='ext-')
 				{
 					if (isset($_POST['s'])&&!empty($_POST['s']))
 					{

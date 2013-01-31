@@ -45,6 +45,7 @@ function landing_page_activate()
 	
 	global $wp_rewrite;
 	$wp_rewrite->flush_rules();
+	$_SESSION['lp_activate'] = 1;
 	
 }
 	

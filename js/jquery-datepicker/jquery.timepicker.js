@@ -5,7 +5,6 @@ http://jonthornton.github.com/jquery-timepicker/
 requires jQuery 1.7+
 ************************/
 
-
 (function (factory) {
     if (typeof define === 'function' && define.amd) {
         // AMD. Register as an anonymous module.
@@ -46,6 +45,7 @@ requires jQuery 1.7+
 			{
 				var self = $(this);
 
+alert('hi');
 				// convert dropdowns to text input
 				if (self[0].tagName == 'SELECT') {
 					var attrs = { 'type': 'text', 'value': self.val() };
@@ -262,6 +262,8 @@ requires jQuery 1.7+
 
 	function _render(self)
 	{
+		
+
 		var settings = self.data('timepicker-settings');
 		var list = self.data('timepicker-list');
 
@@ -309,6 +311,7 @@ requires jQuery 1.7+
 
 			list.append(row);
 		}
+
 
 		list.data('timepicker-input', self);
 		self.data('timepicker-list', list);
@@ -680,6 +683,7 @@ requires jQuery 1.7+
 	// Plugin entry
 	$.fn.timepicker = function(method)
 	{
+		
 		if(methods[method]) { return methods[method].apply(this, Array.prototype.slice.call(arguments, 1)); }
 		else if(typeof method === "object" || !method) { return methods.init.apply(this, arguments); }
 		else { $.error("Method "+ method + " does not exist on jQuery.timepicker"); }

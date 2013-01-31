@@ -162,6 +162,7 @@ jQuery(document).ready(function ($) {
     else {
         jQuery(".currently_selected").show();
     }
+
     // Add current title of template to selector
     var selected_template = jQuery('#lp_select_template').val();
     var selected_template_id = "#" + selected_template;

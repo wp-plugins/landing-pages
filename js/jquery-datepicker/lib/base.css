@@ -1,6 +1,6 @@
-.example input {width:80px;}
-.example h3 { margin: 0 0 10px 0; }
-.example p { margin: 20px 0 0 0; }
+.jquery-date-picker input {width:80px;}
+.jquery-date-picker h3 { margin: 0 0 10px 0; }
+.jquery-date-picker p { margin: 20px 0 0 0; }
 
 /* Bootstrap datepicker CSS */
 .dropdown { position:relative; }

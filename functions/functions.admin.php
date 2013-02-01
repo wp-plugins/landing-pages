@@ -441,7 +441,7 @@ function lp_render_metabox($key,$custom_fields,$post)
 								<div class="lp_tooltip tool_color" title="'.$field['desc'].'"></div>';
 						break;
 					case 'datepicker':
-						echo '<div class="example">	
+						echo '<div class="jquery-date-picker" id="date-picking">	
 						<span class="datepair" data-language="javascript">	
 									Date: <input type="text" id="date-picker-'.$key.'" class="date start" /></span>
 									Time: <input id="time-picker-'.$key.'" type="text" class="time time-picker" />

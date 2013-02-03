@@ -40,7 +40,7 @@ http://www.youtube.com/watch?v=BzcD6PgvLP4
 
 We built the landing page plugin as a framework! You can use it add value to your existing clients.
 
-You can quickly take your existing designs and implement them using our <a href="http://plugins.inboundnow.com/docs/dev/">templating framework</a>.
+You can quickly take your existing designs and implement them using our <a href="http://www.inboundnow.com/landing-pages/docs/dev/">templating framework</a>.
 
 The plugin is also fully extendable and has a number of actions, filters, and hooks available for use.
 

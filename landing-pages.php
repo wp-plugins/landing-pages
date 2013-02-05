@@ -3,12 +3,12 @@
 Plugin Name: Landing Pages
 Plugin URI: http://plugins.inboundnow.com
 Description: The first true all-in-one Landing Page solution for WordPress, including ongoing conversion metrics, a/b split testing, unlimited design options and so much more!
-Version: 1.0.5.2
+Version: 1.0.5.3
 Author: David Wells, Hudson Atwell
 Author URI: http://www.inboundnow.com/
 */
 					
-define('LANDINGPAGES_CURRENT_VERSION', '1.0.5.2' );
+define('LANDINGPAGES_CURRENT_VERSION', '1.0.5.3' );
 define('LANDINGPAGES_URLPATH', WP_PLUGIN_URL.'/'.plugin_basename( dirname(__FILE__) ).'/' );
 define('LANDINGPAGES_PATH', WP_PLUGIN_DIR.'/'.plugin_basename( dirname(__FILE__) ).'/' );
 define('LANDINGPAGES_PLUGIN_SLUG', 'landing-pages' );
@@ -43,10 +43,10 @@ function landing_page_activate()
 	add_option( 'lp_global_record_admin_actions', '1', '', 'no' );
 	add_option( 'lp_global_lp_slug', 'go', '', 'no' );
 	add_option( 'lp_split_testing_slug', 'group', '', 'no' );
+	update_option( 'lp_activate_rewrite_check', '1');
 	
 	global $wp_rewrite;
 	$wp_rewrite->flush_rules();
-	$_SESSION['lp_activate'] = 1;
 	
 }
 	

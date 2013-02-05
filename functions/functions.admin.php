@@ -206,7 +206,7 @@ function lp_save_meta($post_id) {
 				{
 					$old = get_post_meta($post_id, $field['id'], true);				
 					$new = $_POST[$field['id']];	
-					
+
 					if (isset($new) && $new != $old ) {
 						update_post_meta($post_id, $field['id'], $new);
 					} elseif ('' == $new && $old) {
@@ -232,7 +232,7 @@ function lp_save_meta($post_id) {
 					if($field['type'] == 'tax_select') continue;
 						$old = get_post_meta($post_id, $field['id'], true);				
 						$new = $_POST[$field['id']];
-						//echo ":".$new."<br>";			
+						//echo "$old:".$new."<br>";			
 						
 						if (isset($new) && $new != $old ) {
 							update_post_meta($post_id, $field['id'], $new);
@@ -240,6 +240,7 @@ function lp_save_meta($post_id) {
 							delete_post_meta($post_id, $field['id'], $old);
 						}
 				} // end foreach		
+				//exit;
 			}
 		}
 		//exit;
@@ -421,7 +422,7 @@ function lp_render_metabox($key,$custom_fields,$post)
 		// get value of this field if it exists for this post
 		$meta = get_post_meta($post->ID, $field['id'], true);
 		
-		if (!isset($meta)&&isset($field['default'])||empty($meta)&&isset($field['default']))
+		if (!isset($meta)&&isset($field['default'])||!isset($meta)&&empty($meta)&&isset($field['default']))
 		{
 			$meta = $field['default'];
 		}

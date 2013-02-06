@@ -422,7 +422,7 @@ function lp_render_metabox($key,$custom_fields,$post)
 		// get value of this field if it exists for this post
 		$meta = get_post_meta($post->ID, $field['id'], true);
 		
-		if (!isset($meta)&&isset($field['default'])||!isset($meta)&&empty($meta)&&isset($field['default']))
+		if ((!isset($meta)&&isset($field['default']))||isset($meta)&&empty($meta)&&isset($field['default'])&&$meta!==0)
 		{
 			$meta = $field['default'];
 		}

@@ -710,8 +710,12 @@ add_filter( 'wpseo_metabox_prio', 'lp_wpseo_priority');
 add_action( 'in_admin_header', 'lp_in_admin_header');
 function lp_in_admin_header() 
 {
-	global $wp_meta_boxes;
-	unset( $wp_meta_boxes[get_current_screen()->id]['normal']['core']['postcustom'] );
+	global $post; 
+	if ($post->post_type=='landing-page')
+	{
+		unset( $wp_meta_boxes[get_current_screen()->id]['normal']['core']['postcustom'] );
+	}
 }
+  
   
 ?>

@@ -711,6 +711,8 @@ add_action( 'in_admin_header', 'lp_in_admin_header');
 function lp_in_admin_header() 
 {
 	global $post; 
+	global $wp_meta_boxes;
+	
 	if (isset($post)&&$post->post_type=='landing-page') 
 	{
 		unset( $wp_meta_boxes[get_current_screen()->id]['normal']['core']['postcustom'] );

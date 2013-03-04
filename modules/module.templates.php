@@ -216,7 +216,6 @@ else if (isset($_GET['page'])&&$_GET['page']=='lp_manage_templates')
 		}
 
 	}
-	$myListTable = new LP_MANAGE_TEMPLATES();
 	
 
 	

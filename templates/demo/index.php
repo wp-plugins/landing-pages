@@ -11,11 +11,7 @@
 
 /* Step 1: Declare Template Key. This will be automatically detected for you */
 $key = lp_get_parent_directory(dirname(__FILE__));
-$path = LANDINGPAGES_URLPATH.'templates/'.$key.'/'; // This defines the path to the core template folder, read note on next line.
-/* NOTE */
-// In Your Custom Templates you will want to use:
-// $path = LANDINGPAGES_UPLOADS_URLPATH.$key.'/'; 
-// This will define the correct path for third party templates in the /wp-content/uploads/landing-pages/templates/ folder
+$path = LANDINGPAGES_URLPATH.'templates/'.$key.'/'; // This defines the path to your template folder
 
 /* Define Landing Pages's custom pre-load hook for 3rd party plugin integration */
 lp_init();

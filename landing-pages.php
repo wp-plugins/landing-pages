@@ -3,12 +3,12 @@
 Plugin Name: Landing Pages
 Plugin URI: http://plugins.inboundnow.com
 Description: The first true all-in-one Landing Page solution for WordPress, including ongoing conversion metrics, a/b split testing, unlimited design options and so much more!
-Version: 1.0.6.1
+Version: 1.0.7.1
 Author: David Wells, Hudson Atwell
 Author URI: http://www.inboundnow.com/
 */
 					
-define('LANDINGPAGES_CURRENT_VERSION', '1.0.6.1' );
+define('LANDINGPAGES_CURRENT_VERSION', '1.0.5.6' );
 define('LANDINGPAGES_URLPATH', WP_PLUGIN_URL.'/'.plugin_basename( dirname(__FILE__) ).'/' );
 define('LANDINGPAGES_PATH', WP_PLUGIN_DIR.'/'.plugin_basename( dirname(__FILE__) ).'/' );
 define('LANDINGPAGES_PLUGIN_SLUG', 'landing-pages' );
@@ -27,10 +27,12 @@ include_once('modules/module.extension-updater.php');
 include_once('functions/functions.global.php');
 include_once('modules/module.post-type.php');
 include_once('modules/module.track.php');
-include_once('modules/module.ajax.php');
+include_once('modules/module.ajax-setup.php');
 include_once('modules/module.utils.php');
 include_once('modules/module.sidebar.php');
 include_once('modules/module.widgets.php');
+include_once('modules/module.cookies.php');
+include_once('modules/module.lead-collection.php');
 include_once('functions/functions.templates.php'); 
 
 register_activation_hook(__FILE__, 'landing_page_activate');
@@ -44,6 +46,9 @@ function landing_page_activate()
 	add_option( 'lp_global_lp_slug', 'go', '', 'no' );
 	add_option( 'lp_split_testing_slug', 'group', '', 'no' );
 	update_option( 'lp_activate_rewrite_check', '1');
+	
+	//enable lead management
+	//include_once('modules/module.leads-activate.php');
 	
 	global $wp_rewrite;
 	$wp_rewrite->flush_rules();
@@ -129,16 +134,6 @@ if (is_admin())
 }
 
 
-function lp_metabox_print_js($templates)
-{
-	global $post;
-	?>
-	<script type='text/javascript'>
-		
-
-	</script>
-	<?php
-}
 /**
  * Returns current plugin version.
  * 
@@ -236,7 +231,7 @@ function landing_pages_add_conversion_area($content)
 				$wrapper_class = lp_discover_important_wrappers($conversion_area);
 				$conversion_area = lp_rebuild_attributes($conversion_area);	
 			}
-			//echo $conversion_area;exit;
+			
 			$conversion_area = "<div id='lp_container' class='$wrapper_class'>".$conversion_area."</div>";	
 			
 			//echo $template;exit;
@@ -318,7 +313,7 @@ if (is_admin())
 add_filter('single_template', 'lp_custom_template');
 
 function lp_custom_template($single) {
-    global $wp_query, $post;
+    global $wp_query, $post, $query_string;
 	$template = get_post_meta($post->ID, 'lp-selected-template', true);
 	
 	if (isset($template))
@@ -348,6 +343,7 @@ function lp_custom_template($single) {
 				}
 				else
 				{			
+					query_posts ($query_string . '&showposts=1');
 					return LANDINGPAGES_UPLOADS_PATH.$template.'/index.php';
 				}
 			}

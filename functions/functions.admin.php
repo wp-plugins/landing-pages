@@ -131,7 +131,7 @@ function lp_generate_meta()
 			//echo $key."<br>";
 			add_meta_box(
 				"lp_{$id}_custom_meta_box", // $id
-				__( "<small>Template Options:</small>", "lp_{$key}_custom_meta" ),
+				__( "<small>$template_name Options:</small>", "lp_{$key}_custom_meta" ),
 				'lp_show_metabox', // $callback
 				'landing-page', // post-type
 				'normal', // $context
@@ -422,6 +422,7 @@ function lp_render_metabox($key,$custom_fields,$post)
 		// get value of this field if it exists for this post
 		$meta = get_post_meta($post->ID, $field['id'], true);
 		
+
 		if ((!isset($meta)&&isset($field['default']))||isset($meta)&&empty($meta)&&isset($field['default'])&&$meta!==0)
 		{
 			$meta = $field['default'];
@@ -705,7 +706,7 @@ function lp_make_percent($rate, $return = false)
 	}
 }
 
-function lp_wpseo_priority(){	return 'low';}
+function lp_wpseo_priority(){return 'low';}
 add_filter( 'wpseo_metabox_prio', 'lp_wpseo_priority'); 
 add_action( 'in_admin_header', 'lp_in_admin_header');
 function lp_in_admin_header() 
@@ -715,9 +716,10 @@ function lp_in_admin_header()
 	
 	if (isset($post)&&$post->post_type=='landing-page') 
 	{
-		unset( $wp_meta_boxes[get_current_screen()->id]['normal']['core']['postcustom'] );
+		unset( $wp_meta_boxes[get_current_screen()->id]['normal']['core']['postcustom'] ); 
 	}
 }
-  
+
+
   
 ?>

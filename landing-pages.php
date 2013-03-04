@@ -3,7 +3,7 @@
 Plugin Name: Landing Pages
 Plugin URI: http://plugins.inboundnow.com
 Description: The first true all-in-one Landing Page solution for WordPress, including ongoing conversion metrics, a/b split testing, unlimited design options and so much more!
-Version: 1.0.7.1
+Version: 1.0.7.2
 Author: David Wells, Hudson Atwell
 Author URI: http://www.inboundnow.com/
 */

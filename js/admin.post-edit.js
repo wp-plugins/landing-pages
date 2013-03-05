@@ -251,4 +251,9 @@ jQuery(document).ready(function ($) {
 	//Stylize lead's wp-list-table
 	var cnt = $("#leads-table-container").contents();
 	$("#lp_conversion_log_metabox").replaceWith(cnt);
+	
+	//remove inputs from wp-list-table
+	jQuery('#leads-table-container-inside input').each(function(){
+		jQuery(this).remove();
+	});
 });

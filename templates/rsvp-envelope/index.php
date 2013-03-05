@@ -110,7 +110,7 @@ if (have_posts()) : while (have_posts()) : the_post();
                 jQuery("input[type='submit']:first").css("margin-top", "10px");
             });
         </script>
-        <?php endwhile; endif; 
+        <?php break; endwhile; endif; 
         lp_footer(); 
         wp_footer(); ?>
     </body>

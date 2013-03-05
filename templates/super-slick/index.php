@@ -225,7 +225,7 @@ margin-right: -14px;}
 
 
 <?php 
-endwhile; endif; // End wordpress loop
+break; endwhile; endif; // End wordpress loop
 
 lp_footer();
 wp_footer();

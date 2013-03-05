@@ -140,6 +140,7 @@ $content = get_the_content();
 
 
 <?php 
+break;//sometimes a plugn or theme will reset the query during the loop, causing an infinite loop. We only need on loop pass so lets go ahead and break the loop to prevent possible lp load failures. 
 endwhile; endif; 
 lp_footer(); // Load custom landing footer hook for 3rd party extensions
 wp_footer(); // Load normal wordpress footer

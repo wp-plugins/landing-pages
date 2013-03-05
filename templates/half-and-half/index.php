@@ -124,7 +124,7 @@ if (have_posts()) : while (have_posts()) : the_post();
             margin-left: -240px;
         }
     </style>
-    <?php endwhile; endif; // end WordPress Loop 
+    <?php break; endwhile; endif; // end WordPress Loop 
     lp_footer(); // load landing pages footer hook 
     wp_footer(); // load normal wordpress footer
     ?>

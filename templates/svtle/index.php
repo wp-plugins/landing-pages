@@ -201,7 +201,7 @@ $blue = $RBG_array["b"];
             });
         </script>
     <?php } // end mobile form conditional 
-    endwhile; endif; 
+    break; endwhile; endif; 
     lp_footer(); // load landing pages footer hook
     wp_footer(); // load normal wordpress footer ?>
 </body>

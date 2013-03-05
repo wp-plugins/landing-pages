@@ -203,7 +203,7 @@ jQuery(function(){
 jQuery('#lp_container').center();*/
         </script>
 <?php 
-endwhile; endif; 
+break; endwhile; endif; 
 
 lp_footer();
 wp_footer();

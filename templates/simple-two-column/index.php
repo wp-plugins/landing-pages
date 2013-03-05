@@ -140,7 +140,7 @@ padding: 4px;
 </div><!-- end content-wrapper -->
 
  </div><!-- end container -->
- <?php  endwhile; endif; // end wordpress loop
+ <?php break; endwhile; endif; // end wordpress loop
     lp_footer(); // load landing pages footer hook
     wp_footer(); // load normal wordpress footer ?>
 

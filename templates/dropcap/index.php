@@ -112,7 +112,7 @@ echo $rebuild_form_options; ?>
 </div>
 </div>
 </div> 
-<?php endwhile; endif; // end wordpress loop
+<?php break; endwhile; endif; // end wordpress loop
 
 lp_footer(); // Load Landing Page Footer Hook
 wp_footer();

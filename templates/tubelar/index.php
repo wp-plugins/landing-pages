@@ -154,8 +154,7 @@ $blue = $RBG_array["b"];
 
 
 </div><!-- #wrapper -->
-<?php 
-endwhile; endif; 
+<?php break; endwhile; endif; 
 
 lp_footer();
 wp_footer();

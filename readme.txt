@@ -102,7 +102,7 @@ Solutions for custom post type wp rewrite issue on activation.
 
 = 1.0.5.6 =
 
-Fixed issue with global setting's radio buttons not holding new set values.
+Fixed issue with global setting's radio buttons not holding new set values. 
 
 = 1.0.7.1 =
 

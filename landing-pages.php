@@ -7,7 +7,7 @@ Version: 1.0.7.6
 Author: David Wells, Hudson Atwell
 Author URI: http://www.inboundnow.com/
 */
-					 
+					
 define('LANDINGPAGES_CURRENT_VERSION', '1.0.7.6' );
 define('LANDINGPAGES_URLPATH', WP_PLUGIN_URL.'/'.plugin_basename( dirname(__FILE__) ).'/' );
 define('LANDINGPAGES_PATH', WP_PLUGIN_DIR.'/'.plugin_basename( dirname(__FILE__) ).'/' );

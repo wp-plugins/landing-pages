@@ -102,7 +102,7 @@ Solutions for custom post type wp rewrite issue on activation.
 
 = 1.0.5.6 =
 
-Fixed issue with global setting's radio buttons not holding new set values. 
+Fixed issue with global setting's radio buttons not holding new set values.
 
 = 1.0.7.1 =
 
@@ -111,7 +111,3 @@ Added cookie based auto-field population & lead data collection to core.
 = 1.0.7.3 =
 
 Fixed issue with WP_List_table causing posts to to save or edit propperly Attempt 001
-
-= 1.0.7.6 =
-
-Fixed issue with jQuery val() undefined with certain Gravity Forms and wait cursor not enabling during landing page submission.

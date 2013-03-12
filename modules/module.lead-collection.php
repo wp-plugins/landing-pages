@@ -66,7 +66,7 @@ function lp_lead_collection_js()
 	
 	jQuery.ajax({
 		type: 'POST',
-		url: '<?php echo LANDINGPAGES_URLPATH . 'modules/module.ajax-handler.php'; ?>',
+		url: '<?php echo admin_url('admin-ajax.php') ?>',
 		data: {
 			action: 'lp_store_lead',
 			emailTo: email, 

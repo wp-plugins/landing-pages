@@ -92,7 +92,7 @@ body { <?php echo $bg_style; ?> }
 <?php } ?>
 <?php if ($form_text_color != "") { echo "#lp_container {color: #$form_text_color;}"; } ?>	
 </style>
-<?php lp_head(); // Load Custom Landing Page Specific Header Items ?>
+<?php do_action('lp_head'); // Load Custom Landing Page Specific Header Items ?>
 </head>
 
 

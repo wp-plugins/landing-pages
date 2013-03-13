@@ -72,7 +72,7 @@ if (have_posts()) : while (have_posts()) : the_post();
             ?>
         </style>
         <?php wp_head(); // Load Regular WP Head 
-        	lp_head(); // Load Custom Landing Page Specific Header Items ?>
+        	do_action('lp_head'); // Load Custom Landing Page Specific Header Items ?>
         <script src="<?php echo $path; ?>assets/js/jquery-1.3.2.min.js"></script>
         <!--[if IE]>
             <script>

@@ -84,7 +84,7 @@ $content = get_the_content();
 <!-- Load Normal WordPress wp_head() function -->
 <?php wp_head(); ?> 
 <!-- Load Landing Pages's custom pre-load hook for 3rd party plugin integration -->
-<?php lp_head(); ?>
+<?php do_action('lp_head'); ?>
 
 </head>
 <!-- lp_body_class(); Defines Custom Body Classes for Advanced User CSS Customization -->

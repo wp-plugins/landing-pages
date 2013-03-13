@@ -123,7 +123,7 @@ $blue = $RBG_array["b"];
         });
     </script>
       <?php wp_head(); // Load Regular WP Head 
-            lp_head(); // Load Custom Landing Page Specific Header Items ?>
+            do_action('lp_head'); // Load Custom Landing Page Specific Header Items ?>
     <?php if ($sidebar === "right" ) { echo
     "<link rel='stylesheet' href='". $path . "assets/css/flipped-layout.css' type='text/css' media='screen'>"; } ?>
 </head>

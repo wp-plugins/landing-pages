@@ -80,7 +80,7 @@ if (have_posts()) : while (have_posts()) : the_post();
         @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300); 
     </style>
     <?php wp_head(); // Load Regular WP Head ?>
-    <?php lp_head(); // Load Landing Page Specific Header Items ?>
+    <?php do_action('lp_head'); // Load Landing Page Specific Header Items ?>
 </head>
 <body>
     <!--[if lt IE 7]>

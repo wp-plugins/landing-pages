@@ -67,7 +67,7 @@ $blue = $RBG_array["b"];
 <title><?php wp_title(); ?></title>
 	<?php /* Load all functions hooked to lp_head including global js and global css */
 		wp_head(); // Load Regular WP Head
-		lp_head(); // Load Custom Landing Page Specific Header Items
+		do_action('lp_head'); // Load Custom Landing Page Specific Header Items
 ?>
 
 <link rel="stylesheet" href="<?php echo $path; ?>assets/css/style.css" type="text/css" media="screen">

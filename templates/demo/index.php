@@ -14,7 +14,7 @@ $key = lp_get_parent_directory(dirname(__FILE__));
 $path = LANDINGPAGES_URLPATH.'templates/'.$key.'/'; // This defines the path to your template folder
 
 /* Define Landing Pages's custom pre-load hook for 3rd party plugin integration */
-lp_init();
+do_action('lp_init');
 
 /* Load Regular WordPress $post data and start the loop */
 if (have_posts()) : while (have_posts()) : the_post();
@@ -142,7 +142,7 @@ $content = get_the_content();
 <?php 
 break;//sometimes a plugn or theme will reset the query during the loop, causing an infinite loop. We only need on loop pass so lets go ahead and break the loop to prevent possible lp load failures. 
 endwhile; endif; 
-lp_footer(); // Load custom landing footer hook for 3rd party extensions
+do_action('lp_footer'); // Load custom landing footer hook for 3rd party extensions
 wp_footer(); // Load normal wordpress footer
 ?>  
 </body>

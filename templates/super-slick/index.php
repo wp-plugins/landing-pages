@@ -12,7 +12,7 @@ $key = lp_get_parent_directory(dirname(__FILE__));
 $path = LANDINGPAGES_URLPATH.'templates/'.$key.'/';
 $url = plugins_url();
 /* Define Landing Pages's custom pre-load hook for 3rd party plugin integration */
-lp_init();
+do_action('lp_init');
 
 /* Load Regular WordPress $post data and start the loop */
 if (have_posts()) : while (have_posts()) : the_post();
@@ -227,7 +227,7 @@ margin-right: -14px;}
 <?php 
 break; endwhile; endif; // End wordpress loop
 
-lp_footer();
+do_action('lp_footer');
 wp_footer();
 ?> 
 

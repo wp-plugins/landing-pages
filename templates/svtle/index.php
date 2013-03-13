@@ -15,7 +15,7 @@ $key = lp_get_parent_directory(dirname(__FILE__));
 $path = LANDINGPAGES_URLPATH.'templates/'.$key.'/';
 $url = plugins_url();
 /* Define Landing Pages's custom pre-load hook for 3rd party plugin integration */
-lp_init();
+do_action('lp_init');
 
 /* Load $post data */
 if (have_posts()) : while (have_posts()) : the_post();
@@ -202,7 +202,7 @@ $blue = $RBG_array["b"];
         </script>
     <?php } // end mobile form conditional 
     break; endwhile; endif; 
-    lp_footer(); // load landing pages footer hook
+    do_action('lp_footer'); // load landing pages footer hook
     wp_footer(); // load normal wordpress footer ?>
 </body>
 

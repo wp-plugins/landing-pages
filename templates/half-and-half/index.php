@@ -12,8 +12,8 @@ $key = lp_get_parent_directory(dirname(__FILE__)); // unique ID associated with 
 $path = LANDINGPAGES_URLPATH.'templates/'.$key.'/'; // path to template folder
 $url = plugins_url();
 
-/* Define Landing Pages's custom pre-load lp_init(); hook for 3rd party plugin integration */
-lp_init();
+/* Define Landing Pages's custom pre-load do_action('lp_init'); hook for 3rd party plugin integration */
+do_action('lp_init');
 
 /* Start WordPress Loop and Load $post data */
 if (have_posts()) : while (have_posts()) : the_post();
@@ -125,7 +125,7 @@ if (have_posts()) : while (have_posts()) : the_post();
         }
     </style>
     <?php break; endwhile; endif; // end WordPress Loop 
-    lp_footer(); // load landing pages footer hook 
+    do_action('lp_footer'); // load landing pages footer hook 
     wp_footer(); // load normal wordpress footer
     ?>
 </body>

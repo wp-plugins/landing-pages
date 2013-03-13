@@ -178,7 +178,8 @@ function landing_pages_insert_custom_head() {
 		}
 		if (!stristr($custom_css,'<script'))
 		{
-			echo '<script type="text/javascript" id="lp_js_custom">'.$custom_js.'</script>';
+			echo '<script type="text/javascript" id="lp_js_custom">jQuery(document).ready(function($) {
+			'.$custom_js.' });</script>';
 		}
 		else
 		{

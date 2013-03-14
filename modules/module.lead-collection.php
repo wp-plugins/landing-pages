@@ -43,15 +43,18 @@ function lp_lead_collection_js()
 	if (!email)
 	{
 		jQuery("#lp_container_form input[type=text]").each(function() {
-			if (jQuery(this).closest('li').children('label').html().toLowerCase().indexOf('email')>-1) 
+			if (jQuery(this).closest('li').children('label').length>0)
 			{
-				email = this.value;
-			}
-			else if (jQuery(this).closest('li').children('label').html().toLowerCase().indexOf('name')>-1&&!firstname) {
-				firstname = this.value;
-			}
-			else if (jQuery(this).closest('li').children('label').html().toLowerCase().indexOf('name')>-1) {
-				lastname = this.value;
+				if (jQuery(this).closest('li').children('label').html().toLowerCase().indexOf('email')>-1) 
+				{
+					email = this.value;
+				}
+				else if (jQuery(this).closest('li').children('label').html().toLowerCase().indexOf('name')>-1&&!firstname) {
+					firstname = this.value;
+				}
+				else if (jQuery(this).closest('li').children('label').html().toLowerCase().indexOf('name')>-1) {
+					lastname = this.value;
+				}
 			}
 		});
 	}

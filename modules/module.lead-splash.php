@@ -5,9 +5,15 @@ $matches = array();
 preg_match('/wp-admin/', $_SERVER['HTTP_REFERER'], $matches, null, 0);
 
 $lead_id = $_GET['lead_id'];
+$page_id = $_GET['post_id'];
 $wplead_data = get_post_custom($lead_id);
 
+$data['lead_id'] = $lead_id;
+$data['page_id'] = $page_id;
+$data['lead_custom_fields'] = $wplead_data;
+
 ?>
+<h3 class='lp-lead-splash-h3'>User Details:</h3>
 <div id='lead-details-container'>
 <table>
 	<tr>
@@ -51,3 +57,7 @@ $wplead_data = get_post_custom($lead_id);
 		</td>
 	</tr>	
 </table>
+
+<?php
+do_action('lp_module_lead_splash_post',$data);
+?>

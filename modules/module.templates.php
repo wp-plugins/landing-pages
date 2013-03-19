@@ -40,8 +40,12 @@ else if (isset($_GET['page'])&&$_GET['page']=='lp_manage_templates')
 			global $lp_data; 
 			foreach ($lp_data as $key=>$value)
 			{
-				if ($key!='lp'&&$key!='main'&&$key!='main'&&substr($key,0,4)!='ext-')
+				$array_core_templates = array('countdown-lander','default','demo','dropcap','half-and-half','simple-two-column','super-slick','svtle','tubelar','rsvp-envelope');
+				
+				if ($key!='lp'&&!in_array($key,$array_core_templates)&&substr($key,0,4)!='ext-')
 				{
+					//echo $key;
+					//echo "<br>";
 					if (isset($_POST['s'])&&!empty($_POST['s']))
 					{
 						if (!stristr($value['label'],$_POST['s']))
@@ -358,7 +362,7 @@ else if (isset($_GET['page'])&&$_GET['page']=='lp_manage_templates')
 	{
 		$version = $item['version'];
 		$api_response = lp_template_api_request( $item );
-		//print_r($api_response);exit;
+		//print_r($api_response);
 		if( false !== $api_response ) 
 		{
 			if( version_compare( $version, $api_response['new_version'], '<' ) )

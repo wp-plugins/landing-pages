@@ -1,19 +1,22 @@
 <?php
 	
 add_filter('lp_js_hook_submit_form_pre','lp_lead_collection_js');
-
+ 
 function lp_lead_collection_js()
 {	
 	$current_page = "http://".$_SERVER["HTTP_HOST"].$_SERVER["REQUEST_URI"];
 	$post_id = lp_url_to_postid($current_page);
 	(isset($_SERVER['HTTP_REFERER'])) ? $referrer = $_SERVER['HTTP_REFERER'] : $referrer ='direct access';	
 	(isset($_SERVER['REMOTE_ADDR'])) ? $ip_address = $_SERVER['REMOTE_ADDR'] : $ip_address = '0.0.0.0.0';
+
+	do_action('lp-lead-collection-add-js-pre'); 
 	
 	?>	
 	var email = jQuery(".lp-email-value input").val();
 	var firstname = jQuery(".lp-first-name-value input").val();
 	var lastname = jQuery(".lp-last-name-value input").val();
-
+	
+	
 	//alert('1');
 	if (!email)
 	{
@@ -94,10 +97,12 @@ function lp_lead_collection_js()
 			emailTo: email, 
 			first_name: firstname, 
 			last_name: lastname,
-			lp_id: '<?php echo $post_id; ?>'
+			lp_id: '<?php echo $post_id; ?>'<?php 
+				do_action('lp-lead-collection-add-ajax-data'); 
+			?>
 		},
 		success: function(user_id){
-				 //alert(user_id);
+				 alert(user_id);
 				 //jQuery('.lp-form').unbind('submit').submit();
 			   },
 		error: function(MLHttpRequest, textStatus, errorThrown){

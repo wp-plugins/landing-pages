@@ -102,7 +102,7 @@ function lp_lead_collection_js()
 			?>
 		},
 		success: function(user_id){
-				 alert(user_id);
+				 //alert(user_id);
 				 //jQuery('.lp-form').unbind('submit').submit();
 			   },
 		error: function(MLHttpRequest, textStatus, errorThrown){

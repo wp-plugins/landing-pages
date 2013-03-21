@@ -339,6 +339,16 @@ function lp_add_option($key,$type,$id,$default=null,$label=null,$description=nul
 			'default'  => $default
 			);
 			break;
+		case "license-key":
+			return array(
+			'label' => $label,
+			'desc'  => $description,
+			'id'    => $key.'-'.$id,
+			'type'  => 'license-key',
+			'default'  => $default,
+			'slug' => $id
+			);
+			break;
 		case "textarea":
 			return array(
 			'label' => $label,
@@ -450,7 +460,7 @@ function lp_render_metabox($key,$custom_fields,$post)
 									<input type="hidden" name="'.$field['id'].'" id="'.$field['id'].'" value="'.$meta.'" class="new-date" value="" >
 									<p class="description">'.$field['desc'].'</p>
 							</div>';		
-						break;	
+						break;						
 					case 'text':
 						echo '<input type="text" name="'.$field['id'].'" id="'.$field['id'].'" value="'.$meta.'" size="30" />
 								<div class="lp_tooltip" title="'.$field['desc'].'"></div>';
@@ -538,6 +548,8 @@ function lp_render_global_settings($key,$custom_fields,$active_tab)
 		$display = 'none';
 	}
 	
+	//echo $display;
+	
 	// Use nonce for verification
 	echo "<input type='hidden' name='lp_{$key}_custom_fields_nonce' value='".wp_create_nonce('lp-nonce')."' />";
 
@@ -575,6 +587,22 @@ function lp_render_global_settings($key,$custom_fields,$active_tab)
 					case 'datepicker':
 						echo '<input id="datepicker-example2" class="Zebra_DatePicker_Icon" type="text" name="'.$field['id'].'" id="'.$field['id'].'" value="'.$option.'" size="8" />
 								<div class="lp_tooltip tool_date" title="'.$field['desc'].'"></div><p class="description">'.$field['desc'].'</p>';
+						break;	
+					case 'license-key':
+						$license_status = lp_check_license_status($field);
+						//echo $license_status;exit;
+						echo '<input type="hidden" name="lp_license_status-'.$field['slug'].'" id="'.$field['id'].'" value="'.$license_status.'" size="30" />
+						<input type="text" name="'.$field['id'].'" id="'.$field['id'].'" value="'.$option.'" size="30" />
+								<div class="lp_tooltip tool_text" title="'.$field['desc'].'"></div>';
+						
+						if ($license_status=='valid')
+						{
+							echo '<div class="lp_license_status_valid">Valid</div>';
+						}
+						else
+						{
+							echo '<div class="lp_license_status_invalid">Invalid</div>';
+						}						
 						break;	
 					case 'text':
 						echo '<input type="text" name="'.$field['id'].'" id="'.$field['id'].'" value="'.$option.'" size="30" />
@@ -704,6 +732,41 @@ function lp_make_percent($rate, $return = false)
 	{
 		if($return){ return $rate; } else { echo $rate; }
 	}
+}
+
+function lp_check_license_status($field)
+{
+	$license_key = get_option($field['id']);
+		
+	$api_params = array( 
+		'edd_action' => 'check_license', 
+		'license' => $license_key, 
+		'item_name' => urlencode( $field['slug'] ) 
+	);
+	//print_r($api_params);
+	
+	// Call the custom API.
+	$response = wp_remote_get( add_query_arg( $api_params, LANDINGPAGES_STORE_URL ), array( 'timeout' => 15, 'sslverify' => false ) );
+	//print_r($response);exit;
+
+	if ( is_wp_error( $response ) )
+		return false;
+
+	$license_data = json_decode( wp_remote_retrieve_body( $response ) );
+	//echo $license_data;exit;
+	
+	if( $license_data->license == 'valid' ) {
+		return 'valid';
+		// this license is still valid
+	} else {
+		return 'invalid';
+		// this license is
+	}
+}
+
+function lp_save_license_status()
+{
+	
 }
 
 function lp_wpseo_priority(){return 'low';}

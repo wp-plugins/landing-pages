@@ -163,8 +163,8 @@ else if (isset($_GET['page'])&&$_GET['page']=='lp_manage_templates')
 			if (is_array($this->template_data))
 			{
 				$this->found_data = array_slice( $this->template_data,( ( $current_page-1 )* $per_page ), $per_page );
-			
 			}
+			
 			$this->set_pagination_args( array(
 				'total_items' => $total_items,                  //WE have to calculate the total number of items
 				'per_page'    => $per_page                     //WE have to determine how many items to show on a page

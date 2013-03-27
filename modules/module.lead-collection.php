@@ -1,6 +1,6 @@
 <?php
 	
-add_filter('lp_js_hook_submit_form_pre','lp_lead_collection_js');
+add_filter('lp_js_hook_submit_form_success','lp_lead_collection_js');
  
 function lp_lead_collection_js()
 {	
@@ -15,7 +15,7 @@ function lp_lead_collection_js()
 	var email = jQuery(".lp-email-value input").val();
 	var firstname = jQuery(".lp-first-name-value input").val();
 	var lastname = jQuery(".lp-last-name-value input").val();
-	
+	submit_halt = 1;
 	
 	//alert('1');
 	if (!email)
@@ -104,10 +104,14 @@ function lp_lead_collection_js()
 		success: function(user_id){
 				 //alert(user_id);
 				 //jQuery('.lp-form').unbind('submit').submit();
+					this_form.unbind('submit');
+					this_form.submit();
+					submit_halt =0;
 			   },
 		error: function(MLHttpRequest, textStatus, errorThrown){
 				//alert(MLHttpRequest+' '+errorThrown+' '+textStatus);
 				//die();
+				submit_halt =0;
 			}
 
 	});

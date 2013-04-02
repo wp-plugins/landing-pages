@@ -102,11 +102,20 @@ function lp_lead_collection_js()
 			?>
 		},
 		success: function(user_id){
-				 //alert(user_id);
-				 //jQuery('.lp-form').unbind('submit').submit();
+				//alert(user_id);
+				//jQuery('.lp-form').unbind('submit').submit();
+				if (form_id)
+				{
+					jQuery('#'+form_id).unbind('submit');
+					jQuery('#'+form_id).submit();
+					jQuery('#'+form_id :input[type=submit]').click();
+				}
+				else
+				{
 					this_form.unbind('submit');
 					this_form.submit();
-					submit_halt =0;
+				}
+				submit_halt =0;
 			   },
 		error: function(MLHttpRequest, textStatus, errorThrown){
 				//alert(MLHttpRequest+' '+errorThrown+' '+textStatus);

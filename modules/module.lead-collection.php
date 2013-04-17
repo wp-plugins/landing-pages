@@ -105,7 +105,7 @@ function lp_lead_collection_js()
 			emailTo: email, 
 			first_name: firstname, 
 			last_name: lastname,
-			raw_post_values : post_values_json,
+			raw_post_values_json : post_values_json,
 			lp_id: '<?php echo $post_id; ?>'<?php 
 				do_action('lp-lead-collection-add-ajax-data'); 
 			?>

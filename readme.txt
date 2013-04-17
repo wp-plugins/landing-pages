@@ -122,6 +122,6 @@ Added capability to activate and update license keys for premium extensions. Add
 
 Fixing issue with jquery submission errors.
 
-= 1.0.8.2 =
+= 1.0.8.3 =
 
 Improved data passed into lp_store_lead_post hook. 

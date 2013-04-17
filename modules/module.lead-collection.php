@@ -89,6 +89,14 @@ function lp_lead_collection_js()
 		lastname = parts[1];
 	}
 	
+	var form_inputs = jQuery('#lp_container_form form').find('input[type=text],textarea,select');
+
+    var post_values = {};
+    form_inputs.each(function() {
+        post_values[this.name] = jQuery(this).val();
+    });	
+    var post_values_json = JSON.stringify(post_values);
+		
 	jQuery.ajax({
 		type: 'POST',
 		url: '<?php echo admin_url('admin-ajax.php') ?>',
@@ -97,6 +105,7 @@ function lp_lead_collection_js()
 			emailTo: email, 
 			first_name: firstname, 
 			last_name: lastname,
+			raw_post_values : post_values_json,
 			lp_id: '<?php echo $post_id; ?>'<?php 
 				do_action('lp-lead-collection-add-ajax-data'); 
 			?>

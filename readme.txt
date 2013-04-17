@@ -7,7 +7,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: landing pages, inbound marketing, conversion pages, split testing, a b test, a b testing, a/b test, a/b testing, coming soon page, email list, landing page, list building, maintenance page, squeeze page, inbound now, landing-pages, splash pages, cpa, click tracking, goal tracking, analytics
 Requires at least: 3.3
 Tested up to: 3.5
-Stable Tag: 1.0.8.2
+Stable Tag: 1.0.8.3
 
 Create landing pages for your WordPress site. Monitor and improve conversion rates, run A/B split tests, customize your own templates and more.
 
@@ -121,3 +121,7 @@ Added capability to activate and update license keys for premium extensions. Add
 = 1.0.8.1 =
 
 Fixing issue with jquery submission errors.
+
+= 1.0.8.2 =
+
+Improved data passed into lp_store_lead_post hook. 

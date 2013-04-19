@@ -415,6 +415,15 @@ function lp_add_option($key,$type,$id,$default=null,$label=null,$description=nul
 			'default'  => $default
 			);
 			break;
+		case "default-content":
+			return array(
+			'label' => $label,
+			'desc'  => $description,
+			'id'    => $key.'-'.$id,
+			'type'  => 'default-content',
+			'default'  => $default
+			);
+			break;	
 	}
 }
 
@@ -443,6 +452,10 @@ function lp_render_metabox($key,$custom_fields,$post)
 				<th class="landing-page-table-header '.$label_class.'"><label for="'.$field['id'].'">'.$field['label'].'</label></th>
 				<td>';
 				switch($field['type']) {
+					// default content for the_content
+					case 'default-content':
+						echo '<span id="overwrite-content" class="button-secondary">Insert Default Content into main Content area</span><div style="display:none;"><textarea name="'.$field['id'].'" id="'.$field['id'].'" class="default-content" cols="106" rows="6" style="width: 75%; display:hidden;">'.$meta.'</textarea></div>';
+						break;
 					// text
 					case 'colorpicker':
 						if (!$meta)

@@ -136,6 +136,17 @@ jQuery(document).ready(function ($) {
         });
     
     });
+	
+	// the_content default overwrite
+    jQuery('#overwrite-content').click(function(){
+        if (confirm('Are you sure you want to overwrite what is currently in the main edit box above?')) {
+            var default_content = jQuery(".default-content").text();
+           jQuery("#content_ifr").contents().find("body").html(default_content);
+       } else {
+    // Do nothing!
+    }  
+    });
+	
 	// Colorpicker fix
     jQuery('.jpicker').one('mouseenter', function () {
         jQuery(this).jPicker({

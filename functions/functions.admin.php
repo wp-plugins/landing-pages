@@ -144,6 +144,7 @@ function lp_generate_meta()
 	{
 		if (substr($key,0,4)=='ext-')
 		{
+			//echo 1; exit;
 			$id = strtolower(str_replace(' ','-',$key));
 			$name = ucwords(str_replace(array('-','ext '),' ',$key));
 			//echo $key."<br>";
@@ -166,7 +167,9 @@ function lp_show_metabox($post,$key)
 {
 	global $lp_data;
 	$key = $key['args']['key'];
-	$lp_custom_fields = $lp_data[$key]['options'];		
+	$lp_custom_fields = $lp_data[$key]['options'];
+	$lp_custom_fields = apply_filters('lp_show_metabox',$lp_custom_fields, $key);
+	
 	lp_render_metabox($key,$lp_custom_fields,$post);
 }
 
@@ -227,7 +230,7 @@ function lp_save_meta($post_id) {
 				
 				// loop through fields and save the data
 				foreach ($lp_custom_fields as $field) {
-				//echo $key.":".$field['id'];
+				echo $key.":".$field['id']."<br>";
 
 					if($field['type'] == 'tax_select') continue;
 						$old = get_post_meta($post_id, $field['id'], true);				

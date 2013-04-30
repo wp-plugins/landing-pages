@@ -230,7 +230,7 @@ function lp_save_meta($post_id) {
 				
 				// loop through fields and save the data
 				foreach ($lp_custom_fields as $field) {
-				echo $key.":".$field['id']."<br>";
+				//echo $key.":".$field['id']."<br>";
 
 					if($field['type'] == 'tax_select') continue;
 						$old = get_post_meta($post_id, $field['id'], true);				

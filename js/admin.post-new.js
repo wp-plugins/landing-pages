@@ -14,7 +14,7 @@ jQuery(titledescription).appendTo("#titlewrap");
 jQuery(changebutton).appendTo("#templates");
 jQuery("#lp_template_change a").removeClass("button-primary").addClass("button");
 // New Sidebar 
-jQuery("#postbox-container-1").html("<div class='postbox'><center><h3>Download Additional Templates</h3><a target='_blank' href='/wp-admin/edit.php?post_type=landing-page&page=lp_store'><img src='/wp-content/plugins/landing-pages/images/get-wordpress-templates.png'></a><a target='_blank' href='/wp-admin/edit.php?post_type=landing-page&page=lp_store' class='button new-lp-button button-primary button-large'>Download Landing Page Templates</a></center></div>");
+jQuery("#postbox-container-1").html("<div class='postbox'><center><h3>Download Additional Templates</h3><a target='_blank' href='/wp-admin/edit.php?post_type=landing-page&page=lp_store'><img src='/wp-content/plugins/landing-pages/images/get-wordpress-templates.png'></a><a target='_blank' href='/wp-admin/edit.php?post_type=landing-page&page=lp_store' class='button new-lp-button button-primary button-large'>Download Landing Page Templates</a></center></div><div class='postbox'><center><h3>Need Custom Template Design?</h3><a target='_blank' href='/wp-admin/edit.php?post_type=landing-page&page=lp_store'><img src='/wp-content/plugins/landing-pages/images/get-custom-setup.png'></a><a target='_blank' href='http://www.inboundnow.com/landing-pages/custom-wordpress-landing-page-setup/' class='button new-lp-button button-primary button-large'>Get Custom Template Setup</a></center></div>");
     jQuery('.lp_select_template').click(function(){
     jQuery(".mceIframeContainer iframe#content_ifr").css("height", "100%");
     jQuery("#wp-content-editor-container .mceStatusbar").css("display", "none");

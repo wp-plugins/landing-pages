@@ -33,6 +33,7 @@ include_once('modules/module.sidebar.php');
 include_once('modules/module.widgets.php');
 include_once('modules/module.cookies.php');
 include_once('modules/module.lead-collection.php');
+include_once('modules/module.alert.php');
 include_once('functions/functions.templates.php'); 
 
 register_activation_hook(__FILE__, 'landing_page_activate');

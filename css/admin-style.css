@@ -259,3 +259,60 @@ div#lp-store-iframe-container > iframe {
 {
 	color:#388DBC;
 }
+#wp-leads-splash-header {
+	background: #f2f2f2 url('/wp-content/plugins/landing-pages/images/gradient.png') repeat-x top left;
+border-bottom: 1px solid #EBEBEA;
+-webkit-box-shadow: inset 1px 1px 1px rgba(255,255,255,0.3);
+-moz-box-shadow: inset 1px 1px 1px rgba(255,255,255,0.3);
+box-shadow: inset 1px 1px 1px rgba(255,255,255,0.3);
+padding: 20px;
+text-shadow: 1px 1px 1px #fff;
+}
+#lead-details-container {
+	border: 1px solid #EBEBEA;
+}
+#wp-leads-splash-email, #wp-leads-splash-ip, #wp-leads-splash-city, #wp-leads-splash-state, #wp-leads-splash-name {
+	border-bottom: 1px solid #EBEBEA;
+padding: 10px 20px;
+}
+#wp-leads-extra-data {
+	margin-left: 20px;
+margin-top: 5px;
+}
+#wp-leads-extra-data td {
+	padding-right: 15px;
+}
+.wplp-green-button {
+	background: #94BA65 url('/wp-content/plugins/landing-pages/images/gradient.png') repeat-x top left;
+border: 1px solid rgba(0,0,0,0.15);
+-webkit-border-radius: 2px;
+-moz-border-radius: 2px;
+border-radius: 2px;
+-webkit-box-shadow: 0px 2px 3px rgba(0,0,0,0.15), inset 1px 1px 1px rgba(255,255,255,0.2);
+-moz-box-shadow: 0px 2px 3px rgba(0,0,0,0.15), inset 1px 1px 1px rgba(255,255,255,0.2);
+box-shadow: 0px 2px 3px rgba(0,0,0,0.15), inset 1px 1px 1px rgba(255,255,255,0.2);
+color: #fff;
+cursor: pointer;
+display: inline-block;
+font-family: inherit;
+font-size: 14px;
+font-weight: bold;
+padding: 4px 5px;
+text-shadow: -1px -1px 1px rgba(0,0,0,0.15);
+text-decoration: none;
+}
+.wplp-right {
+	float: right;
+}
+.lp-lead-splash-h3, .wp-lead-label {
+	display: inline;
+}
+.wp-lead-label {
+	font-weight: bold;
+}
+#leads-table-container-inside .wp-list-table .details {
+	padding-left: 0px;
+}
+#leads-table-container-inside .wp-list-table .column-date {
+	width: 150px;
+}

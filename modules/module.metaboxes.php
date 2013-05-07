@@ -163,6 +163,7 @@ function lp_display_metabox_main_headline()
 	{
 		$meta = get_post_meta($post->ID, 'lp-main-headline', true);
 		$meta = str_replace('"','\"',$meta);
+		$meta = apply_filters('lp_edit_main_headline', $meta, 1);
 		echo '<div id="lp-main-headline-wrap">';
 		if (isset($meta)&&$meta==null||!isset($meta))
 		{

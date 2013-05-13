@@ -445,8 +445,10 @@ function lp_render_metabox($key,$custom_fields,$post)
 		$meta = get_post_meta($post->ID, $field['id'], true);
 
 
-		if ((!isset($meta)&&isset($field['default'])&&$meta!==0)||isset($meta)&&empty($meta)&&isset($field['default'])&&$meta!==0)
+		if ((!isset($meta)&&isset($field['default'])&&!is_numeric($meta))||isset($meta)&&empty($meta)&&isset($field['default'])&&!is_numeric($meta))
 		{
+			//echo $field['id'].":".$meta;
+			//echo "<br>";
 			$meta = $field['default'];
 		}
 

@@ -125,3 +125,7 @@ Fixing issue with jquery submission errors.
 = 1.0.8.4 =
 
 Fixing activation bug
+
+= 1.0.8.5 =
+
+Providing better conversion and impression tracking for landing pages that are set as homepage. 

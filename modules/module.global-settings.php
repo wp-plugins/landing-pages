@@ -36,8 +36,6 @@ if (is_admin())
 	
 	function lp_display_global_settings_js()
 	{	
-		global $lp_global_settings;
-		$lp_global_settings = lp_get_global_settings_elements();
 		
 		if (isset($_GET['tab']))
 		{
@@ -60,26 +58,21 @@ if (is_admin())
 					jQuery(showoption).click();
     			}, 100);
 				
-				<?php
-				foreach ($lp_global_settings as $key => $array)
-				{
-				?>
-					jQuery('.lp-nav-tab').live('click', function() {
-					
-						var this_id = this.id.replace('tabs-','');
-						//alert(this_id);
-						jQuery('.lp-tab-display').css('display','none');
-						jQuery('#'+this_id).css('display','block');
-						jQuery('.lp-nav-tab').removeClass('nav-tab-special-active');
-						jQuery('.lp-nav-tab').addClass('nav-tab-special-inactive');
-						jQuery('#tabs-'+this_id).addClass('nav-tab-special-active');						
-						jQuery('#id-open-tab').val(this_id);
 
-						
-					});
-				<?php
-				}
-				?>
+				jQuery('.lp-nav-tab').live('click', function() {
+				
+					var this_id = this.id.replace('tabs-','');
+					//alert(this_id);
+					jQuery('.lp-tab-display').css('display','none');
+					jQuery('#'+this_id).css('display','block');
+					jQuery('.lp-nav-tab').removeClass('nav-tab-special-active');
+					jQuery('.lp-nav-tab').addClass('nav-tab-special-inactive');
+					jQuery('#tabs-'+this_id).addClass('nav-tab-special-active');						
+					jQuery('#id-open-tab').val(this_id);
+
+					
+				});
+	
 			});			
 		</script>
 		<?php

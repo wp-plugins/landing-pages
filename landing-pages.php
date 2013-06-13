@@ -355,21 +355,4 @@ function lp_custom_template($single) {
  * LOAD ADDITIONAL MODULES
  */
 include_once('modules/module.customizer.php');
-?>te);
-				//echo LANDINGPAGES_URLPATH.'templates/'.$template.'/index.php'; exit;
-				if (file_exists(LANDINGPAGES_PATH.'templates/'.$template.'/index.php'))
-				{
-					//query_posts ($query_string . '&showposts=1');
-					return LANDINGPAGES_PATH.'templates/'.$template.'/index.php';
-				}
-				else
-				{			
-					//query_posts ($query_string . '&showposts=1');
-					return LANDINGPAGES_UPLOADS_PATH.$template.'/index.php';
-				}
-			}
-		}
-	}
-    return $single;
-}
 ?>

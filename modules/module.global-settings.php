@@ -36,7 +36,6 @@ if (is_admin())
 	
 	function lp_display_global_settings_js()
 	{	
-		
 		if (isset($_GET['tab']))
 		{
 			$default_id = $_GET['tab'];
@@ -45,7 +44,6 @@ if (is_admin())
 		{
 			$default_id ='main';
 		}
-			
 		?>
 		<script type='text/javascript'>
 			jQuery(document).ready(function() 
@@ -60,7 +58,6 @@ if (is_admin())
 				
 
 				jQuery('.lp-nav-tab').live('click', function() {
-				
 					var this_id = this.id.replace('tabs-','');
 					//alert(this_id);
 					jQuery('.lp-tab-display').css('display','none');
@@ -69,8 +66,6 @@ if (is_admin())
 					jQuery('.lp-nav-tab').addClass('nav-tab-special-inactive');
 					jQuery('#tabs-'+this_id).addClass('nav-tab-special-active');						
 					jQuery('#id-open-tab').val(this_id);
-
-					
 				});
 	
 			});			
@@ -102,18 +97,15 @@ if (is_admin())
 			<a  id='tabs-<?php echo $key; ?>' class="lp-nav-tab nav-tab nav-tab-special<?php echo $active_tab == $key ? '-active' : '-inactive'; ?>"><?php echo $data['label']; ?></a> 
 			<?php
 		}
-		echo '</h2>';
-		echo "<div class='lp-settings-tab-sidebar'><div class='lp-sidebar-settings'><h2 style='font-size:17px;'>Like the Plugin? Leave us a review</h2><center><a class='review-button' href='http://wordpress.org/support/view/plugin-reviews/landing-pages?rate=5#postform' target='_blank'>Leave a Review</a></center><small>Reviews help constantly improve the plugin & keep us motivated! <strong>Thank you for your support!</strong></small></div><div class='lp-sidebar-settings'><h2>Help keep the plugin up to date, awesome & free!</h2><form action='https://www.paypal.com/cgi-bin/webscr' method='post' target='_top'>
-<input type='hidden' name='cmd' value='_s-xclick'>
-<input type='hidden' name='hosted_button_id' value='GKQ2BR3RKB3YQ'>
-<input type='image' src='https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif' border='0' name='submit' alt='PayPal - The safer, easier way to pay online!'>
-<img alt='' border='0' src='https://www.paypalobjects.com/en_US/i/scr/pixel.gif' width='1' height='1'>
-</form>
-<small>Spare some change? Buy us a coffee/beer.<strong> We appreciate your continued support.</strong></small></div><div class='lp-sidebar-settings'><h2 style='font-size:18px;'>Follow Updates on Facebook</h2><iframe src='//www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2Finboundnow&amp;width=234&amp;height=65&amp;colorscheme=light&amp;show_faces=false&amp;border_color&amp;stream=false&amp;header=false&amp;appId=364256913591848' scrolling='no' frameborder='0' style='border:none; overflow:hidden; width:234px; height:65px;' allowTransparency='true'></iframe></div></div>";
-		echo "<form action='edit.php?post_type=landing-page&page=lp_global_settings' method='POST'>";
-		
-		echo "<input type='hidden' name='nature' value='lp-global-settings-save'>";
-		echo "<input type='hidden' name='open-tab' id='id-open-tab' value='{$active_tab}'>";
+		echo "</h2><div class='lp-settings-tab-sidebar'><div class='lp-sidebar-settings'><h2 style='font-size:17px;'>Like the Plugin? Leave us a review</h2><center><a class='review-button' href='http://wordpress.org/support/view/plugin-reviews/landing-pages?rate=5#postform' target='_blank'>Leave a Review</a></center><small>Reviews help constantly improve the plugin & keep us motivated! <strong>Thank you for your support!</strong></small></div><div class='lp-sidebar-settings'><h2>Help keep the plugin up to date, awesome & free!</h2><form action='https://www.paypal.com/cgi-bin/webscr' method='post' target='_top'>
+			<input type='hidden' name='cmd' value='_s-xclick'>
+			<input type='hidden' name='hosted_button_id' value='GKQ2BR3RKB3YQ'>
+			<input type='image' src='https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif' border='0' name='submit' alt='PayPal - The safer, easier way to pay online!'>
+			<img alt='' border='0' src='https://www.paypalobjects.com/en_US/i/scr/pixel.gif' width='1' height='1'></form>
+			<small>Spare some change? Buy us a coffee/beer.<strong> We appreciate your continued support.</strong></small></div><div class='lp-sidebar-settings'><h2 style='font-size:18px;'>Follow Updates on Facebook</h2><iframe src='//www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2Finboundnow&amp;width=234&amp;height=65&amp;colorscheme=light&amp;show_faces=false&amp;border_color&amp;stream=false&amp;header=false&amp;appId=364256913591848' scrolling='no' frameborder='0' style='border:none; overflow:hidden; width:234px; height:65px;' allowTransparency='true'></iframe></div></div>";
+		echo "<form action='edit.php?post_type=landing-page&page=lp_global_settings' method='POST'>
+		<input type='hidden' name='nature' value='lp-global-settings-save'>
+		<input type='hidden' name='open-tab' id='id-open-tab' value='{$active_tab}'>";
 		foreach ($lp_global_settings as $key => $array)
 		{
 			$these_settings = $lp_global_settings[$key]['options'];	
@@ -139,7 +131,7 @@ if (is_admin())
 		</div>
 		<div id="custom-templates">
 			<center><a href="http://www.inboundnow.com/landing-pages/custom-wordpress-landing-page-setup/" target=="_blank"><img src="<?php echo LANDINGPAGES_URLPATH;?>/images/custom-setup-image.png"></a>
-</center>
+			</center>
 		</div>
 		</div>
 		<div class="clear" id="php-sql-lp-version">
@@ -249,8 +241,6 @@ if (is_admin())
 			// loop through fields and save the data
 			foreach ($lp_options as $option) 
 			{
-				//echo $option['id'];
-				//echo "<hr>";
 				$old = get_option($option['id']);				
 				$new = $_POST[$option['id']];	
 			
@@ -264,7 +254,7 @@ if (is_admin())
 						$wp_rewrite->flush_rules();
 					}
 					if ($option['type']=='license-key')
-					{
+					{						
 						// retrieve the license from the database
 						$license = trim( get_option( 'edd_sample_license_key' ) );
 						
@@ -280,7 +270,7 @@ if (is_admin())
 
 						// make sure the response came back okay
 						if ( is_wp_error( $response ) )
-							return false;
+							break;
 
 						// decode the license data
 						$license_data = json_decode( wp_remote_retrieve_body( $response ) );
@@ -299,8 +289,16 @@ if (is_admin())
 				else
 				{
 					//print_r($option);
-					if ($option['type']=='license-key')
+					if ($option['type']=='license-key'&& $new )
 					{
+					
+						$license_status = get_option('lp_license_status-'.$option['slug']);
+						
+						if ($license_status=='valid' && $new == $old)
+						{
+							continue;
+						}
+
 						// retrieve the license from the database
 						$license = trim( get_option( 'edd_sample_license_key' ) );
 						
@@ -313,21 +311,16 @@ if (is_admin())
 						
 						// Call the custom API.
 						$response = wp_remote_get( add_query_arg( $api_params, LANDINGPAGES_STORE_URL ), array( 'timeout' => 15, 'sslverify' => false ) );
-
 						//print_r($response);
 						//echo "<br>";
+						
 						// make sure the response came back okay
 						if ( is_wp_error( $response ) )
-							return false;
+							break;
 
 						// decode the license data
 						$license_data = json_decode( wp_remote_retrieve_body( $response ) );
 						
-						//echo $license_data->license;
-						//echo "<br>";
-						//echo $option['slug'];
-						//echo "<hr>";
-						//
 						// $license_data->license will be either "active" or "inactive"						
 						$license_status = update_option('lp_license_status-'.$option['slug'], $license_data->license);
 					}

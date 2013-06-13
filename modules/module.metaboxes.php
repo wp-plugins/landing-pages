@@ -28,13 +28,13 @@ function lp_thumbnail_metabox() {
 	global $plugin_path;
 
 	$template = get_post_meta($post->ID, 'lp-selected-template', true);
-
+	$template = apply_filters('lp_selected_template',$template); 
 
 	$permalink = get_permalink($post->ID);
 	$datetime = the_modified_date('YmjH',null,null,false);
 	$permalink = lp_ready_screenshot_url($permalink,$datetime);
 	$thumbnail = 'http://s.wordpress.com/mshots/v1/' . urlencode(esc_url($permalink)) . '?w=250';
-	
+	$permalink = apply_filters('lp_live_screenshot_url', $permalink);
 	?>
 	<div >
 		<div class="inside" style='margin-left:-8px;'> 
@@ -154,7 +154,7 @@ function lp_wysiwyg_save_meta(){
 	}
 }
 
-/* ADD MAIN HEADLINE  */
+/* ADD MAIN HEADLINE  
 add_action( 'dbx_post_sidebar', 'lp_display_metabox_main_headline' );
 function lp_display_metabox_main_headline() 
 {
@@ -176,6 +176,50 @@ function lp_display_metabox_main_headline()
 		echo '<input type="text" name="lp-main-headline" id="lp-main-headline" value="'.$meta.'" style="width:100%;height:31px;font-size: 1.7em;line-height: 100%;outline: 0 none;padding: 3px 8px;"  title="This headline will appear in the landing page template."></div>';
 	}
 }
+*/
+add_action( 'edit_form_after_title', 'lp_leads_header_area' );
+add_action( 'save_post', 'lp_leads_save_header_area' );
+
+function lp_leads_header_area()
+{
+   global $post;
+	
+	$main_title = get_post_meta( $post->ID , 'lp-main-headline', true );
+    if ( empty ( $post ) || 'landing-page' !== get_post_type( $GLOBALS['post'] ) )
+        return;
+
+    if ( ! $main_title = get_post_meta( $post->ID , 'lp-main-headline',true ) )
+        $main_title = '';
+
+	$main_title = apply_filters('lp_edit_main_headline', $main_title, 1);
+	
+    echo "<div id='main-title-area'>";
+    //echo "<div id='main-title-header'><h3>Main Headline</h3><span class='lp-description'>(visible on landing page)</span></div>";
+    //echo '<label for="lp-main-headline" id="title-prompt-text" class="lp-main-headline-label">Primary Headline</label>';
+    echo '<input type="text" name="lp-main-headline" placeholder="Primary Headline Goes here. This will be visible on the page" id="lp-main-headline" value="'.$main_title.'" title="This headline will appear in the landing page template.">';
+?>
+	
+</div>
+    <?php 
+}
+function lp_leads_save_header_area( $post_id )
+{
+    if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE )
+        return;
+
+    if ( ! current_user_can( 'edit_post', $post_id ) )
+        return;
+
+    $key = 'lp-main-headline';
+
+    if ( isset ( $_POST[ $key ] ) )
+        return update_post_meta( $post_id, $key, $_POST[ $key ] );
+
+	//echo 1; exit;
+    delete_post_meta( $post_id, $key );
+}
+
+
 
 
 add_filter( 'enter_title_here', 'lp_change_enter_title_text', 10, 2 );  
@@ -207,20 +251,22 @@ function add_custom_meta_box_select_templates() {
 
 // Render select template box
 function lp_display_meta_box_select_template() {
-	//echo 1; exit;
+	//echo 1; exit; 
 	global $post;
 
 	$template =  get_post_meta($post->ID, 'lp-selected-template', true);
-
+	$template = apply_filters('lp_selected_template',$template); 
+	
 	if (!isset($template)||isset($template)&&!$template){ $template = 'default';}
 	
+	$name = apply_filters('lp_selected_template_id','lp-selected-template');
 	
 	// Use nonce for verification
 	echo "<input type='hidden' name='lp_lp_custom_fields_nonce' value='".wp_create_nonce('lp-nonce')."' />";
 	?>
 	
 	<div id="lp_template_change"><h2><a class="button-primary" id="lp-change-template-button">Choose Another Template</a></div>
-	<input type='hidden' id='lp_select_template' name='lp-selected-template' value='<?php echo $template; ?>'>
+	<input type='hidden' id='lp_select_template' name='<?php echo $name; ?>' value='<?php echo $template; ?>'>
 		<div id="template-display-options"></div>							
 	
 	<?php
@@ -245,7 +291,8 @@ function lp_display_meta_box_select_template_container() {
 	$extended_path = $uploads_path.'/landing-pages/templates/';
 
 	$template =  get_post_meta($post->ID, 'lp-selected-template', true);
-
+	$template = apply_filters('lp_selected_template',$template); 
+	
 	echo "<div class='lp-template-selector-container' style='{$toggle}'>";
 	echo "<div class='lp-selection-heading'>";
 	echo "<h1>Select Your Landing Page Template!</h1>"; 
@@ -350,13 +397,12 @@ echo '<div id="template-item" class="miscellaneous isotope-item special" style="
 </script>'; */
 }
 
-/*********************************************************************************************************/
-/*********PREPARE CUSTOM CSS META BOX FOR LANDING PAGES AND ADD CSS TO LP POST TYPE RENDERS***************/
-/*********************************************************************************************************/
-/*********************************************************************************************************/
 
-// Insert custom css box
-//Custom CSS Widget
+/** 
+ * PREPARE CUSTOM CSS META BOX FOR LANDING PAGES AND ADD CSS TO LP POST TYPE RENDERS
+ */
+
+// Custom CSS Widget
 add_action('add_meta_boxes', 'add_custom_meta_box_lp_custom_css');
 add_action('save_post', 'landing_pages_save_custom_css');
 
@@ -382,12 +428,14 @@ function landing_pages_save_custom_css($post_id) {
 	update_post_meta($post_id, 'lp-custom-css', $lp_custom_css);
 }
 
-/********************************************************************************************************/
-/*********PREPARE CUSTOM JS META BOX FOR LANDING PAGES AND ADD CSS TO LP POST TYPE RENDERS***************/
-/********************************************************************************************************/
-/********************************************************************************************************/
 
-// Insert custom JS box
+/** 
+ * PREPARE CUSTOM JS META BOX FOR LANDING PAGES AND ADD CSS TO LP POST TYPE RENDERS
+ *
+ * Insert custom JS box to landing page
+ * 
+ */
+
 add_action('add_meta_boxes', 'add_custom_meta_box_lp_custom_js');
 add_action('save_post', 'landing_pages_save_custom_js');
 
@@ -468,16 +516,19 @@ function lp_conversion_log_metabox() {
 				//echo "<br>";
 				
 				//echo $datetime;
-				$full_name = $wplead_data['wpleads_first_name'][0].' '.$wplead_data['wpleads_last_name'][0];
-				$this_data['ID']  = $row['ID'];
-				$this_data['date']  = $datetime;
-				$this_data['name']  = $full_name;
-				$this_data['email']  = $wplead_data['wpleads_email_address'][0];
-				$this_data['first_time']  = $first_time;
+				if (isset($wplead_data['wpleads_email_address']))
+				{
+					$full_name = $wplead_data['wpleads_first_name'][0].' '.$wplead_data['wpleads_last_name'][0];
+					$this_data['ID']  = $row['ID'];
+					$this_data['date']  = $datetime;
+					$this_data['name']  = $full_name;
+					$this_data['email']  = $wplead_data['wpleads_email_address'][0];
+					$this_data['first_time']  = $first_time;
 
-				$this_data = apply_filters('lp_lead_table_data_construct',$this_data);
-				
-				$final_data[] = $this_data;
+					$this_data = apply_filters('lp_lead_table_data_construct',$this_data);
+					
+					$final_data[] = $this_data;
+				}
 			}
 			//print_r($final_data);
 			$this->table_data = $final_data; 			
@@ -578,7 +629,7 @@ function lp_conversion_log_metabox() {
 					//print_r($item);
 					if ($item[ 'first_time' ]==1)
 					{
-						echo '<img src="'.LANDINGPAGES_URLPATH.'images/new-lead.png" title="First timer!">';
+						echo '<img src="'.LANDINGPAGES_URLPATH.'images/new-lead.png" title="First timer!" style="float:right;">';
 					}
 					do_action('lp_lead_table_data_is_details_column',$item);
 					return;		

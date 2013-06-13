@@ -14,7 +14,7 @@ function lp_template_page_notice(){
              </div>';
         }
     }
-}
+} 
 add_action('admin_notices', 'lp_template_page_notice'); 
 add_action('admin_init', 'lp_template_page_ignore');
 function lp_template_page_ignore() {

@@ -32,13 +32,16 @@ function lp_admin_enqueue($hook)
 	if (isset($_GET['page']) && (($_GET['page'] == 'lp_store') || ($_GET['page'] == 'lp_addons'))) {
 		wp_dequeue_script('easyXDM');
 		wp_enqueue_script('easyXDM', LANDINGPAGES_URLPATH . 'js/easyXDM.debug.js');
+		//wp_enqueue_script('lp-js-store', LANDINGPAGES_URLPATH . 'js/admin.store.js');
 	} 
 	
 
 	//Admin enqueue - Landing Page CPT only 
 	if ( isset($post) && 'landing-page' == $post->post_type ) 
 	{ 
+		wp_enqueue_style('lp-only-cpt-admin-css', LANDINGPAGES_URLPATH . 'css/admin-lp-cpt-only-style.css');
 		wp_enqueue_script('lp-post-edit-ui', LANDINGPAGES_URLPATH . 'js/admin.post-edit.js');
+		wp_localize_script( 'lp-post-edit-ui', 'lp_post_edit_ui', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ), 'wp_landing_page_meta_nonce' => wp_create_nonce('wp-landing-page-meta-nonce') ) );
 		
 		//admin.metaboxes.js - Template Selector - Media Uploader
 		wp_enqueue_script('lp-js-metaboxes', LANDINGPAGES_URLPATH . 'js/admin.metaboxes.js');
@@ -47,6 +50,8 @@ function lp_admin_enqueue($hook)
 		$template_data = json_encode($template_data);
 		
 		$template = get_post_meta($post->ID, 'lp-selected-template', true);	
+		$template = apply_filters('lp_selected_template',$template); 
+		
 		$template = strtolower($template);	
 
 		$params = array('selected_template'=>$template, 'templates'=>$template_data);
@@ -69,6 +74,8 @@ function lp_admin_enqueue($hook)
 			wp_dequeue_script('jquery-tinymce');
 			wp_enqueue_script('jquery-tinymce', LANDINGPAGES_URLPATH . 'js/tiny_mce/jquery.tinymce.js');
 
+			// Main edit screen CSS
+			wp_enqueue_style('admin-post-edit-css', LANDINGPAGES_URLPATH . '/css/admin-post-edit.css');
 
 			// jquery datepicker
 			wp_enqueue_script('jquery-datepicker', LANDINGPAGES_URLPATH . 'js/jquery-datepicker/jquery.timepicker.min.js');
@@ -167,6 +174,7 @@ function lp_show_metabox($post,$key)
 {
 	global $lp_data;
 	$key = $key['args']['key'];
+
 	$lp_custom_fields = $lp_data[$key]['options'];
 	$lp_custom_fields = apply_filters('lp_show_metabox',$lp_custom_fields, $key);
 	
@@ -453,9 +461,9 @@ function lp_render_metabox($key,$custom_fields,$post)
 		}
 
 		// begin a table row with
-		echo '<tr class="'.$field['id'].' '.$raw_option_id.'">
+		echo '<tr class="'.$field['id'].' '.$raw_option_id.' landing-page-option-row">
 				<th class="landing-page-table-header '.$label_class.'"><label for="'.$field['id'].'">'.$field['label'].'</label></th>
-				<td>';
+				<td class="landing-page-option-td">';
 				switch($field['type']) {
 					// default content for the_content
 					case 'default-content':
@@ -467,7 +475,7 @@ function lp_render_metabox($key,$custom_fields,$post)
 						{
 							$meta = $field['default'];
 						}
-						echo '<input type="text" class="jpicker" style="background-color:#'.$meta.'" name="'.$field['id'].'" id="'.$field['id'].'" value="'.$meta.'" size="5" />
+						echo '<input type="text" class="jpicker" style="background-color:#'.$meta.'" name="'.$field['id'].'" id="'.$field['id'].'" value="'.$meta.'" size="5" /><span class="button-primary new-save-lp" id="'.$field['id'].'" style="margin-left:10px; display:none;">Update</span>
 								<div class="lp_tooltip tool_color" title="'.$field['desc'].'"></div>';
 						break;
 					case 'datepicker':
@@ -721,6 +729,26 @@ function lp_generate_drowndown($select_id, $post_type, $selected = 0, $width = 4
 }
 
 
+function lp_wp_editor( $content, $id, $settings = array() )
+{
+	//echo $id;
+	$content = apply_filters('lp_wp_editor_content',$content);
+	$id = apply_filters('lp_wp_editor_id',$id);
+	$settings = apply_filters('lp_wp_editor_settings',$settings);
+	//echo "hello";
+	//echo $id;exit;
+	wp_editor( $content, $id, $settings);
+}
+
+
+function lp_display_headline_input($id,$main_headline)
+{
+	//echo $id;
+	$id = apply_filters('lp_display_headline_input_id',$id);
+
+	echo "<input type='text' name='{$id}' id='{$id}' value='{$main_headline}' size='30'>";
+}
+
 
 function lp_ready_screenshot_url($link,$datetime)
 {
@@ -754,8 +782,18 @@ function lp_make_percent($rate, $return = false)
 
 function lp_check_license_status($field)
 {
-	$license_key = get_option($field['id']);
+	//print_r($field);exit;
+	$date = date("Y-m-d");
+	$cache_date = get_option($field['id']."-expire");
+	$license_status = get_option('lp_license_status-'.$field['slug']);
+	
+	if (isset($cache_date)&&($date<$cache_date)&&$license_status=='valid')
+	{
+		return "valid";
+	}
 		
+	$license_key = get_option($field['id']);
+	
 	$api_params = array( 
 		'edd_action' => 'check_license', 
 		'license' => $license_key, 
@@ -765,7 +803,7 @@ function lp_check_license_status($field)
 	
 	// Call the custom API.
 	$response = wp_remote_get( add_query_arg( $api_params, LANDINGPAGES_STORE_URL ), array( 'timeout' => 15, 'sslverify' => false ) );
-	//print_r($response);exit;
+	//print_r($response);
 
 	if ( is_wp_error( $response ) )
 		return false;
@@ -774,17 +812,22 @@ function lp_check_license_status($field)
 	//echo $license_data;exit;
 	
 	if( $license_data->license == 'valid' ) {
+		$newDate = date('Y-m-d', strtotime("+15 days"));
+		update_option($field['id']."-expire", $newDate);
 		return 'valid';
 		// this license is still valid
 	} else {
 		return 'invalid';
-		// this license is
 	}
 }
 
-function lp_save_license_status()
-{
-	
+
+function landing_page_get_version() {
+	if ( ! function_exists( 'get_plugins' ) )
+		require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+	$plugin_folder = get_plugins( '/' . plugin_basename( dirname( __FILE__ ) ) );
+	$plugin_file = basename( ( __FILE__ ) );
+	return $plugin_folder[$plugin_file]['Version'];
 }
 
 function lp_wpseo_priority(){return 'low';}
@@ -801,6 +844,40 @@ function lp_in_admin_header()
 	}
 }
 
+
+/****************** AB TESTING FUNCTIONS *********************************************************************/
+
+
+function lp_ab_unset_variation($variations,$vid)
+{
+	if(($key = array_search($vid, $variations)) !== false) {
+		unset($variations[$key]);
+	}
+	
+	return $variations;
+}
+
+
+function lp_ab_get_lp_active_status($post,$vid=null)
+{
+	if ($vid==0)
+	{
+		$variation_status = get_post_meta( $post->ID , 'lp_ab_variation_status' , true);
+	}
+	else
+	{
+		$variation_status = get_post_meta( $post->ID , 'lp_ab_variation_status-'.$vid , true);
+	}
+	
+	if (!is_numeric($variation_status))
+	{
+		return 1;
+	}
+	else
+	{	
+		return $variation_status;
+	}
+}
 
   
 ?>

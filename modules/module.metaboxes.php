@@ -68,9 +68,10 @@ function lp_display_split_testing_metabox() {
 
 function lp_split_testing_metabox() {
 	global $post;
-
+     
+        echo "<p style='font-weight:normal;'><strong>Please Note</strong> that this version 1 way of running Landing Page split tests will be phases out of the plugin soon.<br><br> Please use the <strong>new and improved A/B testing functionality</strong> located in the tabs above.";
+        echo "<br><br><a href=\"#\" onClick=\"window.open('http://www.youtube.com/embed/KJ_EDJAvv9Y?autoplay=1','landing-page','width=640,height=480,toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,copyhistory=no,resizable=no')\">Watch Video Explanation</a></p>";
 	echo '<p>
-	
 	<a name="lpsplittest" title="Landing Pages: Split Testing Options" id="lpopensplittestoptions" class="button-secondary thickbox" href="' . 	LANDINGPAGES_URLPATH.'modules/module.split-testing-splash.php?post_id=' . $post->ID . '&height=400&width=600&TB_iframe=true">Manage Split Testing</a> 
 	<a name="lp-st-clone" title="Clone page and add it to the same split testing group" id="lp-st-clone-page-groupss" rel="'.$post->ID.'"  class="button-secondary thickbox"  href="' . 	LANDINGPAGES_URLPATH.'modules/module.split-testing-splash.php?post_id=' . $post->ID . '&clone=1&TB_iframe=true&height=400&width=600">Clone This Page</a>
 	</p>';

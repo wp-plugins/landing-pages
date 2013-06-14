@@ -55,7 +55,6 @@ function lp_ab_stats_metabox() {
 			<?php }	?>
 				<?php
 				$howmany = count($variations);
-				echo "<span id='lp-var-count' style='display:none;'>$howmany</span>";
 				foreach ($variations as $key=>$vid)
 				{
 					if (!is_numeric($vid)&&$key==0)
@@ -81,8 +80,9 @@ function lp_ab_stats_metabox() {
 					
 					if ($impressions>0)
 					{
-						$conversion_rate = $conversions / $impressions; 
-						$conversion_rate = round($conversion_rate,2); 
+						$conversion_rate = $conversions / $impressions;
+						(($conversions===0)) ? $sign = "" : $sign = "%"; 
+						$conversion_rate = round($conversion_rate,2) * 100 . $sign; 
 					}
 					else
 					{

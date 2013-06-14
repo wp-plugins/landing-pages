@@ -129,3 +129,10 @@ Fixing activation bug
 = 1.0.8.5 =
 
 Providing better conversion and impression tracking for landing pages that are set as homepage. 
+
+= 1.0.8.6 =
+
+- Release new and improved version of A/B testing!
+- Ajax saving on landing page options for faster page edits
+- Frontend Visual Editor to see what you are editing/changing
+- Enabled frontend editor for use on normal pages and posts

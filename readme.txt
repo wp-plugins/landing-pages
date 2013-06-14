@@ -7,7 +7,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: landing pages, inbound marketing, conversion pages, split testing, a b test, a b testing, a/b test, a/b testing, coming soon page, email list, landing page, list building, maintenance page, squeeze page, inbound now, landing-pages, splash pages, cpa, click tracking, goal tracking, analytics
 Requires at least: 3.3
 Tested up to: 3.5
-Stable Tag: 1.0.8.4
+Stable Tag: 1.0.8.6
 
 Create landing pages for your WordPress site. Monitor and improve conversion rates, run A/B split tests, customize your own templates and more.
 
@@ -64,75 +64,76 @@ The plugin is also fully extendable and has a number of actions, filters, and ho
 
 == Changelog ==
 
-= 1.1 =
-
-Released
-
-
-= 1.0.3.7 =
-
-Bug Fix: 'Clear Stats' button.
-
-= 1.0.3.8 =
-
-Debugging cross browser impressions and conversion tracking. Implemented soltion for url-to-postid conversions that's compatible with the /slug/ removal extension for landing pages plugin.
-Added email validation check to prevent false positives when form standardization is turned on.
-
-= 1.0.3.9 =
-
-Fixed issue with plugins and wp core refusing to update on some installations when landing page plugin is activated. 
-
-= 1.0.4.1 =
-
-Fixed issue with conversions not recording on some servers by forcing form submittal to wait until ajax has completely finnished loading before continuing to process form.  
-
-= 1.0.4.2 =
-
-Added new defitions to form standardization parser. Limited .htaccess rewrites to plugin activation to try and mitigate .htaccess corruptions.  
-
-= 1.0.4.4 =
-
-Migrating store to new location.  Updating version control systems   
-
-= 1.0.5.1 =
-
-Introducing version control system for extensions.
-
-= 1.0.5.3 =
-
-Solutions for custom post type wp rewrite issue on activation.
-
-= 1.0.5.6 =
-
-Fixed issue with global setting's radio buttons not holding new set values.
-
-= 1.0.7.1 =
-
-Added cookie based auto-field population & lead data collection to core.
-
-= 1.0.7.3 =
-
-Fixed issue with WP_List_table causing posts to to save or edit propperly Attempt 001
-
-= 1.0.7.9 =
-
-Added capability to activate and update license keys for premium extensions. Added ability to define white listed HTML elements for Form Standardization process.
-
-= 1.0.8.1 =
-
-Fixing issue with jquery submission errors.
-
-= 1.0.8.4 =
-
-Fixing activation bug
-
-= 1.0.8.5 =
-
-Providing better conversion and impression tracking for landing pages that are set as homepage. 
-
 = 1.0.8.6 =
 
 - Release new and improved version of A/B testing!
 - Ajax saving on landing page options for faster page edits
 - Frontend Visual Editor to see what you are editing/changing
 - Enabled frontend editor for use on normal pages and posts
+
+= 1.0.8.5 =
+
+Providing better conversion and impression tracking for landing pages that are set as homepage. 
+
+= 1.0.8.4 =
+
+Fixing activation bug
+
+= 1.0.8.1 =
+
+Fixing issue with jquery submission errors.
+
+= 1.0.7.9 =
+
+Added capability to activate and update license keys for premium extensions. Added ability to define white listed HTML elements for Form Standardization process.
+
+= 1.0.7.3 =
+
+Fixed issue with WP_List_table causing posts to to save or edit propperly Attempt 001
+
+= 1.0.7.1 =
+
+Added cookie based auto-field population & lead data collection to core.
+
+= 1.0.5.6 =
+
+Fixed issue with global setting's radio buttons not holding new set values.
+
+= 1.0.5.3 =
+
+Solutions for custom post type wp rewrite issue on activation.
+
+= 1.0.5.1 =
+
+Introducing version control system for extensions.
+
+= 1.0.4.4 =
+
+Migrating store to new location.  Updating version control systems   
+
+= 1.0.4.2 =
+
+Added new defitions to form standardization parser. Limited .htaccess rewrites to plugin activation to try and mitigate .htaccess corruptions. 
+
+= 1.0.4.1 =
+
+Fixed issue with conversions not recording on some servers by forcing form submittal to wait until ajax has completely finnished loading before continuing to process form.  
+
+= 1.0.3.9 =
+
+Fixed issue with plugins and wp core refusing to update on some installations when landing page plugin is activated. 
+
+= 1.0.3.8 =
+
+Debugging cross browser impressions and conversion tracking. Implemented soltion for url-to-postid conversions that's compatible with the /slug/ removal extension for landing pages plugin.
+Added email validation check to prevent false positives when form standardization is turned on.
+
+= 1.0.3.7 =
+
+Bug Fix: 'Clear Stats' button.
+
+= 1.1 =
+
+Released
+
+

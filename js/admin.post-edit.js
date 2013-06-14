@@ -19,7 +19,12 @@ jQuery(document).ready(function ($) {
 		// jQuery( ".nav-tab-wrapper.a_b_tabs .lp-ab-tab, #tabs-add-variation").hide();
 	}	
 
-
+     var current_a_tab = jQuery("#tabs-0").hasClass('nav-tab-special-active');
+    if (current_a_tab === true){
+        var url_norm = jQuery("#view-post-btn a").attr('href');
+        var new_url = url_norm + "?lp-variation-id=0";
+        jQuery("#view-post-btn a").attr('href', new_url);
+    }
 	
     // Fix inactivate theme display
     jQuery("#template-box a").live('click', function () {

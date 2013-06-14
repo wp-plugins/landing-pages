@@ -27,7 +27,7 @@ Landing pages are an ideal way to convert more of your passive website visitors 
 * Easily clone existing landing pages and run A/B Split tests on variations.
 * Use your current WordPress theme or choose from our library of custom landing page designs.
 * Pre-populate Forms with visitor information to increase conversion rates
-* Gather lead intelligence and track lead activity with <a href="http://wordpress.org/plugins/leads/">WordPress Leads</a>
+* Gather lead intelligence and track lead activity with <a href="http://wordpress.org/plugins/leads/screenshots/">WordPress Leads</a>
 * Extend functionality with our growing repository of <a href="http://www.inboundnow.com/landing-pages/downloads/category/add-ons/">third party add ons</a>.
 * Easily implement your own custom landing page design.
 

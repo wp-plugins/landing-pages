@@ -55,6 +55,7 @@ function lp_ab_stats_metabox() {
 			<?php }	?>
 				<?php
 				$howmany = count($variations);
+				echo "<span id='lp-var-count' style='display:none;'>$howmany</span>";
 				foreach ($variations as $key=>$vid)
 				{
 					if (!is_numeric($vid)&&$key==0)

@@ -13,26 +13,27 @@ Create landing pages for your WordPress site. Monitor and improve conversion rat
 
 == Description ==
 
-This plugin creates landing pages (a.k.a. conversion or splash pages) for your WordPress site. It gives site owners the ability to monitor and track conversion rates, run a/b or multivariate split tests on landing pages, and most importantly increase lead capture!
+This plugin creates landing pages (a.k.a. conversion or splash pages) for your WordPress site. It gives site owners the ability to monitor and track conversion rates, run a/b or multivariate split tests on landing pages, and most importantly increase lead flow!
 
 The landing page plugin was specifically designed with inbound marketing best practices in mind and will help you drive & convert more leads on your site.
 
-Landing pages are an ideal way to convert more of your passive website visitors into active leads or list subscribers.
+Landing pages are an ideal way to convert more of your passive website visitors into active leads or email list subscribers.
 
 = Highlights =
 
 * Create beautiful Landing Pages on your WordPress site.
+* Visual Editor to view changes being made on the fly!
 * Track conversion rates on your landing pages for continual optimization.
 * Easily clone existing landing pages and run A/B Split tests on variations.
 * Use your current WordPress theme or choose from our library of custom landing page designs.
 * Pre-populate Forms with visitor information to increase conversion rates
-* Gather lead intelligence and track lead activity
+* Gather lead intelligence and track lead activity with <a href="http://wordpress.org/plugins/leads/">WordPress Leads</a>
 * Extend functionality with our growing repository of <a href="http://www.inboundnow.com/landing-pages/downloads/category/add-ons/">third party add ons</a>.
 * Easily implement your own custom landing page design.
 
 This plugin is form agnostic meaning it will work with any form system you use.
 
-Recommended form plugins (Gravity forms or contact form 7)
+Recommended form plugins (Gravity forms, Ninja Forms or Contact form 7)
 
 = About the Plugin =
 
@@ -40,11 +41,11 @@ http://www.youtube.com/watch?v=BzcD6PgvLP4
 
 = Developers & Designers = 
 
-We built the landing page plugin as a framework! You can use it add value to your existing clients.
+We built the landing page plugin as a framework! Need A/B testing out of the box implemented for your existing designs? Use WordPress Landing Pages to quickly spin up new landing pages that have all the functionality your clients will need.
 
 You can quickly take your existing designs and implement them using our <a href="http://www.inboundnow.com/landing-pages/docs/dev/">templating framework</a>.
 
-The plugin is also fully extendable and has a number of actions, filters, and hooks available for use.
+The plugin is also fully extendable and has a number of actions, filters, and hooks available for use. If a hook doesn't exist, simply ask and we can implement custom changes.
 
 == Installation ==
 
@@ -66,10 +67,10 @@ The plugin is also fully extendable and has a number of actions, filters, and ho
 
 = 1.0.8.6 =
 
-- Release new and improved version of A/B testing!
-- Ajax saving on landing page options for faster page edits
-- Frontend Visual Editor to see what you are editing/changing
-- Enabled frontend editor for use on normal pages and posts
+* Release new and improved version of A/B testing!
+* Ajax saving on landing page options for faster page edits
+* Frontend Visual Editor to see what you are editing/changing
+* Enabled frontend editor for use on normal pages and posts
 
 = 1.0.8.5 =
 

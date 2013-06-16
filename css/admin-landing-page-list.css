@@ -48,6 +48,14 @@ border-right: 1px solid #EBEBEA;
 .wp-list-table td.cr {
 padding-left: 49px;
 }
+.row-title {
+font-size: 15px!important;
+margin-top: 2px !important;
+display: inline-block;}
+
+.wp-list-table td.actions {
+padding-left: 42px;
+}
 #hide-stats, .show-stats-top {
    color: #21759b;
 font-size: 9px;
@@ -64,7 +72,7 @@ padding-left: 10px;
 font-size: 12px;
 border: 1px solid #EBEBEA;
 border-top: none;
-min-height: 113px;
+min-height: 134px;
 border-bottom: none;
 margin-bottom: -2px;
 padding-bottom: 0px;

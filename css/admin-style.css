@@ -20,22 +20,13 @@
 	display: none;
 }
 
-#template-box {
+#template-box, .thumbnail-lander img {
 	background: #FCFDFE;
 	padding: 3%;
 	margin-right: 10px;
 	border: 1px solid #E0E0E0;
 	-moz-border-radius: 7px;
 	border-radius: 7px;
-	//-moz-box-shadow: 0 0 3px rgba(0,0,0,0.3),
-	// 1px 1px 0 #fff inset,
-	// -1px -1px 0 #fff inset;
-	//-webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.3),
-	// 1px 1px 0 white inset,
-	// -1px -1px 0 white inset;
-	//box-shadow: 0 0 3px rgba(0, 0, 0, 0.3),
-	// 1px 1px 0 white inset,
-	// -1px -1px 0 white inset;
 	position: relative;
 	overflow: hidden;
 	display: block;
@@ -392,4 +383,3 @@ div#lp-store-iframe-container > iframe {
 tr.media-id p.description {
     display: inline-block;
 }
-

@@ -1,16 +1,20 @@
 jQuery(document).ready(function($) {
 
-	// Resize Functions
-	$("#wp_content_resize, #lp-conversion-area_ifr").height(210);
-	   setTimeout(function() {
-	jQuery("#lp-conversion-area_ifr, #lp-conversion-area_tbl, #wp_content_ifr, .mceLayout, .mceIframeContainer iframe").height(150);
-	}, 1000);
-
 	var window_width = jQuery(window).width();
 	var parent_window = parent.document.width;
 	iframe_size = parent_window * 0.334;
 	new_size = parent_window * 0.70;
 	new_new_size = parent_window - new_size;
+	editor_size = iframe_size * 0.85 + "px";
+	// Resize Functions
+	$("#wp_content_resize, #lp-conversion-area_ifr").height(210);
+	   setTimeout(function() {
+	jQuery("#lp-conversion-area_ifr, #lp-conversion-area_tbl, #wp_content_ifr, .mceLayout, .mceIframeContainer iframe").height(150);
+	jQuery(".wp-editor-container table").css("max-width", editor_size);
+		jQuery('iframe').contents().find("body").each(function(){
+			jQuery(this).css("max-width", editor_size);
+		}); 
+	}, 1000);
 
 	//jQuery("body").width(iframe_size);
 	//jQuery("#wpcontent").width(iframe_size);

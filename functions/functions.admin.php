@@ -17,8 +17,9 @@ function lp_admin_enqueue($hook)
 	//jpicker - color picker
 	wp_enqueue_script('jpicker', LANDINGPAGES_URLPATH . 'js/jpicker/jpicker-1.1.6.min.js');
 	wp_localize_script( 'jpicker', 'jpicker', array( 'thispath' => LANDINGPAGES_URLPATH.'js/jpicker/images/' ));
+	//wp_enqueue_style('jpicker-css', LANDINGPAGES_URLPATH . 'js/jpicker/css/jPicker.css');	// have min below
 	wp_enqueue_style('jpicker-css', LANDINGPAGES_URLPATH . 'js/jpicker/css/jPicker-1.1.6.min.css');
-	wp_enqueue_style('jpicker-css', LANDINGPAGES_URLPATH . 'js/jpicker/css/jPicker.css');	
+	
 	
 	//Tool tip script
 	wp_dequeue_script('jquery-qtip');
@@ -36,7 +37,7 @@ function lp_admin_enqueue($hook)
 	} 
 	
 
-	//Admin enqueue - Landing Page CPT only 
+	// Admin enqueue - Landing Page CPT only 
 	if ( isset($post) && 'landing-page' == $post->post_type ) 
 	{ 
 		wp_enqueue_style('lp-only-cpt-admin-css', LANDINGPAGES_URLPATH . 'css/admin-lp-cpt-only-style.css');
@@ -56,6 +57,7 @@ function lp_admin_enqueue($hook)
 
 		$params = array('selected_template'=>$template, 'templates'=>$template_data);
 		wp_localize_script('lp-js-metaboxes', 'data', $params);
+		// Isotope sorting
 		wp_enqueue_script('lp-js-isotope', LANDINGPAGES_URLPATH . 'js/isotope/jquery.isotope.js', array('jquery'), '1.0', true );
 		wp_enqueue_style('lp-css-isotope', LANDINGPAGES_URLPATH . 'js/isotope/css/style.css');
 		
@@ -86,6 +88,16 @@ function lp_admin_enqueue($hook)
 			wp_enqueue_style('jquery-timepicker-css', LANDINGPAGES_URLPATH . 'js/jquery-datepicker/jquery.timepicker.css');
 			wp_enqueue_style('jquery-datepicker-base.css', LANDINGPAGES_URLPATH . 'js/jquery-datepicker/lib/base.css');		
 		}
+		// Admin UI for Landing Page List
+		if ( $hook == 'edit.php' && (isset($_GET['post_type']) && ($_GET['post_type'] == 'landing-page') ) ) 
+		{
+		wp_enqueue_script(array('jquery', 'editor', 'thickbox', 'media-upload'));
+		wp_enqueue_script('landing-page-list', LANDINGPAGES_URLPATH . 'js/admin.landing-page-list.js');
+		wp_enqueue_style('landing-page-list-css', LANDINGPAGES_URLPATH.'css/admin-landing-page-list.css');
+		wp_admin_css('thickbox');
+		add_thickbox(); 
+		}
+
 	}
 }
 

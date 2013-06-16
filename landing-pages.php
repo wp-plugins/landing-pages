@@ -350,7 +350,23 @@ function lp_custom_template($single) {
 	}
     return $single;
 }
-
+/*
+global $wpdb;
+$data   =   array();
+$wpdb->query("
+  SELECT `meta_key`, `meta_value`
+	FROM $wpdb->postmeta
+	WHERE `post_id` = ".$_GET['post']."
+");
+foreach($wpdb->last_result as $k => $v){
+	$data[$v->meta_key] =   $v->meta_value;
+};
+if (isset($_GET['post']))
+{
+	echo "<pre>";
+	print_r( $data);
+	echo "</pre>";
+}
 /**
  * LOAD ADDITIONAL MODULES
  */

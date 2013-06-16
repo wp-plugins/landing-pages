@@ -103,7 +103,7 @@ function lp_ab_stats_metabox() {
 
 					<div id="lp-variation-<?php echo lp_ab_key_to_letter($key); ?>" class="bab-variation-row <?php echo $variation_status_class;?>" >
 						<div class='bab-varation-header'>
-								<span class='bab-variation-name'>Variation <span class='bab-stat-letter'><?php echo lp_ab_key_to_letter($key); ?></span>
+								<span class='bab-variation-name'>Variation <span class='bab-stat-letter'><?php echo lp_ab_key_to_letter($vid); ?></span>
 								<?php 
 								if($variation_status!=1)
 								{
@@ -199,7 +199,7 @@ function lp_ab_testing_add_tabs()
 		
 		if ($vid!=0)
 		{
-			$letter = lp_ab_key_to_letter($i);
+			$letter = lp_ab_key_to_letter($vid);
 			
 			//alert (variation.new_variation); 
 			if ($current_variation_id==$vid&&!isset($_GET['new-variation']))

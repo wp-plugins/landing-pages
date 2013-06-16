@@ -33,6 +33,9 @@ right: 10px;
 	border-style: solid;
 
 }
+.mceToolbar.mceToolbarRow1.Enabled td {
+	display: inline-block !important;
+}
 .media-modal {
 position: fixed;
 top: 45px !important;}

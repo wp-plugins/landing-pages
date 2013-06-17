@@ -27,7 +27,7 @@ jQuery(document).ready(function($) {
 */
       jQuery(".variation-winner-is").each(function(){
     var target = jQuery(this).text();
-      jQuery("." + target).css("background-color", "#e2ffc9");
+      jQuery("." + target).addClass("winner-lp").attr("data-lp", "Current Winner");
     });
 
     var hidestats = "<span id='hide-stats'>(Hide Stats)</span><span class='show-stats show-stats-top'>Show Stats</span>";
@@ -58,12 +58,14 @@ jQuery('.lp-letter').on('mouseenter', function(event) {
   // Bind the qTip within the event handler
   var text_in_tip = jQuery(this).attr("data-notes");
   var letter = jQuery(this).text();
+  var status = "<span class='lp-paused'>" + jQuery(this).parent().attr("rel") + "</span>";
+  var winner = "<span class='lp-win'>" + jQuery(this).parent().attr("data-lp") + "</span>";
   jQuery(this).qtip({
     overwrite: false, // Make sure the tooltip won't be overridden once created
       content: {
           text: text_in_tip,
           title: {
-            text: 'Variation ' + letter + "<span class='lp-pop-close'>close</span>"
+            text: 'Variation ' + letter + "<span class='lp-extra'>" + status + winner + "</span>" + "<span class='lp-pop-close'>close</span>"
           }
         },
     position: {

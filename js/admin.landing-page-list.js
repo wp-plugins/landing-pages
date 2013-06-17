@@ -87,8 +87,11 @@ jQuery('.lp-letter').on('mouseleave', function(event) {
 
 });
 
-jQuery("body").on("click", ".lp-pop-close, .lp-pop-preview a", function(event) {
+jQuery("body").on("click", ".lp-pop-close", function(event) {
 jQuery(this).parent().parent().parent().hide();
+});
+jQuery("body").on("click", ".lp-pop-preview a", function(event) {
+jQuery(this).parent().parent().parent().parent().hide();
 });
 
  });

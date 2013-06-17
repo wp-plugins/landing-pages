@@ -168,7 +168,7 @@ if ( current_user_can( 'manage_options' ) ) {
 }
 echo $page;
 //header("HTTP/1.1 307 Temporary Redirect");
-//header("Location: $url");
+//header("Location: $url"); // This looks like it's not caching. In that case we could send folks through
 
 
 

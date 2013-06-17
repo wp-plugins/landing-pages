@@ -201,6 +201,8 @@ min-width: 60px;
 display: inline-block;
 padding-left: 4px;
 padding-right: 4px;
+min-width: 30px;
+text-align: center;
 }
 .lp-letter, .cr-number {
 display: inline-block;

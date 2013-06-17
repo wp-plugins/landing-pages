@@ -760,7 +760,13 @@ function lp_display_headline_input($id,$main_headline)
 
 	echo "<input type='text' name='{$id}' id='{$id}' value='{$main_headline}' size='30'>";
 }
+function lp_display_notes_input($id,$variation_notes)
+{
+	//echo $id;
+	$id = apply_filters('lp_display_notes_input_id',$id);
 
+	echo "<span id='add-lp-notes'>Notes:</span><input placeholder='Add Notes to your variation. Example: This version is testing a green submit button' type='text' class='lp-notes' name='{$id}' id='{$id}' value='{$variation_notes}' size='30'>";
+}
 
 function lp_ready_screenshot_url($link,$datetime)
 {

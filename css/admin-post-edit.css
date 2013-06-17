@@ -1,16 +1,23 @@
-#titlediv #title {
+#titlediv #title, #lp-notes-area input {
 background-color: #fff;
 border: none;
 }
 #wpbody-content {
 overflow: visible !important;
 }
-#titlediv #title:focus{
+#lp-notes-area input {
+	width: 95%;
+	color: #AAAAAA;
+}
+#lp-notes-area input:focus{
+	color: #000;
+}
+#titlediv #title:focus, #lp-notes-area input:focus{
   border: solid 1px #dfdfdf;
 }
 #post-body-content .a_b_tabs {
 padding: 0px;
-margin-bottom: 15px;
+margin-bottom: 9px;
 margin-left: -18px;
 padding-left: 22px;
 margin-top: 5px;
@@ -26,7 +33,12 @@ position: relative;
 #adminmenu .wp-menu-arrow div { 
 left: -2px;
   }
-
+#add-lp-notes {
+	display: none;
+vertical-align: middle;
+font-weight: 600;
+padding-right: 2px;
+}
 .add-new-h2 {
   display: none;
 } 

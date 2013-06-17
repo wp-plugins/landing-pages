@@ -9,6 +9,62 @@
 #cr {
     width: 120px;
 }
+.lp-pop-description {
+    display: block;
+    max-width: 325px;
+}
+.lp-pop-close {
+font-size: 11px;
+position: absolute;
+font-weight: 100;
+right: 10px;
+top: 3px;
+}
+.lp-pop-edit a{
+    color:#fff;
+}
+.lp-pop-controls {
+      display: inline-block; 
+      margin-top: 8px;
+}
+.lp-pop-edit {
+   display: inline-block !important;
+margin-right: 11px !important;
+margin-left: 5px !important;
+}
+.qtip {
+    background: #fff;
+}
+.qtip-tip {
+    height: 9px !important;
+}
+.qtip-content, .lp-pop-description, .lp-pop-preview a {
+    color:#333;
+
+}
+.lp-pop-preview a, .lp-pop-edit a {
+   text-decoration: none; 
+}
+.qtip-titlebar {
+position: relative;
+padding: 0px;}
+.qtip-jtools {
+border: 2px solid rgba(172, 172, 172, 1); }
+.qtip-title {
+ position: relative;
+margin: 0 0 5px;
+padding: 12px 17px 14px 14px;
+line-height: 19px;
+font-size: 19px;
+color: #fff;
+text-shadow: 0 -1px 0 rgba(0,0,0,0.3);
+background: #8cc1e9;
+background-image: -webkit-gradient(linear,left bottom,left top,from(#72a7cf),to(#8cc1e9));
+background-image: -webkit-linear-gradient(bottom,#72a7cf,#8cc1e9);
+background-image: -moz-linear-gradient(bottom,#72a7cf,#8cc1e9);
+background-image: -o-linear-gradient(bottom,#72a7cf,#8cc1e9);
+background-image: linear-gradient(to top,#72a7cf,#8cc1e9);
+}
 .stats li {
     border-bottom: 1px solid #EBEBEA;
 padding: 6px 20px;

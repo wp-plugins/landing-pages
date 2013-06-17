@@ -180,28 +180,28 @@ function lp_display_metabox_main_headline()
 */
 add_action( 'edit_form_after_title', 'lp_leads_header_area' );
 add_action( 'save_post', 'lp_leads_save_header_area' );
+add_action( 'save_post', 'lp_leads_save_notes_area' );
 
 function lp_leads_header_area()
 {
    global $post;
 	
 	$main_title = get_post_meta( $post->ID , 'lp-main-headline', true );
+	$varaition_notes = get_post_meta( $post->ID , 'lp-variation-notes', true );
     if ( empty ( $post ) || 'landing-page' !== get_post_type( $GLOBALS['post'] ) )
         return;
 
     if ( ! $main_title = get_post_meta( $post->ID , 'lp-main-headline',true ) )
         $main_title = '';
 
+    if ( ! $varaition_notes = get_post_meta( $post->ID , 'lp-variation-notes',true ) )
+        $varaition_notes = '';
 	$main_title = apply_filters('lp_edit_main_headline', $main_title, 1);
-	
-    echo "<div id='main-title-area'>";
-    //echo "<div id='main-title-header'><h3>Main Headline</h3><span class='lp-description'>(visible on landing page)</span></div>";
-    //echo '<label for="lp-main-headline" id="title-prompt-text" class="lp-main-headline-label">Primary Headline</label>';
-    echo '<input type="text" name="lp-main-headline" placeholder="Primary Headline Goes here. This will be visible on the page" id="lp-main-headline" value="'.$main_title.'" title="This headline will appear in the landing page template.">';
-?>
-	
-</div>
-    <?php 
+	$varaition_notes = apply_filters('lp_edit_varaition_notes', $varaition_notes, 1);
+		echo "<div id='lp-notes-area'>";
+   		lp_display_notes_input('lp-variation-notes',$varaition_notes);
+    	echo '</div><div id="main-title-area"><input type="text" name="lp-main-headline" placeholder="Primary Headline Goes here. This will be visible on the page" id="lp-main-headline" value="'.$main_title.'" title="This headline will appear in the landing page template."></div>';
+
 }
 function lp_leads_save_header_area( $post_id )
 {
@@ -220,7 +220,22 @@ function lp_leads_save_header_area( $post_id )
     delete_post_meta( $post_id, $key );
 }
 
+function lp_leads_save_notes_area( $post_id )
+{
+    if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE )
+        return;
 
+    if ( ! current_user_can( 'edit_post', $post_id ) )
+        return;
+
+    $key = 'lp-variation-notes';
+
+    if ( isset ( $_POST[ $key ] ) )
+        return update_post_meta( $post_id, $key, $_POST[ $key ] );
+
+	//echo 1; exit;
+    delete_post_meta( $post_id, $key );
+}
 
 
 add_filter( 'enter_title_here', 'lp_change_enter_title_text', 10, 2 );  

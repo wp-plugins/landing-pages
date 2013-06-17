@@ -178,14 +178,14 @@ function lp_display_metabox_main_headline()
 	}
 }
 */
-add_action( 'edit_form_after_title', 'lp_leads_header_area' );
-add_action( 'save_post', 'lp_leads_save_header_area' );
-add_action( 'save_post', 'lp_leads_save_notes_area' );
+add_action( 'edit_form_after_title', 'lp_landing_page_header_area' );
+add_action( 'save_post', 'lp_save_header_area' );
+add_action( 'save_post', 'lp_save_notes_area' );
 
-function lp_leads_header_area()
+function lp_landing_page_header_area()
 {
    global $post;
-	
+	$lp_variation = (isset($_GET['lp-variation-id'])) ? $_GET['lp-variation-id'] : '0';
 	$main_title = get_post_meta( $post->ID , 'lp-main-headline', true );
 	$varaition_notes = get_post_meta( $post->ID , 'lp-variation-notes', true );
     if ( empty ( $post ) || 'landing-page' !== get_post_type( $GLOBALS['post'] ) )
@@ -200,10 +200,10 @@ function lp_leads_header_area()
 	$varaition_notes = apply_filters('lp_edit_varaition_notes', $varaition_notes, 1);
 		echo "<div id='lp-notes-area'>";
    		lp_display_notes_input('lp-variation-notes',$varaition_notes);
-    	echo '</div><div id="main-title-area"><input type="text" name="lp-main-headline" placeholder="Primary Headline Goes here. This will be visible on the page" id="lp-main-headline" value="'.$main_title.'" title="This headline will appear in the landing page template."></div>';
+    	echo '</div><div id="main-title-area"><input type="text" name="lp-main-headline" placeholder="Primary Headline Goes here. This will be visible on the page" id="lp-main-headline" value="'.$main_title.'" title="This headline will appear in the landing page template."></div><div id="lp-current-view">'.$lp_variation.'</div><div id="switch-lp">0</div>';
 
 }
-function lp_leads_save_header_area( $post_id )
+function lp_save_header_area( $post_id )
 {
     if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE )
         return;
@@ -220,7 +220,7 @@ function lp_leads_save_header_area( $post_id )
     delete_post_meta( $post_id, $key );
 }
 
-function lp_leads_save_notes_area( $post_id )
+function lp_save_notes_area( $post_id )
 {
     if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE )
         return;

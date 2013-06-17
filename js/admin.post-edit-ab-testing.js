@@ -45,9 +45,9 @@ jQuery(document).ready(function ($) {
 	//jQuery('.new-save-lp-frontend').attr('href',preview_href+'?template-customize=on&lp-variation-id='+variation.vid);
 	
 	//setup timer and and navigation change events
-	var input_change = 0;	
+	var input_change = jQuery("#switch-lp").text();	
 	jQuery('.wrap').on('keyup change', jQuery('form').find('input[type=text],textarea,select'), function() {	
-		input_change = 1;
+		jQuery("#switch-lp").text("1");
 		console.log("change");
 	});
 	

@@ -1,23 +1,23 @@
 jQuery(document).ready(function ($) {
 
-	if (jQuery.isFunction('isotope'))
-	{
-		jQuery('#templates-container').isotope();
-			  
-		// filter items when filter link is clicked
-		jQuery('#template-filter a').click(function(){      
-		  var selector = jQuery(this).attr('data-filter');
-		  //alert(selector);
-		  jQuery('#templates-container').isotope({ filter: selector });
-		  return false;
-		});
-	}
-	
+    if (jQuery.isFunction('isotope'))
+    {
+        jQuery('#templates-container').isotope();
+              
+        // filter items when filter link is clicked
+        jQuery('#template-filter a').click(function(){      
+          var selector = jQuery(this).attr('data-filter');
+          //alert(selector);
+          jQuery('#templates-container').isotope({ filter: selector });
+          return false;
+        });
+    }
+    
     var post_status = jQuery("#original_post_status").val();
     
-	if (post_status === "draft") {
-		// jQuery( ".nav-tab-wrapper.a_b_tabs .lp-ab-tab, #tabs-add-variation").hide();
-	}	
+    if (post_status === "draft") {
+        // jQuery( ".nav-tab-wrapper.a_b_tabs .lp-ab-tab, #tabs-add-variation").hide();
+    }   
 
      var current_a_tab = jQuery("#tabs-0").hasClass('nav-tab-special-active');
     if (current_a_tab === true){
@@ -25,7 +25,7 @@ jQuery(document).ready(function ($) {
         var new_url = url_norm + "?lp-variation-id=0";
         jQuery("#view-post-btn a").attr('href', new_url);
     }
-	
+    
     // Fix inactivate theme display
     jQuery("#template-box a").live('click', function () {
 
@@ -112,7 +112,7 @@ jQuery(document).ready(function ($) {
 
         $(window).resize( function() { tb_position() } );
     });
-	
+    
     // Isotope Styling
     jQuery('#template-filter a').first().addClass('button-primary');
     jQuery('#template-filter a').click(function(){
@@ -224,7 +224,7 @@ jQuery(document).ready(function ($) {
     /* Move Slug Box
     var slugs = jQuery("#edit-slug-box");
     jQuery('#main-title-area').after(slugs.show());
-	*/
+    */
     // Background Options
     jQuery('.current_lander .background-style').live('change', function () {
         var input = jQuery(".current_lander .background-style option:selected").val();
@@ -278,94 +278,121 @@ jQuery(document).ready(function ($) {
     jQuery('#leads-table-container-inside input').each(function(){
         jQuery(this).remove();
     });
+    jQuery("#publish").val("Update All");
+    // Ajax Saving for metadata
+    jQuery('#lp_metabox_select_template input, #lp_metabox_select_template select, #lp_metabox_select_template textarea').on("change keyup", function (e) {
+        // iframe content change needs its own change function $("#iFrame").contents().find("#someDiv")
+        // media uploader needs its own change function
+        var this_id = jQuery(this).attr("id");
+        var parent_el = jQuery(this).parent();
+        jQuery(parent_el).find(".lp-success-message").remove();
+        jQuery(parent_el).find(".new-save-lp").remove();
+        var ajax_save_button = jQuery('<span class="button-primary new-save-lp" id="' + this_id + '" style="margin-left:10px">Update</span>');
+        //console.log(parent_el);
+        jQuery(ajax_save_button).appendTo(parent_el);
+    });
+    jQuery('#lp-notes-area input').on("change keyup", function (e) {
+       var this_id = jQuery(this).attr("id");
+        var parent_el = jQuery(this).parent();
+        jQuery(parent_el).find(".lp-success-message").remove();
+        jQuery(parent_el).find(".new-save-lp").remove();
+        var ajax_save_button = jQuery('<span class="button-primary new-save-lp" id="' + this_id + '" style="margin-left:10px">Update</span>');
+        //console.log(parent_el);
+        jQuery(ajax_save_button).appendTo(parent_el);
+    });
 
-	// Ajax Saving for metadata
-	jQuery('#lp_metabox_select_template input, #lp_metabox_select_template select, #lp_metabox_select_template textarea').on("change", function (e) {
-		// iframe content change needs its own change function $("#iFrame").contents().find("#someDiv")
-		// media uploader needs its own change function
-		var this_id = jQuery(this).attr("id");
-		var parent_el = jQuery(this).parent();
-		jQuery(parent_el).find(".lp-success-message").remove();
-		jQuery(parent_el).find(".new-save-lp").hide();
-		var ajax_save_button = jQuery('<span class="button-primary new-save-lp" id="' + this_id + '" style="margin-left:10px">Update</span>');
-		//console.log(parent_el);
-		jQuery(ajax_save_button).appendTo(parent_el);
-	});
-	
-	var nonce_val = lp_post_edit_ui.wp_landing_page_meta_nonce; // NEED CORRECT NONCE
-	jQuery("body").on('click', '.new-save-lp', function () {
-		var type_input = jQuery(this).parent().find("input").attr("type");
-		var type_select = jQuery(this).parent().find("select");
-		jQuery(this).parent().find(".lp-success-message").hide();
-		var type_textarea = jQuery(this).parent().find("textarea");
-		if (typeof (type_input) != "undefined" && type_input !== null) {
-			var type_of_field = type_input;
-		} else if (typeof (type_textarea) != "undefined" && type_textarea !== null) {
-			var type_of_field = 'textarea';
-		} else {
-			(typeof (type_select) != "undefined" && type_select)
-			var type_of_field = 'select';
-		}
+        jQuery('#main-title-area input').on("change keyup", function (e) {
+        // iframe content change needs its own change function $("#iFrame").contents().find("#someDiv")
+        // media uploader needs its own change function
+        var this_id = jQuery(this).attr("id");
+        var current_view = jQuery("#lp-current-view").text();
+        if (current_view !== "0") {
+            this_id = this_id + '-' + current_view;
+        }
+        var parent_el = jQuery(this).parent();
+        jQuery(parent_el).find(".lp-success-message").remove();
+        jQuery(parent_el).find(".new-save-lp").remove();
+        var ajax_save_button = jQuery('<span class="button-primary new-save-lp" id="' + this_id + '" style="margin-left:10px">Update</span>');
+        //console.log(parent_el);
+        jQuery(ajax_save_button).appendTo(parent_el);
+    });
 
-		console.log(type_of_field);
-		var new_value_meta_input = jQuery(this).parent().find("input").val();
-		// console.log(new_value_meta_input); 
-		var new_value_meta_select = jQuery(this).parent().find("select").val();
-		var new_value_meta_textarea = jQuery(this).parent().find("textarea").val();
-		//console.log(new_value_meta_select); 
-		var new_value_meta_radio = jQuery(this).parent().find("input:checked").val();
-		var new_value_meta_checkbox = jQuery(this).parent().find('input[type="checkbox"]:checked').val();
 
-		// prep data
-		if (typeof (new_value_meta_input) != "undefined" && new_value_meta_input !== null && type_of_field == "text") {
-			var meta_to_save = new_value_meta_input;
-		} else if (typeof (new_value_meta_textarea) != "undefined" && new_value_meta_textarea !== null && type_of_field == "textarea") {
-			var meta_to_save = new_value_meta_textarea;
-		} else if (typeof (new_value_meta_select) != "undefined" && new_value_meta_select !== null) {
-			var meta_to_save = new_value_meta_select;
-		} else if (typeof (new_value_meta_radio) != "undefined" && new_value_meta_radio !== null && type_of_field == "radio") {
-			var meta_to_save = new_value_meta_radio;
-		} else if (typeof (new_value_meta_checkbox) != "undefined" && new_value_meta_checkbox !== null && type_of_field == "checkbox") {
-			var meta_to_save = new_value_meta_checkbox;
-		} else {
-			var meta_to_save = "";
-		}
+    var nonce_val = lp_post_edit_ui.wp_landing_page_meta_nonce; // NEED CORRECT NONCE
+    jQuery("body").on('click', '.new-save-lp', function () {
+        var type_input = jQuery(this).parent().find("input").attr("type");
+        var type_select = jQuery(this).parent().find("select");
+        jQuery(this).parent().find(".lp-success-message").hide();
+        var type_textarea = jQuery(this).parent().find("textarea");
+        if (typeof (type_input) != "undefined" && type_input !== null) {
+            var type_of_field = type_input;
+        } else if (typeof (type_textarea) != "undefined" && type_textarea !== null) {
+            var type_of_field = 'textarea';
+        } else {
+            (typeof (type_select) != "undefined" && type_select)
+            var type_of_field = 'select';
+        }
 
-		// if data exists save it
-		var this_meta_id = jQuery(this).attr("id");
-		var post_id = jQuery("#post_ID").val();
+        console.log(type_of_field);
+        var new_value_meta_input = jQuery(this).parent().find("input").val();
+        // console.log(new_value_meta_input); 
+        var new_value_meta_select = jQuery(this).parent().find("select").val();
+        var new_value_meta_textarea = jQuery(this).parent().find("textarea").val();
+        //console.log(new_value_meta_select); 
+        var new_value_meta_radio = jQuery(this).parent().find("input:checked").val();
+        var new_value_meta_checkbox = jQuery(this).parent().find('input[type="checkbox"]:checked').val();
 
-		jQuery.ajax({
-			type: 'POST',
-			url: lp_post_edit_ui.ajaxurl,
-			context: this,
-			data: {
-				action: 'wp_landing_page_meta_save',
-				meta_id: this_meta_id,
-				new_meta_val: meta_to_save,
-				page_id: post_id,
-				nonce: nonce_val
-			},
+        // prep data
+        if (typeof (new_value_meta_input) != "undefined" && new_value_meta_input !== null && type_of_field == "text") {
+            var meta_to_save = new_value_meta_input;
+        } else if (typeof (new_value_meta_textarea) != "undefined" && new_value_meta_textarea !== null && type_of_field == "textarea") {
+            var meta_to_save = new_value_meta_textarea;
+        } else if (typeof (new_value_meta_select) != "undefined" && new_value_meta_select !== null) {
+            var meta_to_save = new_value_meta_select;
+        } else if (typeof (new_value_meta_radio) != "undefined" && new_value_meta_radio !== null && type_of_field == "radio") {
+            var meta_to_save = new_value_meta_radio;
+        } else if (typeof (new_value_meta_checkbox) != "undefined" && new_value_meta_checkbox !== null && type_of_field == "checkbox") {
+            var meta_to_save = new_value_meta_checkbox;
+        } else {
+            var meta_to_save = "";
+        }
 
-			success: function (data) {
-				var self = this;
+        // if data exists save it
+        var this_meta_id = jQuery(this).attr("id");
+        var post_id = jQuery("#post_ID").val();
 
-				//alert(data);
-				// jQuery('.lp-form').unbind('submit').submit();
-				//var worked = '<span class="success-message-map">Success! ' + this_meta_id + ' set to ' + meta_to_save + '</span>';
-				var worked = '<span class="lp-success-message">Updated!</span>';
-				var s_message = jQuery(self).parent();
-				jQuery(worked).appendTo(s_message);
-				jQuery(self).hide();
-				//alert("Changes Saved!");
-			},
+        jQuery.ajax({
+            type: 'POST',
+            url: lp_post_edit_ui.ajaxurl,
+            context: this,
+            data: {
+                action: 'wp_landing_page_meta_save',
+                meta_id: this_meta_id,
+                new_meta_val: meta_to_save,
+                page_id: post_id,
+                nonce: nonce_val
+            },
 
-			error: function (MLHttpRequest, textStatus, errorThrown) {
-				alert("Ajax not enabled");
-			}
-		});
+            success: function (data) {
+                var self = this;
 
-		return false;
+                //alert(data);
+                // jQuery('.lp-form').unbind('submit').submit();
+                //var worked = '<span class="success-message-map">Success! ' + this_meta_id + ' set to ' + meta_to_save + '</span>';
+                var worked = '<span class="lp-success-message">Updated!</span>';
+                var s_message = jQuery(self).parent();
+                jQuery(worked).appendTo(s_message);
+                jQuery(self).hide();
+                jQuery("#switch-lp").text("0");
+                //alert("Changes Saved!");
+            },
+
+            error: function (MLHttpRequest, textStatus, errorThrown) {
+                alert("Ajax not enabled");
+            }
+        });
+
+        return false;
         
-	});
+    });
 });

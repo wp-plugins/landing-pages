@@ -15,7 +15,7 @@ jQuery(document).ready(function($) {
     jQuery(".lp-impress-num").each(function(){
     var empty = jQuery(this).text();
      if ( empty === "" ){
-      jQuery(this).parent().text("  no stats yet");
+      jQuery(this).parent().html("<span class='lp-no-stats'>no stats yet</span>");
       }
     });
    /*jQuery(".lp-varation-stat-ul").each(function(){
@@ -54,10 +54,10 @@ jQuery(document).ready(function($) {
       jQuery(this).parent().find(".lp-varation-stat-ul").show();
     });
  
-jQuery('.lp-letter').on('mouseenter', function(event) {
+jQuery('.lp-letter, .cr-number').on('mouseenter', function(event) {
   // Bind the qTip within the event handler
   var text_in_tip = jQuery(this).attr("data-notes");
-  var letter = jQuery(this).text();
+  var letter = jQuery(this).attr("data-letter");
   var status = "<span class='lp-paused'>" + jQuery(this).parent().attr("rel") + "</span>";
   var winner = "<span class='lp-win'>" + jQuery(this).parent().attr("data-lp") + "</span>";
   jQuery(this).qtip({

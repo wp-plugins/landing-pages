@@ -1,9 +1,8 @@
 jQuery(document).ready(function ($) {
-
     jQuery("#submitdiv").siblings().hide(); 
     jQuery("#title-prompt-text").text("Name Your New Landing Page");
     var titledescription = jQuery("<span id='descriptor'>This will be the administrative title your landing page, the main headline is created in the next step</span>");
-jQuery(titledescription).appendTo("#titlewrap");
+    jQuery(titledescription).appendTo("#titlewrap");
 
     jQuery("#save-action input").addClass("button-primary button-large").css("margin-bottom", "10px").attr("value", "Create Landing Page"); 
     var sidebar = jQuery("#side-sortables");
@@ -32,7 +31,27 @@ jQuery('.lp_select_template').click(function(){
         //alert(template);
         //alert(label);
     });
-
+    // filter items when filter link is clicked
+    jQuery('#template-filter a').click(function(){      
+      var selector = jQuery(this).attr('data-filter');
+      //alert(selector);
+      jQuery('#templates-container').isotope({ filter: selector });
+      return false;
+    });
+    
+    jQuery('.lp_select_template').click(function(){
+        var template = jQuery(this).attr('id');
+        var label = jQuery(this).attr('label');
+        jQuery(".lp-template-selector-container").fadeOut(500,function(){
+            jQuery(".wrap").fadeIn(500, function(){
+            });
+        });
+        
+        jQuery('#lp_metabox_select_template h3').html('Current Active Template: '+label);
+        jQuery('#lp_select_template').val(template);
+        //alert(template);
+        //alert(label);
+    });
 
 
 jQuery("#template-box a").live('click', function () {

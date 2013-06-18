@@ -76,11 +76,23 @@ else
 			//echo "Status:".$variation_status."ID".$vid;
 			//echo "<br>";
 			if (!is_numeric($variation_status)||$variation_status==1)
-				$live_variations[$key] = $vid;
+				$live_variations[] = $vid;
 		}
 		
+		$keys_as_values = array_flip($live_variations);
+		
 		//set pointer to beginning of array;
-		reset($live_variations);
+		reset($keys_as_values);
+		
+		print_r($live_variations);
+		
+		if (!isset($live_variations[$marker]))
+		{
+			//echo "reset pointer!"; exit;
+			//echo "<br>";
+			$marker= reset($keys_as_values);
+			//echo  next($live_variations);
+		}
 		
 		//if ($marker == end($live_variations))
 		//{
@@ -93,20 +105,24 @@ else
 		
 		//echo key($live_variations);exit;
 		$i = 0;
-		while ((key($live_variations) != $marker ))
-		{		
-			if ($i>100)
-				break;
+		if (key($keys_as_values)!=$marker)
+		{
+			while ((next($keys_as_values) != $marker ))
+			{		
+				if ($i>100)
+					break;
+				
+				//echo "here";	
 			
-			//echo "here";	
-		
-			next($live_variations);
-			//echo "<br>";
-			//echo "here:$marker <br>";
-			$i++;
+				//next($live_variations);
+				//echo "<br>";
+				//echo "key:".key($live_variations);
+				//echo "<br>";
+				//echo "marker:$marker <br>";
+				$i++;
+			}
 		}
-		
-		//echo "Key: ".key($live_variations);
+
 		//echo "<br>";
 		//echo "Marker:".$marker;
 		//echo "<br>";
@@ -127,17 +143,21 @@ else
 		//echo current($live_variations);
 		//echo each($live_variations);
 		//next($live_variations);
-		$marker = next($live_variations);
+		$marker = next($keys_as_values);
 		//echo $marker;exit;
 		//echo "<br>";
 		//echo next($live_variations);
 		//echo "<br>";
 		//echo next($live_variations);
 		//echo "<br>";
-		//echo "final marker: $marker";exit;
+		//echo "final marker: $marker";
+		//echo "<br>";
+		//
+		//exit;
 		if (!$marker)
 		{
-			$marker = reset($live_variations);
+			//echo "here";exit;
+			$marker = reset($keys_as_values);
 		}
 			
 		//echo "final marker:$marker";
@@ -150,7 +170,8 @@ else
 	{
 		$variation_id = 0;
 	}
-				 
+		
+	//echo "<br>";
 	//echo "final vid:".$variation_id;exit;
 	$url = get_permalink($pid);
 
@@ -162,13 +183,13 @@ else
 setcookie('lp-variation-id', $variation_id,time()+3600,"/");
 $page = lp_remote_connect($url);
 
-add_filter( 'show_admin_bar' , 'my_function_admin_bar');
-if ( current_user_can( 'manage_options' ) ) {
-    show_admin_bar( true );
-}
-echo $page;
-//header("HTTP/1.1 307 Temporary Redirect");
-//header("Location: $url"); // This looks like it's not caching. In that case we could send folks through
+//add_filter( 'show_admin_bar' , 'my_function_admin_bar');
+//if ( current_user_can( 'manage_options' ) ) {
+   // show_admin_bar( true );
+//}
+//echo $page;
+header("HTTP/1.1 307 Temporary Redirect");
+header("Location: $url"); // This looks like it's not caching. In that case we could send folks through
 
 
 

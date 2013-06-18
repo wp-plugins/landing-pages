@@ -115,7 +115,7 @@ function lp_ab_stats_metabox() {
 								</span> 
 									
 									
-								<span class="bab-notes" title="Notes appear on hover"></span>
+								<span class="lp-delete-var-stats" data-letter='<?php echo lp_ab_key_to_letter($vid); ?>' data-vid='<?php echo $vid; ?>' rel='<?php echo $post->ID;?>' title="Delete this variations stats">Clear Stats</span>
 							</div>
 						<div class="bab-stat-row">	
 							<div class='bab-stat-stats' colspan='2'>

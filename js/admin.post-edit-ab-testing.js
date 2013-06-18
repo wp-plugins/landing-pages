@@ -1,6 +1,3 @@
-
-
-/****************** AB TESTING JS FOR CPT EDITING *********************************/
 jQuery(document).ready(function ($) {	
 	var variations = new Array();
 	var has_variations = 0;

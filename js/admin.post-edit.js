@@ -1,8 +1,5 @@
 jQuery(document).ready(function ($) {
-
-    if (jQuery.isFunction('isotope'))
-    {
-        jQuery('#templates-container').isotope();
+jQuery('#templates-container').isotope();
               
         // filter items when filter link is clicked
         jQuery('#template-filter a').click(function(){      
@@ -11,13 +8,9 @@ jQuery(document).ready(function ($) {
           jQuery('#templates-container').isotope({ filter: selector });
           return false;
         });
-    }
+  
     
-    var post_status = jQuery("#original_post_status").val();
-    
-    if (post_status === "draft") {
-        // jQuery( ".nav-tab-wrapper.a_b_tabs .lp-ab-tab, #tabs-add-variation").hide();
-    }   
+   
 
      var current_a_tab = jQuery("#tabs-0").hasClass('nav-tab-special-active');
     if (current_a_tab === true){
@@ -278,7 +271,21 @@ jQuery(document).ready(function ($) {
     jQuery('#leads-table-container-inside input').each(function(){
         jQuery(this).remove();
     });
-    jQuery("#publish").val("Update All");
+
+     var post_status = jQuery("#original_post_status").val();
+    
+    if (post_status === "draft") {
+        // jQuery( ".nav-tab-wrapper.a_b_tabs .lp-ab-tab, #tabs-add-variation").hide();
+        jQuery(".new-save-lp-frontend").on("click", function(event) {
+            event.preventDefault();
+            alert("Must publish this page before you can use the visual editor!");
+        });
+        var subbox = jQuery("#submitdiv");
+        jQuery("#lp_ab_display_stats_metabox").before(subbox)
+    } else {
+        jQuery("#publish").val("Update All");
+    }
+
     // Ajax Saving for metadata
     jQuery('#lp_metabox_select_template input, #lp_metabox_select_template select, #lp_metabox_select_template textarea').on("change keyup", function (e) {
         // iframe content change needs its own change function $("#iFrame").contents().find("#someDiv")

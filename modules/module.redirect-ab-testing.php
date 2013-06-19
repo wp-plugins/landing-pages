@@ -84,7 +84,7 @@ else
 		//set pointer to beginning of array;
 		reset($keys_as_values);
 		
-		print_r($live_variations);
+		//print_r($live_variations);
 		
 		if (!isset($live_variations[$marker]))
 		{

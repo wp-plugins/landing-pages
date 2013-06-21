@@ -102,8 +102,6 @@ $content = get_the_content();
   <!-- Use the_title(); to print out the main headline -->
    <h1><?php the_title(); ?></h1>
 
-  <h3><?php echo $sub_headline;?></h3>
-
          <?php 
           // Conditional check for main content placeholder
           if ($content != "") {

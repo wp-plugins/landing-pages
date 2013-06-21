@@ -39,7 +39,7 @@ jQuery(document).ready(function ($) {
 			
 			//console.log('ran');
 		}, 2000);
-/*
+	/* Almost working
 	jQuery('.live-preview-area-box, #lp_container_form').on('mouseover', function (event)
 	{
 		var $tgt = jQuery(event.target);
@@ -69,7 +69,7 @@ jQuery(document).ready(function ($) {
 		}
 		//console.log(actual_el);
 		var finding_the_match = jQuery(parent.document).find('#lp_customizer_options').contents().find(actual_el);
-		jQuery(finding_the_match).parent().parent().css("background", "yellow");
+		jQuery(finding_the_match).parent().parent().css("background", "#EBEBEB");
 		
 	 
 	});
@@ -118,9 +118,9 @@ jQuery(document).ready(function ($) {
 		 
 		console.log(frame_body);
 		//jQuery(parent.document).find('#lp_customizer_options').contents().find(click_id).click();
-		parent.document.getElementById('lp_customizer_options').contentWindow.MyFunction(click_id, event)
+		//parent.document.getElementById('lp_customizer_options').contentWindow.MyFunction(click_id, event)
 			
 	   
 	});
-*/	
+	*/
 });

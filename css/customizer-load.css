@@ -19,7 +19,9 @@
 	-o-transition: all 0.3s ease-out;
 	transition: all 0.3s ease-out;
 }
-
+html {
+margin-top: 0px !important;
+}
 .live-preview-active 
 {
 	background-color: gray;
@@ -34,7 +36,7 @@
 			.live-preview-active {
 				background: rgba(253, 253, 252, 1) url('/wp-content/plugins/landing-pages/images/gradient.png') repeat-x top left;
 				border-radius: 0px;
-				padding: 5px 10px;
+				padding: 0px;
 				outline: 2px dashed rgb(255, 0, 0);
 				-webkit-box-shadow: 0px 0px 35px rgba(50, 50, 50, 1);
 				-moz-box-shadow:   0px 0px 35px rgba(50, 50, 50, 1);

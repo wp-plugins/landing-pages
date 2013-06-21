@@ -55,25 +55,6 @@ jQuery('#templates-container').isotope();
          jQuery('#TB_iframeContent, #TB_window').show();
         }, 600);     
     });
-
-    var delay = (function () {
-        var timer = 0;
-        return function (callback, ms) {
-            clearTimeout(timer);
-            timer = setTimeout(callback, ms);
-        };
-    })();
-    
-    jQuery(function () {
-        var pause = 100; // will only process code within delay(function() { ... }) every 100ms.
-        jQuery(window).resize(function () {
-            delay(function () {
-                var width = jQuery(window).width(); 
-                jQuery('#TB_iframeContent, #TB_window').width( 640 ).height( 800 ).css("margin-left", "0px").css("left", "35%");
-            }, pause);
-        });
-        jQuery(window).resize();
-    });
     
     // Load meta box in correct position on page load
     var current_template = jQuery("input#lp_select_template ").val();

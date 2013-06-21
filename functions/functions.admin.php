@@ -1,6 +1,5 @@
 <?php
 
-
 add_action('admin_enqueue_scripts','lp_admin_enqueue');
 
 function lp_admin_enqueue($hook)
@@ -925,6 +924,3 @@ function lp_ab_get_lp_active_status($post,$vid=null)
 		return $variation_status;
 	}
 }
-
-  
-?>

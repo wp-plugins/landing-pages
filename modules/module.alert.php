@@ -60,7 +60,6 @@ jQuery("#bulk_actions").prepend(moretemp); jQuery(".lp-selection-heading").appen
 add_action('admin_notices', 'lp_template_page_get_more');
 /* End Template Notices */
 
-
 function lp_ab_notice(){
     global $pagenow;  
     $page_string = isset($_GET["page"]) ? $_GET["page"] : "null";
@@ -71,5 +70,3 @@ function lp_ab_notice(){
         }
 }
 add_action('admin_notices', 'lp_ab_notice');
-
-?>

@@ -2,10 +2,8 @@
 /**
 * WordPress Landing Page Config File
 * Template Name:  Demo Template
-*
 * @package  WordPress Landing Pages
 * @author 	David Wells
-
 */
 
 do_action('lp_global_config'); // The lp_global_config function is for global code added by 3rd party extensions
@@ -98,4 +96,4 @@ $lp_data[$key]['options'][] =
 // Add a media uploader field to your landing page options	
 // This is called in the template's index.php file with lp_get_value($post, $key, 'wysiwyg-id'); 
 $lp_data[$key]['options'][] = 
-	lp_add_option($key,"media","media-id","/wp-content/plugins/landing-pages/templates/path-to-image-place-holder.png","File/Image Upload Label","File/Image Upload Description", $options=null);	
+	lp_add_option($key,"media","media-id","/wp-content/plugins/landing-pages/templates/path-to-image-place-holder.png","File/Image Upload Label","File/Image Upload Description", $options=null);

@@ -148,4 +148,3 @@ class LP_EXTENSION_UPDATER {
 		endif;
 	}
 }
-//echo 1; exit;

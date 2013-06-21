@@ -115,15 +115,3 @@ function landing_body_class_names($classes) {
  }
     return $arr;
 }
-
-/* Display all widgets on a landing page
-add_filter( 'sidebars_widgets', 'disable_all_widgets' );
-
-function disable_all_widgets( $sidebars_widgets ) {
-
-	if ( is_single(132) )
-		$sidebars_widgets = array( false );
-
-	return $sidebars_widgets;
-}
-// end disable all widgets */

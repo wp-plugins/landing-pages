@@ -77,8 +77,10 @@ if (is_admin())
 	if (count($template_paths)>0)
 	{
 		foreach ($template_paths as $name)
-		{		
-			include_once(LANDINGPAGES_PATH."/templates/$name/config.php"); 	
+		{	
+			if ($name != ".svn"){	
+			include_once(LANDINGPAGES_PATH."/templates/$name/config.php");
+			}	
 		}		
 	}
 	
@@ -91,8 +93,8 @@ if (is_admin())
 	if (count($template_paths)>0)
 	{
 		foreach ($template_paths as $name)
-		{			
-			include_once($extended_templates_path."$name/config.php"); 	
+		{	
+			include_once($extended_templates_path."$name/config.php");	
 		}		
 	}
 	
@@ -110,8 +112,10 @@ if (is_admin())
 	if (count($template_paths)>0)
 	{
 		foreach ($template_paths as $name)
-		{		
+		{	
+			if ($name != ".svn"){	
 			include_once(LANDINGPAGES_PATH."/templates/$name/config.php"); 	
+			}
 		}
 		
 		$template_data = lp_get_template_data();
@@ -336,4 +340,3 @@ function lp_custom_template($single) {
     return $single;
 }
 include_once('modules/module.customizer.php');
-?>

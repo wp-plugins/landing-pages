@@ -75,4 +75,4 @@ $lp_data[$key]['options'][] =
 // Add a Radio button
 $options = array('1' => 'on','0'=>'off');
 $lp_data[$key]['options'][] = 
-	lp_add_option($key,"radio","display-social","0","Display Social Media Share Buttons","Toggle social sharing on and off", $options);	
+	lp_add_option($key,"radio","display-social","0","Display Social Media Share Buttons","Toggle social sharing on and off", $options);

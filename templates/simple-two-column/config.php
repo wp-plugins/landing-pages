@@ -71,4 +71,4 @@ $lp_data[$key]['options'][] =
 
 // Add Colorpicker
 $lp_data[$key]['options'][] = 
-	lp_add_option($key,"colorpicker","sidebar-text-color","ffffff","Sidebar Text Color","Use this setting to change the sidebar text color", $options=null);	
+	lp_add_option($key,"colorpicker","sidebar-text-color","ffffff","Sidebar Text Color","Use this setting to change the sidebar text color", $options=null);

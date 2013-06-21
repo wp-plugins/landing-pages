@@ -186,11 +186,6 @@ else
 setcookie('lp-variation-id', $variation_id,time()+3600,"/");
 //$page = lp_remote_connect($url);
 
-//add_filter( 'show_admin_bar' , 'my_function_admin_bar');
-//if ( current_user_can( 'manage_options' ) ) {
-   // show_admin_bar( true );
-//}
-//echo $page;
 @header("HTTP/1.1 307 Temporary Redirect");
 @header("Location: $url");
 

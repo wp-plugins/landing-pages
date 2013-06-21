@@ -94,9 +94,17 @@ function lp_remove_all_styles()
 	}
 
 }
-
 // Remove all body_classes from custom landing page templates - disabled but you can use the function above to model native v non-native template conditionals.
 //add_action('wp','landingpage_remove_plugin_filters');
+/**
+ * Debug Activation errors */
+/*
+ add_action('activated_plugin','save_error');
+function save_error(){
+    update_option('plugin_error',  ob_get_contents());
+}
+echo "here" . get_option('plugin_error') . "hi";
+ */
 function landingpage_remove_plugin_filters() {
 
     global $wp_filter;

@@ -1,7 +1,7 @@
 <?php
-	
+
 add_filter('lp_js_hook_submit_form_success','lp_lead_collection_js');
- 
+
 function lp_lead_collection_js()
 {	
 	$current_page = "http://".$_SERVER["HTTP_HOST"].$_SERVER["REQUEST_URI"];

@@ -434,7 +434,6 @@ add_action('admin_menu', 'lp_templates_add_menu');
 
 function lp_templates_add_menu()
 {
-	//echo 2;
 	if (current_user_can('manage_options'))
 	{
 		global $_registered_pages;    

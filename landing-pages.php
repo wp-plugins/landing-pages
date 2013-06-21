@@ -22,6 +22,7 @@ define('LANDINGPAGES_UPLOADS_URLPATH', $uploads['baseurl'].'/landing-pages/templ
  */
 if (is_admin())
 {
+if(!isset($_SESSION)){@session_start();}
 include_once('functions/functions.admin.php');
 include_once('modules/module.global-settings.php');
 include_once('modules/module.clone.php');
@@ -41,11 +42,9 @@ include_once('modules/module.cookies.php');
 include_once('modules/module.lead-collection.php');
 include_once('modules/module.ab-testing.php');
 include_once('modules/module.alert.php');
-include_once('functions/functions.templates.php'); 
+//include_once('functions/functions.templates.php'); 
 
-/**
- * REGISTER ACTIVATION!
- */
+// Register Landing Pages
 register_activation_hook(__FILE__, 'landing_page_activate');
 
 function landing_page_activate()
@@ -66,9 +65,7 @@ function landing_page_activate()
 	
 }
 	
-/**
- * PREPARE LANDING PAGE TEMPLATES
- */
+// Prepare Landing Page Templates
 if (is_admin())
 {
 	//load current url in global variable
@@ -156,9 +153,11 @@ function landing_pages_insert_custom_head() {
 		//$global_js =  htmlspecialchars_decode(get_option( 'lp_global_js', '' ));			
 		$global_record_admin_actions = get_option( 'lp_global_record_admin_actions', '0' );
 		
-		$this_id = $post->ID;
-		$custom_css = get_post_meta($this_id, 'lp-custom-css', true);
-		$custom_js = get_post_meta($this_id, 'lp-custom-js', true);
+		$custom_css_name = apply_filters('lp-custom-css-name','lp-custom-css');
+		$custom_js_name = apply_filters('lp-custom-js-name','lp-custom-js');
+		//echo $custom_css_name;
+		$custom_css = get_post_meta($post->ID, $custom_css_name, true);
+		$custom_js = get_post_meta($post->ID, $custom_js_name, true);
 		//echo $this_id;exit;
 
 		//Print Cusom CSS
@@ -263,8 +262,8 @@ if (is_admin())
 	include_once('modules/module.split-testing.php');
 	include_once('modules/module.templates.php');
 	include_once('modules/module.store.php');
-	/**********************************************************/
-	/******************CREATE SETTINGS SUBMENU*****************/
+
+// Create Sub-menu
 
 	add_action('admin_menu', 'lp_add_menu');
 	
@@ -287,21 +286,7 @@ if (is_admin())
 			
 		}
 	}
-	
-/**
- * PREPARE STAT CLEARNING FUNCTIONS
- */
-function lp_clear_stats_group($landing_page_ids)
-	{
-		$this_array = explode(',',$landing_page_ids);
-		
-		foreach ($landing_page_ids as $lp_id)
-		{
-			update_post_meta($lp_id, 'lp_page_views_count', 0);
-			update_post_meta($lp_id, 'lp_page_conversions_count', 0);
-		}
-	}
-	
+
 }
 
 /**
@@ -350,25 +335,5 @@ function lp_custom_template($single) {
 	}
     return $single;
 }
-/*
-global $wpdb;
-$data   =   array();
-$wpdb->query("
-  SELECT `meta_key`, `meta_value`
-	FROM $wpdb->postmeta
-	WHERE `post_id` = ".$_GET['post']."
-");
-foreach($wpdb->last_result as $k => $v){
-	$data[$v->meta_key] =   $v->meta_value;
-};
-if (isset($_GET['post']))
-{
-	echo "<pre>";
-	print_r( $data);
-	echo "</pre>";
-}
-/**
- * LOAD ADDITIONAL MODULES
- */
 include_once('modules/module.customizer.php');
 ?>

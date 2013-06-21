@@ -17,23 +17,21 @@ jQuery(document).ready(function ($) {
 
 	});
 
-$('#lp-live-preview').load(function() { 
-   // write your code here....
-	jQuery('#lp-live-preview').contents().find('html').addClass('small-html').css('overflow', 'auto').css('padding-bottom', '40px');
-	jQuery('#lp-live-preview').contents().find('html').width('125%');
-	jQuery('#lp-live-preview').contents().find('body').height('100%');
-	jQuery('#lp-live-preview').contents().find('head').append('<link rel="stylesheet" href="/wp-content/plugins/landing-pages/css/customizer-load.css" type="text/css" />');
+
+	jQuery('html').addClass('small-html').css('overflow', 'auto').css('padding-bottom', '40px');
+	jQuery('html').width('125%');
+	jQuery('body').height('100%');
+	jQuery('head').append('<link rel="stylesheet" href="/wp-content/plugins/landing-pages/css/customizer-load.css" type="text/css" />');
 	if (viewchoice === "full-size") {
-		jQuery('#lp-live-preview').contents().find('html').removeClass('small-html');
-		jQuery('#lp-live-preview').contents().find('html').width('100%');
-		jQuery('#lp-live-preview').contents().find('body').height('100%');
+		jQuery('html').removeClass('small-html');
+		jQuery('html').width('100%');
+		jQuery('body').height('100%');
 	 	setTimeout(function() {
-	 	jQuery('#lp_customizer_options').contents().find(".full-size-view").hide();
-		jQuery('#lp_customizer_options').contents().find(".shrink-view").show();
+	 	jQuery(parent.document).find('#lp_customizer_options').contents().find(".full-size-view").hide();
+		jQuery(parent.document).find('#lp_customizer_options').contents().find(".shrink-view").show();
 	}, 1000);
 	} 
-});	
-
+	
 	setTimeout(function () {
 		   
 			var sidebarwidth = jQuery('#lp_customizer_options').width();

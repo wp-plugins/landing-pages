@@ -13,6 +13,9 @@ $data['page_id'] = $page_id;
 $data['lead_custom_fields'] = $wplead_data;
 
 ?>
+
+<?php 	$city = (isset($wplead_data['wpleads_city'][0])) ? $wplead_data['wpleads_city'][0] : 'NA';
+		$region = (isset($wplead_data['wpleads_region_name'][0])) ? $wplead_data['wpleads_region_name'][0] : 'NA'; ?>
 <link rel='stylesheet'  href='/wp-content/plugins/landing-pages/css/admin-style.css' type='text/css' media='all' />
 
 <div id='lead-details-container'>
@@ -32,10 +35,10 @@ $data['lead_custom_fields'] = $wplead_data;
 <div class="wp-lead-label">IP Address: </div> <?php echo $wplead_data['wpleads_ip_address'][0]; ?>
 </div>
 <div id="wp-leads-splash-city">
-<div class="wp-lead-label">City: </div> <?php echo $wplead_data['wpleads_city'][0]; ?>
+<div class="wp-lead-label">City: </div> <?php echo $city; ?>
 </div>
 <div id="wp-leads-splash-state">
-<div class="wp-lead-label">State: </div> <?php echo $wplead_data['wpleads_region_name'][0]; ?>
+<div class="wp-lead-label">State: </div> <?php echo $region; ?>
 </div>
 
 <div id="wp-leads-extra-data">

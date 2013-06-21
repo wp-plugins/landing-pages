@@ -263,7 +263,7 @@ function landing_pages_add_conversion_area($content)
 
 if (is_admin())
 {
-	include_once('modules/module.split-testing.php');
+	//include_once('modules/module.split-testing.php');
 	include_once('modules/module.templates.php');
 	include_once('modules/module.store.php');
 
@@ -277,7 +277,7 @@ if (is_admin())
 		if (current_user_can('manage_options'))
 		{
 
-			add_submenu_page('edit.php?post_type=landing-page', 'URL Rotater', 'URL Rotater', 'manage_options', 'lp_split_testing','lp_split_testing_display');	
+			//add_submenu_page('edit.php?post_type=landing-page', 'URL Rotater', 'URL Rotater', 'manage_options', 'lp_split_testing','lp_split_testing_display');	
 			
 			add_submenu_page('edit.php?post_type=landing-page', 'Templates', 'Templates', 'manage_options', 'lp_manage_templates','lp_manage_templates',100);	
 				

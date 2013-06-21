@@ -2,21 +2,17 @@
 
 if (is_admin())
 {	
-	
-	
 	//define main tabs and bind display functions
-
 	if (isset($_GET['page'])&&($_GET['page']=='lp_global_settings'&&$_GET['page']=='lp_global_settings'))
 	{
 		add_action('admin_init','lp_global_settings_enqueue');
 		function lp_global_settings_enqueue()
 		{		
-			wp_enqueue_style('lp-css-global-settings-here', LANDINGPAGES_URLPATH . 'css/admin-global-settings.css');
-			//wp_enqueue_script('lp-js-global-settings', LANDINGPAGES_URLPATH . 'js/admin.global-settings.js');			
+			wp_enqueue_style('lp-css-global-settings-here', LANDINGPAGES_URLPATH . 'css/admin-global-settings.css');			
 		}
 	}
 	
-	/*SETUP NAVIGATION AND DISPLAY ELEMENTS*/
+	// Setup navigation and display elements
 	$tab_slug = 'main';
 	$lp_global_settings[$tab_slug]['label'] = 'Global Settings';	
 	
@@ -24,8 +20,6 @@ if (is_admin())
 	$lp_global_settings[$tab_slug]['options'][] = lp_add_option($tab_slug,"text","landing-page-group-permalink-prefix","group","Default split testing group permalink prefix","Enter in the 'prefix' for split testing group permalinks. eg: /prefix/pemalink-name", $options=null);
 	$lp_global_settings[$tab_slug]['options'][] = lp_add_option($tab_slug,"radio","landing-page-auto-format-forms","1","Enable Form Standardization","With this setting enabled landing pages plugin will clean and standardize all input ids and classnames. Uncheck this setting to disable standardization.", $options= array('1'=>'on','0'=>'off'));
 	$lp_global_settings[$tab_slug]['options'][] = lp_add_option($tab_slug,"textarea","landing-page-auto-format-forms-retain-elements","<button><script><textarea><style><input><form><select><label><a><p><b><u><strong><i><img><strong><span><font><h1><h2><h3><center><blockquote><embed><object><small>","Form Standardization Element Whitelist","Form standardization strips the conversion area content of html elements. Add the elements you do not want to be stripped to this list.", $options= array('1'=>'on','0'=>'off'));
-	/*SETUP END*/
-
 
 
 	function lp_get_global_settings_elements()
@@ -55,7 +49,6 @@ if (is_admin())
 					var showoption = "#" + getoption;
 					jQuery(showoption).click();
     			}, 100);
-				
 
 				jQuery('.lp-nav-tab').live('click', function() {
 					var this_id = this.id.replace('tabs-','');
@@ -207,16 +200,7 @@ if (is_admin())
                         <strong>Version <?php echo landing_page_get_version();?></strong>
                     </td>
                     <td>
-                        <?php /* This might help get version numbers http://wordpress.stackexchange.com/questions/361/is-there-a-way-for-a-plug-in-to-get-its-own-version-number/371#371
-                            if(version_compare(GFCommon::$version, $version_info["version"], '>=')){
-                                ?>
-                                <img src="<?php echo LANDINGPAGES_URLPATH;?>/images/tick.png"/>
-                                <?php
-                            }
-                            else{
-                                echo sprintf(__("New version %s available. Automatic upgrade available on the %splugins page%s", "gravityforms"), $version_info["version"], '<a href="plugins.php">', '</a>');
-                            } */
-                        ?>
+
                     </td>
                 </tr>
             </table>
@@ -334,5 +318,3 @@ if (is_admin())
 	}
 	//exit;
 }
-
-?>

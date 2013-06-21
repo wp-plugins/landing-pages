@@ -1,13 +1,5 @@
 <?php
-// new functions file for david to play with
-
-/* ideas
-
-
-*/
-
-///////////
-/* Add in styling to specific list elements in navigation. This is for hiding nav elements from templates. Might not need if the container class below will work. Only works with some inactive templates and not others
+/* 
 function add_first_and_last($output) {
   $output = preg_replace('/class="menu-item/', 'class="first-menu-item menu-item', $output, 1);
   $output = substr_replace($output, 'class="last-menu-item menu-item', strripos($output, 'class="menu-item'), strlen('class="menu-item'));
@@ -102,10 +94,8 @@ function lp_remove_all_styles()
 	}
 
 }
- 
 
-
-///////// Remove all body_classes from custom landing page templates - disabled but you can use the function above to model native v non-native template conditionals.
+// Remove all body_classes from custom landing page templates - disabled but you can use the function above to model native v non-native template conditionals.
 //add_action('wp','landingpage_remove_plugin_filters');
 function landingpage_remove_plugin_filters() {
 

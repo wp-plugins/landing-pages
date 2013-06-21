@@ -1,13 +1,11 @@
 <?php
-
-/***********************************************************/
-/*********PREPARE LANDING PAGE FORM META BOX ***************/
-/***********************************************************/
-/***********************************************************/
+/**
+ * Prepare Landing Page Form Metabox
+ */
 
 // Add additonal WYSIWYG edit box to landing page custom post type:
 define('WYSIWYG_META_BOX_ID', 'lp_2_form_content');
-define('WYSIWYG_EDITOR_ID', 'landing-page-myeditor'); //Important for CSS that this is different
+define('WYSIWYG_EDITOR_ID', 'landing-page-myeditor');
 define('WYSIWYG_META_KEY', 'lp-conversion-area');
 
 /* ADD THUMBNAIL METABOX TO SIDEBAR */
@@ -155,29 +153,7 @@ function lp_wysiwyg_save_meta(){
 	}
 }
 
-/* ADD MAIN HEADLINE  
-add_action( 'dbx_post_sidebar', 'lp_display_metabox_main_headline' );
-function lp_display_metabox_main_headline() 
-{
-	global $post;
-	if ($post->post_type=='landing-page')
-	{
-		$meta = get_post_meta($post->ID, 'lp-main-headline', true);
-		$meta = str_replace('"','\"',$meta);
-		$meta = apply_filters('lp_edit_main_headline', $meta, 1);
-		echo '<div id="lp-main-headline-wrap">';
-		if (isset($meta)&&$meta==null||!isset($meta))
-		{
-			echo '<label for="lp-main-headline" id="title-prompt-text" class="lp-main-headline-label">Primary Headline</label>';
-		}
-		else
-		{
-				echo '<label for="lp-main-headline" id="title-prompt-text" class="lp-main-headline-label"></label>';
-		}
-		echo '<input type="text" name="lp-main-headline" id="lp-main-headline" value="'.$meta.'" style="width:100%;height:31px;font-size: 1.7em;line-height: 100%;outline: 0 none;padding: 3px 8px;"  title="This headline will appear in the landing page template."></div>';
-	}
-}
-*/
+// Add in Main Headline
 add_action( 'edit_form_after_title', 'lp_landing_page_header_area' );
 add_action( 'save_post', 'lp_save_header_area' );
 add_action( 'save_post', 'lp_save_notes_area' );
@@ -250,10 +226,7 @@ function lp_change_enter_title_text( $text, $post ) {
 	}
 }  
 
-
-/* ADD TEMPLATE SELECT METABOX  */
-
-//Add select template meta box
+// Add template select metabox
 function add_custom_meta_box_select_templates() { 
 	
 	add_meta_box(
@@ -267,9 +240,7 @@ function add_custom_meta_box_select_templates() {
 
 // Render select template box
 function lp_display_meta_box_select_template() {
-	//echo 1; exit; 
 	global $post;
-
 	$template =  get_post_meta($post->ID, 'lp-selected-template', true);
 	$template = apply_filters('lp_selected_template',$template); 
 	
@@ -287,7 +258,6 @@ function lp_display_meta_box_select_template() {
 	
 	<?php
 }
-
 
 add_action('admin_notices', 'lp_display_meta_box_select_template_container'); 	
 
@@ -390,33 +360,7 @@ function lp_display_meta_box_select_template_container() {
 	echo "<div class='clear'></div>";
 	echo "</div>";
 	echo "<div style='display:none;' class='currently_selected'>This is Currently Selected</a></div>";
-/*	Add in first box for users to get more templates
-
-echo '<div id="template-item" class="miscellaneous isotope-item special" style="">
-				<div id="template-box">
-					<div class="lp_tooltip_templates" oldtitle="The clean professional template is awesome!" title="" data-hasqtip="true"></div>
-				<a class="lp_select_template" href="#" label="Clean Professional" id="clean-professional">
-					<img src="http://inboundsoon.wpengine.com/wp-content/plugins/landing-pages/templates/clean-professional/thumbnail.png" class="template-thumbnail" alt="Clean Professional" id="id_">
-				</a>
-				<p>
-					</p><div id="template-title">GET MORE Templates</div>
-					<a href="#" label="Clean Professional" id="clean-professional" class="lp_select_template">Select</a> | 
-					<a class="thickbox miscellaneous" href="../wp-content/plugins/landing-pages/templates/demo/demo2.html?TB_iframe=true&amp;width=1503&amp;height=429" id="lp_preview_this_template">Preview</a> 
-				<p></p>
-				</div>
-			</div>
-			<script>
-			jQuery(document).ready(function ($) {
-				var newItems = jQuery(".special");
-				jQuery("#templates-container").prepend(newItems).isotope( "reloadItems" ).isotope({ sortBy: "original-order" });
-			});
-</script>'; */
 }
-
-
-/** 
- * PREPARE CUSTOM CSS META BOX FOR LANDING PAGES AND ADD CSS TO LP POST TYPE RENDERS
- */
 
 // Custom CSS Widget
 add_action('add_meta_boxes', 'add_custom_meta_box_lp_custom_css');
@@ -431,27 +375,25 @@ function lp_custom_css_input() {
 		
 	echo "<em>Custom CSS may be required to remove sidebars, increase the widget of the post content container to 100%, and sometimes to manually remove comment boxes.</em>";
 	echo '<input type="hidden" name="lp-custom-css-noncename" id="lp_custom_css_noncename" value="'.wp_create_nonce(basename(__FILE__)).'" />';
-	echo '<textarea name="lp-custom-css" id="lp-custom-css" rows="5" cols="30" style="width:100%;">'.get_post_meta($post->ID,'lp-custom-css',true).'</textarea>';
+	$custom_css_name = apply_filters('lp-custom-css-name','lp-custom-css');
+	echo '<textarea name="'.$custom_css_name.'" id="lp-custom-css" rows="5" cols="30" style="width:100%;">'.get_post_meta($post->ID,$custom_css_name,true).'</textarea>';
 }
 
 function landing_pages_save_custom_css($post_id) {
 	global $post;
 	if (!isset($post)||!isset($_POST['lp-custom-css']))
 		return;
-		
+	
 	if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return $post_id;
-	$lp_custom_css = $_POST['lp-custom-css'];
+
+	
+	$custom_css_name = apply_filters('lp-custom-css-name','lp-custom-css');
+	
+	$lp_custom_css = $_POST[$custom_css_name];
 	update_post_meta($post_id, 'lp-custom-css', $lp_custom_css);
 }
 
-
-/** 
- * PREPARE CUSTOM JS META BOX FOR LANDING PAGES AND ADD CSS TO LP POST TYPE RENDERS
- *
- * Insert custom JS box to landing page
- * 
- */
-
+//Insert custom JS box to landing page
 add_action('add_meta_boxes', 'add_custom_meta_box_lp_custom_js');
 add_action('save_post', 'landing_pages_save_custom_js');
 
@@ -460,27 +402,27 @@ function add_custom_meta_box_lp_custom_js() {
 }
 
 function lp_custom_js_input() {
-   global $post;
-   echo "<em></em>";
-   //echo wp_create_nonce('lp-custom-js');exit;
-   echo '<input type="hidden" name="lp_custom_js_noncename" id="lp_custom_js_noncename" value="'.wp_create_nonce(basename(__FILE__)).'" />';
-   echo '<textarea name="lp-custom-js" id="lp_custom_js" rows="5" cols="30" style="width:100%;">'.get_post_meta($post->ID,'lp-custom-js',true).'</textarea>';
+	global $post;
+	echo "<em></em>";
+	//echo wp_create_nonce('lp-custom-js');exit;
+	$custom_js_name = apply_filters('lp-custom-js-name','lp-custom-js');
+	
+	echo '<input type="hidden" name="lp_custom_js_noncename" id="lp_custom_js_noncename" value="'.wp_create_nonce(basename(__FILE__)).'" />';
+	echo '<textarea name="'.$custom_js_name.'" id="lp_custom_js" rows="5" cols="30" style="width:100%;">'.get_post_meta($post->ID,$custom_js_name,true).'</textarea>';
 }
 
 function landing_pages_save_custom_js($post_id) {
 	global $post;
-	if (!isset($post)||!isset($_POST['lp-custom-css']))
+	if (!isset($post)||!isset($_POST['lp-custom-js']))
 		return;
 	if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return $post_id;
-	$lp_custom_js = $_POST['lp-custom-js'];
+	
+	$custom_js_name = apply_filters('lp-custom-js-name','lp-custom-js');
+	
+	$lp_custom_js = $_POST[$custom_js_name];
+	
 	update_post_meta($post_id, 'lp-custom-js', $lp_custom_js);
 }
-
-
-/********************************************************************************************************/
-/*********PREPARE CUSTOM JS META BOX FOR LANDING PAGES AND ADD CSS TO LP POST TYPE RENDERS***************/
-/********************************************************************************************************/
-/********************************************************************************************************/
 
 // Insert custom JS box
 add_action('add_meta_boxes', 'add_custom_meta_box_lp_conversion_log');
@@ -694,5 +636,3 @@ function lp_conversion_log_metabox() {
 //hook add_meta_box action into custom call fuction 
 //lp_generate_meta is contained in functions.php
 add_action('add_meta_boxes', 'lp_generate_meta');
-
-?>

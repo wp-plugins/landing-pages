@@ -172,6 +172,3 @@ if (!post_type_exists('wp-lead'))
 
 	}
 }
-
-
-?>

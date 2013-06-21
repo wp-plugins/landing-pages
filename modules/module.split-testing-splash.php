@@ -14,7 +14,7 @@ wp_enqueue_style('lp-css-split-testing-splash', LANDINGPAGES_URLPATH . 'css/admi
 
 wp_enqueue_script('utils');
 wp_enqueue_script('editor');
-wp_enqueue_script('lp-js-split-testing-splash', LANDINGPAGES_URLPATH . 'js/admin.split-testing-splash.js');
+wp_enqueue_script('lp-js-split-testing-splash', LANDINGPAGES_URLPATH . 'js/admin/admin.split-testing-splash.js');
 
 
 do_action('admin_print_styles');
@@ -602,7 +602,4 @@ function lp_split_testing_clone_popup_display()
 	</script>		
 		
 	<?php
-}	
-
-
-?>
+}

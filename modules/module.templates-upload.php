@@ -2,13 +2,9 @@
 
 function lp_templates_upload()
 {
-	//echo 2;exit;
-	
 	lp_templates_upload_execute();
-
 	lp_display_upload();
 	lp_templates_search();
-	
 }
 
 function lp_display_upload()
@@ -138,6 +134,3 @@ function lp_templates_update()
 {
 	echo 'hello Update!';
 }
-
-
-?>

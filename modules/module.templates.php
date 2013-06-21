@@ -4,7 +4,7 @@ if (isset($_GET['page'])&&($_GET['page']=='lp_templates_upload'||$_GET['page']==
 	add_action('admin_enqueue_scripts','lp_templates_admin_enqueue');
 	function lp_templates_admin_enqueue()
 	{
-		wp_enqueue_script('lp-js-templates-upload', LANDINGPAGES_URLPATH . 'js/admin.templates-upload.js');
+		wp_enqueue_script('lp-js-templates-upload', LANDINGPAGES_URLPATH . 'js/admin/admin.templates-upload.js');
 	}	
 	
 	include_once(LANDINGPAGES_PATH.'modules/module.templates-upload.php');	
@@ -16,9 +16,7 @@ else if (isset($_GET['page'])&&$_GET['page']=='lp_manage_templates')
 	function lp_templates_admin_enqueue()
 	{
 		wp_enqueue_style('lp-css-templates', LANDINGPAGES_URLPATH . 'css/admin-templates.css');
-		wp_enqueue_style('lp-css-capty', LANDINGPAGES_URLPATH . 'js/capty/style.css');
-		//wp_enqueue_script('lp-js-capty', LANDINGPAGES_URLPATH . 'js/capty/jquery.capty.js');
-		wp_enqueue_script('lp-js-templates', LANDINGPAGES_URLPATH . 'js/admin.templates.js');
+		wp_enqueue_script('lp-js-templates', LANDINGPAGES_URLPATH . 'js/admin/admin.templates.js');
 
 	}	
 		
@@ -27,8 +25,6 @@ else if (isset($_GET['page'])&&$_GET['page']=='lp_manage_templates')
 		require_once( ABSPATH . 'wp-admin/includes/class-wp-list-table.php' );
 	}
 
-
-	
 	class LP_MANAGE_TEMPLATES extends WP_List_Table 
 	{
 		private $template_data;
@@ -457,6 +453,3 @@ function lp_templates_add_menu()
 		$_registered_pages[$hookname] = true;  
 	}
 }
-
-
-?>

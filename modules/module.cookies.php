@@ -1,6 +1,5 @@
 <?php
 
-
 add_action('lp_record_conversion','lp_cookie_user');
 function lp_cookie_user($lp_id)
 {	
@@ -20,7 +19,3 @@ function lp_cookie_user($lp_id)
 	//tracks information about which landing pages the user has performed an action on
 	setcookie('landing-page-action-'.$lp_id , '1', time() + (20 * 365 * 24 * 60 * 60),'/');
 }
-
-
-
-?>

@@ -23,8 +23,6 @@ if(session_id()=="") {
 	//session_start();
 }
 
-
-
 //echo $_GET['permalink_name'];exit;
 //echo $_SESSION[$_GET['permalink_name']];
 if (isset($_SESSION[$_GET['permalink_name']]) && !$debug)
@@ -174,8 +172,13 @@ else
 	//echo "<br>";
 	//echo "final vid:".$variation_id;exit;
 	$url = get_permalink($pid);
-
-	$url = $url."?lp-variation-id=".$variation_id;
+	$old_params = "";
+	foreach ($_GET as $key=>$value) {
+		if ($key != "permalink_name"){
+  	$old_params .= "&$key=" . $value;
+  		}
+  	}
+	$url = $url."?lp-variation-id=".$variation_id.$old_params;
 	$_SESSION[$_GET['permalink_name']] = $url;
 }
 //echo "<br>";
@@ -189,11 +192,7 @@ setcookie('lp-variation-id', $variation_id,time()+3600,"/");
 //}
 //echo $page;
 @header("HTTP/1.1 307 Temporary Redirect");
-@header("Location: $url"); // This looks like it's not caching. In that case we could send folks through
-
-
-
-////////////////////////////////////////////////////////////
+@header("Location: $url");
 
 function lp_get_next($array, $key) {
    $currentKey = key($array);
@@ -203,5 +202,3 @@ function lp_get_next($array, $key) {
    }
    return next($array);
 }
-
-?>

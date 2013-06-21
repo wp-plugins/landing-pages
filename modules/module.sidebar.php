@@ -17,7 +17,6 @@ function lp_register_sidebars()
 			'priority'=> 10
 		));
 	}
-	
 
 }
 
@@ -74,6 +73,3 @@ function lp_replace_sidebars()
 	}
 
 }
-
-
-?>

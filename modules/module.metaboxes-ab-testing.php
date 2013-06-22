@@ -165,6 +165,7 @@ function lp_ab_testing_add_tabs()
 	global $post;
 	$post_type_is = get_post_type($post->ID);
 	$permalink = get_permalink($post->ID);
+	
 	// Only show lp tabs on landing pages post types (for now)
 	if ($post_type_is === "landing-page") 
 	{
@@ -230,7 +231,8 @@ function lp_ab_testing_add_tabs()
 	} 
 	else 
 	{
+		if ($post_type_is === "page" || $post_type_is === "post" ) {
 		// Frontend edit button for other post types
-		echo '<a class="button-primary new-save-lp-frontend" style="position: fixed;right: 38px; top: 57px;" href="'.$permalink.'?template-customize=on">Launch Visual Editor</a>';
+		echo '<a class="button-primary new-save-lp-frontend" style="position: fixed;right: 38px; top: 57px;" href="'.$permalink.'?template-customize=on">Launch Visual Editor</a>'; }
 	}
 }

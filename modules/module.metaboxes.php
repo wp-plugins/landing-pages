@@ -529,7 +529,7 @@ function lp_conversion_log_metabox() {
 			// If no sort, default to title
 			$orderby = ( ! empty( $_GET['orderby'] ) ) ? $_GET['orderby'] : 'date';
 			// If no order, default to asc
-			$order = ( ! empty($_GET['order'] ) ) ? $_GET['order'] : 'asc';
+			$order = ( ! empty($_GET['order'] ) ) ? $_GET['order'] : 'dsc';
 			// Determine sort order
 			$result = strcmp( $a[$orderby], $b[$orderby] );
 			// Send final sort direction to usort

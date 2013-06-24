@@ -52,7 +52,7 @@ function lp_thumbnail_metabox() {
 	<?php
 }		
 
-/* old Split testing. Phased out for new
+/* ADD SPLIT TESTING METABOX TO SIDEBAR */
 add_action('add_meta_boxes', 'lp_display_split_testing_metabox');
 function lp_display_split_testing_metabox() {
 		add_meta_box( 
@@ -63,6 +63,7 @@ function lp_display_split_testing_metabox() {
 		'side', 
 		'low' );
 }
+
 function lp_split_testing_metabox() {
 	global $post;
      
@@ -73,7 +74,7 @@ function lp_split_testing_metabox() {
 	<a name="lp-st-clone" title="Clone page and add it to the same split testing group" id="lp-st-clone-page-groupss" rel="'.$post->ID.'"  class="button-secondary thickbox"  href="' . 	LANDINGPAGES_URLPATH.'modules/module.split-testing-splash.php?post_id=' . $post->ID . '&clone=1&TB_iframe=true&height=400&width=600">Clone This Page</a>
 	</p>';
 	
-}	*/	
+}		
 
 /* ADD CONVERSION AREA METABOX */
 function lp_display_meta_box_lp_conversion_area(){
@@ -445,6 +446,7 @@ function lp_conversion_log_metabox() {
 			global $post;
 			global $wpdb;
 			$final_data = array();
+	
 			$query = "SELECT
 				wposts.*
 				FROM ".$wpdb->posts." AS wposts
@@ -529,7 +531,7 @@ function lp_conversion_log_metabox() {
 			// If no sort, default to title
 			$orderby = ( ! empty( $_GET['orderby'] ) ) ? $_GET['orderby'] : 'date';
 			// If no order, default to asc
-			$order = ( ! empty($_GET['order'] ) ) ? $_GET['order'] : 'dsc';
+			$order = ( ! empty($_GET['order'] ) ) ? $_GET['order'] : 'asc';
 			// Determine sort order
 			$result = strcmp( $a[$orderby], $b[$orderby] );
 			// Send final sort direction to usort
@@ -558,6 +560,10 @@ function lp_conversion_log_metabox() {
 
 			if ($this->table_data)
 				$this->found_data = array_slice( $this->table_data,( ( $current_page-1 )* $per_page ), $per_page );
+			else
+			{
+				$this->found_data = array();
+			}
 			
 			$this->set_pagination_args( array(
 				'total_items' => $total_items,                  //WE have to calculate the total number of items

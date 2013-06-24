@@ -83,7 +83,7 @@ jQuery(document).ready(function($) {
 		  solo: true  
 		},
 		//hide: 'unfocus'
-		hide: { when: { event: 'inactive' }, delay: 1400 }
+		hide: { when: { event: 'inactive' }, delay: 1200 }
 	  }, event); // Pass through our original event to qTip
 	})
 	

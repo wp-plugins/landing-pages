@@ -55,7 +55,7 @@ jQuery(document).ready(function($) {
       jQuery(this).parent().find(".lp-varation-stat-ul").show();
     });
  
-	jQuery('.lp-letter, .cr-number').on('mouseenter', function(event) {
+	jQuery('.lp-letter, .cr-number, .qtip').on('mouseenter', function(event) {
 	  // Bind the qTip within the event handler
 	  var text_in_tip = jQuery(this).attr("data-notes");
 	  var letter = jQuery(this).attr("data-letter");
@@ -82,7 +82,8 @@ jQuery(document).ready(function($) {
 		  ready: true, // Show the tooltip as soon as it's bound, vital so it shows up the first time you hover!
 		  solo: true  
 		},
-		hide: 'unfocus'
+		//hide: 'unfocus'
+		hide: { when: { event: 'inactive' }, delay: 1400 }
 	  }, event); // Pass through our original event to qTip
 	})
 	

@@ -133,74 +133,74 @@ if (is_admin())
 		}
 	}
 	
-	//ready content area for displaying ab variations
-	add_filter('lp_content_area','lp_ab_testing_prepare_content_area');
-	function lp_ab_testing_prepare_content_area($content)
-	{				
-		$current_variation_id = lp_ab_testing_get_current_variation_id();
-		
-		if (isset($_REQUEST['post']))
-		{
-			$post_id = $_REQUEST['post'];
-		}
-		else if (isset($_REQUEST['lp_id']))
-		{
-			$post_id = $_REQUEST['lp_id'];
-		}
-		
-		if ($current_variation_id>0)
-			$content = get_post_meta($post_id,'content-'.$current_variation_id, true);				
-		
-		return $content;
-	}
-	
-	//ready conversion area for displaying ab variations
-	add_filter('lp_conversion_area','lp_ab_testing_prepare_conversion_area');
-	function lp_ab_testing_prepare_conversion_area($content)
-	{				
-		$current_variation_id = lp_ab_testing_get_current_variation_id();
-		
-		if (isset($_REQUEST['post']))
-		{
-			$post_id = $_REQUEST['post'];
-		}
-		else if (isset($_REQUEST['lp_id']))
-		{
-			$post_id = $_REQUEST['lp_id'];
-		}
-		
-		if ($current_variation_id>0)
-			$content = get_post_meta($post_id,'landing-page-myeditor-'.$current_variation_id, true);				
-		//echo $content;exit;
-		return $content;
-	}
-	
-	add_filter('lp_main_headline','lp_ab_testing_prepare_headline');
-	function lp_ab_testing_prepare_headline($main_headline)
-	{	
-		
-		$current_variation_id = lp_ab_testing_get_current_variation_id();
 
-		if (isset($_REQUEST['post']))
-		{
-			$post_id = $_REQUEST['post'];
-		}
-		else if (isset($_REQUEST['lp_id']))
-		{
-			$post_id = $_REQUEST['lp_id'];
-		}
-		
-		if ($current_variation_id>0)
-			$main_headline = get_post_meta($post_id,'lp-main-headline-'.$current_variation_id, true);
 
-		if (!$main_headline)
-		{
-			get_post_meta($post_id,'lp-main-headline', true);
-		}
-		
 
-		return $main_headline;
-	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	
 	add_filter('lp_edit_main_headline','lp_ab_testing_admin_prepare_headline');
 	function lp_ab_testing_admin_prepare_headline($main_headline)
@@ -554,6 +554,83 @@ else
 
 //PERFORM ACTIONS REQUIRED ON BOTH FRONT AND BACKEND
 
+//ready content area for displaying ab variations
+add_filter('lp_content_area','lp_ab_testing_prepare_content_area' , 10 , 2 );
+function lp_ab_testing_prepare_content_area($content, $post=null)
+{				
+	$current_variation_id = lp_ab_testing_get_current_variation_id();
+	if (isset($post))
+	{
+		$post_id = $post->ID;
+	}
+	else if (isset($_REQUEST['post']))
+	{
+		$post_id = $_REQUEST['post'];
+	}
+	else if (isset($_REQUEST['lp_id']))
+	{
+		$post_id = $_REQUEST['lp_id'];
+	}
+	
+	if ($current_variation_id>0)
+		$content = get_post_meta($post_id,'content-'.$current_variation_id, true);				
+	
+	//echo "$current_variation_id : $content";exit;
+	return $content;
+}
+
+//ready conversion area for displaying ab variations
+add_filter('lp_conversion_area','lp_ab_testing_prepare_conversion_area' , 10 , 2 );
+function lp_ab_testing_prepare_conversion_area($content,$post=null)
+{				
+	$current_variation_id = lp_ab_testing_get_current_variation_id();
+	
+	if (isset($post))
+	{
+		$post_id = $post->ID;
+	}
+	else if (isset($_REQUEST['post']))
+	{
+		$post_id = $_REQUEST['post'];
+	}
+	else if (isset($_REQUEST['lp_id']))
+	{
+		$post_id = $_REQUEST['lp_id'];
+	}
+	
+	if ($current_variation_id>0)
+		$content = get_post_meta($post_id,'landing-page-myeditor-'.$current_variation_id, true);				
+	//echo $content;exit;
+	return $content;
+}
+
+add_filter('lp_main_headline','lp_ab_testing_prepare_headline');
+function lp_ab_testing_prepare_headline($main_headline)
+{	
+	
+	$current_variation_id = lp_ab_testing_get_current_variation_id();
+
+	if (isset($_REQUEST['post']))
+	{
+		$post_id = $_REQUEST['post'];
+	}
+	else if (isset($_REQUEST['lp_id']))
+	{
+		$post_id = $_REQUEST['lp_id'];
+	}
+	
+	if ($current_variation_id>0)
+		$main_headline = get_post_meta($post_id,'lp-main-headline-'.$current_variation_id, true);
+
+	if (!$main_headline)
+	{
+		get_post_meta($post_id,'lp-main-headline', true);
+	}
+	
+
+	return $main_headline;
+}
+
 add_action('init','lp_ab_testing_add_rewrite_rules');
 function lp_ab_testing_add_rewrite_rules()
 {
@@ -832,4 +909,25 @@ function ab_testing_frontend_editor_screen_pre($post)
 		}
 	});
 	</script>
-<?php } ?>
+<?php } 
+
+/*-------------------------------------------------------WORKSPACE-------------------------------------------------------*/
+//print all global fields for post
+/*
+global $wpdb;
+$data   =   array();
+$wpdb->query("
+	SELECT `meta_key`, `meta_value`
+	FROM $wpdb->postmeta
+	WHERE `post_id` = ".$_GET['post']."
+");
+foreach($wpdb->last_result as $k => $v){
+	$data[$v->meta_key] =   $v->meta_value;
+};
+if (isset($_GET['post']))
+{
+	print_r( $data);
+} 
+*/
+
+?>

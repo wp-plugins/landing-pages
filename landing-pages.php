@@ -3,12 +3,12 @@
 Plugin Name: Landing Pages
 Plugin URI: http://www.inboundnow.com/landing-pages/
 Description: The first true all-in-one Landing Page solution for WordPress, including ongoing conversion metrics, a/b split testing, unlimited design options and so much more!
-Version: 1.0.9.4
+Version: 1.0.9.5
 Author: David Wells, Hudson Atwell
 Author URI: http://www.inboundnow.com/
 */
 					
-define('LANDINGPAGES_CURRENT_VERSION', '1.0.9.4' );
+define('LANDINGPAGES_CURRENT_VERSION', '1.0.9.5' );
 define('LANDINGPAGES_URLPATH', WP_PLUGIN_URL.'/'.plugin_basename( dirname(__FILE__) ).'/' );
 define('LANDINGPAGES_PATH', WP_PLUGIN_DIR.'/'.plugin_basename( dirname(__FILE__) ).'/' );
 define('LANDINGPAGES_PLUGIN_SLUG', 'landing-pages' );
@@ -239,7 +239,9 @@ function landing_pages_add_conversion_area($content)
 			$position = get_post_meta($post->ID, "{$key}-conversion-area-placement", true);
 			$_SESSION['lp_conversion_area_position'] = $position;
 			
-			$conversion_area = do_shortcode(get_post_meta($post->ID, 'lp-conversion-area', true));
+			$content = lp_content_area(null,null,true);
+			$conversion_area = lp_conversion_area(null,null,true,true);
+		
 			$standardize_form = get_option( 'main-landing-page-auto-format-forms' , 1); // conditional to check for options
 			if ($standardize_form) 
 			{
@@ -248,8 +250,9 @@ function landing_pages_add_conversion_area($content)
 			}
 			
 			$conversion_area = "<div id='lp_container' class='$wrapper_class'>".$conversion_area."</div>";	
-			
-			//echo $template;exit;
+
+
+
 			if ($position=='top')
 			{
 				$content = $conversion_area.$content;
@@ -263,7 +266,7 @@ function landing_pages_add_conversion_area($content)
 				$content = $content;
 			}
 			else 
-			{
+			{				
 				$conversion_area = str_replace("id='lp_container'","id='lp_container' class='lp_form_$position' style='float:$position'",$conversion_area);
 				$content = $conversion_area.$content;
 				
@@ -271,7 +274,8 @@ function landing_pages_add_conversion_area($content)
 		}
 		
 	}
-	//echo $content;exit;
+
+
 	return $content;
 }
 

@@ -101,13 +101,8 @@ jQuery("body").on('mouseleave', 'tr.type-landing-page', function () {
 		  ready: true, // Show the tooltip as soon as it's bound, vital so it shows up the first time you hover!
 		  solo: true  
 		},
-<<<<<<< .mine
 		//hide: 'unfocus'
     hide: { when: { event: 'inactive' }, delay: 1200 } 
-=======
-		//hide: 'unfocus'
-		hide: { when: { event: 'inactive' }, delay: 1200 } 
->>>>>>> .r731964
 	  }, event); // Pass through our original event to qTip
 	})
 	

@@ -214,8 +214,8 @@ function landing_pages_insert_custom_head() {
    }
 }
 
-add_filter('the_content','landing_pages_add_conversion_area');
-add_filter('get_the_content','landing_pages_add_conversion_area');
+add_filter('the_content','landing_pages_add_conversion_area', 20);
+add_filter('get_the_content','landing_pages_add_conversion_area', 20);
 function landing_pages_add_conversion_area($content)
 {	
 	if ('landing-page'==get_post_type())

@@ -14,11 +14,24 @@ jQuery(document).ready(function($) {
 
     jQuery(".lp-impress-num").each(function(){
     var empty = jQuery(this).text();
-     if ( empty === "" ){
+     if ( empty === "" || empty === "0" ){
+      jQuery(this).parent().parent().find(".lp-letter").css("color", "#ccc");
       jQuery(this).parent().html("<span class='lp-no-stats'>no stats yet</span>");
       }
     });
-	
+    /* List tour */
+	 var tourbutton = '<a class="" id="lp-tour" style="font-size:13px;">Need help? Take the tour</a>';
+    jQuery(tourbutton).appendTo("h2:eq(0)");
+    jQuery("body").on('click', '#lp-tour', function () {
+        var tour = jQuery("#lp-tour-style").length;
+         if ( tour === 0 ) {
+            jQuery('head').append("<link rel='stylesheet' id='lp-tour-style' href='/wp-content/plugins/landing-pages/css/admin-tour.css' type='text/css' /><script type='text/javascript' src='/wp-content/plugins/landing-pages/js/admin/tour/tour.post-list.js'></script><script type='text/javascript' src='/wp-content/plugins/landing-pages/js/admin/intro.js'></script>");
+          }
+        setTimeout(function() {
+                introJs().start(); // start tour
+        }, 300);
+
+    });
 	/*jQuery(".lp-varation-stat-ul").each(function(){
     var length = jQuery(this).find("li").length;
      if ( length < 3 ){
@@ -26,6 +39,12 @@ jQuery(document).ready(function($) {
       }
     });
 */
+jQuery("body").on('mouseenter', 'tr.type-landing-page', function () {
+    jQuery(this).find(".no-stats-yet").show();
+    });
+jQuery("body").on('mouseleave', 'tr.type-landing-page', function () {
+    jQuery(this).find(".no-stats-yet").hide();
+    });
       jQuery(".variation-winner-is").each(function(){
     var target = jQuery(this).text();
       jQuery("." + target).addClass("winner-lp").attr("data-lp", "Current Winner");
@@ -82,8 +101,13 @@ jQuery(document).ready(function($) {
 		  ready: true, // Show the tooltip as soon as it's bound, vital so it shows up the first time you hover!
 		  solo: true  
 		},
+<<<<<<< .mine
+		//hide: 'unfocus'
+    hide: { when: { event: 'inactive' }, delay: 1200 } 
+=======
 		//hide: 'unfocus'
 		hide: { when: { event: 'inactive' }, delay: 1200 } 
+>>>>>>> .r731964
 	  }, event); // Pass through our original event to qTip
 	})
 	

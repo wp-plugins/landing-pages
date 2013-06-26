@@ -65,6 +65,11 @@ The plugin is also fully extendable and has a number of actions, filters, and ho
 
 == Changelog ==
 
+= 1.0.9.4 =
+* Added in tours for the edit screen and the list of landing page screen for new users to learn how to use the tool quickly and easily
+* Updated conversion tracking for wp-leads addon plugin
+* Added in option for default templates to toggle on/off navigation
+
 = 1.0.9.3 =
 
 * Removed old A/B split testing and the new system is fully in place!

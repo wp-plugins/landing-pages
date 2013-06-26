@@ -62,6 +62,20 @@ function landing_page_activate()
 	
 	global $wp_rewrite;
 	$wp_rewrite->flush_rules();
+
+	// NEED to insert custom meta as well
+	/* Need to set initial option on first activation
+	$default_lander = wp_insert_post(
+			array(
+				'post_title'     => 'Landing Page Example',
+				'post_content'   => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vitae mauris arcu, eu pretium nisi. Praesent fringilla ornare ullamcorper. Pellentesque diam orci, sodales in blandit ut, placerat quis felis. Vestibulum at sem massa, in tempus nisi. Vivamus ut fermentum odio. Etiam porttitor faucibus volutpat. Vivamus vitae mi ligula, non hendrerit urna. Suspendisse potenti. Quisque eget massa a massa semper mollis.',
+				'post_status'    => 'publish',
+				'post_author'    => 1,
+				'post_type'      => 'landing-page',
+				// 'post_meta' => array("lp-main-headline" => "Main Headline"),
+				'comment_status' => 'closed'
+			)
+		); */
 	
 }
 	
@@ -220,7 +234,8 @@ function landing_pages_add_conversion_area($content)
 		//echo $key;	
 		if ($my_theme->exists()||$key=='default')
 		{
-			
+			global $post;
+			get_post_meta($post->ID, "default-conversion-area-placement", true);
 			$position = get_post_meta($post->ID, "{$key}-conversion-area-placement", true);
 			$_SESSION['lp_conversion_area_position'] = $position;
 			
@@ -249,7 +264,7 @@ function landing_pages_add_conversion_area($content)
 			}
 			else 
 			{
-				$conversion_area = str_replace("id='lp_inner'","id='lp_inner' class='lp_$position' style='float:$position'",$conversion_area);
+				$conversion_area = str_replace("id='lp_container'","id='lp_container' class='lp_form_$position' style='float:$position'",$conversion_area);
 				$content = $conversion_area.$content;
 				
 			}

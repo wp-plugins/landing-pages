@@ -211,7 +211,17 @@ td.stats.column-stats {
 
 .wp-list-table td.actions {
 }
-
+.post-state .states{
+							font-size:10px;
+							padding:3px 8px 3px 8px;
+							-moz-border-radius:2px;
+							-webkit-border-radius:2px;
+							border-radius:2px;
+							}
+					.post-state .password{background:#000;color:#fff;}
+					.post-state .pending{background:#83CF21 !important;color:#fff;}
+					.post-state .private{background:#E0A21B;color:#fff;}
+					.post-state .draft{background:#006699;color:#fff;}
 #hide-stats, .show-stats-top {
 	color: #21759b;
 	font-size: 9px;
@@ -224,7 +234,10 @@ td.stats.column-stats {
 
 .no-stats-yet {
 	padding-left: 7px;
-	padding-top: 6px;
+padding-top: 6px;
+color: #777;
+font-size: 11px;
+display: none;
 }
 
 .widefat td.stats {
@@ -246,7 +259,8 @@ td.stats.column-stats {
 	min-width: 199px;
 	display: inline-block;
 }
-
+.introjs-showElement .row-actions {
+visibility: visible;}
 .lp-impress-num {
 	display: inline-block;
 	text-align: center;
@@ -258,6 +272,7 @@ td.stats.column-stats {
 .lp-no-stats {
 	display: inline-block;
 	padding-left: 10px;
+	color: #ccc;
 }
 
 .lp-impress-num, .lp-con-num, .cr-number {

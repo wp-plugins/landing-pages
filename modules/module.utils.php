@@ -46,16 +46,21 @@ function lp_fix_seo_title()
 add_filter( 'wp_nav_menu_args', 'lp_wp_nav_menu_args' );
 function lp_wp_nav_menu_args( $args = '' )
 {
+	global $post;
 	if ( 'landing-page' == get_post_type() ) {
-		if (isset($args['container_class']))
-		{
-			$current_class = " ".$args['container_class'];
+		if (get_post_meta($post->ID, 'default-lp_hide_nav', true) === 'off') {
+			if (isset($args['container_class']))
+			{
+				$current_class = " ".$args['container_class'];
+			}
+
+			$args['container_class'] = "custom_landing_page_nav{$current_class}";
+			
+			$args['echo'] = false; // works!
 		}
-
-		$args['container_class'] = "custom_landing_page_nav{$current_class}";
-
-		$args['echo'] = false; // works!
 	}
+	
+	
 	return $args;
 } 
 

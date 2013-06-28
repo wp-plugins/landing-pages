@@ -48,7 +48,8 @@ function lp_wp_nav_menu_args( $args = '' )
 {
 	global $post;
 	if ( 'landing-page' == get_post_type() ) {
-		if (get_post_meta($post->ID, 'default-lp_hide_nav', true) === 'off') {
+		$nav_status = get_post_meta($post->ID, 'default-lp_hide_nav', true);
+		if ($nav_status === 'off' || empty($nav_status)) {
 			if (isset($args['container_class']))
 			{
 				$current_class = " ".$args['container_class'];
@@ -62,7 +63,7 @@ function lp_wp_nav_menu_args( $args = '' )
 	
 	
 	return $args;
-} 
+}
 
 ///////// Remove all base css from the current active wordpress theme in landing pages
 //currently removes all css from wp_head and re-enqueues the admin bar css.

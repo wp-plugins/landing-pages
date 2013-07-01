@@ -133,74 +133,6 @@ if (is_admin())
 		}
 	}
 	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	
 	add_filter('lp_edit_main_headline','lp_ab_testing_admin_prepare_headline');
 	function lp_ab_testing_admin_prepare_headline($main_headline)
@@ -393,18 +325,19 @@ if (is_admin())
 			{
 				$postID = $parent_id;
 			}
-			
+		
 			lp_ab_testing_save_post($postID);
-
+			
 		}
 		else
-		{
+		{			
 			//echo "here";exit;
-			$this_data = json_encode($data);
+			//$this_data = json_encode($data);
 			//mail('hudson.atwell@gmail.com','test2',$this_data);
 		}
 		
-		return $data;
+		if (count($data)>1)
+			return $data;
 	} 
 	
 	add_action('save_post','lp_ab_testing_save_post');

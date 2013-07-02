@@ -248,6 +248,7 @@ function landing_pages_add_conversion_area($content)
 			$content = lp_content_area(null,null,true);
 			$conversion_area = lp_conversion_area(null,null,true,true);
 		
+		
 			
 			$standardize_form = get_option( 'main-landing-page-auto-format-forms' , 1); // conditional to check for options
 			if ($standardize_form) 

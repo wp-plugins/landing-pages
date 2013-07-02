@@ -537,6 +537,33 @@ function lp_ab_testing_prepare_conversion_area($content,$post=null)
 	return $content;
 }
 
+//ready conversion area for displaying ab variations
+add_filter('lp_conversion_area_position','lp_ab_testing_lp_conversion_area_position' , 10 , 2 );
+function lp_ab_testing_lp_conversion_area_position($position, $post = null, $key = 'default')
+{				
+
+	$current_variation_id = lp_ab_testing_get_current_variation_id();
+	
+	if (isset($post))
+	{
+		$post_id = $post->ID;
+	}
+	else if (isset($_REQUEST['post']))
+	{
+		$post_id = $_REQUEST['post'];
+	}
+	else if (isset($_REQUEST['lp_id']))
+	{
+		$post_id = $_REQUEST['lp_id'];
+	}
+	
+	if ($current_variation_id>0)
+		$position = get_post_meta($post->ID, "{$key}-conversion-area-placement-".$current_variation_id, true);
+
+	return $position;
+}
+
+
 add_filter('lp_main_headline','lp_ab_testing_prepare_headline');
 function lp_ab_testing_prepare_headline($main_headline)
 {	

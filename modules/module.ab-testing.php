@@ -96,7 +96,7 @@ if (is_admin())
 			//set wysiwyg boxes to correct variation data
 			
 			$content_area = lp_content_area(null,null,true);
-			$conversion_area = lp_conversion_area(null,null,true,false);
+			$conversion_area = lp_conversion_area(null,null,true,false,false);
 			
 			//prepare for new variation creation - use A as default content if not being cloned
 			if (($new_variation==1&&!isset($_GET['clone']))||isset($_GET['clone'])&&$_GET['clone']==0)

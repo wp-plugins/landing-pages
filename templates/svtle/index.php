@@ -34,7 +34,9 @@ if (have_posts()) : while (have_posts()) : the_post();
     $bg_image = lp_get_value($post, $key, 'bg-image');
     $mobile_form = lp_get_value($post, $key, 'mobile-form');
     $submit_button_color = lp_get_value($post, $key, 'submit-button-color'); 
-    
+    //prepare content
+	$content = lp_content_area($post,null,true);
+	
     // Convert Hex to RGB Value for submit button
 function Hex_2_RGB($hex) {
         $hex = ereg_replace("#", "", $hex);
@@ -158,7 +160,7 @@ $blue = $RBG_array["b"];
              <h1 class="entry-title"><?php the_title(); ?></h1>
 
             <div class="entry-content">
-                <?php the_content();?>
+                <?php echo $content; ?>
             </div>
         </article>
     </section>

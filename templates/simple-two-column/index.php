@@ -30,6 +30,8 @@ if (have_posts()) : while (have_posts()) : the_post();
     $sidebar = lp_get_value($post, $key, 'sidebar'); 
     $social_display = lp_get_value($post, $key, 'display-social');
     $submit_button_color = lp_get_value($post, $key, 'submit-button-color'); 
+	//prepare content
+	$content = lp_content_area($post,null,true);
     
 // Convert Hex to RGB Value for submit button
 function Hex_2_RGB($hex) {
@@ -126,7 +128,7 @@ $blue = $RBG_array["b"];
 <div id="left">
 	<div id="left-content">
 <h1><?php the_title(); ?></h1>
-<?php the_content();?>
+<?php echo $content; ?>
 	</div> <!-- end left-content -->
 </div> <!-- end left -->
  <style type="text/css">

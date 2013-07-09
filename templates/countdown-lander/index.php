@@ -60,6 +60,9 @@ $red = $RBG_array['r'];
 $green = $RBG_array["g"];
 $blue = $RBG_array["b"];
 
+//prepare content
+$content = lp_content_area($post,null,true);
+
 ?>
 
 <!DOCTYPE html>
@@ -127,7 +130,7 @@ body {  background: url(<?php echo $bg_image; ?>) no-repeat center center fixed;
         <div id="form-area">
         <?php lp_conversion_area(); /* Print out form content */ ?>
         <div id="content-area">
-            <?php the_content();?>
+            <?php echo $content;?>
         </div> <!-- end content area -->
         </div>
 </div>  

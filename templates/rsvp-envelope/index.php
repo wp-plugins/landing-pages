@@ -27,6 +27,8 @@ if (have_posts()) : while (have_posts()) : the_post();
 	$sub_headline = lp_get_value($post, $key, 'sub-headline'); 
 	$media_example = lp_get_value($post, $key, 'media-example');
 	$bg_color = lp_get_value($post, $key, 'main-bg-color');
+	//prepare content
+	$content = lp_content_area($post,null,true);
 ?>
 <!DOCTYPE html>
 <html>
@@ -94,7 +96,7 @@ if (have_posts()) : while (have_posts()) : the_post();
             
 		<h1><?php the_title(); ?></h1>	
             <div id="main-content">
-                <?php the_content();?>
+                <?php echo $content; ?>
             </div>
             <div id="wrap">
                 <div id="form_wrap">

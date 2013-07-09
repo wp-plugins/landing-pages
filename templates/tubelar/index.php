@@ -28,6 +28,7 @@ if (have_posts()) : while (have_posts()) : the_post();
 	$clear_bg_settings = lp_get_value($post, $key, 'clear-bg-settings');
 	$social_display = lp_get_value($post, $key, 'display-social'); 
 	$submit_button_color = lp_get_value($post, $key, 'submit-button-color'); 
+	$content = lp_content_area(null,null,true);
 	
 // Convert Hex to RGB Value for submit button
 function Hex_2_RGB($hex) {
@@ -60,7 +61,9 @@ $blue = $RBG_array["b"];
 	        return $match;
 	}
 
-	$videoid = youtubeid($yt_video);?>
+	$videoid = youtubeid($yt_video);
+	
+?>
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -131,7 +134,7 @@ $blue = $RBG_array["b"];
 		<div class="black-50">
 			<h1><?php the_title(); ?></h1>
 			
-			<?php the_content();?>
+			<?php echo $content; ?>
 
 		</div>
 		

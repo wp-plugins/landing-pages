@@ -23,6 +23,8 @@ if (have_posts()) : while (have_posts()) : the_post();
  * - The config.php values create the metaboxes visible to the user.
  * - We define those meta-keys here to use them in the template.
  */ 
+	//prepare content
+	$content = lp_content_area($post,null,true);
 	$headline_color = lp_get_value($post, $key, 'headline-color');
 	$sub_headline_color = lp_get_value($post, $key, 'sub-headline-color'); 
 	$sub_headline = lp_get_value($post, $key, 'sub-headline'); 
@@ -31,8 +33,7 @@ if (have_posts()) : while (have_posts()) : the_post();
 	$bottom_text_color = lp_get_value($post, $key, 'bottom-text-color');
 	$bottom_color = lp_get_value($post, $key, 'bottom-color'); 
 	$bottom_content = lp_get_value($post, $key, 'wysiwyg-content'); 
-	$form_placement = lp_get_value($post, $key, 'form-placement'); 
-	$content = get_the_content();
+	$form_placement = lp_get_value($post, $key, 'form-placement'); 	
 	$social_display = lp_get_value($post, $key, 'display-social');
 	$submit_button_color = lp_get_value($post, $key, 'submit-button-color');   
 
@@ -166,7 +167,7 @@ jQuery(document).ready(
 		<div id="slideshow-inright">
 
 		<?php if ($content != "") {
-            the_content();
+            echo $content;
         }
      else {
 			echo "<img src='/wp-content/plugins/landing-pages/templates/super-slick/assets/images/placeholder-hero.png'>"; 

@@ -59,6 +59,7 @@ if ( $background_style === "repeat-y" ) {
 	$bg_style = 'background: url('.$background_image.') repeat-y; ';
 	};	
 
+$content = lp_content_area(null,null,true);
 
 
 
@@ -107,7 +108,7 @@ echo $rebuild_form_options; ?>
 	</p>
 </div>
 <div id="main-content-area">
-	<?php the_content();?>
+	<?php echo $content; ?>
 	<?php lp_conversion_area(); /* Print out form content */ ?>
 </div>
 </div>

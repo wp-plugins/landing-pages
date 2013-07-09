@@ -27,7 +27,9 @@ if (have_posts()) : while (have_posts()) : the_post();
     $content_text_color = lp_get_value($post, $key, 'content-text-color'); 
     $sidebar_color = lp_get_value($post, $key, 'sidebar-color'); 
     $sidebar_text_color = lp_get_value($post, $key, 'sidebar-text-color'); 
-    $submit_button_color = lp_get_value($post, $key, 'submit-button-color');   
+    $submit_button_color = lp_get_value($post, $key, 'submit-button-color');  
+	$content = lp_content_area(null,null,true);
+
 ?>
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -92,7 +94,7 @@ if (have_posts()) : while (have_posts()) : the_post();
         <div id="area">
              <h1><?php the_title(); // Load WordPress Post Title ?></h1>
 
-            <?php the_content(); // Load Wordpress Content ?>
+            <?php echo $content; // Load Wordpress Content ?>
         </div><!--end #area -->
     </div><!--end #content -->
 

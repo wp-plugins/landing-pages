@@ -110,7 +110,7 @@ padding-top: 40px;}
 }
 form {font-weight: 100;}
 #area_two {margin: 100px auto;
-overflow: auto;
+overflow: hidden;
 padding-top: 70px;
 width: 450px;}
 

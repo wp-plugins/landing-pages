@@ -165,7 +165,10 @@ function lp_list_feature($label,$url=null)
 function lp_generate_meta()
 {
 	global $lp_data;
-	//print_r($lp_data);exit;
+	global $post;
+	//print_r($lp_data);
+	$current_template = get_post_meta( $post->ID , 'lp-selected-template' , true);
+	//echo $current_template;
 	foreach ($lp_data as $key=>$array)
 	{
 		if ($key!='lp'&&substr($key,0,4)!='ext-')

@@ -19,7 +19,37 @@
 {
 	display: none;
 }
-
+#setting-error-tgmpa p:nth-child(2) strong em {
+	margin-top: 5px;
+}
+#setting-error-tgmpa em {
+	display: block;
+}
+#add-landing-page.hide-if-js {
+    display: block !important;
+}
+#setting-error-tgmpa {
+	padding-bottom: 5px;
+padding-top: 5px;
+padding-left: 10px;
+}
+#setting-error-tgmpa a.thickbox {
+font-size: 16px;
+padding-top: 5px;
+display: inline-block;
+padding-bottom: 5px;
+}
+#setting-error-tgmpa.updated p {
+width: 99%;
+margin: 0px;
+}
+#setting-error-tgmpa a span {
+	color: #000 !important;
+text-decoration: none;
+font-size: 14px !important;
+font-style: normal !important;
+font-weight: normal !important;
+}
 #template-box, .thumbnail-lander img {
 	background: #FCFDFE;
 	padding: 3%;

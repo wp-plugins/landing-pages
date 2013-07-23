@@ -97,6 +97,7 @@ function lp_lead_collection_js()
     });	
     var post_values_json = JSON.stringify(post_values);
 	var wp_lead_uid = jQuery.cookie("wp_lead_uid");
+	jQuery.cookie("wp_lead_email", email, { path: '/', expires: 365 });
 	var current_variation = <?php $variation = (isset($_GET['lp-variation-id'])) ? $_GET['lp-variation-id'] : '0'; echo  $variation ;?>;	
 	jQuery.ajax({
 		type: 'POST',

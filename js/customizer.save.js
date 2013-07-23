@@ -64,7 +64,6 @@ jQuery(document).ready(function($) {
 	// Prep Data and Save
 	var nonce_val = lp_post_edit_ui.wp_landing_page_meta_nonce; // NEED CORRECT NONCE
 	jQuery(document).on('mousedown', '.new-save-lp-frontend', function () {
-		//alert('here');
 		var type_input = jQuery(this).parent().find("input").attr("type");
 		var type_select = jQuery(this).parent().find("select");
 		// var the_conversion_area_editor = jQuery(this).parent().parent().find('#lp-conversion-area_ifr').length;
@@ -114,9 +113,10 @@ jQuery(document).ready(function($) {
 		// console.log(meta_to_save);
 
 		var this_meta_id = jQuery(this).attr("id"); // From save button
-		// console.log(this_meta_id);
+		console.log(this_meta_id);
 		var post_id = jQuery("#post_ID").text();
-		//console.log(post_id);
+		console.log(post_id);
+		console.log(meta_to_save);
 			
 		// Run Ajax
 		jQuery.ajax({

@@ -2,11 +2,11 @@ jQuery(document).ready(function ($) {
 
 	jQuery('.time-picker').timepicker({ 'timeFormat': 'H:i' });
 	
-	 if ($('.current_lander .new-date').length) { // implies *not* zero
-    var current_val = jQuery(".current_lander .new-date").val();
-  		} else {
-    var current_val = jQuery(".new-date").val();
-  		}
+	if ($('.current_lander .new-date').length) { // implies *not* zero
+		var current_val = jQuery(".current_lander .new-date").val();
+  	} else {
+		var current_val = jQuery(".new-date").val();
+  	}
 
 	var ret = current_val.split(" ");
 	var current_date = ret[0];

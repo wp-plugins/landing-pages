@@ -10,18 +10,14 @@ jQuery(document).ready(function ($) {
 	var hidden_html = '<input type="hidden" id="better-ab-testing-variation" name="lp-variation-id" value="'+ variation.vid +'">';
 	jQuery('.wrap form').prepend(hidden_html);
 	
+	//if (variation.content_area.indexOf("<p") == -1 && variation.content_area.indexOf("<br") == -1 )
+	//{
+		variation.content_area = variation.content_area.replace(/\n/g, "\");
+	//}
+	
 	jQuery("#wp-content-editor-container textarea").val(variation.content_area);
-	jQuery("#landing-page-myeditor").val(variation.conversion_area);
-	
-	//setTimeout(function () {
 	jQuery("#content_ifr").contents().find("body").html(variation.content_area);
-	//},100);
-
-	//setTimeout(function () {
-	jQuery("#landing-page-myeditor_ifr").contents().find("body").html(variation.conversion_area);
-	//},100);
-
-	
+		
 
 	var html;
 	if (variation.vid>0&&variation.new_variation!=1)

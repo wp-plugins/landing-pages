@@ -5,153 +5,105 @@ add_action('admin_enqueue_scripts','lp_admin_enqueue');
 function lp_admin_enqueue($hook)
 {
 	global $post;
+	$screen = get_current_screen(); //print_r($screen);
 	
 	//enqueue styles and scripts
 	wp_enqueue_style('lp-admin-css', LANDINGPAGES_URLPATH . 'css/admin-style.css');
 	
 	//jquery cookie
 	wp_dequeue_script('jquery-cookie');
-	wp_enqueue_script('jquery-cookie', LANDINGPAGES_URLPATH . 'js/jquery.cookie.js');
+	wp_enqueue_script('jquery-cookie', LANDINGPAGES_URLPATH . 'js/jquery.lp.cookie.js');
 	
-	//jpicker - color picker
-	wp_enqueue_script('jpicker', LANDINGPAGES_URLPATH . 'js/libraries/jpicker/jpicker-1.1.6.min.js');
-	wp_localize_script( 'jpicker', 'jpicker', array( 'thispath' => LANDINGPAGES_URLPATH.'js/libraries/jpicker/images/' ));
-	//wp_enqueue_style('jpicker-css', LANDINGPAGES_URLPATH . 'js/jpicker/css/jPicker.css');	// have min below
-	wp_enqueue_style('jpicker-css', LANDINGPAGES_URLPATH . 'js/libraries/jpicker/css/jPicker-1.1.6.min.css');
+	// Frontend Editor
+	if ((isset($_GET['page']) == 'lp-frontend-editor')) {
+	// scripts soon	
+	}
 	
-	
-	//Tool tip script
-	wp_dequeue_script('jquery-qtip');
-	wp_enqueue_script('jquery-qtip', LANDINGPAGES_URLPATH . 'js/libraries/jquery-qtip/jquery.qtip.min.js');
-	wp_enqueue_script('load-qtip', LANDINGPAGES_URLPATH . 'js/libraries/jquery-qtip/load.qtip.js');
-	
-	//Tool tip css
-	wp_enqueue_style('qtip-css', LANDINGPAGES_URLPATH . 'css/jquery.qtip.min.css');
-	
-	//easyXDM - for store rendering
-	if (isset($_GET['page']) && (($_GET['page'] == 'lp_store') || ($_GET['page'] == 'lp_addons'))) {
+	// Store Options Page
+	if (isset($_GET['page']) && (($_GET['page'] == 'lp_store') || ($_GET['page'] == 'lp_addons'))) 
+	{
 		wp_dequeue_script('easyXDM');
 		wp_enqueue_script('easyXDM', LANDINGPAGES_URLPATH . 'js/libraries/easyXDM.debug.js');
 		//wp_enqueue_script('lp-js-store', LANDINGPAGES_URLPATH . 'js/admin/admin.store.js');
 	} 
-	// Frontend Editor
-	if ((isset($_GET['page']) == 'lp-frontend-editor')) {
-		
-	}
 
 	// Admin enqueue - Landing Page CPT only 
-	if ( isset($post) && 'landing-page' == $post->post_type ) 
+	if (  ( isset($post) && 'landing-page' == $post->post_type ) || ( isset($_GET['post_type']) && $_GET['post_type']=='landing-page' ) ) 
 	{ 
-
-			// Admin UI for normal page editing
+		
+		wp_enqueue_script('jpicker', LANDINGPAGES_URLPATH . 'js/libraries/jpicker/jpicker-1.1.6.min.js');
+		wp_localize_script( 'jpicker', 'jpicker', array( 'thispath' => LANDINGPAGES_URLPATH.'js/libraries/jpicker/images/' ));
+		wp_enqueue_style('jpicker-css', LANDINGPAGES_URLPATH . 'js/libraries/jpicker/css/jPicker-1.1.6.min.css');
+		wp_dequeue_script('jquery-qtip');
+		wp_enqueue_script('jquery-qtip', LANDINGPAGES_URLPATH . 'js/libraries/jquery-qtip/jquery.qtip.min.js');
+		wp_enqueue_script('load-qtip', LANDINGPAGES_URLPATH . 'js/libraries/jquery-qtip/load.qtip.js', array('jquery-qtip'));
+		wp_enqueue_style('qtip-css', LANDINGPAGES_URLPATH . 'css/jquery.qtip.min.css'); //Tool tip css
+		wp_enqueue_style('lp-only-cpt-admin-css', LANDINGPAGES_URLPATH . 'css/admin-lp-cpt-only-style.css');
+		
+		// Add New and Edit Screens
 		if ( $hook == 'post-new.php' || $hook == 'post.php' ) 
 		{
-			wp_enqueue_script('lp-post-edit-ui', LANDINGPAGES_URLPATH . 'js/admin/admin.post-edit.js');
-			wp_localize_script( 'lp-post-edit-ui', 'lp_post_edit_ui', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ), 'wp_landing_page_meta_nonce' => wp_create_nonce('wp-landing-page-meta-nonce') ) );
-			
 			//admin.metaboxes.js - Template Selector - Media Uploader
 			wp_enqueue_script('lp-js-metaboxes', LANDINGPAGES_URLPATH . 'js/admin/admin.metaboxes.js');
-			
-			$template_data = lp_get_template_data();
+			 
+			$template_data = lp_get_extension_data();
 			$template_data = json_encode($template_data);
-			
 			$template = get_post_meta($post->ID, 'lp-selected-template', true);	
 			$template = apply_filters('lp_selected_template',$template); 
-			
 			$template = strtolower($template);	
-
 			$params = array('selected_template'=>$template, 'templates'=>$template_data);
 			wp_localize_script('lp-js-metaboxes', 'data', $params);
+			
 			// Isotope sorting
-			wp_enqueue_script('lp-js-isotope', LANDINGPAGES_URLPATH . 'js/libraries/isotope/jquery.isotope.js', array('jquery'), '1.0', true );
-			wp_enqueue_style('lp-css-isotope', LANDINGPAGES_URLPATH . 'js/libraries/isotope/css/style.css');
+			wp_enqueue_script('isotope', LANDINGPAGES_URLPATH . 'js/libraries/isotope/jquery.isotope.js', array('jquery'), '1.0', true );
+			wp_enqueue_style('isotope', LANDINGPAGES_URLPATH . 'js/libraries/isotope/css/style.css');
 
 			// Conditional TINYMCE for landing pages
 			wp_dequeue_script('jquery-tinymce');
 			wp_enqueue_script('jquery-tinymce', LANDINGPAGES_URLPATH . 'js/libraries/tiny_mce/jquery.tinymce.js');
 
-			// Main edit screen CSS
+		}
+		// Edit Screen
+		if ( $hook == 'post.php' ) 
+		{
+			wp_enqueue_script('lp-post-edit-ui', LANDINGPAGES_URLPATH . 'js/admin/admin.post-edit.js');
+			wp_localize_script( 'lp-post-edit-ui', 'lp_post_edit_ui', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ), 'post_id' => $post->ID , 'wp_landing_page_meta_nonce' => wp_create_nonce('wp-landing-page-meta-nonce'),  'lp_template_nonce' => wp_create_nonce('lp-nonce') ) );
 			wp_enqueue_style('admin-post-edit-css', LANDINGPAGES_URLPATH . '/css/admin-post-edit.css');
-
+			/* Error with picker_functions.js for datepicker need new solution
+			wp_enqueue_script('jqueryui');
 			// jquery datepicker
 			wp_enqueue_script('jquery-datepicker', LANDINGPAGES_URLPATH . 'js/libraries/jquery-datepicker/jquery.timepicker.min.js');
-			wp_enqueue_script('jquery-datepicker-functions', LANDINGPAGES_URLPATH . 'js/libraries/jquery-datepicker/picker_functions.js');
+			
 			wp_enqueue_script('jquery-datepicker-base', LANDINGPAGES_URLPATH . 'js/libraries/jquery-datepicker/lib/base.js');
 			wp_enqueue_script('jquery-datepicker-datepair', LANDINGPAGES_URLPATH . 'js/libraries/jquery-datepicker/lib/datepair.js');
 			wp_localize_script( 'jquery-datepicker', 'jquery_datepicker', array( 'thispath' => LANDINGPAGES_URLPATH.'js/libraries/jquery-datepicker/' ));
+			wp_enqueue_script('jquery-datepicker-functions', LANDINGPAGES_URLPATH . 'js/libraries/jquery-datepicker/picker_functions.js');
 			wp_enqueue_style('jquery-timepicker-css', LANDINGPAGES_URLPATH . 'js/libraries/jquery-datepicker/jquery.timepicker.css');
 			wp_enqueue_style('jquery-datepicker-base.css', LANDINGPAGES_URLPATH . 'js/libraries/jquery-datepicker/lib/base.css');	
-
-			
-			/*	wp_register_script(
-		    'jqueryui',  //handle
-		    'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js',
-		    array(),  //dependencies
-		    false,  //version
-		    false  //footer
-		);	
-			wp_enqueue_script('jqueryui');
-			wp_enqueue_script('kool-swap', LANDINGPAGES_URLPATH . 'js/jquery.kool-swap.js');
-			wp_enqueue_style('kool-swap-css', LANDINGPAGES_URLPATH . 'css/kool-swap.css');
 			*/
 		}
 
-		wp_enqueue_style('lp-only-cpt-admin-css', LANDINGPAGES_URLPATH . 'css/admin-lp-cpt-only-style.css');
-		
-		
-		// Admin UI for add new landing page
+		// Add New Screen
 		if ( $hook == 'post-new.php'  ) 
 		{  
 			// Create New Landing Jquery UI
 			wp_enqueue_script('lp-js-create-new-lander', LANDINGPAGES_URLPATH . 'js/admin/admin.post-new.js', array('jquery'), '1.0', true );
+			wp_localize_script( 'lp-js-create-new-lander', 'lp_post_new_ui', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ), 'post_id' => $post->ID , 'wp_landing_page_meta_nonce' => wp_create_nonce('lp_nonce') ) );
 			wp_enqueue_style('lp-css-post-new', LANDINGPAGES_URLPATH . 'css/admin-post-new.css');
 		}
 		
-	
-		// Admin UI for Landing Page List
-		if ( $hook == 'edit.php' && (isset($_GET['post_type']) && ($_GET['post_type'] == 'landing-page') ) ) 
+		// List Screen
+		if ( $screen->id == 'edit-landing-page' ) 
 		{
-		wp_enqueue_script(array('jquery', 'editor', 'thickbox', 'media-upload'));
-		wp_enqueue_script('landing-page-list', LANDINGPAGES_URLPATH . 'js/admin/admin.landing-page-list.js');
-		wp_enqueue_style('landing-page-list-css', LANDINGPAGES_URLPATH.'css/admin-landing-page-list.css');
-		//load the script
-		wp_enqueue_script('jqueryui');
-		/*
-		wp_enqueue_script('jquery-intro', LANDINGPAGES_URLPATH . 'js/admin/intro.js', array( 'jquery' ));
-		wp_enqueue_style('intro-css', LANDINGPAGES_URLPATH . 'css/admin-tour.css'); */
-		wp_admin_css('thickbox');
-		add_thickbox(); 
+			wp_enqueue_script(array('jquery', 'editor', 'thickbox', 'media-upload'));
+			wp_enqueue_script('landing-page-list', LANDINGPAGES_URLPATH . 'js/admin/admin.landing-page-list.js');
+			wp_enqueue_style('landing-page-list-css', LANDINGPAGES_URLPATH.'css/admin-landing-page-list.css');
+			wp_enqueue_script('jqueryui');
+			wp_admin_css('thickbox');
+			add_thickbox(); 
 		}
 
 	}
-}
-
-
-function lp_get_template_data_cats($array)
-{
-	foreach ($array as $key=>$val)
-	{
-		$cat_value = $val['category'];
-		$name = str_replace(array('-','_'),' ',$cat_value);
-		$name = ucwords($name);
-		if (!isset($template_cats[$cat_value]))
-		{						
-			$template_cats[$cat_value]['count'] = 1;
-			$template_cats[$cat_value]['value'] = $cat_value;
-			//$template_cats[$cat_value]['label'] = "$name (".$template_cats[$cat_value]['count'].")";
-			$template_cats[$cat_value]['label'] = "$name";
-		}
-		else
-		{			
-			$template_cats[$cat_value]['count']++;
-			//$template_cats[$cat_value]['label'] = "$name (".$template_cats[$cat_value]['count'].")";
-			$template_cats[$cat_value]['label'] = "$name";
-			$template_cats[$cat_value]['value'] = $cat_value;
-		}
-	}
-	//print_r($template_cats);exit;
-	
-	return $template_cats;
 }
 
 function lp_list_feature($label,$url=null)
@@ -162,151 +114,21 @@ function lp_list_feature($label,$url=null)
 		);	
 }
 
-function lp_generate_meta()
-{
-	global $lp_data;
-	global $post;
-	//print_r($lp_data);
-	$current_template = get_post_meta( $post->ID , 'lp-selected-template' , true);
-	//echo $current_template;
-	foreach ($lp_data as $key=>$array)
-	{
-		if ($key!='lp'&&substr($key,0,4)!='ext-')
-		{
-			$template_name = ucwords(str_replace('-',' ',$key));
-			$id = strtolower(str_replace(' ','-',$key));
-			//echo $key."<br>";
-			add_meta_box(
-				"lp_{$id}_custom_meta_box", // $id
-				__( "<small>$template_name Options:</small>", "lp_{$key}_custom_meta" ),
-				'lp_show_metabox', // $callback
-				'landing-page', // post-type
-				'normal', // $context
-				'default',// $priority
-				array('key'=>$key)
-				); //callback args
-		}
-	}
-	foreach ($lp_data as $key=>$array)
-	{
-		if (substr($key,0,4)=='ext-')
-		{
-			//echo 1; exit;
-			$id = strtolower(str_replace(' ','-',$key));
-			$name = ucwords(str_replace(array('-','ext '),' ',$key));
-			//echo $key."<br>";
-			add_meta_box(
-				"lp_{$id}_custom_meta_box", // $id
-				__( "$name Extension Options", "lp_{$key}_custom_meta" ),
-				'lp_show_metabox', // $callback
-				'landing-page', // post-type
-				'normal', // $context
-				'default',// $priority
-				array('key'=>$key)
-				); //callback args
-		}
-	}
-	
-}
-
 // The Callback
 function lp_show_metabox($post,$key) 
 {
-	global $lp_data;
+	$extension_data = lp_get_extension_data();
 	$key = $key['args']['key'];
 
-	$lp_custom_fields = $lp_data[$key]['options'];
+	$lp_custom_fields = $extension_data[$key]['options'];
 	$lp_custom_fields = apply_filters('lp_show_metabox',$lp_custom_fields, $key);
 	
 	lp_render_metabox($key,$lp_custom_fields,$post);
 }
 
-add_action('save_post', 'lp_save_meta');
-function lp_save_meta($post_id) {
-	global $lp_data;
-	global $post;
-	
-	if (!isset($post)||isset($_POST['split_test']))
-		return;
-		
-	if ($post->post_type=='revision')
-	{
-		return;
-	}
-	
-	if ((defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) ||(isset($_POST['post_type'])&&$_POST['post_type']=='revision'))
-	{
-		return;
-	}
-		
-	if ($post->post_type=='landing-page')
-	{
-		//print_r($lp_data);exit;
-		//echo $_POST['lp-selected-template'];
-		foreach ($lp_data as $key=>$data)
-		{	
-			if ($key=='lp')
-			{
-				// verify nonce
-				if (!wp_verify_nonce($_POST["lp_{$key}_custom_fields_nonce"], 'lp-nonce'))
-				{
-					return $post_id;
-				}
-				
-				$lp_custom_fields = $lp_data[$key]['options'];	
-				
-				foreach ($lp_custom_fields as $field)
-				{
-					$old = get_post_meta($post_id, $field['id'], true);				
-					$new = $_POST[$field['id']];	
-
-					if (isset($new) && $new != $old ) {
-						update_post_meta($post_id, $field['id'], $new);
-					} elseif ('' == $new && $old) {
-						delete_post_meta($post_id, $field['id'], $old);
-					}
-				}
-			}
-			else if ($_POST['lp-selected-template']==$key||substr($key,0,4)=='ext-')
-			{	
-				
-				$lp_custom_fields = $lp_data[$key]['options'];		
-
-				// verify nonce
-				if (!wp_verify_nonce($_POST["lp_{$key}_custom_fields_nonce"], 'lp-nonce'))
-				{
-					return $post_id;
-				}
-				
-				// loop through fields and save the data
-				foreach ($lp_custom_fields as $field) {
-				//echo $key.":".$field['id']."<br>";
-
-					if($field['type'] == 'tax_select') continue;
-						$old = get_post_meta($post_id, $field['id'], true);				
-						$new = $_POST[$field['id']];
-						//echo "$old:".$new."<br>";			
-						
-						if (isset($new) && $new != $old ) {
-							update_post_meta($post_id, $field['id'], $new);
-						} elseif ('' == $new && $old) {
-							delete_post_meta($post_id, $field['id'], $old);
-						}
-				} // end foreach		
-				//exit;
-			}
-		}
-		//exit;
-		// save taxonomies
-		$post = get_post($post_id);
-		//$category = $_POST['landing_page_category'];
-		//wp_set_object_terms( $post_id, $category, 'landing_page_category' );
-	}
-}
 
 add_action('wp_trash_post', 'lp_trash_lander');
 function lp_trash_lander($post_id) {
-	global $lp_data;
 	global $post;
 
 	if (!isset($post)||isset($_POST['split_test']))
@@ -475,6 +297,15 @@ function lp_add_option($key,$type,$id,$default=null,$label=null,$description=nul
 			'desc'  => $description,
 			'id'    => $key.'-'.$id,
 			'type'  => 'default-content',
+			'default'  => $default
+			);
+			break;	
+		case "html":
+			return array(
+			'label' => $label,
+			'desc'  => $description,
+			'id'    => $key.'-'.$id,
+			'type'  => 'html',
 			'default'  => $default
 			);
 			break;	
@@ -718,7 +549,7 @@ function lp_render_global_settings($key,$custom_fields,$active_tab)
 							$i++;
 						}
 						echo "</table>";
-						echo '<br><div class="lp_tooltip tool_checkbox" title="'.$field['desc'].'"></div><p class="description">'.$field['desc'].'</p>';
+						echo '<br><div class="lp_tooltip tool_checkbox" title="'.$field['desc'].'"></div>';
 					break;
 					// radio
 					case 'radio':
@@ -737,6 +568,11 @@ function lp_render_global_settings($key,$custom_fields,$active_tab)
 							echo '<option', $option == $value ? ' selected="selected"' : '', ' value="'.$value.'">'.$label.'</option>';
 						}
 						echo '</select><br /><div class="lp_tooltip tool_dropdown" title="'.$field['desc'].'"></div>';
+					break;
+					case 'html':
+						//print_r($field);
+						echo $option;
+						echo '<br /><div class="lp_tooltip tool_dropdown" title="'.$field['desc'].'"></div>';
 					break;
 					
 
@@ -894,9 +730,14 @@ function lp_in_admin_header()
 }
 
 
-/****************** AB TESTING FUNCTIONS *********************************************************************/
+/* AB TESTING FUNCTIONS */
 
-
+/**
+ * [lp_ab_unset_variation description]
+ * @param  [type] $variations [description]
+ * @param  [type] $vid        [description]
+ * @return [type]             [description]
+ */
 function lp_ab_unset_variation($variations,$vid)
 {
 	if(($key = array_search($vid, $variations)) !== false) {
@@ -906,7 +747,12 @@ function lp_ab_unset_variation($variations,$vid)
 	return $variations;
 }
 
-
+/**
+ * [lp_ab_get_lp_active_status returns if landing page is in rotation or not]
+ * @param  [type] $post [description]
+ * @param  [type] $vid  [description]
+ * @return [type]       1 or 0
+ */
 function lp_ab_get_lp_active_status($post,$vid=null)
 {
 	if ($vid==0)

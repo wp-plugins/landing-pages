@@ -19,7 +19,6 @@ if (have_posts()) : while (have_posts()) : the_post();
     
     /* Pre-load meta data into variables */
     
-    
     $content_color = lp_get_value($post, $key, 'content-color'); 
     $body_color = lp_get_value($post, $key, 'body-color');
     $sidebar_color = lp_get_value($post, $key, 'sidebar-color'); 
@@ -32,31 +31,22 @@ if (have_posts()) : while (have_posts()) : the_post();
     $submit_button_color = lp_get_value($post, $key, 'submit-button-color'); 
 	//prepare content
 	$content = lp_content_area($post,null,true);
+    // Get Colorscheme
+    $submit_color_scheme = inbound_color_scheme($submit_button_color, 'int');
+   
+    // Get lighter submit color
+    $top_grad_submit = inbound_color($submit_color_scheme, 35);
+
+    $RBG_array = inbound_Hex_2_RGB($submit_button_color);
+    $red = $RBG_array['r'];
+    $green = $RBG_array["g"];
+    $blue = $RBG_array["b"];
     
-// Convert Hex to RGB Value for submit button
-function Hex_2_RGB($hex) {
-        $hex = ereg_replace("#", "", $hex);
-        $color = array();
- 
-        if(strlen($hex) == 3) {
-            $color['r'] = hexdec(substr($hex, 0, 1) . $r);
-            $color['g'] = hexdec(substr($hex, 1, 1) . $g);
-            $color['b'] = hexdec(substr($hex, 2, 1) . $b);
-        }
-        else if(strlen($hex) == 6) {
-            $color['r'] = hexdec(substr($hex, 0, 2));
-            $color['g'] = hexdec(substr($hex, 2, 2));
-            $color['b'] = hexdec(substr($hex, 4, 2));
-        }
- 
-        return $color;
-        
-}
-$RBG_array = Hex_2_RGB($submit_button_color);
-$red = $RBG_array['r'];
-$green = $RBG_array["g"];
-$blue = $RBG_array["b"]; 
-    
+    $RBG_array_1 = inbound_Hex_2_RGB($top_grad_submit);
+    $red_1 = $RBG_array_1['r'];
+    $green_1 = $RBG_array_1["g"];
+    $blue_1 = $RBG_array_1["b"];
+
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en-US"><head profile="http://gmpg.org/xfn/11"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -91,12 +81,12 @@ $blue = $RBG_array["b"];
         ?>
          <?php if ($submit_button_color != "") {
           echo"input[type='submit'] {
-               background: -moz-linear-gradient(rgba($red,$green,$blue, 0.5), rgba($red,$green,$blue, 0.7));
-               background: -ms-linear-gradient(rgba($red,$green,$blue, 0.5), rgba($red,$green,$blue, 0.7));
-               background: -o-linear-gradient(rgba($red,$green,$blue, 0.5), rgba($red,$green,$blue, 0.7));
-               background: -webkit-gradient(linear, 0 0, 0 100%, from(rgba($red,$green,$blue, 0.5)), to(rgba($red,$green,$blue, 0.7)));
-               background: -webkit-linear-gradient(rgba($red,$green,$blue, 0.5), rgba($red,$green,$blue, 0.7));
-               background: linear-gradient(rgba($red,$green,$blue, 0.5), rgba($red,$green,$blue, 0.7));
+               background: -moz-linear-gradient(rgba($red_1,$green_1,$blue_1, 0.5), rgba($red,$green,$blue, 0.7));
+               background: -ms-linear-gradient(rgba($red_1,$green_1,$blue_1, 0.5), rgba($red,$green,$blue, 0.7));
+               background: -o-linear-gradient(rgba($red_1,$green_1,$blue_1, 0.5), rgba($red,$green,$blue, 0.7));
+               background: -webkit-gradient(linear, 0 0, 0 100%, from(rgba($red_1,$green_1,$blue_1, 0.5)), to(rgba($red,$green,$blue, 0.7)));
+               background: -webkit-linear-gradient(rgba($red_1,$green_1,$blue_1, 0.5), rgba($red,$green,$blue, 0.7));
+               background: linear-gradient(rgba($red_1,$green_1,$blue_1, 0.5), rgba($red,$green,$blue, 0.7));
                 border: 1px solid #000;}";
            }
         ?> 

@@ -1,4 +1,83 @@
 <?php
+// Added Demo Landing on Install
+add_action('init', 'inbound_create_default_post_type');
+function inbound_create_default_post_type(){
+    // NEED to insert custom meta as well
+    $option_name = "lp_settings_generalxxx";
+    $option_key = "default_landing_pagexxx";
+    $current_user = wp_get_current_user();
+    add_option( $option_name, '' );
+    //delete_option( 'lp_settings_general' );
+    $lp_default_options = get_option($option_name);
+    // Create Default if it doesn't exist
+    if ( ! isset( $lp_default_options[$option_key] ) ) {
+        $default_lander = wp_insert_post(
+                array(
+                    'post_title'     => 'A/B Testing Landing Page Example',
+                    'post_content'   => '<p>This is the first paragraph of your landing page where you want to draw the viewer in and quickly explain your value proposition.</p><p><strong>Use Bullet Points to:</strong><ul><li>Explain why they should fill out the form</li><li>What they will learn if they download</li><li>A problem this form will solve for them</li></ul></p><p>Short ending paragraph reiterating the value behind the form</p>',
+                    'post_status'    => 'publish',
+                    'post_author'    => $current_user->ID,
+                    'post_type'      => 'landing-page',
+                    'comment_status' => 'closed'
+                )
+            ); 
+        // Variation A
+        add_post_meta($default_lander, 'lp-main-headline', 'Main Catchy Headline (A)');
+        add_post_meta($default_lander, 'lp-selected-template', 'svtle');
+        add_post_meta($default_lander, 'lp-conversion-area', '<h2>Form A</h2><form action="" method="post">First Name: <input name="first-name" type="text" /><br>Last Name: <input name="last-name" type="text" /><br>Email:<input name="email" type="text" /><br><input name="submit" type="submit" value="Submit" /></form>');
+        // Varaition B
+        add_post_meta($default_lander, 'lp-main-headline-1', 'Main Catchy Headline Two (B)');
+        add_post_meta($default_lander, 'lp-selected-template-1', 'svtle');
+        add_post_meta($default_lander, 'landing-page-myeditor-1', '<h2>Form B</h2><form action="" method="post">First Name: <input name="first-name" type="text" /><br>Last Name: <input name="last-name" type="text" /><br>Email:<input name="email" type="text" /><br><input name="submit" type="submit" value="Submit" /></form>');
+        add_post_meta($default_lander, 'content-1', '<p>(Version B) This is the first paragraph of your landing page where you want to draw the viewer in and quickly explain your value proposition.</p><p><strong>Use Bullet Points to:</strong><ul><li>Explain why they should fill out the form</li><li>What they will learn if they download</li><li>A problem this form will solve for them</li></ul></p><p>Short ending paragraph reiterating the value behind the form</p>');
+        
+        // Add A/B Testing meta
+        add_post_meta($default_lander, 'lp-ab-variations', '0,1');
+        add_post_meta($default_lander, 'lp-ab-variation-impressions-0', 30);
+        add_post_meta($default_lander, 'lp-ab-variation-impressions-1', 35);
+        add_post_meta($default_lander, 'lp-ab-variation-conversions-0', 10);
+        add_post_meta($default_lander, 'lp-ab-variation-conversions-1', 15);
+        // Add template meta A
+        add_post_meta($default_lander, 'svtle-submit-button-color', '5baa1e');
+        add_post_meta($default_lander, 'svtle-display-social', '0');
+        add_post_meta($default_lander, 'svtle-logo', '/wp-content/plugins/landing-pages/templates/svtle/assets/images/inbound-logo.png');
+        add_post_meta($default_lander, 'svtle-body-color', 'ffffff');
+        add_post_meta($default_lander, 'svtle-sidebar', 'left');
+        add_post_meta($default_lander, 'svtle-page-text-color', '4d4d4d');
+        add_post_meta($default_lander, 'svtle-sidebar-color', 'ffffff');
+        add_post_meta($default_lander, 'svtle-sidebar-text-color', '000000');
+        add_post_meta($default_lander, 'svtle-header-color', 'ffffff');
+        // Add template meta B
+        add_post_meta($default_lander, 'svtle-submit-button-color-1', 'ff0c00');
+        add_post_meta($default_lander, 'svtle-display-social-1', '0');
+        add_post_meta($default_lander, 'svtle-logo-1', '/wp-content/plugins/landing-pages/templates/svtle/assets/images/inbound-logo.png');
+        add_post_meta($default_lander, 'svtle-body-color-1', '51b0ef');
+        add_post_meta($default_lander, 'svtle-sidebar-1', 'left');
+        add_post_meta($default_lander, 'svtle-page-text-color-1', '000000');
+        add_post_meta($default_lander, 'svtle-sidebar-color-1', '51b0ef');
+        add_post_meta($default_lander, 'svtle-sidebar-text-color-1', '000000');
+        add_post_meta($default_lander, 'svtle-header-color-1', '51b0ef');
+
+        // Store our page IDs
+        $options = array(
+            $option_key => $default_lander
+        );
+
+        update_option( $option_name, $options );        
+    }
+}
+
+/**
+ * Debug Activation errors */
+//update_option('plugin_error',  ''); //clear
+/*
+add_action('activated_plugin','activation_save_error');
+
+function activation_save_error(){
+    update_option('plugin_error',  ob_get_contents());
+}*/
+//echo "Errors:" . get_option('plugin_error');
+
 /**
  * Include the TGM_Plugin_Activation class.
  */

@@ -30,7 +30,7 @@ body {
 	
 #content {margin: auto; width:800px; padding:20px;}
 #main-content-area {padding-left: 0px;}
-
+form {font-family: Sans-Serif;}
 .btn.large {
 font-size: 16px;
 line-height: normal;

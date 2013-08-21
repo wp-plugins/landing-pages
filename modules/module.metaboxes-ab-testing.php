@@ -170,6 +170,10 @@ function lp_ab_testing_add_tabs()
 	if ($post_type_is === "landing-page") 
 	{
 		$current_variation_id = lp_ab_testing_get_current_variation_id();
+		if (isset($_GET['new_meta_key']))
+			$current_variation_id = $_GET['new_meta_key'];
+			
+		echo "<input type='hidden' id='open_variation' value='{$current_variation_id}'>";
 		
 		$variations = get_post_meta($post->ID,'lp-ab-variations', true);
 		$array_variations = explode(',',$variations);

@@ -1,20 +1,22 @@
 jQuery(document).ready(function ($) {
-jQuery('#templates-container').isotope();
+
+	jQuery('#templates-container').isotope();
               
-        // filter items when filter link is clicked
-        jQuery('#template-filter a').click(function(){      
-          var selector = jQuery(this).attr('data-filter');
-          //alert(selector);
-          jQuery('#templates-container').isotope({ filter: selector });
-          return false;
-        });
-  /* Ajax loading tabs
-     jQuery.koolSwap({
-       swapBox : '#poststuff',
-       outDuration : 550,
-        inDuration : 600,
-    });
-    */
+	// filter items when filter link is clicked
+	jQuery('#template-filter a').click(function(){      
+	  var selector = jQuery(this).attr('data-filter');
+	  //alert(selector);
+	  jQuery('#templates-container').isotope({ filter: selector });
+	  return false;
+	});
+	/* Ajax loading tabs
+		jQuery.koolSwap({
+			swapBox : '#poststuff',
+			outDuration : 550,
+			inDuration : 600,
+	});
+	*/
+	
     /* Tour Start JS */
     var tourbutton = '<a class="" id="lp-tour" style="font-size:13px;">Need help? Take the tour</a>';
     jQuery(tourbutton).appendTo("h2:eq(0)");
@@ -29,7 +31,7 @@ jQuery('#templates-container').isotope();
 
     });
    
-     var current_a_tab = jQuery("#tabs-0").hasClass('nav-tab-special-active');
+    var current_a_tab = jQuery("#tabs-0").hasClass('nav-tab-special-active');
     if (current_a_tab === true){
         var url_norm = jQuery("#view-post-btn a").attr('href');
         var new_url = url_norm + "?lp-variation-id=0";
@@ -39,10 +41,10 @@ jQuery('#templates-container').isotope();
     // Fix inactivate theme display
     jQuery("#template-box a").live('click', function () {
 
-    setTimeout(function() {
-     jQuery('#TB_window iframe').contents().find("#customize-controls").hide();
-        jQuery('#TB_window iframe').contents().find(".wp-full-overlay.expanded").css("margin-left", "0px");
-    }, 600);
+		setTimeout(function() {
+			jQuery('#TB_window iframe').contents().find("#customize-controls").hide();
+				jQuery('#TB_window iframe').contents().find(".wp-full-overlay.expanded").css("margin-left", "0px");
+		}, 600);
      
     });
     
@@ -114,22 +116,71 @@ jQuery('#templates-container').isotope();
     jQuery('.lp_select_template').click(function(){
         var template = jQuery(this).attr('id');
         var label = jQuery(this).attr('label');
-        jQuery("#template-box.default_template_highlight").removeClass("default_template_highlight");
-        var selected_template_id = "#" + template;
-        var currentlabel = jQuery(".currently_selected").show();
+		var selected_template_id = "#" + template;
+		var currentlabel = jQuery(".currently_selected").show();
+		var current_template = jQuery("input#lp_select_template ").val();
+        var current_template_meta = "#lp_" + current_template + "_custom_meta_box";
+        var current_template_h3 = "#lp_" + current_template + "_custom_meta_box h3";
+        var current_template_div = "#lp_" + current_template + "_custom_meta_box .handlediv";
+        var open_variation = jQuery("#open_variation").val();
+
+		if (open_variation>0)
+		{
+			var variation_tag = "-"+open_variation;
+		}
+		else
+		{
+			var variation_tag = "";
+		}
+       
+	    jQuery("#template-box.default_template_highlight").removeClass("default_template_highlight");   
+        
         jQuery(selected_template_id).parent().addClass("default_template_highlight").prepend(currentlabel);
-        jQuery(".lp-template-selector-container").fadeOut(500,function(){
+       
+	    jQuery(".lp-template-selector-container").fadeOut(500,function(){
+			jQuery('#lp_metabox_select_template input').remove();
+			jQuery('#lp_metabox_select_template .form-table').remove(); 
+						
+			var ajax_data = {
+				action: 'lp_get_template_meta',
+				selected_template: template,
+				post_id: lp_post_edit_ui.post_id,
+			};	
+	
+			jQuery.ajax({
+					type: "POST",
+					url: lp_post_edit_ui.ajaxurl,
+					data: ajax_data,
+					dataType: 'html',
+					timeout: 7000,
+					success: function (response) {		
+						//alert(response);
+						var html = '<input id="lp_select_template" type="hidden" value="'+template+'" name="lp-selected-template'+variation_tag+'">'
+								 + '<input type="hidden" value="'+lp_post_edit_ui.lp_template_nonce+'" name="lp_lp_custom_fields_nonce">'
+								 + '<h3 class="hndle" style="background: none repeat scroll 0% 0% rgb(248, 248, 248); cursor: default;">'
+								 + '<span>'
+								 + '<small>'+ template +' Options:</small>'
+								 +	'</span>'
+								 +	'</h3>'
+								 + response;									
+						
+						jQuery('#lp_metabox_select_template #template-display-options').html(html);
+						jQuery('.time-picker').timepicker({ 'timeFormat': 'H:i' });						
+						
+					},
+					error: function(request, status, err) {					
+						alert(status);
+					}
+				});
             jQuery(".wrap").fadeIn(500, function(){
             });
         });
+		
         jQuery(current_template_meta).appendTo("#template-display-options");
         jQuery('#lp_metabox_select_template h3').first().html('Current Active Template: '+label);
         jQuery('#lp_select_template').val(template);
         jQuery(".Old-Template").hide();
-        var current_template = jQuery("input#lp_select_template ").val();
-        var current_template_meta = "#lp_" + current_template + "_custom_meta_box";
-        var current_template_h3 = "#lp_" + current_template + "_custom_meta_box h3";
-        var current_template_div = "#lp_" + current_template + "_custom_meta_box .handlediv";
+      
         jQuery(current_template_div).css("display","none");
         jQuery(current_template_h3).css("background","#f8f8f8");
         jQuery(current_template_meta).show().appendTo("#template-display-options").removeClass("postbox").addClass("Old-Template");
@@ -156,36 +207,41 @@ jQuery('#templates-container').isotope();
     });
     
     // Colorpicker fix
-    jQuery('.jpicker').one('mouseenter', function () {
-        jQuery(this).jPicker({
-            window: // used to define the position of the popup window only useful in binded mode
-            {
-                title: null, // any title for the jPicker window itself - displays "Drag Markers To Pick A Color" if left null
-                position: {
-                    x: 'screenCenter', // acceptable values "left", "center", "right", "screenCenter", or relative px value
-                    y: 'center', // acceptable values "top", "bottom", "center", or relative px value
-                },
-                expandable: false, // default to large static picker - set to true to make an expandable picker (small icon with popup) - set
-                // automatically when binded to input element
-                liveUpdate: true, // set false if you want the user to click "OK" before the binded input box updates values (always "true"
-                // for expandable picker)
-                alphaSupport: false, // set to true to enable alpha picking
-                alphaPrecision: 0, // set decimal precision for alpha percentage display - hex codes do not map directly to percentage
-                // integers - range 0-2
-                updateInputColor: true // set to false to prevent binded input colors from changing
-            }
-        },
-        function(color, context)
-        {
-          var all = color.val('all');
-         // alert('Color chosen - hex: ' + (all && '#' + all.hex || 'none') + ' - alpha: ' + (all && all.a + '%' || 'none'));
-           //jQuery(this).attr('rel', all.hex);
-           jQuery(this).parent().find(".lp-success-message").remove();
-           jQuery(this).parent().find(".new-save-lp").show();
-           jQuery(this).parent().find(".new-save-lp-frontend").show();
+    jQuery(document).on('mouseenter', '.jpicker', function (e) {
+		if(jQuery(e.target).data('mouseovered')!='yes')
+		{
+  
+			jQuery(this).jPicker({
+				window: // used to define the position of the popup window only useful in binded mode
+				{
+					title: null, // any title for the jPicker window itself - displays "Drag Markers To Pick A Color" if left null
+					position: {
+						x: 'screenCenter', // acceptable values "left", "center", "right", "screenCenter", or relative px value
+						y: 'center', // acceptable values "top", "bottom", "center", or relative px value
+					},
+					expandable: false, // default to large static picker - set to true to make an expandable picker (small icon with popup) - set
+					// automatically when binded to input element
+					liveUpdate: true, // set false if you want the user to click "OK" before the binded input box updates values (always "true"
+					// for expandable picker)
+					alphaSupport: false, // set to true to enable alpha picking
+					alphaPrecision: 0, // set decimal precision for alpha percentage display - hex codes do not map directly to percentage
+					// integers - range 0-2
+					updateInputColor: true // set to false to prevent binded input colors from changing
+				}
+			},
+			function(color, context)
+			{
+			  var all = color.val('all');
+			 // alert('Color chosen - hex: ' + (all && '#' + all.hex || 'none') + ' - alpha: ' + (all && all.a + '%' || 'none'));
+			   //jQuery(this).attr('rel', all.hex);
+			   jQuery(this).parent().find(".lp-success-message").remove();
+			   jQuery(this).parent().find(".new-save-lp").show();
+			   jQuery(this).parent().find(".new-save-lp-frontend").show();
 
-           //jQuery(this).attr('value', all.hex);
-        });
+			   //jQuery(this).attr('value', all.hex);
+			});
+			jQuery(e.target).data('mouseovered','yes');
+		}		
     });
 
     if (jQuery(".lp-template-selector-container").css("display") == "none"){
@@ -306,7 +362,7 @@ jQuery('#templates-container').isotope();
         jQuery(ajax_save_button).appendTo(parent_el);
     });
 
-        jQuery('#main-title-area input').on("change keyup", function (e) {
+    jQuery('#main-title-area input').on("change keyup", function (e) {
         // iframe content change needs its own change function $("#iFrame").contents().find("#someDiv")
         // media uploader needs its own change function
         var this_id = jQuery(this).attr("id");
@@ -323,81 +379,5 @@ jQuery('#templates-container').isotope();
     });
 
 
-    var nonce_val = lp_post_edit_ui.wp_landing_page_meta_nonce; // NEED CORRECT NONCE
-    jQuery("body").on('click', '.new-save-lp', function () {
-        var type_input = jQuery(this).parent().find("input").attr("type");
-        var type_select = jQuery(this).parent().find("select");
-        jQuery(this).parent().find(".lp-success-message").hide();
-        var type_textarea = jQuery(this).parent().find("textarea");
-        if (typeof (type_input) != "undefined" && type_input !== null) {
-            var type_of_field = type_input;
-        } else if (typeof (type_textarea) != "undefined" && type_textarea !== null) {
-            var type_of_field = 'textarea';
-        } else {
-            (typeof (type_select) != "undefined" && type_select)
-            var type_of_field = 'select';
-        }
-
-        console.log(type_of_field);
-        var new_value_meta_input = jQuery(this).parent().find("input").val();
-        // console.log(new_value_meta_input); 
-        var new_value_meta_select = jQuery(this).parent().find("select").val();
-        var new_value_meta_textarea = jQuery(this).parent().find("textarea").val();
-        //console.log(new_value_meta_select); 
-        var new_value_meta_radio = jQuery(this).parent().find("input:checked").val();
-        var new_value_meta_checkbox = jQuery(this).parent().find('input[type="checkbox"]:checked').val();
-
-        // prep data
-        if (typeof (new_value_meta_input) != "undefined" && new_value_meta_input !== null && type_of_field == "text") {
-            var meta_to_save = new_value_meta_input;
-        } else if (typeof (new_value_meta_textarea) != "undefined" && new_value_meta_textarea !== null && type_of_field == "textarea") {
-            var meta_to_save = new_value_meta_textarea;
-        } else if (typeof (new_value_meta_select) != "undefined" && new_value_meta_select !== null) {
-            var meta_to_save = new_value_meta_select;
-        } else if (typeof (new_value_meta_radio) != "undefined" && new_value_meta_radio !== null && type_of_field == "radio") {
-            var meta_to_save = new_value_meta_radio;
-        } else if (typeof (new_value_meta_checkbox) != "undefined" && new_value_meta_checkbox !== null && type_of_field == "checkbox") {
-            var meta_to_save = new_value_meta_checkbox;
-        } else {
-            var meta_to_save = "";
-        }
-
-        // if data exists save it
-        var this_meta_id = jQuery(this).attr("id");
-        var post_id = jQuery("#post_ID").val();
-
-        jQuery.ajax({
-            type: 'POST',
-            url: lp_post_edit_ui.ajaxurl,
-            context: this,
-            data: {
-                action: 'wp_landing_page_meta_save',
-                meta_id: this_meta_id,
-                new_meta_val: meta_to_save,
-                page_id: post_id,
-                nonce: nonce_val
-            },
-
-            success: function (data) {
-                var self = this;
-
-                //alert(data);
-                // jQuery('.lp-form').unbind('submit').submit();
-                //var worked = '<span class="success-message-map">Success! ' + this_meta_id + ' set to ' + meta_to_save + '</span>';
-                var worked = '<span class="lp-success-message">Updated!</span>';
-                var s_message = jQuery(self).parent();
-                jQuery(worked).appendTo(s_message);
-                jQuery(self).hide();
-                jQuery("#switch-lp").text("0");
-                //alert("Changes Saved!");
-            },
-
-            error: function (MLHttpRequest, textStatus, errorThrown) {
-                alert("Ajax not enabled");
-            }
-        });
-
-        return false;
-        
-    });
+    
 });

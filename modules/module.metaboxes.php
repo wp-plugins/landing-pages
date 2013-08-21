@@ -52,103 +52,86 @@ function lp_thumbnail_metabox() {
 	<?php
 }		
 
-/* old Split testing. Phased out for new
-add_action('add_meta_boxes', 'lp_display_split_testing_metabox');
-function lp_display_split_testing_metabox() {
-		add_meta_box( 
-		'lp-metabox-splittesting', 
-		__( 'Split Testing', 'lp_metabox_split_testing_options' ),
-		'lp_split_testing_metabox',
-		'landing-page' , 
-		'side', 
-		'low' );
-}
-function lp_split_testing_metabox() {
-	global $post;
-     
-        echo "<p style='font-weight:normal;'><strong>Please Note</strong> that this version 1 way of running Landing Page split tests will be phases out of the plugin soon.<br><br> Please use the <strong>new and improved A/B testing functionality</strong> located in the tabs above.";
-        echo "<br><br><a href=\"#\" onClick=\"window.open('http://www.youtube.com/embed/KJ_EDJAvv9Y?autoplay=1','landing-page','width=640,height=480,toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,copyhistory=no,resizable=no')\">Watch Video Explanation</a></p>";
-	echo '<p>
-	<a name="lpsplittest" title="Landing Pages: Split Testing Options" id="lpopensplittestoptions" class="button-secondary thickbox" href="' . 	LANDINGPAGES_URLPATH.'modules/module.split-testing-splash.php?post_id=' . $post->ID . '&height=400&width=600&TB_iframe=true">Manage Split Testing</a> 
-	<a name="lp-st-clone" title="Clone page and add it to the same split testing group" id="lp-st-clone-page-groupss" rel="'.$post->ID.'"  class="button-secondary thickbox"  href="' . 	LANDINGPAGES_URLPATH.'modules/module.split-testing-splash.php?post_id=' . $post->ID . '&clone=1&TB_iframe=true&height=400&width=600">Clone This Page</a>
-	</p>';
-	
-}	*/	
-
 /* ADD CONVERSION AREA METABOX */
+
+add_action('add_meta_boxes', 'lp_display_meta_box_lp_conversion_area');
 function lp_display_meta_box_lp_conversion_area(){
-		add_meta_box( WYSIWYG_META_BOX_ID, __('Landing Page Form or Conversion Button', 'wysiwyg'), 'lp_meta_box_conversion_area', 'landing-page', 'normal', 'high' );
-//add_meta_box( $id, $title, $callback, $post_type, $context, $priority, $callback_args );
+	add_meta_box( WYSIWYG_META_BOX_ID, __('Landing Page Form or Conversion Button', 'wysiwyg'), 'lp_meta_box_conversion_area', 'landing-page', 'normal', 'high' );
+	//add_meta_box( $id, $title, $callback, $post_type, $context, $priority, $callback_args );
 }
 
 function lp_meta_box_conversion_area(){
 
-		global $post;
+	global $post;
 
-		$meta_box_id = WYSIWYG_META_BOX_ID;
-		$editor_id = WYSIWYG_EDITOR_ID;
+	$meta_box_id = WYSIWYG_META_BOX_ID;
+	$editor_id = WYSIWYG_EDITOR_ID;
 
-		//Add CSS & jQuery goodness to make this work like the original WYSIWYG
-		echo "
-				<style type='text/css'>
-						#$meta_box_id #edButtonHTML, #$meta_box_id #edButtonPreview {background-color: #F1F1F1; border-color: #DFDFDF #DFDFDF #CCC; color: #999;}
-						#$editor_id{width:100%;}
-						#$meta_box_id #editorcontainer{background:#fff !important;}
-						#$meta_box_id #editor_id_fullscreen{display:none;}
-				</style>
+	//Add CSS & jQuery goodness to make this work like the original WYSIWYG
+	echo "
+			<style type='text/css'>
+					#$meta_box_id #edButtonHTML, #$meta_box_id #edButtonPreview {background-color: #F1F1F1; border-color: #DFDFDF #DFDFDF #CCC; color: #999;}
+					#$editor_id{width:100%;}
+					#$meta_box_id #editorcontainer{background:#fff !important;}
+					#$meta_box_id #editor_id_fullscreen{display:none;}
+			</style>
 
-				<script type='text/javascript'>
-						jQuery(function($){
-								$('#$meta_box_id #editor-toolbar > a').click(function(){
-										$('#$meta_box_id #editor-toolbar > a').removeClass('active');
-										$(this).addClass('active');
-								});
+			<script type='text/javascript'>
+					jQuery(function($){
+							$('#$meta_box_id #editor-toolbar > a').click(function(){
+									$('#$meta_box_id #editor-toolbar > a').removeClass('active');
+									$(this).addClass('active');
+							});
 
-								if($('#$meta_box_id #edButtonPreview').hasClass('active')){
-										$('#$meta_box_id #ed_toolbar').hide();
-								}
+							if($('#$meta_box_id #edButtonPreview').hasClass('active')){
+									$('#$meta_box_id #ed_toolbar').hide();
+							}
 
-								$('#$meta_box_id #edButtonPreview').click(function(){
-										$('#$meta_box_id #ed_toolbar').hide();
-								});
+							$('#$meta_box_id #edButtonPreview').click(function(){
+									$('#$meta_box_id #ed_toolbar').hide();
+							});
 
-								$('#$meta_box_id #edButtonHTML').click(function(){
-										$('#$meta_box_id #ed_toolbar').show();
-								});
+							$('#$meta_box_id #edButtonHTML').click(function(){
+									$('#$meta_box_id #ed_toolbar').show();
+							});
 
-				//Tell the uploader to insert content into the correct WYSIWYG editor
-				$('#media-buttons a').bind('click', function(){
-					var customEditor = $(this).parents('#$meta_box_id');
-					if(customEditor.length > 0){
-						edCanvas = document.getElementById('$editor_id');
-					}
-					else{
-						edCanvas = document.getElementById('content');
-					}
-				});
-						});
-				</script>
-		";
-		
-		//Create The Editor
-		$content = get_post_meta($post->ID, WYSIWYG_META_KEY, true);
-		wp_editor($content, $editor_id);
+			//Tell the uploader to insert content into the correct WYSIWYG editor
+			$('#media-buttons a').bind('click', function(){
+				var customEditor = $(this).parents('#$meta_box_id');
+				if(customEditor.length > 0){
+					edCanvas = document.getElementById('$editor_id');
+				}
+				else{
+					edCanvas = document.getElementById('content');
+				}
+			});
+					});
+			</script>
+	";
+	
+	//Create The Editor
+	//$content = get_post_meta($post->ID, WYSIWYG_META_KEY, true);
+	//echo get_post_meta($post->ID,'landing-page-myeditor-1',true);exit;
+	$conversion_area = lp_conversion_area(null,null,true,false,false);
+	wp_editor($conversion_area, $editor_id);
 
-		//Clear The Room!
-		echo "<div style='clear:both; display:block;'></div>";
-		echo "<div style='width:100%;text-align:right;margin-top:11px;'><div class='lp_tooltip'  title=\"To help track conversions Landing Pages Plugin will automatically add class='lp-track-form' to the first form element found in the conversion area. If there is no form element then it will automatically add class='lp-track-link' to the first link found in the conversion area. To track additional links and form elements the above class names may have to be added to elements manually.\" ></div></div>";
+	//Clear The Room!
+	echo "<div style='clear:both; display:block;'></div>";
+	echo "<div style='width:100%;text-align:right;margin-top:11px;'><div class='lp_tooltip'  title=\"To help track conversions Landing Pages Plugin will automatically add class='lp-track-form' to the first form element found in the conversion area. If there is no form element then it will automatically add class='lp-track-link' to the first link found in the conversion area. To track additional links and form elements the above class names may have to be added to elements manually.\" ></div></div>";
 		
 }
 
 add_action('save_post', 'lp_wysiwyg_save_meta');
 function lp_wysiwyg_save_meta(){
-
+	//echo 1; exit; 
 	$editor_id = WYSIWYG_EDITOR_ID;
 	$meta_key = WYSIWYG_META_KEY;
 
 	if(isset($_REQUEST[$editor_id]))
 	{
-		update_post_meta($_REQUEST['post_ID'], WYSIWYG_META_KEY, $_REQUEST[$editor_id]);
+		$data = wpautop($_REQUEST[$editor_id]);
+		//echo "<pre>$data</pre>";exit;
+		update_post_meta($_REQUEST['post_ID'], WYSIWYG_META_KEY, $data);
 	}
 }
 
@@ -159,7 +142,7 @@ add_action( 'save_post', 'lp_save_notes_area' );
 
 function lp_landing_page_header_area()
 {
-   global $post;
+	global $post;
 	$lp_variation = (isset($_GET['lp-variation-id'])) ? $_GET['lp-variation-id'] : '0';
 	$main_title = get_post_meta( $post->ID , 'lp-main-headline', true );
 	$varaition_notes = get_post_meta( $post->ID , 'lp-variation-notes', true );
@@ -170,7 +153,7 @@ function lp_landing_page_header_area()
         $main_title = '';
 
     if ( ! $varaition_notes = get_post_meta( $post->ID , 'lp-variation-notes',true ) )
-        $varaition_notes = '';
+    $varaition_notes = '';
 	$main_title = apply_filters('lp_edit_main_headline', $main_title, 1);
 	$varaition_notes = apply_filters('lp_edit_varaition_notes', $varaition_notes, 1);
 		echo "<div id='lp-notes-area'>";
@@ -225,7 +208,8 @@ function lp_change_enter_title_text( $text, $post ) {
 	}
 }  
 
-// Add template select metabox
+
+add_action('add_meta_boxes', 'add_custom_meta_box_select_templates');
 function add_custom_meta_box_select_templates() { 
 	
 	add_meta_box(
@@ -262,14 +246,17 @@ add_action('admin_notices', 'lp_display_meta_box_select_template_container');
 
 // Render select template box
 function lp_display_meta_box_select_template_container() {
-	global $lp_data, $post,  $template_data_cats, $current_url;
+	global $post, $current_url;
 	
 	if (isset($post)&&$post->post_type!='landing-page'||!isset($post)){ return false; }
 	
 	( !strstr( $current_url, 'post-new.php')) ?  $toggle = "display:none" : $toggle = "";
 	
-	$template_data = lp_get_template_data();
-	unset($template_data['lp']);
+	
+	$extension_data = lp_get_extension_data();
+	$extension_data_cats = lp_get_extension_data_cats($extension_data);
+	
+	unset($extension_data['lp']);
 
 	$uploads = wp_upload_dir();
 	$uploads_path = $uploads['basedir'];
@@ -286,7 +273,7 @@ function lp_display_meta_box_select_template_container() {
 		echo '<ul id="template-filter" >';
 			echo '<li><a href="#" data-filter="*">All</a></li>';
 			$categories = array();
-			foreach ($template_data_cats as $cat)
+			foreach ($extension_data_cats as $cat)
 			{
 				
 				$slug = str_replace(' ','-',$cat['value']);
@@ -302,11 +289,11 @@ function lp_display_meta_box_select_template_container() {
 		echo "</ul>";
 		echo '<div id="templates-container" >';
 		
-		foreach ($template_data as $this_template=>$data)
+		foreach ($extension_data as $this_extension=>$data)
 		{
 			 
 
-			if (substr($this_template,0,4)=='ext-')
+			if (substr($this_extension,0,4)=='ext-')
 			{
 				continue;
 			}		
@@ -316,15 +303,15 @@ function lp_display_meta_box_select_template_container() {
 			// get demo link
 			if (isset($data['features'][0]['url'])) 
 				$demolink = $data['features'][0]['url'] . "?TB_iframe=true&width=1024&height=800"; // grab demo link
-			else if ($this_template=='default')
+			else if ($this_extension=='default')
 				$demolink =  get_bloginfo('template_directory')."/screenshot.png";									
 			else
-				$demolink = "/wp-admin/customize.php?theme=" .$this_template. "&TB_iframe=true&width=1024&height=800";
+				$demolink = "/wp-admin/customize.php?theme=" .$this_extension. "&TB_iframe=true&width=1024&height=800";
 			
 			// get template description
 			if (isset($data['features'][1]['label'])) 
 				$template_desc = $data['features'][1]['label']; // grab demo link
-			else if ($this_template=='default')
+			else if ($this_extension=='default')
 				$template_desc =  "This is your primary Wordpress theme that is currently active";								
 			else
 				// $shortname = $data['theme_slug'];
@@ -333,22 +320,22 @@ function lp_display_meta_box_select_template_container() {
 			// Get Thumbnail
 			if (isset($data['thumbnail']))
 				$thumbnail = $data['thumbnail'];
-			else if ($this_template=='default')
+			else if ($this_extension=='default')
 				$thumbnail =  get_bloginfo('template_directory')."/screenshot.png";									
 			else
 			{
-				$thumbnail = LANDINGPAGES_UPLOADS_URLPATH.$this_template."/thumbnail.png";
+				$thumbnail = LANDINGPAGES_UPLOADS_URLPATH.$this_extension."/thumbnail.png";
 			} 
 			?>
 			<div id='template-item' class="<?php echo $cat_slug; ?>">
 				<div id="template-box">
 					<div class="lp_tooltip_templates" title="<?php echo $template_desc; ?>"></div>
-				<a class='lp_select_template' href='#' label='<?php echo $data['label']; ?>' id='<?php echo $this_template; ?>'>
+				<a class='lp_select_template' href='#' label='<?php echo $data['label']; ?>' id='<?php echo $this_extension; ?>'>
 					<img src="<?php echo $thumbnail; ?>" class='template-thumbnail' alt="<?php echo $data['label']; ?>" id='id_<?php echo $data['theme_slug']; ?>'>
 				</a>
 				<p>
 					<div id="template-title"><?php echo $data['label']; ?></div>
-					<a href='#' label='<?php echo $data['label']; ?>' id='<?php echo $this_template; ?>' class='lp_select_template'>Select</a> | 
+					<a href='#' label='<?php echo $data['label']; ?>' id='<?php echo $this_extension; ?>' class='lp_select_template'>Select</a> | 
 					<a class='thickbox <?php echo $cat_slug;?>' href='<?php echo $demolink;?>' id='lp_preview_this_template'>Preview</a> 
 				</p>
 				</div>
@@ -435,7 +422,7 @@ function lp_conversion_log_metabox() {
 	
 	class LP_LEAD_LOG extends WP_List_Table 
 	{
-		private $template_data;
+		private $extension_data;
 		private $singular;
 		private $plural;
 		private $post;
@@ -640,6 +627,178 @@ function lp_conversion_log_metabox() {
 	echo '</div>';
 }
 
-//hook add_meta_box action into custom call fuction 
-//lp_generate_meta is contained in functions.php
+/**
+ * Generate Template & Extension Metaboxes
+ */
+
+
 add_action('add_meta_boxes', 'lp_generate_meta');
+function lp_generate_meta()
+{
+	global $post;
+	if ($post->post_type!='landing-page')
+		return;
+	
+	$extension_data = lp_get_extension_data();	
+	
+	//print_r($extension_data);
+	
+	$current_template = get_post_meta( $post->ID , 'lp-selected-template' , true);
+	$current_template = apply_filters('lp_variation_selected_template',$current_template, $post);
+	
+	//echo $current_template; exit;
+	foreach ($extension_data as $key=>$array)
+	{
+		//echo "$key : $current_template <br>";
+		if ($key!='lp'&&substr($key,0,4)!='ext-' && $key==$current_template)
+		{
+			$template_name = ucwords(str_replace('-',' ',$key));
+			$id = strtolower(str_replace(' ','-',$key));
+			//echo $key."<br>";
+			add_meta_box(
+				"lp_{$id}_custom_meta_box", // $id
+				__( "<small>$template_name Options:</small>", "lp_{$key}_custom_meta" ),
+				'lp_show_metabox', // $callback
+				'landing-page', // post-type
+				'normal', // $context
+				'default',// $priority
+				array('key'=>$key)
+				); //callback args
+		}
+	}
+
+	foreach ($extension_data as $key=>$array)
+	{
+		if (substr($key,0,4)=='ext-')
+		{
+			//echo 1; exit;
+			$id = strtolower(str_replace(' ','-',$key));
+			$name = ucwords(str_replace(array('-','ext '),' ',$key));
+			//echo $key."<br>";
+			add_meta_box(
+				"lp_{$id}_custom_meta_box", // $id
+				__( "$name Extension Options", "lp_{$key}_custom_meta" ),
+				'lp_show_metabox', // $callback
+				'landing-page', // post-type
+				'normal', // $context
+				'default',// $priority
+				array('key'=>$key)
+				); //callback args
+		}
+	}
+	
+}
+
+add_action('save_post', 'lp_save_meta');
+function lp_save_meta($post_id) {
+	global $post;
+
+	$extension_data = lp_get_extension_data();
+	
+	if (!isset($post)||isset($_POST['split_test']))
+		return;
+		
+	if ($post->post_type=='revision')
+	{
+		return;
+	}
+	
+	if ((defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) ||(isset($_POST['post_type'])&&$_POST['post_type']=='revision'))
+	{
+		return;
+	}
+		
+	if ($post->post_type=='landing-page')
+	{
+		//print_r($extension_data);exit;
+		foreach ($extension_data as $key=>$data)
+		{	
+			if ($key=='lp')
+			{
+				// verify nonce
+				if (!wp_verify_nonce($_POST["lp_{$key}_custom_fields_nonce"], 'lp-nonce'))
+				{
+
+					return $post_id;
+				}
+				
+				$lp_custom_fields = $extension_data[$key]['options'];	
+				
+				foreach ($lp_custom_fields as $field)
+				{
+					$old = get_post_meta($post_id, $field['id'], true);				
+					(isset($_POST[$field['id']]))? $new = $_POST[$field['id']] : $new = null;	
+
+					if (isset($new) && $new != $old ) {
+						update_post_meta($post_id, $field['id'], $new);
+					} elseif ('' == $new && $old) {
+						delete_post_meta($post_id, $field['id'], $old);
+					}
+				}
+			}
+			else if (substr($key,0,4)=='ext-')
+			{	
+				
+				$lp_custom_fields = $extension_data[$key]['options'];		
+			
+				// verify nonce
+				if (!wp_verify_nonce($_POST["lp_{$key}_custom_fields_nonce"], 'lp-nonce'))
+				{
+					return $post_id;
+				}
+				
+				// loop through fields and save the data
+				foreach ($lp_custom_fields as $field) {
+				//echo $key.":".$field['id']."<br>";
+
+					if($field['type'] == 'tax_select') continue;
+						$old = get_post_meta($post_id, $field['id'], true);		
+						
+						(isset($_POST[$field['id']]))? $new = $_POST[$field['id']] : $new = null;
+						//echo "$old:".$new."<br>";			
+						
+						if (isset($new) && $new != $old ) {
+							update_post_meta($post_id, $field['id'], $new);
+						} elseif ('' == $new && $old) {
+							delete_post_meta($post_id, $field['id'], $old);
+						}
+				} // end foreach		
+			}
+			else if ((isset($_POST['lp-selected-template'])&&$_POST['lp-selected-template']==$key))
+			{
+				$lp_custom_fields = $extension_data[$key]['options'];
+				//echo "key:$key<br>";
+				//print_r($lp_custom_fields);
+				// loop through fields and save the data
+				foreach ($lp_custom_fields as $field) {
+				//echo $key.":".$field['id']."<br>";
+					
+					if($field['type'] == 'tax_select' || !isset($_POST[$field['id']])) 
+						continue;
+					
+					$old = get_post_meta($post_id, $field['id'], true);				
+					(isset($_POST[$field['id']]))? $new = $_POST[$field['id']] : $new = null;
+					//echo "$old:".$new."<br>";			
+					
+					if (isset($new) && $new != $old ) {
+						update_post_meta($post_id, $field['id'], $new);
+					} elseif ('' == $new && $old) {
+						delete_post_meta($post_id, $field['id'], $old);
+					}
+				} 
+			}
+			else
+			{
+				//echo "key:$key<br>";
+			}
+		}
+		
+		//echo "here";
+		//exit;
+		// save taxonomies
+		$post = get_post($post_id);
+		//$category = $_POST['landing_page_category'];
+		//wp_set_object_terms( $post_id, $category, 'landing_page_category' );
+	}
+}
+

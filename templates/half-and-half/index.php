@@ -30,6 +30,7 @@ if (have_posts()) : while (have_posts()) : the_post();
     $submit_button_color = lp_get_value($post, $key, 'submit-button-color');  
 	$content = lp_content_area(null,null,true);
 
+  
 ?>
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->

@@ -3,33 +3,21 @@
 Plugin Name: Landing Pages
 Plugin URI: http://www.inboundnow.com/landing-pages/
 Description: The first true all-in-one Landing Page solution for WordPress, including ongoing conversion metrics, a/b split testing, unlimited design options and so much more!
-Version: 1.0.9.8
+Version: 1.0.9.9
 Author: David Wells, Hudson Atwell
 Author URI: http://www.inboundnow.com/
 */
 					
-define('LANDINGPAGES_CURRENT_VERSION', '1.0.9.8' );
+define('LANDINGPAGES_CURRENT_VERSION', '1.0.9.9' );
 define('LANDINGPAGES_URLPATH', WP_PLUGIN_URL.'/'.plugin_basename( dirname(__FILE__) ).'/' );
 define('LANDINGPAGES_PATH', WP_PLUGIN_DIR.'/'.plugin_basename( dirname(__FILE__) ).'/' );
 define('LANDINGPAGES_PLUGIN_SLUG', 'landing-pages' );
-define('LANDINGPAGES_STORE_URL', 'http://www.inboundnow.com/landing-pages/' ); 
+define('LANDINGPAGES_STORE_URL', 'http://inboundly.wpengine.com/landing-pages/' ); 
 $uploads = wp_upload_dir();
 define('LANDINGPAGES_UPLOADS_PATH', $uploads['basedir'].'/landing-pages/templates/' ); 
 define('LANDINGPAGES_UPLOADS_URLPATH', $uploads['baseurl'].'/landing-pages/templates/' ); 
+$current_url = "http://".$_SERVER["HTTP_HOST"].$_SERVER["REQUEST_URI"]."";
 
-/**
- * Load Admin Core Files
- */
-if (is_admin())
-{
-if(!isset($_SESSION)){@session_start();}
-include_once('functions/functions.admin.php');
-include_once('modules/module.global-settings.php');
-include_once('modules/module.clone.php');
-include_once('modules/module.extension-updater.php');
-include_once('modules/module.install.php');
-include_once('modules/module.alert.php');
-}
 /**
  * load frontend-only and load global core files
  */
@@ -44,9 +32,23 @@ include_once('modules/module.cookies.php');
 include_once('modules/module.lead-collection.php');
 include_once('modules/module.ab-testing.php');
 
-//include_once('functions/functions.templates.php'); 
+if (is_admin())
+{
+if(!isset($_SESSION)){@session_start();}
+include_once('functions/functions.admin.php');
+include_once('modules/module.global-settings.php');
+include_once('modules/module.clone.php');
+include_once('modules/module.extension-updater.php');
+include_once('modules/module.install.php');
+include_once('modules/module.alert.php');
+}
 
-// Register Landing Pages
+
+	
+/**
+ * REGISTER LANDING PAGES ACTIVATION
+ */
+ 
 register_activation_hook(__FILE__, 'landing_page_activate');
 
 function landing_page_activate()
@@ -56,107 +58,35 @@ function landing_page_activate()
 	add_option( 'lp_global_js', '', '', 'no' );
 	add_option( 'lp_global_record_admin_actions', '1', '', 'no' );
 	add_option( 'lp_global_lp_slug', 'go', '', 'no' );
+	
 	//add_option( 'lp_split_testing_slug', 'group', '', 'no' );
 	update_option( 'lp_activate_rewrite_check', '1');
 	
-	//enable lead management
-	//include_once('modules/module.leads-activate.php');
-	
-	global $wp_rewrite;
-	$wp_rewrite->flush_rules();
-
-	// NEED to insert custom meta as well
-	/* Need to set initial option on first activation
-	$default_lander = wp_insert_post(
-			array(
-				'post_title'     => 'Landing Page Example',
-				'post_content'   => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vitae mauris arcu, eu pretium nisi. Praesent fringilla ornare ullamcorper. Pellentesque diam orci, sodales in blandit ut, placerat quis felis. Vestibulum at sem massa, in tempus nisi. Vivamus ut fermentum odio. Etiam porttitor faucibus volutpat. Vivamus vitae mi ligula, non hendrerit urna. Suspendisse potenti. Quisque eget massa a massa semper mollis.',
-				'post_status'    => 'publish',
-				'post_author'    => 1,
-				'post_type'      => 'landing-page',
-				// 'post_meta' => array("lp-main-headline" => "Main Headline"),
-				'comment_status' => 'closed'
-			)
-		); */
+	//global $wp_rewrite;
+	//$wp_rewrite->flush_rules();
 	
 }
+
 	
-// Prepare Landing Page Templates
+/**
+ * LOAD FUNCTIONS THAT WILL BE USED BY NATIVE TEMPLATES
+ */
+ 
+add_action('lp_init', 'inbound_include_template_functions');
+
+if (!function_exists('inbound_include_template_functions')) {
+	function inbound_include_template_functions(){
+		include_once('shared/functions.templates.php');
+	}
+}
+	
+/**
+ * PREPARE LANDING PAGE TEMPLATE DATA
+ */
+ 
 if (is_admin())
-{
-	//load current url in global variable
-	$current_url = "http://".$_SERVER["HTTP_HOST"].$_SERVER["REQUEST_URI"]."";
-	
-	$template_paths = lp_get_core_template_paths();	
-	
-	//Now load all config.php files with their custom meta data
-	if (count($template_paths)>0)
-	{
-		foreach ($template_paths as $name)
-		{	
-			if ($name != ".svn"){	
-			include_once(LANDINGPAGES_PATH."/templates/$name/config.php");
-			}	
-		}		
-	}
-	
-	$template_paths = lp_get_extended_template_paths();	
-	$uploads = wp_upload_dir();
-	$uploads_path = $uploads['basedir'];
-	//print_r($template_paths);exit;
-	$extended_templates_path = $uploads_path.'/landing-pages/templates/';
-	
-	if (count($template_paths)>0)
-	{
-		foreach ($template_paths as $name)
-		{	
-			include_once($extended_templates_path."$name/config.php");	
-		}		
-	}
-	
-	$template_data = lp_get_template_data();
-	if (isset($template_data))
-	{
-		$template_data_cats = lp_get_template_data_cats($template_data);
-	}
-	
-	
-	$template_paths = lp_get_core_template_paths();	
-	//print_r($template_paths);
-	
-	//Now load all config.php files with their custom meta data
-	if (count($template_paths)>0)
-	{
-		foreach ($template_paths as $name)
-		{	
-			if ($name != ".svn"){	
-			include_once(LANDINGPAGES_PATH."/templates/$name/config.php"); 	
-			}
-		}
-		
-		$template_data = lp_get_template_data();
-		if (isset($template_data))
-		{
-			$template_data_cats = lp_get_template_data_cats($template_data);
-		}
-	}
-	
-	//Select Template
-	//main headline metabox is defined in module-metaboxes.php
-	$lp_data['lp']['options'][] = 	lp_add_option('lp',"radio","selected-template","default","Select Template","This option provides a placeholder for the selected template data", $options=null);
-	
-	//Set Main Headline
-	//main headline metabox is defined in module-metaboxes.php
-	$lp_data['lp']['options'][] =  lp_add_option('lp',"radio","main-headline","","Set Main Headline","Set Main Headline", $options=null);	
-
-	
-	add_action('add_meta_boxes', 'lp_display_meta_box_lp_conversion_area');
-
-	/* ADD FORM WYSIWYG METABOX */
-	//prepare primary meta box that allows user to select templates
-	add_action('add_meta_boxes', 'add_custom_meta_box_select_templates');
-
-	//include additional metaboxes
+{	
+	include_once('load.extensions.php');
 	include_once('modules/module.metaboxes.php');
 }
 
@@ -367,4 +297,32 @@ function lp_custom_template($single) {
 	}
     return $single;
 }
+
+/**
+ * ADD TRACKING SCRIPTS FOR IMPRESSION AND CONVERSION TRACKING
+ */
+
+add_action('wp_footer','lp_register_ajax');
+function lp_register_ajax() {
+	$current_url = "http://".$_SERVER["HTTP_HOST"].$_SERVER["REQUEST_URI"]."/";
+	$current_url = trim(str_replace('//','/',"http://".$_SERVER["HTTP_HOST"].$_SERVER["REQUEST_URI"]."/"));
+	global $post;
+	// if leads on add tracking to all pages
+	if (@function_exists('wpleads_check_active'))
+	{
+		require_once(LANDINGPAGES_PATH . 'js/ajax.tracking.js.php');
+	}
+	else if ($post->post_type=='landing-page')
+	{	
+		require_once(LANDINGPAGES_PATH . 'js/ajax.tracking.js.php');
+	}
+	// embed the javascript file that makes the AJAX request
+	//wp_enqueue_script( 'lp-ajax-request', LANDINGPAGES_URLPATH . 'js/ajax.tracking.js.php', array( 'jquery' ) );
+	//wp_localize_script( 'lp-ajax-request', 'myajax', array( 'ajaxurl' => admin_url('admin-ajax.php'), 'current_url' =>  $current_url, 'standardize_form' =>  $standardize_form ));
+}
+
+/**
+ * LOAD THE TEMLATE CUSTOMIZER MODULE
+ */
+
 include_once('modules/module.customizer.php');

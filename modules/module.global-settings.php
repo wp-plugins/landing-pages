@@ -117,17 +117,17 @@ if (is_admin())
 			<hr>
 		<div id="more-templates">
 			<center>
-			<a href="http://www.inboundnow.com/landing-pages/downloads/category/templates/" target="_blank"><img src="<?php echo LANDINGPAGES_URLPATH;?>/images/templates-image.png"></a>
+			<a href="http://www.inboundnow.com/market/category/landing-pages/landing-pages-templates/" target="_blank"><img src="<?php echo LANDINGPAGES_URLPATH;?>/images/templates-image.png"></a>
 			
 			</center>
 		</div>
 		<div id="more-addons">
 			<center>
-			<a href="http://www.inboundnow.com/landing-pages/downloads/category/add-ons/" target="_blank"><img src="<?php echo LANDINGPAGES_URLPATH;?>/images/add-on-image.png"></a>
+			<a href="http://www.inboundnow.com/market/category/landing-pages/extensions/" target="_blank"><img src="<?php echo LANDINGPAGES_URLPATH;?>/images/add-on-image.png"></a>
 		</center>
 		</div>
 		<div id="custom-templates">
-			<center><a href="http://www.inboundnow.com/landing-pages/custom-wordpress-landing-page-setup/" target=="_blank"><img src="<?php echo LANDINGPAGES_URLPATH;?>/images/custom-setup-image.png"></a>
+			<center><a href="http://www.inboundnow.com/contact/" target=="_blank"><img src="<?php echo LANDINGPAGES_URLPATH;?>/images/custom-setup-image.png"></a>
 			</center>
 		</div>
 		</div>

@@ -28,7 +28,7 @@ Landing pages are an ideal way to convert more of your passive website visitors 
 * Use your current WordPress theme or choose from our library of custom landing page designs.
 * Pre-populate Forms with visitor information to increase conversion rates
 * Gather lead intelligence and track lead activity with <a href="http://wordpress.org/plugins/leads/screenshots/">WordPress Leads</a>
-* Extend functionality with our growing repository of <a href="http://www.inboundnow.com/landing-pages/downloads/category/add-ons/">third party add ons</a>.
+* Extend functionality with our growing repository of <a href="http://www.inboundnow.com/market/category/landing-pages/extensions/">third party add ons</a>.
 * Easily implement your own custom landing page design.
 
 This plugin is form agnostic meaning it will work with any form system you use.
@@ -43,7 +43,7 @@ http://www.youtube.com/watch?v=BzcD6PgvLP4
 
 We built the landing page plugin as a framework! Need A/B testing out of the box implemented for your existing designs? Use WordPress Landing Pages to quickly spin up new landing pages that have all the functionality your clients will need.
 
-You can quickly take your existing designs and implement them using our <a href="http://www.inboundnow.com/landing-pages/docs/dev/">templating framework</a>.
+You can quickly take your existing designs and implement them using our <a href="http://docs.inboundnow.com/landing-pages/dev">templating framework</a>.
 
 The plugin is also fully extendable and has a number of actions, filters, and hooks available for use. If a hook doesn't exist, simply ask and we can implement custom changes.
 
@@ -54,7 +54,7 @@ The plugin is also fully extendable and has a number of actions, filters, and ho
 
 == Frequently Asked Questions ==
 *Can I create my own landing page designs?,
-*Yes! You can learn how to <a href="http://plugins.inboundnow.com/docs/dev/creating-templates/">create your own landing page template here</a>.
+*Yes! You can learn how to <a href="http://docs.inboundnow.com/landing-pages/dev/creating-templates">create your own landing page template here</a>.
 
 == Screenshots ==
 

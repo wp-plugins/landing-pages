@@ -1,4 +1,4 @@
-jQuery(document).ready(function ($) {
+cooljQuery(document).ready(function ($) {
 
 	jQuery('#templates-container').isotope();
               
@@ -341,6 +341,7 @@ jQuery(document).ready(function ($) {
     }
 
     // Ajax Saving for metadata
+	/*
     jQuery('#lp_metabox_select_template input, #lp_metabox_select_template select, #lp_metabox_select_template textarea').on("change keyup", function (e) {
         // iframe content change needs its own change function $("#iFrame").contents().find("#someDiv")
         // media uploader needs its own change function
@@ -377,7 +378,7 @@ jQuery(document).ready(function ($) {
         //console.log(parent_el);
         jQuery(ajax_save_button).appendTo(parent_el);
     });
-
+	*/
 
     
 });

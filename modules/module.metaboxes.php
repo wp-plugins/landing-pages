@@ -361,19 +361,22 @@ function lp_custom_css_input() {
 		
 	echo "<em>Custom CSS may be required to remove sidebars, increase the widget of the post content container to 100%, and sometimes to manually remove comment boxes.</em>";
 	echo '<input type="hidden" name="lp-custom-css-noncename" id="lp_custom_css_noncename" value="'.wp_create_nonce(basename(__FILE__)).'" />';
-	$custom_css_name = apply_filters('lp-custom-css-name','lp-custom-css');
+	$custom_css_name = apply_filters('lp_custom_css_name','lp-custom-css');
 	echo '<textarea name="'.$custom_css_name.'" id="lp-custom-css" rows="5" cols="30" style="width:100%;">'.get_post_meta($post->ID,$custom_css_name,true).'</textarea>';
 }
 
 function landing_pages_save_custom_css($post_id) {
 	global $post;
-	if (!isset($post)||!isset($_POST['lp-custom-css']))
+	
+	if (!isset($post) || ( isset($post) && $post->post_type!='landing-page' ) )
 		return;
+	
 	
 	if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return $post_id;
 
 	
-	$custom_css_name = apply_filters('lp-custom-css-name','lp-custom-css');
+	$custom_css_name = apply_filters('lp_custom_css_name','lp-custom-css');
+	//echo $custom_css_name;exit;
 	
 	$lp_custom_css = $_POST[$custom_css_name];
 	update_post_meta($post_id, 'lp-custom-css', $lp_custom_css);
@@ -391,7 +394,7 @@ function lp_custom_js_input() {
 	global $post;
 	echo "<em></em>";
 	//echo wp_create_nonce('lp-custom-js');exit;
-	$custom_js_name = apply_filters('lp-custom-js-name','lp-custom-js');
+	$custom_js_name = apply_filters('lp_custom_js_name','lp-custom-js');
 	
 	echo '<input type="hidden" name="lp_custom_js_noncename" id="lp_custom_js_noncename" value="'.wp_create_nonce(basename(__FILE__)).'" />';
 	echo '<textarea name="'.$custom_js_name.'" id="lp_custom_js" rows="5" cols="30" style="width:100%;">'.get_post_meta($post->ID,$custom_js_name,true).'</textarea>';
@@ -399,11 +402,13 @@ function lp_custom_js_input() {
 
 function landing_pages_save_custom_js($post_id) {
 	global $post;
-	if (!isset($post)||!isset($_POST['lp-custom-js']))
+	if (!isset($post) || ( isset($post) && $post->post_type!='landing-page' ) )
 		return;
+	
+		
 	if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return $post_id;
 	
-	$custom_js_name = apply_filters('lp-custom-js-name','lp-custom-js');
+	$custom_js_name = apply_filters('lp_custom_js_name','lp-custom-js');
 	
 	$lp_custom_js = $_POST[$custom_js_name];
 	

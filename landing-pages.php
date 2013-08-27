@@ -7,7 +7,7 @@ Version:  1.1.0.2
 Author: David Wells, Hudson Atwell
 Author URI: http://www.inboundnow.com/
 */
-					
+			
 define('LANDINGPAGES_CURRENT_VERSION', ' 1.1.0.2' );
 define('LANDINGPAGES_URLPATH', WP_PLUGIN_URL.'/'.plugin_basename( dirname(__FILE__) ).'/' );
 define('LANDINGPAGES_PATH', WP_PLUGIN_DIR.'/'.plugin_basename( dirname(__FILE__) ).'/' );
@@ -18,9 +18,7 @@ define('LANDINGPAGES_UPLOADS_PATH', $uploads['basedir'].'/landing-pages/template
 define('LANDINGPAGES_UPLOADS_URLPATH', $uploads['baseurl'].'/landing-pages/templates/' ); 
 $current_url = "http://".$_SERVER["HTTP_HOST"].$_SERVER["REQUEST_URI"]."";
 
-/**
- * load frontend-only and load global core files
- */
+/* load frontend-only and load global core files */
 include_once('functions/functions.global.php');
 include_once('modules/module.post-type.php');
 include_once('modules/module.track.php');
@@ -32,6 +30,11 @@ include_once('modules/module.cookies.php');
 include_once('modules/module.lead-collection.php');
 include_once('modules/module.ab-testing.php');
 
+/* Inbound Core Shared Files */
+include_once('shared/tracking/store.lead.php'); // Lead Storage
+include_once('shared/post-type.lead.php'); // Lead CPT
+
+
 if (is_admin())
 {
 if(!isset($_SESSION)){@session_start();}
@@ -42,8 +45,6 @@ include_once('modules/module.extension-updater.php');
 include_once('modules/module.install.php');
 include_once('modules/module.alert.php');
 }
-
-
 	
 /**
  * REGISTER LANDING PAGES ACTIVATION
@@ -67,7 +68,6 @@ function landing_page_activate()
 	
 }
 
-	
 /**
  * LOAD FUNCTIONS THAT WILL BE USED BY NATIVE TEMPLATES
  */
@@ -103,8 +103,8 @@ function landing_pages_insert_custom_head() {
 		//$global_js =  htmlspecialchars_decode(get_option( 'lp_global_js', '' ));			
 		$global_record_admin_actions = get_option( 'lp_global_record_admin_actions', '0' );
 		
-		$custom_css_name = apply_filters('lp-custom-css-name','lp-custom-css');
-		$custom_js_name = apply_filters('lp-custom-js-name','lp-custom-js');
+		$custom_css_name = apply_filters('lp_custom_css_name','lp-custom-css');
+		$custom_js_name = apply_filters('lp_custom_js_name','lp-custom-js');
 		//echo $custom_css_name;
 		$custom_css = get_post_meta($post->ID, $custom_css_name, true);
 		$custom_js = get_post_meta($post->ID, $custom_js_name, true);
@@ -119,7 +119,7 @@ function landing_pages_insert_custom_head() {
 		{
 			echo $custom_css;
 		}
-		if (!stristr($custom_css,'<script'))
+		if (!stristr($custom_js,'<script'))
 		{
 			echo '<script type="text/javascript" id="lp_js_custom">jQuery(document).ready(function($) {
 			'.$custom_js.' });</script>';
@@ -234,8 +234,6 @@ if (is_admin())
 		//echo 1; exit;
 		if (current_user_can('manage_options'))
 		{
-
-			//add_submenu_page('edit.php?post_type=landing-page', 'URL Rotater', 'URL Rotater', 'manage_options', 'lp_split_testing','lp_split_testing_display');	
 			
 			add_submenu_page('edit.php?post_type=landing-page', 'Templates', 'Templates', 'manage_options', 'lp_manage_templates','lp_manage_templates',100);	
 				
@@ -308,12 +306,12 @@ function lp_register_ajax() {
 	$current_url = trim(str_replace('//','/',"http://".$_SERVER["HTTP_HOST"].$_SERVER["REQUEST_URI"]."/"));
 	global $post;
 	// if leads on add tracking to all pages
-	if (@function_exists('wpleads_check_active'))
+	
+	if (@function_exists('wpleads_check_active') && 'landing-page' !== $post->post_type)
 	{
-		require_once(LANDINGPAGES_PATH . 'js/ajax.tracking.js.php');
+		require_once(WP_PLUGIN_DIR . '/leads/js/wpl.leads-tracking.js.php'); // This needs consolidation and fixing
 	}
-	else if ($post->post_type=='landing-page')
-	{	
+	else {	
 		require_once(LANDINGPAGES_PATH . 'js/ajax.tracking.js.php');
 	}
 	// embed the javascript file that makes the AJAX request

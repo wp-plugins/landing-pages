@@ -3,16 +3,16 @@
 Plugin Name: Landing Pages
 Plugin URI: http://www.inboundnow.com/landing-pages/
 Description: The first true all-in-one Landing Page solution for WordPress, including ongoing conversion metrics, a/b split testing, unlimited design options and so much more!
-Version:  1.1.0.2
+Version:  1.1.4
 Author: David Wells, Hudson Atwell
 Author URI: http://www.inboundnow.com/
 */
 			
-define('LANDINGPAGES_CURRENT_VERSION', ' 1.1.0.2' );
+define('LANDINGPAGES_CURRENT_VERSION', '1.1.4' );
 define('LANDINGPAGES_URLPATH', WP_PLUGIN_URL.'/'.plugin_basename( dirname(__FILE__) ).'/' );
 define('LANDINGPAGES_PATH', WP_PLUGIN_DIR.'/'.plugin_basename( dirname(__FILE__) ).'/' );
 define('LANDINGPAGES_PLUGIN_SLUG', 'landing-pages' );
-define('LANDINGPAGES_STORE_URL', 'http://inboundly.wpengine.com/landing-pages/' ); 
+define('LANDINGPAGES_STORE_URL', 'http://www.inboundnow.com/landing-pages/' ); 
 $uploads = wp_upload_dir();
 define('LANDINGPAGES_UPLOADS_PATH', $uploads['basedir'].'/landing-pages/templates/' ); 
 define('LANDINGPAGES_UPLOADS_URLPATH', $uploads['baseurl'].'/landing-pages/templates/' ); 
@@ -27,12 +27,20 @@ include_once('modules/module.utils.php');
 include_once('modules/module.sidebar.php');
 include_once('modules/module.widgets.php');
 include_once('modules/module.cookies.php');
-include_once('modules/module.lead-collection.php');
 include_once('modules/module.ab-testing.php');
+add_action('init', 'lp_click_track_redirect', 11); // Click Tracking init
+include_once('modules/module.click-tracking.php');
+/* Inbound Core Shared Files. Lead files take presidence */
 
-/* Inbound Core Shared Files */
-include_once('shared/tracking/store.lead.php'); // Lead Storage
-include_once('shared/post-type.lead.php'); // Lead CPT
+add_action( 'plugins_loaded', 'inbound_load_shared' );
+function inbound_load_shared(){
+	if (function_exists('wpleads_check_active')) { 
+		include_once( WPL_PATH.'/shared/tracking/store.lead.php'); // Lead Storage
+	} else {
+		include_once('shared/tracking/store.lead.php'); // Lead Storage
+	}
+}
+
 
 
 if (is_admin())
@@ -59,8 +67,6 @@ function landing_page_activate()
 	add_option( 'lp_global_js', '', '', 'no' );
 	add_option( 'lp_global_record_admin_actions', '1', '', 'no' );
 	add_option( 'lp_global_lp_slug', 'go', '', 'no' );
-	
-	//add_option( 'lp_split_testing_slug', 'group', '', 'no' );
 	update_option( 'lp_activate_rewrite_check', '1');
 	
 	//global $wp_rewrite;
@@ -221,7 +227,6 @@ function landing_pages_add_conversion_area($content)
 
 if (is_admin())
 {
-	//include_once('modules/module.split-testing.php');
 	include_once('modules/module.templates.php');
 	include_once('modules/module.store.php');
 
@@ -298,6 +303,15 @@ function lp_custom_template($single) {
 
 /**
  * ADD TRACKING SCRIPTS FOR IMPRESSION AND CONVERSION TRACKING
+ */
+// Moved to /shared/tracking/
+
+
+/**
+ * LOAD THE TEMLATE CUSTOMIZER MODULE
+ */
+
+include_once('modules/module.customizer.php');NVERSION TRACKING
  */
 
 add_action('wp_footer','lp_register_ajax');

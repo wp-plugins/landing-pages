@@ -302,38 +302,6 @@ function lp_custom_template($single) {
 }
 
 /**
- * ADD TRACKING SCRIPTS FOR IMPRESSION AND CONVERSION TRACKING
- */
-
-
-
-/**
- * LOAD THE TEMLATE CUSTOMIZER MODULE
- */
-
-include_once('modules/module.customizer.php');
-
-
-add_action('wp_footer','lp_register_ajax');
-function lp_register_ajax() {
-	$current_url = "http://".$_SERVER["HTTP_HOST"].$_SERVER["REQUEST_URI"]."/";
-	$current_url = trim(str_replace('//','/',"http://".$_SERVER["HTTP_HOST"].$_SERVER["REQUEST_URI"]."/"));
-	global $post;
-	// if leads on add tracking to all pages
-	
-	if (@function_exists('wpleads_check_active') && 'landing-page' !== $post->post_type)
-	{
-		require_once(WP_PLUGIN_DIR . '/leads/js/wpl.leads-tracking.js.php'); // This needs consolidation and fixing
-	}
-	else {	
-		require_once(LANDINGPAGES_PATH . 'js/ajax.tracking.js.php');
-	}
-	// embed the javascript file that makes the AJAX request
-	//wp_enqueue_script( 'lp-ajax-request', LANDINGPAGES_URLPATH . 'js/ajax.tracking.js.php', array( 'jquery' ) );
-	//wp_localize_script( 'lp-ajax-request', 'myajax', array( 'ajaxurl' => admin_url('admin-ajax.php'), 'current_url' =>  $current_url, 'standardize_form' =>  $standardize_form ));
-}
-
-/**
  * LOAD THE TEMLATE CUSTOMIZER MODULE
  */
 

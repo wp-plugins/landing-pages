@@ -312,7 +312,7 @@ function lp_custom_template($single) {
  */
 
 include_once('modules/module.customizer.php');
- */
+
 
 add_action('wp_footer','lp_register_ajax');
 function lp_register_ajax() {

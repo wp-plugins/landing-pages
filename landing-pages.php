@@ -304,14 +304,14 @@ function lp_custom_template($single) {
 /**
  * ADD TRACKING SCRIPTS FOR IMPRESSION AND CONVERSION TRACKING
  */
-// Moved to /shared/tracking/
+
 
 
 /**
  * LOAD THE TEMLATE CUSTOMIZER MODULE
  */
 
-include_once('modules/module.customizer.php');NVERSION TRACKING
+include_once('modules/module.customizer.php');
  */
 
 add_action('wp_footer','lp_register_ajax');

@@ -788,7 +788,7 @@ function lp_ab_testing_prepare_variation_callback()
 		
 	}			
 }
-
+		
 
 add_filter('the_content','lp_ab_testing_alter_content_area', 10, 2);
 function lp_ab_testing_alter_content_area($content)
@@ -812,7 +812,7 @@ function lp_ab_testing_alter_title_area($content)
 {
 	global $post;
 	
-	if ($post->post_type!='landing-page')
+	if ($post->post_type!='landing-page'||is_admin())
 		return $content;
 	
 	return lp_main_headline($post, null, true);	
@@ -860,6 +860,7 @@ function ab_testing_frontend_editor_screen_pre($post)
 		}
 	});
 	</script>
-<?php } 
+	<?php 
+} 
 
 ?>

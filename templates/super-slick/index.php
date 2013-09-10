@@ -39,7 +39,7 @@ if (have_posts()) : while (have_posts()) : the_post();
 
 	// Convert Hex to RGB Value for submit button
 function Hex_2_RGB($hex) {
-        $hex = preg_replace("/#/", "", $hex);
+        $hex = ereg_replace("#", "", $hex);
         $color = array();
  
         if(strlen($hex) == 3) {
@@ -178,31 +178,47 @@ jQuery(document).ready(
 <?php if ($social_display==="1" ) { // Show Social Media Icons?>
 	<?php lp_social_media(); // print out social media buttons?>
 	<style type="text/css">
-	#lp-social-buttons {clear: both;
-	margin: auto;
-	width: 460px;}
-	  #lp-social-buttons {width: 517px;
-margin: auto;
-}
-.sharrre .googleplus {
-width: 90px !important;
-}
-.sharrre .pinterest {
-    width: 75px !important;
-}
-.twitter {
-    width: 111px;
-}
-.sharrre .button {
-width: 106px;}
-.linkedin {
-margin-right: -14px;}
-	#slideshow-inner {
-	margin-left: auto;
-	margin-right: auto;
-	padding-top: 15px;
-	width: 960px;
-	padding-bottom: 10px;
+	#lp-social-buttons {
+		clear: both;
+		margin: auto;
+		width: 460px;
+	}
+	
+	#lp-social-buttons {
+		width: 517px;
+		margin: auto;
+	}
+	
+	.sharrre .googleplus 
+	{
+		width: 90px !important;
+	}
+	
+	.sharrre .pinterest {
+		width: 75px !important;
+	}
+	
+	.twitter {
+		width: 111px;
+	}
+	
+	.sharrre .button 
+	{
+		width: 106px;
+	}
+	
+	.linkedin 
+	{
+		margin-right: -14px;
+	}
+	
+	#slideshow-inner 
+	{
+		margin-left: auto;
+		margin-right: auto;
+		padding-top: 15px;
+		width: 960px;
+		padding-bottom: 10px;
 	}
 	</style> 	
 <?php  } ?>	

@@ -396,7 +396,7 @@ if (is_admin())
 		//exit;
 	}
 	
-		
+	if (!function_exists('lp_render_global_settings')) {	
 	function lp_render_global_settings($key,$custom_fields,$active_tab)
 	{
 
@@ -544,5 +544,6 @@ if (is_admin())
 			echo '</td></tr>';
 		} // end foreach
 		echo '</table>'; // end table
+	}
 	}
 }

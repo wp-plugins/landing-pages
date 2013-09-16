@@ -8,7 +8,7 @@ Author: David Wells, Hudson Atwell
 Author URI: http://www.inboundnow.com/
 */
 			
-define('LANDINGPAGES_CURRENT_VERSION', '1.1.54' );
+define('LANDINGPAGES_CURRENT_VERSION', '1.1.5' );
 define('LANDINGPAGES_URLPATH', WP_PLUGIN_URL.'/'.plugin_basename( dirname(__FILE__) ).'/' );
 define('LANDINGPAGES_PATH', WP_PLUGIN_DIR.'/'.plugin_basename( dirname(__FILE__) ).'/' );
 define('LANDINGPAGES_PLUGIN_SLUG', 'landing-pages' );
@@ -30,17 +30,19 @@ include_once('modules/module.cookies.php');
 include_once('modules/module.ab-testing.php');
 add_action('init', 'lp_click_track_redirect', 11); // Click Tracking init
 include_once('modules/module.click-tracking.php');
+
 /* Inbound Core Shared Files. Lead files take presidence */
 
 add_action( 'plugins_loaded', 'inbound_load_shared' );
-function inbound_load_shared(){
-	if (function_exists('wpleads_check_active')) { 
-		include_once( WPL_PATH.'/shared/tracking/store.lead.php'); // Lead Storage
-	} else {
-		include_once('shared/tracking/store.lead.php'); // Lead Storage
+if (!function_exists('inbound_load_shared')) {
+	function inbound_load_shared(){
+		if (function_exists('wpleads_check_active') && file_exists( WPL_PATH.'/shared/tracking/store.lead.php')) { 
+			include_once( WPL_PATH.'/shared/tracking/store.lead.php'); // Lead Storage from leads plugin
+		} else {
+			include_once('shared/tracking/store.lead.php'); // Lead Storage from landing pages
+		}
 	}
 }
-
 
 
 if (is_admin())
@@ -65,13 +67,20 @@ function landing_page_activate()
 
 	add_option( 'lp_global_css', '', '', 'no' );
 	add_option( 'lp_global_js', '', '', 'no' );
-	add_option( 'lp_global_record_admin_actions', '1', '', 'no' );
 	add_option( 'lp_global_lp_slug', 'go', '', 'no' );
 	update_option( 'lp_activate_rewrite_check', '1');
 	
 	//global $wp_rewrite;
 	//$wp_rewrite->flush_rules();
 	
+} 
+
+register_deactivation_hook(__FILE__, 'landing_page_deactivate');
+
+function landing_page_deactivate()
+{
+	global $wp_rewrite;
+	$wp_rewrite->flush_rules();
 }
 
 /**
@@ -107,7 +116,6 @@ function landing_pages_insert_custom_head() {
    if (isset($post)&&'landing-page'==$post->post_type) 
    {
 		//$global_js =  htmlspecialchars_decode(get_option( 'lp_global_js', '' ));			
-		$global_record_admin_actions = get_option( 'lp_global_record_admin_actions', '0' );
 		
 		$custom_css_name = apply_filters('lp_custom_css_name','lp-custom-css');
 		$custom_js_name = apply_filters('lp_custom_js_name','lp-custom-js');
@@ -135,18 +143,6 @@ function landing_pages_insert_custom_head() {
 			echo $custom_js;
 		}
 
-		if ($global_record_admin_actions==0&&current_user_can( 'manage_options' ))
-		{
-		}
-		else
-		{		
-
-			if (!lp_determine_spider())
-			{
-				//lp_set_page_views(get_the_ID($this_id));
-			}
-		}
-		  
 		//rewind_posts();
 		//wp_reset_query();
    }
@@ -300,6 +296,12 @@ function lp_custom_template($single) {
 	}
     return $single;
 }
+
+/**
+ * ADD TRACKING SCRIPTS FOR IMPRESSION AND CONVERSION TRACKING
+ */
+// Moved to /shared/tracking/
+
 
 /**
  * LOAD THE TEMLATE CUSTOMIZER MODULE

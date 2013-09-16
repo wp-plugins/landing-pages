@@ -29,16 +29,18 @@ if (have_posts()) : while (have_posts()) : the_post();
     $countdown_message = lp_get_value($post, $key, 'countdown-message'); 
     $bg_image = lp_get_value($post, $key, 'bg-image');
     $submit_button_color = lp_get_value($post, $key, 'submit-button-color'); 
-// Date Formatting
-$new_value = str_replace('-',' ', $date_picker);
-$js_date = str_replace(':',' ', $new_value);
-$res = preg_replace('/[^a-z0-9åäö\s]/ui', '', $js_date);
-$arr = preg_split('/\s+/', $res, 6);
-$imploded = implode(',', array_slice($arr, 0, 5));
-$date_array = explode(",", $imploded);
+	
+	// Date Formatting
+	$new_value = str_replace('-',' ', $date_picker);
+	$js_date = str_replace(':',' ', $new_value);
+	$res = preg_replace('/[^a-z0-9åäö\s]/ui', '', $js_date);
+	$arr = preg_split('/\s+/', $res, 6);
+	$imploded = implode(',', array_slice($arr, 0, 5));
+	$date_array = explode(",", $imploded);
+	
 // Convert Hex to RGB Value for submit button
 function lp_Hex_2_RGB($hex) {
-        $hex = @ereg_replace("#", "", $hex);
+        $hex = @preg_replace("/#/", "", $hex);
         $color = array();
  
         if(strlen($hex) == 3) {
@@ -76,7 +78,7 @@ $content = lp_content_area($post,null,true);
 		?>
         
         <!-- Our CSS stylesheet file -->
-        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300" />
         <link rel="stylesheet" href="<?php echo $path; ?>assets/css/styles.css" />
         <link rel="stylesheet" href="<?php echo $path; ?>assets/countdown/jquery.countdown.css" />
  <style type="text/css">

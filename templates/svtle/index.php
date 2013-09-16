@@ -39,7 +39,7 @@ if (have_posts()) : while (have_posts()) : the_post();
 	
     // Convert Hex to RGB Value for submit button
 function Hex_2_RGB($hex) {
-        $hex = ereg_replace("#", "", $hex);
+        $hex = preg_replace("/#/", "", $hex);
         $color = array();
  
         if(strlen($hex) == 3) {
@@ -136,8 +136,8 @@ $blue = $RBG_array["b"];
     <header id="sidebar">
         <aside id="logo" class="clearfix">
             <figure data-media="<?php echo $logo; ?>" data-media440="<?php echo $logo; ?>"
-            data-media600="<?php echo $logo; ?>" title="<?php the_title(); ?>">
-                <img src="<?php echo $logo; ?>" alt="<?php the_title(); ?>">
+            data-media600="<?php echo $logo; ?>" title="<?php lp_main_headline(); ?>">
+                <img src="<?php echo $logo; ?>" alt="<?php lp_main_headline(); ?>">
             </figure>
         </aside>
         <aside id="form-area">

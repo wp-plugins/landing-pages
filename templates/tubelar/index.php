@@ -32,7 +32,7 @@ if (have_posts()) : while (have_posts()) : the_post();
 	
 // Convert Hex to RGB Value for submit button
 function Hex_2_RGB($hex) {
-        $hex = ereg_replace("#", "", $hex);
+        $hex = preg_replace("/#/", "", $hex);
         $color = array();
  
         if(strlen($hex) == 3) {
@@ -132,7 +132,7 @@ $blue = $RBG_array["b"];
 		top:175px;
 		}</style>
 		<div class="black-50">
-			<h1><?php the_title(); ?></h1>
+			<h1><?php lp_main_headline(); ?></h1>
 			
 			<?php echo $content; ?>
 

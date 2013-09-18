@@ -228,7 +228,7 @@ if (is_admin())
 		if (!$varaition_notes&&isset($_REQUEST['post']))
 		{
 			//echo 1;exit;
-			get_post_meta($_GET['post'],'lp-variation-notes', true);
+			get_post_meta($_REQUEST['post'],'lp-variation-notes', true);
 		}
 		
 		return $varaition_notes;
@@ -541,31 +541,6 @@ else
 
 //PERFORM ACTIONS REQUIRED ON BOTH FRONT AND BACKEND
 
-//ready content area for displaying ab variations
-add_filter('lp_content_area','lp_ab_testing_prepare_content_area' , 10 , 2 );
-function lp_ab_testing_prepare_content_area($content, $post=null)
-{				
-	$current_variation_id = lp_ab_testing_get_current_variation_id();
-	if (isset($post))
-	{
-		$post_id = $post->ID;
-	}
-	else if (isset($_REQUEST['post']))
-	{
-		$post_id = $_REQUEST['post'];
-	}
-	else if (isset($_REQUEST['lp_id']))
-	{
-		$post_id = $_REQUEST['lp_id'];
-	}
-	
-	if ($current_variation_id>0)
-		$content = get_post_meta($post_id,'content-'.$current_variation_id, true);				
-	
-	//echo "$current_variation_id : $content";exit;
-	return $content;
-}
-
 //ready conversion area for displaying ab variations
 add_filter('lp_conversion_area_pre_standardize','lp_ab_testing_prepare_conversion_area' , 10 , 2 );
 function lp_ab_testing_prepare_conversion_area($content,$post=null)
@@ -611,7 +586,7 @@ function lp_ab_testing_lp_conversion_area_position($position, $post = null, $key
 	{
 		$post_id = $_REQUEST['lp_id'];
 	}
-	
+
 	if ($current_variation_id>0)
 		$position = get_post_meta($post->ID, "{$key}-conversion-area-placement-".$current_variation_id, true);
 
@@ -791,6 +766,7 @@ function lp_ab_testing_prepare_variation_callback()
 		
 
 add_filter('the_content','lp_ab_testing_alter_content_area', 10, 2);
+add_filter('get_the_content','lp_ab_testing_alter_content_area', 10, 2);
 function lp_ab_testing_alter_content_area($content)
 {
 	global $post;

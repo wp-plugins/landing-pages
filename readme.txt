@@ -19,8 +19,6 @@ The landing page plugin was specifically designed with inbound marketing best pr
 
 Landing pages are an ideal way to convert more of your passive website visitors into active leads or email list subscribers.
 
-<b>Follow this plugin on <a href="https://github.com/inboundnow/landing-pages/">GitHub</a></b>
-
 = Highlights =
 
 * Create beautiful Landing Pages on your WordPress site.
@@ -47,7 +45,9 @@ We built the landing page plugin as a framework! Need A/B testing out of the box
 
 You can quickly take your existing designs and implement them using our <a href="http://docs.inboundnow.com/landing-pages/dev">templating framework</a>.
 
-The plugin is also fully extendable and has a number of actions, filters, and hooks available for use. If a hook doesn't exist, simply ask and we can implement custom changes.
+The plugin is also fully extendable and has a number of <a href='http://docs.inboundnow.com/landing-pages/dev/core-hooks-filters'>actions, filters</a>, and hooks available for use. If a hook doesn't exist, simply ask and we can implement custom changes.
+
+<b>You can also follow us on <a href="https://github.com/inboundnow/landing-pages/">GitHub</a></b>
 
 == Installation ==
 

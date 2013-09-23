@@ -16,7 +16,7 @@ jQuery(document).ready(function ($) {
 			inDuration : 600,
 	});
 	*/
-
+    /* Turning off switch
       jQuery("body").on('click', '#content-tmce, .wp-switch-editor.switch-tmce', function () {
             $.cookie("lp-edit-view-choice", "editor", { path: '/', expires: 7 });
         });
@@ -37,7 +37,7 @@ jQuery(document).ready(function ($) {
             jQuery(".wp-switch-editor.switch-tmce").click();
             }, 1000);
         }
-
+    */
     /* Tour Start JS */
     var tourbutton = '<a class="" id="lp-tour" style="font-size:13px;">Need help? Take the tour</a>';
     jQuery(tourbutton).appendTo("h2:eq(0)");

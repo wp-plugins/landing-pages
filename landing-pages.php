@@ -3,12 +3,12 @@
 Plugin Name: Landing Pages
 Plugin URI: http://www.inboundnow.com/landing-pages/
 Description: The first true all-in-one Landing Page solution for WordPress, including ongoing conversion metrics, a/b split testing, unlimited design options and so much more!
-Version:  1.1.7
+Version:  1.1.8
 Author: David Wells, Hudson Atwell
 Author URI: http://www.inboundnow.com/
 */
 			
-define('LANDINGPAGES_CURRENT_VERSION', '1.1.7' );
+define('LANDINGPAGES_CURRENT_VERSION', '1.1.8' );
 define('LANDINGPAGES_URLPATH', WP_PLUGIN_URL.'/'.plugin_basename( dirname(__FILE__) ).'/' );
 define('LANDINGPAGES_PATH', WP_PLUGIN_DIR.'/'.plugin_basename( dirname(__FILE__) ).'/' );
 define('LANDINGPAGES_PLUGIN_SLUG', 'landing-pages' );
@@ -32,15 +32,15 @@ add_action('init', 'lp_click_track_redirect', 11); // Click Tracking init
 include_once('modules/module.click-tracking.php');
 
 /* Inbound Core Shared Files. Lead files take presidence */
-add_action( 'plugins_loaded', 'inbound_load_shared' );
-if (!function_exists('inbound_load_shared')) {
-	function inbound_load_shared(){
+add_action( 'plugins_loaded', 'inbound_load_shared_landing_pages' );
+function inbound_load_shared_landing_pages(){
 		if (function_exists('wpleads_check_active') && file_exists( WPL_PATH.'/shared/tracking/store.lead.php')) { 
 			include_once( WPL_PATH.'/shared/tracking/store.lead.php'); // Lead Storage from leads plugin
+			include_once( WPL_PATH.'/shared/classes/form.class.php'); // Inbound Forms Module
 		} else {
 			include_once('shared/tracking/store.lead.php'); // Lead Storage from landing pages
+			include_once('shared/classes/form.class.php');  // Mirrored forms
 		}
-	}
 }
 
 if (is_admin())

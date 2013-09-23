@@ -16,8 +16,9 @@ jQuery(document).ready(function ($) {
 			inDuration : 600,
 	});
 	*/
-    /* Turning off switch
-      jQuery("body").on('click', '#content-tmce, .wp-switch-editor.switch-tmce', function () {
+    
+    /* Fixed post editor switching */
+    jQuery("body").on('click', '#content-tmce, .wp-switch-editor.switch-tmce', function () {
             $.cookie("lp-edit-view-choice", "editor", { path: '/', expires: 7 });
         });
         jQuery("body").on('click', '#content-html, .wp-switch-editor.switch-html', function () {
@@ -27,17 +28,17 @@ jQuery(document).ready(function ($) {
         if(which_editor === null){
            setTimeout(function() {
             jQuery("#content-tmce").click();
-            jQuery(".wp-switch-editor.switch-tmce").click();
+            //jQuery(".wp-switch-editor.switch-tmce").click(); // causing problems for sub editors
             }, 1000);
        
         }    
         if(which_editor === 'editor'){
           setTimeout(function() {
             jQuery("#content-tmce").click();
-            jQuery(".wp-switch-editor.switch-tmce").click();
+            //jQuery(".wp-switch-editor.switch-tmce").click(); // causing problems for sub editors
             }, 1000);
         }
-    */
+
     /* Tour Start JS */
     var tourbutton = '<a class="" id="lp-tour" style="font-size:13px;">Need help? Take the tour</a>';
     jQuery(tourbutton).appendTo("h2:eq(0)");

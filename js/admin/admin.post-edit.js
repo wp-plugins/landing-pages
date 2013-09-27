@@ -16,9 +16,8 @@ jQuery(document).ready(function ($) {
 			inDuration : 600,
 	});
 	*/
-    
-    /* Fixed post editor switching */
-    jQuery("body").on('click', '#content-tmce, .wp-switch-editor.switch-tmce', function () {
+
+      jQuery("body").on('click', '#content-tmce, .wp-switch-editor.switch-tmce', function () {
             $.cookie("lp-edit-view-choice", "editor", { path: '/', expires: 7 });
         });
         jQuery("body").on('click', '#content-html, .wp-switch-editor.switch-html', function () {
@@ -28,14 +27,14 @@ jQuery(document).ready(function ($) {
         if(which_editor === null){
            setTimeout(function() {
             jQuery("#content-tmce").click();
-            //jQuery(".wp-switch-editor.switch-tmce").click(); // causing problems for sub editors
+            //jQuery(".wp-switch-editor.switch-tmce").click();
             }, 1000);
        
         }    
         if(which_editor === 'editor'){
           setTimeout(function() {
             jQuery("#content-tmce").click();
-            //jQuery(".wp-switch-editor.switch-tmce").click(); // causing problems for sub editors
+            //jQuery(".wp-switch-editor.switch-tmce").click();
             }, 1000);
         }
 

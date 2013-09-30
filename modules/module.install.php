@@ -3,11 +3,11 @@
 add_action('init', 'inbound_create_default_post_type');
 function inbound_create_default_post_type(){
     // NEED to insert custom meta as well
-    $option_name = "lp_settings_generalxxx";
-    $option_key = "default_landing_pagexxx";
+    $option_name = "lp_settings_general";
+    $option_key = "default_landing_page";
     $current_user = wp_get_current_user();
     add_option( $option_name, '' );
-    update_user_meta( get_current_user_id(), 'tgmpa_dismissed_notice', 0 ); // Clean dismiss settings
+    //update_user_meta( get_current_user_id(), 'tgmpa_dismissed_notice', 0 ); // Clean dismiss settings
     //delete_option( 'lp_settings_general' );
     $lp_default_options = get_option($option_name);
     // Create Default if it doesn't exist

@@ -4,7 +4,7 @@ Contributors: David Wells, adbox
 Donate link: mailto:Hudson.Atwell@gmail.com
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Tags: landing pages, inbound marketing, conversion pages, split testing, a b test, a b testing, a/b test, a/b testing, coming soon page, email list, landing page, list building, maintenance page, squeeze page, inbound now, landing-pages, splash pages, cpa, click tracking, goal tracking, analytics
+Tags: landing pages, inbound marketing, conversion pages, split testing, a b test, a b testing, a/b test, a/b testing, coming soon page, email list, landing page, list building, maintenance page, squeeze page, inbound now, landing-pages, splash pages, cpa, click tracking, goal tracking, analytics, free landing page templates
 Requires at least: 3.4
 Tested up to: 3.5
 Stable Tag: 1.2.2
@@ -12,6 +12,8 @@ Stable Tag: 1.2.2
 Create landing pages for your WordPress site. Monitor and improve conversion rates, run A/B split tests, customize your own templates and more.
 
 == Description ==
+
+> WordPress Landing Pages works as a standalone plugin or hand in hand with [WordPress Calls to Action](http://wordpress.org/plugins/cta/ "Learn more about Calls to Action") & [WordPress Leads](http://wordpress.org/plugins/leads/ "Learn more about WordPress Leads") to create a powerful & free lead generation system for your business.
 
 > WordPress Landing Pages works as a standalone plugin or hand in hand with [WordPress Calls to Action](http://wordpress.org/plugins/cta/ "Learn more about Calls to Action") & [WordPress Leads](http://wordpress.org/plugins/leads/ "Learn more about WordPress Leads") to create a powerful & free lead generation system for your business.
 
@@ -69,10 +71,9 @@ The plugin is also fully extendable and has a number of <a href='http://docs.inb
 
 == Changelog ==
 
-=  1.2.2 =
+=  1.2.3 =
  
-* Fixed: Unexpected output from the new form tool (coming soon)
-* Fixed: Install WordPress Leads Message in Admin from showing multiple times
+* Fixed: Security issue with vulnerability to sql injection. 
 
 =  1.2.1 =
  

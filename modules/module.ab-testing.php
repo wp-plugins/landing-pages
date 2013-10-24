@@ -795,6 +795,7 @@ function lp_ab_testing_alter_content_area($content)
 
 	if ($variation_id>0)
 	{
+		$content = wpautop($content);
 		$content = do_shortcode(get_post_meta($post->ID,'content-'.$variation_id, true));
 	}
 	

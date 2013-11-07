@@ -704,7 +704,7 @@ function lp_show_metabox($post,$key)
 	$lp_custom_fields = $extension_data[$key]['settings'];
 	$lp_custom_fields = apply_filters('lp_show_metabox',$lp_custom_fields, $key);
 	
-	lp_render_metabox($key,$lp_custom_fields,$post);
+	lp_render_metabox($key,$lp_custom_fields,$post); 
 }
 
 function lp_render_metabox($key,$custom_fields,$post)

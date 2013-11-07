@@ -19,7 +19,7 @@ This plugin creates landing pages (a.k.a. conversion or splash pages) for your W
 
 The landing page plugin was specifically designed with inbound marketing best practices in mind and will help you drive & convert more leads on your site.
 
-Landing pages are an ideal way to convert more of your passive website visitors into active leads or email list subscribers.
+Landing pages are an ideal way to convert more of your passive website visitors into active leads or email list subscribers. 
 
 = Highlights =
 

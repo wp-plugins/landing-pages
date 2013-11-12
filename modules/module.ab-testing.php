@@ -809,7 +809,8 @@ function lp_ab_testing_alter_title_area( $content , $id = null)
 {
 	global $post;
 	if (!isset($post))
-		return;
+		return $content;
+		
 	if ( ( $post->post_type!='landing-page'||is_admin()) || $id != $post->ID)
 		return $content;
 

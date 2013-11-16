@@ -335,7 +335,11 @@ if (is_admin())
 		
 		foreach ($lp_global_settings as $key=>$data)
 		{	
-			$tab_settings = $lp_global_settings[$key]['settings'];		
+			$tab_settings = $lp_global_settings[$key]['settings'];	
+			
+			if (!$tab_setting)
+				continue;
+			
 			// loop through fields and save the data
 			foreach ($tab_settings as $field) 
 			{
@@ -444,7 +448,9 @@ if (is_admin())
 		
 	function lp_render_global_settings($key,$custom_fields,$active_tab)
 	{
-
+		if (!$custom_fields)
+			return;
+		
 		//Check if active tab
 		if ($key==$active_tab)
 		{

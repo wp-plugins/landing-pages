@@ -15,7 +15,7 @@ function lp_display_thumbnail_metabox() {
 
 		add_meta_box(
 		'lp-thumbnail-sidebar-preview',
-		__( 'Template Preview', 'lp_metabox_thumbnail_preview' ),
+		__( 'Template Preview', LANDINGPAGES_TEXT_DOMAIN),
 		'lp_thumbnail_metabox',
 		'landing-page' ,
 		'side',
@@ -41,7 +41,7 @@ function lp_thumbnail_metabox() {
 					<td>
 						<?php
 
-							echo "<a href='$permalink' target='_blank' ><img src='$thumbnail' style='width:250px;height:250px;' title='Preveiw this theme ($template)'></a>";
+							echo "<a href='$permalink' target='_blank' ><img src='$thumbnail' style='width:250px;height:250px;' title='". __( 'Preveiw this theme' , LANDINGPAGES_TEXT_DOMAIN) ." ,  ({$template})'></a>";
 						?>
 					</td>
 				</tr>
@@ -56,10 +56,11 @@ function lp_thumbnail_metabox() {
 
 add_action('add_meta_boxes', 'lp_display_meta_box_lp_conversion_area');
 function lp_display_meta_box_lp_conversion_area(){
-	add_meta_box( WYSIWYG_META_BOX_ID, __('Landing Page Form or Conversion Button', 'wysiwyg'), 'lp_meta_box_conversion_area', 'landing-page', 'normal', 'high' );
+	add_meta_box( WYSIWYG_META_BOX_ID, __('Landing Page Form or Conversion Button - <em>click the black & blue power button icon to build forms/buttons</em>', LANDINGPAGES_TEXT_DOMAIN), 'lp_meta_box_conversion_area', 'landing-page', 'normal', 'high' );
 	//add_meta_box( $id, $title, $callback, $post_type, $context, $priority, $callback_args );
 }
 
+// Phasing out conversion area sometime soon
 function lp_meta_box_conversion_area(){
 
 	global $post;
@@ -115,7 +116,7 @@ function lp_meta_box_conversion_area(){
 
 	//Clear The Room!
 	echo "<div style='clear:both; display:block;'></div>";
-	echo "<div style='width:100%;text-align:right;margin-top:11px;'><div class='lp_tooltip'  title=\"To help track conversions Landing Pages Plugin will automatically add a tracking class to forms. If you would like to track a link add this class to it class='wpl-track-me-link'\" ></div></div>";
+	echo "<div style='width:100%;text-align:right;margin-top:11px;'><div class='lp_tooltip'  title=\"". __('To help track conversions Landing Pages Plugin will automatically add a tracking class to forms. If you would like to track a link add this class to it' , LANDINGPAGES_TEXT_DOMAIN) ." class='wpl-track-me-link'\" ></div></div>";
 
 }
 
@@ -155,11 +156,11 @@ function lp_landing_page_header_area()
 	$main_title = apply_filters('lp_edit_main_headline', $main_title, 1);
 	$varaition_notes = apply_filters('lp_edit_varaition_notes', $varaition_notes, 1);
 	$varaition_id = apply_filters( 'lp_display_notes_input_id' , 'lp-variation-notes' );
-	
+
 	echo "<div id='lp-notes-area'>";
-	echo "<span id='add-lp-notes'>Notes:</span><input placeholder='Add Notes to your variation. Example: This version is testing a green submit button' type='text' class='lp-notes' name='{$varaition_id}' id='{$varaition_id}' value='{$variation_notes}' size='30'>";
-	echo '</div><div id="main-title-area"><input type="text" name="lp-main-headline" placeholder="Primary Headline Goes here. This will be visible on the page" id="lp-main-headline" value="'.$main_title.'" title="This headline will appear in the landing page template."></div><div id="lp-current-view">'.$lp_variation.'</div><div id="switch-lp">0</div>';
-   
+	echo "<span id='add-lp-notes'>". __('Notes' , LANDINGPAGES_TEXT_DOMAIN) .":</span><input placeholder='". __('Add Notes to your variation. Example: This version is testing a green submit button ' , LANDINGPAGES_TEXT_DOMAIN) ."' type='text' class='lp-notes' name='{$varaition_id}' id='{$varaition_id}' value='{$varaition_notes}' size='30'>";
+	echo '</div><div id="main-title-area"><input type="text" name="lp-main-headline" placeholder="'. __('Primary Headline Goes here. This will be visible on the page' , LANDINGPAGES_TEXT_DOMAIN) .'" id="lp-main-headline" value="'.$main_title.'" title="'. __('This headline will appear in the landing page template.' , LANDINGPAGES_TEXT_DOMAIN) .'"></div><div id="lp-current-view">'.$lp_variation.'</div><div id="switch-lp">0</div>';
+
    // Frontend params
     if(isset($_REQUEST['frontend']) && $_REQUEST['frontend'] == 'true') {
     echo('<input type="hidden" name="frontend" id="frontend-on" value="true" />');
@@ -204,7 +205,7 @@ add_filter( 'enter_title_here', 'lp_change_enter_title_text', 10, 2 );
 function lp_change_enter_title_text( $text, $post ) {
 	if ($post->post_type=='landing-page')
 	{
-        return 'Enter Landing Page Description';
+        return __( 'Enter Landing Page Description' , LANDINGPAGES_TEXT_DOMAIN);
 	}
 	else
 	{
@@ -218,7 +219,7 @@ function add_custom_meta_box_select_templates() {
 
 	add_meta_box(
 		'lp_metabox_select_template', // $id
-		__( 'Landing Page Templates', 'landingpage_custom_meta' ),
+		__( 'Landing Page Templates', LANDINGPAGES_TEXT_DOMAIN),
 		'lp_display_meta_box_select_template', // $callback
 		'landing-page', // $page
 		'normal', // $context
@@ -240,7 +241,7 @@ function lp_display_meta_box_select_template() {
 	echo "<input type='hidden' name='lp_lp_custom_fields_nonce' value='".wp_create_nonce('lp-nonce')."' />";
 	?>
 
-	<div id="lp_template_change"><h2><a class="button-primary" id="lp-change-template-button">Choose Another Template</a></div>
+	<div id="lp_template_change"><h2><a class="button" id="lp-change-template-button"><?php _e( 'Choose Another Template' , LANDINGPAGES_TEXT_DOMAIN); ?></a></div>
 	<input type='hidden' id='lp_select_template' name='<?php echo $name; ?>' value='<?php echo $template; ?>'>
 		<div id="template-display-options"></div>
 
@@ -252,7 +253,7 @@ add_action('admin_notices', 'lp_display_meta_box_select_template_container');
 // Render select template box
 function lp_display_meta_box_select_template_container() {
 	global $post;
-	
+
 	$current_url = "http://".$_SERVER["HTTP_HOST"].$_SERVER["REQUEST_URI"]."";
 
 	if (isset($post)&&$post->post_type!='landing-page'||!isset($post)){ return false; }
@@ -275,12 +276,13 @@ function lp_display_meta_box_select_template_container() {
 
 	echo "<div class='lp-template-selector-container' style='{$toggle}'>";
 	echo "<div class='lp-selection-heading'>";
-	echo "<h1>Select Your Landing Page Template!</h1>";
-	echo '<a class="button-secondary" style="display:none;" id="lp-cancel-selection">Cancel Template Change</a>';
+	echo "<h1>". __( 'Select Your Landing Page Template!' , LANDINGPAGES_TEXT_DOMAIN) ."</h1>";
+	echo '<a class="button-secondary" style="display:none;" id="lp-cancel-selection">'. __('Cancel Template Change' , LANDINGPAGES_TEXT_DOMAIN) .'</a>';
 	echo "</div>";
 		echo '<ul id="template-filter" >';
-			echo '<li class="button-primary button"><a href="#" data-filter="*">All</a></li>';
-			$categories = array();
+			echo '<li class="button-primary button"><a href="#" data-filter="*">'. __( 'All' , LANDINGPAGES_TEXT_DOMAIN) .'</a></li>';
+			echo '<li class="button-primary button"><a href="#" data-filter=".theme">'. __( 'Theme' , LANDINGPAGES_TEXT_DOMAIN ) .'</a></li>';
+			$categories = array('Theme');
 			foreach ($extension_data_cats as $cat)
 			{
 
@@ -337,7 +339,7 @@ function lp_display_meta_box_select_template_container() {
 				$thumbnail = LANDINGPAGES_URLPATH.'templates/default/thumbnail.png';
 
 			}
-
+			$demo_link = (isset($data['info']['demo'])) ? $data['info']['demo'] : '';
 			?>
 			<div id='template-item' class="<?php echo $cat_slug; ?>">
 				<div id="template-box">
@@ -347,8 +349,8 @@ function lp_display_meta_box_select_template_container() {
 				</a>
 				<p>
 					<div id="template-title"><?php echo $data['info']['label']; ?></div>
-					<a href='#' label='<?php echo $data['info']['label']; ?>' id='<?php echo $this_extension; ?>' class='lp_select_template'>Select</a> |
-					<a class='thickbox <?php echo $cat_slug;?>' href='<?php echo $data['info']['demo'];?>' id='lp_preview_this_template'>Preview</a>
+					<a href='#' label='<?php echo $data['info']['label']; ?>' id='<?php echo $this_extension; ?>' class='lp_select_template'><?php _e( 'Select' , LANDINGPAGES_TEXT_DOMAIN); ?> </a> |
+					<a class='thickbox <?php echo $cat_slug;?>' href='<?php echo $data['info']['demo'];?>' id='lp_preview_this_template'><?php _e( 'Preview' , LANDINGPAGES_TEXT_DOMAIN); ?></a>
 				</p>
 				</div>
 			</div>
@@ -357,7 +359,7 @@ function lp_display_meta_box_select_template_container() {
 	echo '</div>';
 	echo "<div class='clear'></div>";
 	echo "</div>";
-	echo "<div style='display:none;' class='currently_selected'>This is Currently Selected</a></div>";
+	echo "<div style='display:none;' class='currently_selected'>". __( 'This is Currently Selected' , LANDINGPAGES_TEXT_DOMAIN) ."</a></div>";
 }
 
 // Custom CSS Widget
@@ -365,13 +367,13 @@ add_action('add_meta_boxes', 'add_custom_meta_box_lp_custom_css');
 add_action('save_post', 'landing_pages_save_custom_css');
 
 function add_custom_meta_box_lp_custom_css() {
-   add_meta_box('lp_3_custom_css', 'Custom CSS', 'lp_custom_css_input', 'landing-page', 'normal', 'low');
+   add_meta_box('lp_3_custom_css', __( 'Custom CSS' , LANDINGPAGES_TEXT_DOMAIN) , 'lp_custom_css_input', 'landing-page', 'normal', 'low');
 }
 
 function lp_custom_css_input() {
 	global $post;
 
-	echo "<em>Custom CSS may be required to remove sidebars, increase the widget of the post content container to 100%, and sometimes to manually remove comment boxes.</em>";
+	_e("<em>Custom CSS may be required to customize this landing page.</em><strong> <u>Format</u>: #element-id { display:none !important; }</strong>" , LANDINGPAGES_TEXT_DOMAIN);
 	echo '<input type="hidden" name="lp-custom-css-noncename" id="lp_custom_css_noncename" value="'.wp_create_nonce(basename(__FILE__)).'" />';
 	$custom_css_name = apply_filters('lp_custom_css_name','lp-custom-css');
 	echo '<textarea name="'.$custom_css_name.'" id="lp-custom-css" rows="5" cols="30" style="width:100%;">'.get_post_meta($post->ID,$custom_css_name,true).'</textarea>';
@@ -398,7 +400,7 @@ add_action('add_meta_boxes', 'add_custom_meta_box_lp_custom_js');
 add_action('save_post', 'landing_pages_save_custom_js');
 
 function add_custom_meta_box_lp_custom_js() {
-   add_meta_box('lp_3_custom_js', 'Custom JS', 'lp_custom_js_input', 'landing-page', 'normal', 'low');
+   add_meta_box('lp_3_custom_js', __('Custom JS' , LANDINGPAGES_TEXT_DOMAIN) , 'lp_custom_js_input', 'landing-page', 'normal', 'low');
 }
 
 function lp_custom_js_input() {
@@ -430,7 +432,7 @@ function landing_pages_save_custom_js($post_id) {
 add_action('add_meta_boxes', 'add_custom_meta_box_lp_conversion_log');
 
 function add_custom_meta_box_lp_conversion_log() {
-   add_meta_box('lp_conversion_log_metabox', 'Lead Captures', 'lp_conversion_log_metabox', 'landing-page', 'normal', 'low');
+   add_meta_box('lp_conversion_log_metabox', __( 'Lead Captures' , LANDINGPAGES_TEXT_DOMAIN) , 'lp_conversion_log_metabox', 'landing-page', 'normal', 'low');
 }
 
 function lp_conversion_log_metabox() {
@@ -443,10 +445,12 @@ function lp_conversion_log_metabox() {
 		private $plural;
 		private $post;
 		private $wpdb;
+
 		function __construct()
 		{
 			global $post;
 			global $wpdb;
+
 			$final_data = array();
 			$query = "SELECT
 				wposts.*
@@ -501,6 +505,7 @@ function lp_conversion_log_metabox() {
 			//print_r($args);exit;
 			$args['plural'] = sanitize_key( '' );
 			$args['singular'] = sanitize_key( '' );
+			$this->screen = get_current_screen();
 			$this->_args = $args;
 		}
 
@@ -574,8 +579,8 @@ function lp_conversion_log_metabox() {
 				'per_page'    => $per_page                     //WE have to determine how many items to show on a page
 			) );
 
-
 			$this->items = $this->found_data;
+
 		}
 
 		function column_default( $item, $column_name )
@@ -591,12 +596,12 @@ function lp_conversion_log_metabox() {
 				case 'email':
 					return "<a href='mailto:".$item[ $column_name ]."'>".$item[ $column_name ]."</a>";
 				case 'details':
-					echo '<a href="' . 	LANDINGPAGES_URLPATH.'modules/module.lead-splash.php?lead_id=' . $item[ 'ID' ] . '&post_id=' . $post->ID . '&height=400&width=600&TB_iframe=true" class="thickbox">View Lead</a>';
+					echo '<a href="' . 	LANDINGPAGES_URLPATH.'modules/module.lead-splash.php?lead_id=' . $item[ 'ID' ] . '&post_id=' . $post->ID . '&height=400&width=600&TB_iframe=true" class="thickbox">' . __( 'View Lead' ,LANDINGPAGES_TEXT_DOMAIN) .'</a>';
 					echo '&nbsp;&nbsp;';
 					//print_r($item);
 					if ($item[ 'first_time' ]==1)
 					{
-						echo '<img src="'.LANDINGPAGES_URLPATH.'images/new-lead.png" title="First timer!" style="float:right;">';
+						echo '<img src="'.LANDINGPAGES_URLPATH.'images/new-lead.png" title="' . __( 'First timer!' , LANDINGPAGES_TEXT_DOMAIN) .'" style="float:right;">';
 					}
 					do_action('lp_lead_table_data_is_details_column',$item);
 					return;
@@ -616,7 +621,7 @@ function lp_conversion_log_metabox() {
 
 		function no_items()
 		{
-			_e( 'No conversions recorded yet...' );
+			_e( 'No conversions recorded yet...' , LANDINGPAGES_TEXT_DOMAIN);
 		}
 
 		function get_bulk_actions()
@@ -633,7 +638,7 @@ function lp_conversion_log_metabox() {
 
 	}
 	echo '<div id="leads-table-container">';
-	echo '<h2 id="convert-header">Conversion logs:</h2>';
+	echo '<h2 id="convert-header">'. __( 'Conversion logs:' , LANDINGPAGES_TEXT_DOMAIN) .'</h2>';
 	echo '<div id="leads-table-container-inside">';
 	$myListTable = new LP_LEAD_LOG();
 	$myListTable->prepare_items();
@@ -670,7 +675,7 @@ function lp_generate_meta()
 			//echo $key."<br>";
 			add_meta_box(
 				"lp_{$id}_custom_meta_box", // $id
-				__( "<small>$template_name Options:</small>", "lp" ),
+				__( "<small>$template_name Options:</small>", LANDINGPAGES_TEXT_DOMAIN),
 				'lp_show_metabox', // $callback
 				'landing-page', // post-type
 				'normal', // $context
@@ -695,7 +700,7 @@ function lp_generate_meta()
 			//echo $key."<br>";
 			add_meta_box(
 				"lp_{$id}_custom_meta_box", // $id
-				__( "$name", "lp" ),
+				__( "$name", LANDINGPAGES_TEXT_DOMAIN),
 				'lp_show_metabox', // $callback
 				'landing-page', // post-type
 				$position , // $context
@@ -712,11 +717,16 @@ function lp_show_metabox($post,$key)
 
 	$extension_data = lp_get_extension_data();
 	$key = $key['args']['key'];
-
+	// Get current cat list for templates
+	if (isset($_GET['lp-cats'])) {
+	 get_all_template_categories($extension_data);
+	}
 	$lp_custom_fields = $extension_data[$key]['settings'];
 	$lp_custom_fields = apply_filters('lp_show_metabox',$lp_custom_fields, $key);
 
 	lp_render_metabox($key,$lp_custom_fields,$post);
+
+
 }
 
 
@@ -726,15 +736,24 @@ function lp_render_metabox($key,$custom_fields,$post)
 	echo "<input type='hidden' name='lp_{$key}_custom_fields_nonce' value='".wp_create_nonce('lp-nonce')."' />";
 
 	// Begin the field table and loop
-	echo '<table class="form-table" >';
+	echo '<div class="form-table" id="inbound-meta">';
 
 	foreach ($custom_fields as $field) {
-		$raw_option_id = str_replace($key . "-", "", $field['id']);
 		$field_id = $key . "-" .$field['id'];
-		$label_class = $raw_option_id . "-label";
+		$field_name = $field['id'];
+		$label_class = $field['id'] . "-label";
+		$type_class = " inbound-" . $field['type'];
+		$type_class_row = " inbound-" . $field['type'] . "-row";
+		$type_class_option = " inbound-" . $field['type'] . "-option";
+		$option_class = (isset($field['class'])) ? $field['class'] : '';
 		// get value of this field if it exists for this post
 		$meta = get_post_meta($post->ID, $field_id, true);
+		$global_meta = get_post_meta($post->ID, $field_name, true);
+		if(empty($global_meta)) {
+			$global_meta = $field['default'];
+		}
 
+		//print_r($field);
 		if ((!isset($meta)&&isset($field['default'])&&!is_numeric($meta))||isset($meta)&&empty($meta)&&isset($field['default'])&&!is_numeric($meta))
 		{
 			//echo $field['id'].":".$meta;
@@ -742,105 +761,130 @@ function lp_render_metabox($key,$custom_fields,$post)
 			$meta = $field['default'];
 		}
 
-		// begin a table row with
-		echo '<tr class="'.$field_id.' '.$raw_option_id.' landing-page-option-row">
-				<th class="landing-page-table-header '.$label_class.'"><label for="'.$field_id.'">'.$field['label'].'</label></th>
-				<td class="landing-page-option-td">';
-				switch($field['type']) {
-					// default content for the_content
-					case 'default-content':
-						echo '<span id="overwrite-content" class="button-secondary">Insert Default Content into main Content area</span><div style="display:none;"><textarea name="'.$field_id.'" id="'.$field_id.'" class="default-content" cols="106" rows="6" style="width: 75%; display:hidden;">'.$meta.'</textarea></div>';
-						break;
-					// text
-					case 'colorpicker':
-						if (!$meta)
-						{
-							$meta = $field['default'];
+	    // Remove prefixes on global => true template options
+	    if (isset($field['global']) && $field['global'] === true) {
+	    $field_id = $field_name;
+	    $meta = get_post_meta($post->ID, $field_name, true);
+	    }
+
+				// begin a table row with
+				echo '<div class="'.$field['id'].$type_class_row.' div-'.$option_class.' wp-call-to-action-option-row inbound-meta-box-row">';
+						if ($field['type'] != "description-block" && $field['type'] != "custom-css" ) {
+						echo '<div id="inbound-'.$field_id.'" data-actual="'.$field_id.'" class="inbound-meta-box-label wp-call-to-action-table-header '.$label_class.$type_class.'"><label for="'.$field_id.'">'.$field['label'].'</label></div>';
 						}
-						echo '<input type="text" class="jpicker" style="background-color:#'.$meta.'" name="'.$field_id.'" id="'.$field_id.'" value="'.$meta.'" size="5" /><span class="button-primary new-save-lp" id="'.$field_id.'" style="margin-left:10px; display:none;">Update</span>
-								<div class="lp_tooltip tool_color" title="'.$field['description'].'"></div>';
-						break;
-					case 'datepicker':
-						echo '<div class="jquery-date-picker" id="date-picking">
-						<span class="datepair" data-language="javascript">
-									Date: <input type="text" id="date-picker-'.$key.'" class="date start" /></span>
-									Time: <input id="time-picker-'.$key.'" type="text" class="time time-picker" />
-									<input type="hidden" name="'.$field_id.'" id="'.$field_id.'" value="'.$meta.'" class="new-date" value="" >
-									<p class="description">'.$field['description'].'</p>
-							</div>';
-						break;
-					case 'text':
-						echo '<input type="text" name="'.$field_id.'" id="'.$field_id.'" value="'.$meta.'" size="30" />
-								<div class="lp_tooltip" title="'.$field['description'].'"></div>';
-						break;
-					// textarea
-					case 'textarea':
-						echo '<textarea name="'.$field_id.'" id="'.$field_id.'" cols="106" rows="6" style="width: 75%;">'.$meta.'</textarea>
-								<div class="lp_tooltip tool_textarea" title="'.$field['description'].'"></div>';
-						break;
-					// wysiwyg
-					case 'wysiwyg':
-						wp_editor( $meta, $field_id, $settings = array() );
-						echo	'<p class="description">'.$field['description'].'</p>';
-						break;
-					// media
-					case 'media':
-						echo '<label for="upload_image">';
-						echo '<input name="'.$field_id.'"  id="'.$field_id.'" type="text" size="36" name="upload_image" value="'.$meta.'" />';
-						echo '<input class="upload_image_button" id="uploader_'.$field_id.'" type="button" value="Upload Image" />';
-						echo '<p class="description">'.$field['description'].'</p>';
-						break;
-					// checkbox
-					case 'checkbox':
-						$i = 1;
-						echo "<table class='lp_check_box_table'>";
-						if (!isset($meta)){$meta=array();}
-						elseif (!is_array($meta)){
-							$meta = array($meta);
-						}
-						foreach ($field['options'] as $value=>$label) {
-							if ($i==5||$i==1)
-							{
-								echo "<tr>";
-								$i=1;
-							}
-								echo '<td><input type="checkbox" name="'.$field_id.'[]" id="'.$field_id.'" value="'.$value.'" ',in_array($value,$meta) ? ' checked="checked"' : '','/>';
-								echo '<label for="'.$value.'">&nbsp;&nbsp;'.$label.'</label></td>';
-							if ($i==4)
-							{
-								echo "</tr>";
-							}
-							$i++;
-						}
-						echo "</table>";
-						echo '<div class="lp_tooltip tool_checkbox" title="'.$field['description'].'"></div>';
-					break;
-					// radio
-					case 'radio':
-						foreach ($field['options'] as $value=>$label) {
-							//echo $meta.":".$field_id;
-							//echo "<br>";
-							echo '<input type="radio" name="'.$field_id.'" id="'.$field_id.'" value="'.$value.'" ',$meta==$value ? ' checked="checked"' : '','/>';
-							echo '<label for="'.$value.'">&nbsp;&nbsp;'.$label.'</label> &nbsp;&nbsp;&nbsp;&nbsp;';
-						}
-						echo '<div class="lp_tooltip" title="'.$field['description'].'"></div>';
-					break;
-					// select
-					case 'dropdown':
-						echo '<select name="'.$field_id.'" id="'.$field_id.'" class="'.$raw_option_id.'">';
-						foreach ($field['options'] as $value=>$label) {
-							echo '<option', $meta == $value ? ' selected="selected"' : '', ' value="'.$value.'">'.$label.'</option>';
-						}
-						echo '</select><div class="lp_tooltip" title="'.$field['description'].'"></div>';
-					break;
+
+						echo '<div class="wp-call-to-action-option-td inbound-meta-box-option '.$type_class_option.'" data-field-type="'.$field['type'].'">';
+						switch($field['type']) {
+							// default content for the_content
+							case 'default-content':
+								echo '<span id="overwrite-content" class="button-secondary">Insert Default Content into main Content area</span><div style="display:none;"><textarea name="'.$field_id.'" id="'.$field_id.'" class="default-content" cols="106" rows="6" style="width: 75%; display:hidden;">'.$meta.'</textarea></div>';
+								break;
+							case 'description-block':
+								echo '<div id="'.$field_id.'" class="description-block">'.$field['description'].'</div>';
+								break;
+							case 'custom-css':
+								echo '<style type="text/css">'.$field['default'].'</style>';
+								break;
+							// text
+							case 'colorpicker':
+								if (!$meta)
+								{
+									$meta = $field['default'];
+								}
+								$var_id = (isset($_GET['new_meta_key'])) ? "-" . $_GET['new_meta_key'] : '';
+								echo '<input type="text" class="jpicker" style="background-color:#'.$meta.'" name="'.$field_id.'" id="'.$field_id.'" value="'.$meta.'" size="5" /><span class="button-primary new-save-lp" data-field-type="text" id="'.$field_id.$var_id.'" style="margin-left:10px; display:none;">Update</span>
+										<div class="lp_tooltip tool_color" title="'.$field['description'].'"></div>';
+								break;
+							case 'datepicker':
+								echo '<div class="jquery-date-picker inbound-datepicker" id="date-picking" data-field-type="text">
+								<span class="datepair" data-language="javascript">
+											Date: <input type="text" id="date-picker-'.$key.'" class="date start" /></span>
+											Time: <input id="time-picker-'.$key.'" type="text" class="time time-picker" />
+											<input type="hidden" name="'.$field_id.'" id="'.$field_id.'" value="'.$meta.'" class="new-date" value="" >
+											<p class="description">'.$field['description'].'</p>
+									</div>';
+								break;
+							case 'text':
+								echo '<input type="text" name="'.$field_id.'" id="'.$field_id.'" value="'.$meta.'" size="30" />
+										<div class="lp_tooltip" title="'.$field['description'].'"></div>';
+								break;
+							case 'number':
+
+								echo '<input type="number" class="'.$option_class.'" name="'.$field_id.'" id="'.$field_id.'" value="'.$meta.'" size="30" />
+										<div class="lp_tooltip" title="'.$field['description'].'"></div>';
+
+								break;
+							// textarea
+							case 'textarea':
+								echo '<textarea name="'.$field_id.'" id="'.$field_id.'" cols="106" rows="6" style="width: 75%;">'.$meta.'</textarea>
+										<div class="lp_tooltip tool_textarea" title="'.$field['description'].'"></div>';
+								break;
+							// wysiwyg
+							case 'wysiwyg':
+								echo "<div class='iframe-options iframe-options-".$field_id."' id='".$field['id']."'>";
+								wp_editor( $meta, $field_id, $settings = array( 'editor_class' => $field_name ) );
+								echo	'<p class="description">'.$field['description'].'</p></div>';
+								break;
+							// media
+							case 'media':
+								//echo 1; exit;
+								echo '<label for="upload_image" data-field-type="text">';
+								echo '<input name="'.$field_id.'"  id="'.$field_id.'" type="text" size="36" name="upload_image" value="'.$meta.'" />';
+								echo '<input class="upload_image_button" id="uploader_'.$field_id.'" type="button" value="Upload Image" />';
+								echo '<p class="description">'.$field['description'].'</p>';
+								break;
+							// checkbox
+							case 'checkbox':
+								$i = 1;
+								echo "<table class='lp_check_box_table'>";
+								if (!isset($meta)){$meta=array();}
+								elseif (!is_array($meta)){
+									$meta = array($meta);
+								}
+								foreach ($field['options'] as $value=>$label) {
+									if ($i==5||$i==1)
+									{
+										echo "<tr>";
+										$i=1;
+									}
+										echo '<td data-field-type="checkbox"><input type="checkbox" name="'.$field_id.'[]" id="'.$field_id.'" value="'.$value.'" ',in_array($value,$meta) ? ' checked="checked"' : '','/>';
+										echo '<label for="'.$value.'">&nbsp;&nbsp;'.$label.'</label></td>';
+									if ($i==4)
+									{
+										echo "</tr>";
+									}
+									$i++;
+								}
+								echo "</table>";
+								echo '<div class="lp_tooltip tool_checkbox" title="'.$field['description'].'"></div>';
+							break;
+							// radio
+							case 'radio':
+								foreach ($field['options'] as $value=>$label) {
+									//echo $meta.":".$field_id;
+									//echo "<br>";
+									echo '<input type="radio" name="'.$field_id.'" id="'.$field_id.'" value="'.$value.'" ',$meta==$value ? ' checked="checked"' : '','/>';
+									echo '<label for="'.$value.'">&nbsp;&nbsp;'.$label.'</label> &nbsp;&nbsp;&nbsp;&nbsp;';
+								}
+								echo '<div class="lp_tooltip" title="'.$field['description'].'"></div>';
+							break;
+							// select
+							case 'dropdown':
+								echo '<select name="'.$field_id.'" id="'.$field_id.'" class="'.$field['id'].'">';
+								foreach ($field['options'] as $value=>$label) {
+									echo '<option', $meta == $value ? ' selected="selected"' : '', ' value="'.$value.'">'.$label.'</option>';
+								}
+								echo '</select><div class="lp_tooltip" title="'.$field['description'].'"></div>';
+							break;
 
 
 
-				} //end switch
-		echo '</td></tr>';
-	} // end foreach
-	echo '</table>'; // end table
-}
+						} //end switch
+				echo '</div></div>';
+			} // end foreach
+			echo '</div>'; // end table
+			//exit;
+		}
 
 add_action('save_post', 'lp_save_meta');
 function lp_save_meta($post_id) {

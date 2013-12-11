@@ -3,7 +3,6 @@
     jQuery('form').each(function(){
     	jQuery(this).addClass('wpl-track-me');
 	});
-	
  	// Saves variation page views
  	var variation_id = landing_path_info.variation;
  	// Save page view count

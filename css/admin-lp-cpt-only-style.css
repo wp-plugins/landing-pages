@@ -1,10 +1,11 @@
 #main-title-area #lp-main-headline {
 width: 100%;
-height: 31px;
-font-size: 1.7em;
+
+font-size: 23px;
 line-height: 100%;
 outline: 0 none;
-padding: 3px 7px;
+padding: 0px 7px;
+padding-top: 8px;
 }
 #main-title-header h3 {
 	display: inline-block;
@@ -13,9 +14,7 @@ padding: 3px 7px;
 #titlediv {
 	margin-bottom: 0px;
 }
-#edit-slug-box {
-margin-top: 0px;
-}
+
 .lp-template-selector-container ul#template-filter li {
 display: inline-block;
 padding: 5px;
@@ -39,7 +38,6 @@ ul#template-filter .button-primary a {
 }
 #more-templates-button {
 	display: inline-block;
-	margin-left: 20px;
 	vertical-align: middle;
 	float: none !important;
 	font-weight: normal;

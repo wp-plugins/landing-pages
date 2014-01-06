@@ -356,8 +356,8 @@ function lp_display_meta_box_select_template_container() {
 				</a>
 				<p>
 					<div id="template-title"><?php echo $data['info']['label']; ?></div>
-					<a href='#' label='<?php echo $data['info']['label']; ?>' id='<?php echo $this_extension; ?>' class='lp_select_template'><?php _e( 'Select' , LANDINGPAGES_TEXT_DOMAIN); ?> </a> |
-					<a class='thickbox <?php echo $cat_slug;?>' href='<?php echo $demo_link;?>' id='lp_preview_this_template'><?php _e( 'Preview' , LANDINGPAGES_TEXT_DOMAIN); ?></a>
+					<a href='#' label='<?php echo $data['info']['label']; ?>' id='<?php echo $this_extension; ?>' class='lp_select_template'><?php _e( 'Select' , LANDINGPAGES_TEXT_DOMAIN); ?></a> |
+					<a class='<?php echo $cat_slug;?>' target="_blank" href='<?php echo $demo_link;?>' id='lp_preview_this_template'><?php _e( 'Preview' , LANDINGPAGES_TEXT_DOMAIN); ?></a>
 				</p>
 				</div>
 			</div>
@@ -771,6 +771,10 @@ function lp_render_metabox($key,$custom_fields,$post)
 		$type_class_row = " inbound-" . $field['type'] . "-row";
 		$type_class_option = " inbound-" . $field['type'] . "-option";
 		$option_class = (isset($field['class'])) ? $field['class'] : '';
+		//$status = (isset($field['status'])) ? $field['status'] : '';
+		$ink = get_option('lp-license-keys-'. $key);
+		$status = get_option('lp_license_status-'. $key);
+		$status_test = (isset($status) && $status != "") ? $status : 'inactive';
 		// get value of this field if it exists for this post
 		$meta = get_post_meta($post->ID, $field_id, true);
 		$global_meta = get_post_meta($post->ID, $field_name, true);
@@ -805,7 +809,7 @@ function lp_render_metabox($key,$custom_fields,$post)
 								echo '<span id="overwrite-content" class="button-secondary">Insert Default Content into main Content area</span><div style="display:none;"><textarea name="'.$field_id.'" id="'.$field_id.'" class="default-content" cols="106" rows="6" style="width: 75%; display:hidden;">'.$meta.'</textarea></div>';
 								break;
 							case 'description-block':
-								echo '<div id="'.$field_id.'" class="description-block">'.$field['description'].'</div>';
+								echo '<div id="'.$field_id.'" class="description-block">' . $field['description'].'</div>';
 								break;
 							case 'custom-css':
 								echo '<style type="text/css">'.$field['default'].'</style>';

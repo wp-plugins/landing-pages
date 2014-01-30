@@ -94,7 +94,7 @@ if (have_posts()) : while (have_posts()) : the_post();
 
     <body>
         <div id="body-container">
-            <?php echo dirname(__FILE__);?>
+            <?php // echo dirname(__FILE__);?>
 		<h1><?php lp_main_headline(); ?></h1>
             <div id="main-content">
                 <?php echo $content; ?>

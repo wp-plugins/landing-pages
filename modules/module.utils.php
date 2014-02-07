@@ -116,6 +116,19 @@ if (!function_exists('inbound_meta_debug')) {
 	}
 }
 
+// Fix wp_title for known bad behavior themes */
+add_action('wp','landingpage_fix_known_wp_title_isses' , 10);
+function landingpage_fix_known_wp_title_isses() {
+
+	if ('landing-page' != get_post_type()){
+		return;
+	}
+
+	remove_filter( 'wp_title', 'genesis_doctitle_wrap' , 20 );
+	remove_filter( 'wp_title', 'genesis_default_title' , 10 );
+}
+
+
 // Fix SEO Title Tags to not use the_title
 //add_action('wp','landingpage_seo_title_filters');
 function landingpage_seo_title_filters() {

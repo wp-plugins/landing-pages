@@ -1,41 +1,41 @@
 jQuery(document).ready(function ($) {
 
-	jQuery('#templates-container').isotope();
+
     // Isotope Styling
     jQuery('#template-filter li').first().addClass('button-primary');
-	// filter items when filter link is clicked
-	jQuery('#template-filter a').click(function(){
-	  var selector = jQuery(this).attr('data-filter');
-	  jQuery("ul#template-filter li").removeClass('button-primary');
+    // filter items when filter link is clicked
+    jQuery('#template-filter a').click(function(){
+      var selector = jQuery(this).attr('data-filter');
+      jQuery("ul#template-filter li").removeClass('button-primary');
       jQuery(this).parent().addClass('button-primary');
-	  jQuery('#templates-container').isotope({ filter: selector });
-	  return false;
-	});
 
-	/* Ajax loading tabs
-		jQuery.koolSwap({
-			swapBox : '#poststuff',
-			outDuration : 550,
-			inDuration : 600,
-	});
-	*/
+      return false;
+    });
 
-	jQuery("body").on('click', '#content-tmce, .wp-switch-editor.switch-tmce', function () {
-		$.cookie("lp-edit-view-choice", "editor", { path: '/', expires: 7 });
-	});
+    /* Ajax loading tabs
+        jQuery.koolSwap({
+            swapBox : '#poststuff',
+            outDuration : 550,
+            inDuration : 600,
+    });
+    */
 
-	jQuery("body").on('click', '#content-html, .wp-switch-editor.switch-html', function () {
-		$.cookie("lp-edit-view-choice", "html", { path: '/', expires: 7 });
-	});
+    jQuery("body").on('click', '#content-tmce, .wp-switch-editor.switch-tmce', function () {
+        $.cookie("lp-edit-view-choice", "editor", { path: '/', expires: 7 });
+    });
 
-	var which_editor = $.cookie("lp-edit-view-choice");
-	if(which_editor === null){
-	   setTimeout(function() {
-		//jQuery("#content-tmce").click();
-		//jQuery(".wp-switch-editor.switch-tmce").click();
-		}, 1000);
+    jQuery("body").on('click', '#content-html, .wp-switch-editor.switch-html', function () {
+        $.cookie("lp-edit-view-choice", "html", { path: '/', expires: 7 });
+    });
 
-	}
+    var which_editor = $.cookie("lp-edit-view-choice");
+    if(which_editor === null){
+       setTimeout(function() {
+        //jQuery("#content-tmce").click();
+        //jQuery(".wp-switch-editor.switch-tmce").click();
+        }, 1000);
+
+    }
     /*
 
         var chtml= jQuery('#content-html');
@@ -46,16 +46,16 @@ jQuery(document).ready(function ($) {
         switchEditors.switchto(ctmce[0]); // switch to tinymce
 
      */
-	if(which_editor === 'editor'){
-	  setTimeout(function() {
+    if(which_editor === 'editor'){
+      setTimeout(function() {
 
         var ctmce= jQuery('#content-tmce');
         switchEditors.switchto(ctmce[0]); // switch to tinymce
 
         var conversion_area = jQuery("#landing-page-myeditor-tmce");
         switchEditors.switchto(conversion_area[0]); // switch to tinymce
-		//jQuery("#content-tmce").click();
-		//jQuery(".wp-switch-editor.switch-tmce").click();
+        //jQuery("#content-tmce").click();
+        //jQuery(".wp-switch-editor.switch-tmce").click();
         jQuery('.inbound-wysiwyg-option textarea').each(function(){
             var chtml= "#" + jQuery(this).attr('id') + '-html';
             var ctmce= "#" + jQuery(this).attr('id') + '-tmce';
@@ -63,8 +63,8 @@ jQuery(document).ready(function ($) {
             var tinymce_box = jQuery(ctmce);
             switchEditors.switchto(tinymce_box[0]); // switch to tinymce
         });
-		}, 1000);
-	}
+        }, 1000);
+    }
 
     /* Tour Start JS */
     var tourbutton = '<a class="" id="lp-tour" style="font-size:13px;">Need help? Take the tour</a>';
@@ -90,10 +90,10 @@ jQuery(document).ready(function ($) {
     // Fix inactivate theme display
     jQuery("#template-box a").live('click', function () {
 
-		setTimeout(function() {
-			jQuery('#TB_window iframe').contents().find("#customize-controls").hide();
-				jQuery('#TB_window iframe').contents().find(".wp-full-overlay.expanded").css("margin-left", "0px");
-		}, 600);
+        setTimeout(function() {
+            jQuery('#TB_window iframe').contents().find("#customize-controls").hide();
+                jQuery('#TB_window iframe').contents().find(".wp-full-overlay.expanded").css("margin-left", "0px");
+        }, 600);
 
     });
 
@@ -177,62 +177,62 @@ jQuery(document).ready(function ($) {
     jQuery('.lp_select_template').click(function(){
         var template = jQuery(this).attr('id');
         var label = jQuery(this).attr('label');
-		var selected_template_id = "#" + template;
-		var currentlabel = jQuery(".currently_selected").show();
-		var current_template = jQuery("input#lp_select_template ").val();
+        var selected_template_id = "#" + template;
+        var currentlabel = jQuery(".currently_selected").show();
+        var current_template = jQuery("input#lp_select_template ").val();
         var current_template_meta = "#lp_" + current_template + "_custom_meta_box";
         var current_template_h3 = "#lp_" + current_template + "_custom_meta_box h3";
         var current_template_div = "#lp_" + current_template + "_custom_meta_box .handlediv";
         var open_variation = jQuery("#open_variation").val();
 
-		if (open_variation>0)
-		{
-			var variation_tag = "-"+open_variation;
-		}
-		else
-		{
-			var variation_tag = "";
-		}
+        if (open_variation>0)
+        {
+            var variation_tag = "-"+open_variation;
+        }
+        else
+        {
+            var variation_tag = "";
+        }
 
-	    jQuery("#template-box.default_template_highlight").removeClass("default_template_highlight");
+        jQuery("#template-box.default_template_highlight").removeClass("default_template_highlight");
 
         jQuery(selected_template_id).parent().addClass("default_template_highlight").prepend(currentlabel);
 
-	    jQuery(".lp-template-selector-container").fadeOut(500,function(){
-			jQuery('#lp_metabox_select_template input').remove();
-			jQuery('#lp_metabox_select_template .form-table').remove();
+        jQuery(".lp-template-selector-container").fadeOut(500,function(){
+            jQuery('#lp_metabox_select_template input').remove();
+            jQuery('#lp_metabox_select_template .form-table').remove();
 
-			var ajax_data = {
-				action: 'lp_get_template_meta',
-				selected_template: template,
-				post_id: lp_post_edit_ui.post_id,
-			};
+            var ajax_data = {
+                action: 'lp_get_template_meta',
+                selected_template: template,
+                post_id: lp_post_edit_ui.post_id,
+            };
 
-			jQuery.ajax({
-					type: "POST",
-					url: lp_post_edit_ui.ajaxurl,
-					data: ajax_data,
-					dataType: 'html',
-					timeout: 7000,
-					success: function (response) {
-						//alert(response);
-						var html = '<input id="lp_select_template" type="hidden" value="'+template+'" name="lp-selected-template'+variation_tag+'">'
-								 + '<input type="hidden" value="'+lp_post_edit_ui.lp_template_nonce+'" name="lp_lp_custom_fields_nonce">'
-								 + '<h3 class="hndle" style="cursor: default;">'
-								 + '<span>'
-								 + '<small>'+ template +' Options:</small>'
-								 +	'</span>'
-								 +	'</h3>'
-								 + response;
+            jQuery.ajax({
+                    type: "POST",
+                    url: lp_post_edit_ui.ajaxurl,
+                    data: ajax_data,
+                    dataType: 'html',
+                    timeout: 7000,
+                    success: function (response) {
+                        //alert(response);
+                        var html = '<input id="lp_select_template" type="hidden" value="'+template+'" name="lp-selected-template'+variation_tag+'">'
+                                 + '<input type="hidden" value="'+lp_post_edit_ui.lp_template_nonce+'" name="lp_lp_custom_fields_nonce">'
+                                 + '<h3 class="hndle" style="cursor: default;">'
+                                 + '<span>'
+                                 + '<small>'+ template +' Options:</small>'
+                                 +  '</span>'
+                                 +  '</h3>'
+                                 + response;
 
-						jQuery('#lp_metabox_select_template #template-display-options').html(html);
-						jQuery('.time-picker').timepicker({ 'timeFormat': 'H:i' });
+                        jQuery('#lp_metabox_select_template #template-display-options').html(html);
+                        jQuery('.time-picker').timepicker({ 'timeFormat': 'H:i' });
 
-					},
-					error: function(request, status, err) {
-						alert(status);
-					}
-				});
+                    },
+                    error: function(request, status, err) {
+                        alert(status);
+                    }
+                });
             jQuery(".wrap").fadeIn(500, function(){
             });
         });
@@ -324,7 +324,7 @@ jQuery(document).ready(function ($) {
 
     jQuery('#lp-change-template-button').live('click', function () {
         jQuery(".wrap").fadeOut(500,function(){
-            jQuery('#templates-container').isotope();
+
             jQuery(".lp-template-selector-container").fadeIn(500, function(){
                 jQuery(".currently_selected").show();
                 jQuery('#lp-cancel-selection').show();
@@ -474,7 +474,7 @@ jQuery(document).ready(function ($) {
     */
 
 
-	// SAVE META
+    // SAVE META
     var nonce_val = lp_post_edit_ui.wp_landing_page_meta_nonce; // NEED CORRECT NONCE
     jQuery(document).on('mousedown', '.new-save-lp', function () {
         var type_input = jQuery(this).parent().find("input").attr("type");

@@ -1,6 +1,6 @@
 jQuery(document).ready(function ($) {
 
-	jQuery('#templates-container').isotope();
+
     // Isotope Styling
     jQuery('#template-filter li').first().addClass('button-primary');
 	// filter items when filter link is clicked
@@ -8,7 +8,7 @@ jQuery(document).ready(function ($) {
 	  var selector = jQuery(this).attr('data-filter');
 	  jQuery("ul#template-filter li").removeClass('button-primary');
       jQuery(this).parent().addClass('button-primary');
-	  jQuery('#templates-container').isotope({ filter: selector });
+
 	  return false;
 	});
 
@@ -324,7 +324,7 @@ jQuery(document).ready(function ($) {
 
     jQuery('#lp-change-template-button').live('click', function () {
         jQuery(".wrap").fadeOut(500,function(){
-            jQuery('#templates-container').isotope();
+
             jQuery(".lp-template-selector-container").fadeIn(500, function(){
                 jQuery(".currently_selected").show();
                 jQuery('#lp-cancel-selection').show();

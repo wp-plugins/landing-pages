@@ -7,7 +7,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: landing pages, inbound marketing, conversion pages, split testing, a b test, a b testing, a/b test, a/b testing, coming soon page, email list, landing page, list building, maintenance page, squeeze page, inbound now, landing-pages, splash pages, cpa, click tracking, goal tracking, analytics, free landing page templates
 Requires at least: 3.7
 Tested up to: 3.8
-Stable Tag: 1.4.7
+Stable Tag: 1.4.8
 
 Create landing pages for your WordPress site. Monitor and improve conversion rates, run A/B split tests, customize your own templates and more.
 
@@ -58,7 +58,7 @@ The plugin is also fully extendable and has a number of <a href='http://docs.inb
 
 == Frequently Asked Questions ==
 *Can I create my own landing page designs?,
-*Yes! You can learn how to <a href="http://docs.inboundnow.com/landing-pages/dev/creating-templates">create your own landing page template here</a>.
+*Yes! You can learn how to <a href="http://docs.inboundnow.com/guide/creating-landing-page-templates/">create your own landing page template here</a>.
 
 == Screenshots ==
 
@@ -68,6 +68,20 @@ The plugin is also fully extendable and has a number of <a href='http://docs.inb
 4. Choose from a ton of pre-made templates, use your existing design, or design your own theme!
 
 == Changelog ==
+
+= 1.4.8 =
+* Added Google Analytics Custom Event Tracking for form submissions
+* Added Ability: automatically sort leads into lists on form completions
+* Added Ability: Send lead notification emails to multiple people. Use comma separated values
+* Improved Social Media Buttons called with lp_social_media() function
+* Fixed qTranslate plugin bug
+* Fixed Genesis Title tag conflict
+* Added improved asset loader
+* Updated main docs.inboundnow.com site. Check it out!
+
+= 1.4.7 =
+* GPL fix with js library
+
 = 1.4.6 =
 * New Feature: Bulk Lead management with leads plugin wordpress.org/plugins/leads/
 * Added tags to lead profiles for improved management/categorization

@@ -65,6 +65,10 @@ jQuery(document).ready(function ($) {
       var selector = jQuery(this).attr('data-filter');
       jQuery("ul#template-filter li").removeClass('button-primary');
       jQuery(this).parent().addClass('button-primary');
+      $(".template-item-boxes").fadeOut(500);
+      setTimeout(function() {
+       $(selector).fadeIn(500);
+      }, 500);
 
       return false;
     });

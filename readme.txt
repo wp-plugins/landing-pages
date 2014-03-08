@@ -33,10 +33,6 @@ Landing pages are an ideal way to convert more of your passive website visitors 
 * Extend functionality with our growing repository of <a href="http://www.inboundnow.com/market/category/landing-pages/extensions/">third party add ons</a>.
 * Easily implement your own custom landing page design.
 
-This plugin is form agnostic meaning it will work with any form system you use.
-
-Recommended form plugins (Gravity forms, Ninja Forms or Contact form 7)
-
 = About the Plugin =
 
 http://www.youtube.com/watch?v=flEd0sRTFUo
@@ -45,9 +41,9 @@ http://www.youtube.com/watch?v=flEd0sRTFUo
 
 We built the landing page plugin as a framework! Need A/B testing out of the box implemented for your existing designs? Use WordPress Landing Pages to quickly spin up new landing pages that have all the functionality your clients will need.
 
-You can quickly take your existing designs and implement them using our <a href="http://docs.inboundnow.com/landing-pages/dev">templating framework</a>.
+You can quickly take your existing designs and implement them using our <a href="http://docs.inboundnow.com/guide/creating-landing-page-templates/">templating framework</a>.
 
-The plugin is also fully extendable and has a number of <a href='http://docs.inboundnow.com/landing-pages/dev/core-hooks-filters'>actions, filters</a>, and hooks available for use. If a hook doesn't exist, simply ask and we can implement custom changes.
+The plugin is also fully extendable and has a number of <a href='http://docs.inboundnow.com/section/developer/'>actions, filters</a>, and hooks available for use. If a hook doesn't exist, simply ask and we can implement custom changes.
 
 <b>You can also follow us on <a href="https://github.com/inboundnow/landing-pages/">GitHub</a></b>
 

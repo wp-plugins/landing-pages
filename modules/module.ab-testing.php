@@ -565,7 +565,7 @@ else
 		{
 			(isset($_REQUEST['lp-variation-id'])) ? $variation_id = $_REQUEST['lp-variation-id'] : $variation_id = $_COOKIE['lp-variation-id'];
 			if ($variation_id>0)
-					return get_post_meta($post->ID, $key.'-'.$id. '-' .$variation_id , true);
+					return do_shortcode(get_post_meta($post->ID, $key.'-'.$id. '-' .$variation_id , true));
 			else
 				return $return;
 		}
@@ -899,6 +899,10 @@ function lp_ab_testing_alter_content_area($content)
 {
 	global $post;
 
+	if ( $post->post_type != 'landing-page' ) {
+		return;
+	}
+	
 	$variation_id = lp_ab_testing_get_current_variation_id();
 
 	if ($variation_id>0)

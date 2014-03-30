@@ -7,7 +7,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: landing pages, inbound marketing, conversion pages, split testing, a b test, a b testing, a/b test, a/b testing, coming soon page, email list, landing page, list building, maintenance page, squeeze page, inbound now, landing-pages, splash pages, cpa, click tracking, goal tracking, analytics, free landing page templates
 Requires at least: 3.8
 Tested up to: 3.8
-Stable Tag: 1.5.0
+Stable Tag: 1.5.1
 
 Create landing pages for your WordPress site. Monitor and improve conversion rates, run A/B split tests, customize your own templates and more.
 
@@ -45,9 +45,9 @@ http://www.youtube.com/watch?v=flEd0sRTFUo
 
 We built the landing page plugin as a framework! Need A/B testing out of the box implemented for your existing designs? Use WordPress Landing Pages to quickly spin up new landing pages that have all the functionality your clients will need.
 
-You can quickly take your existing designs and implement them using our <a href="http://docs.inboundnow.com/landing-pages/dev">templating framework</a>.
+You can quickly take your existing designs and implement them using our <a href="http://docs.inboundnow.com/section/developer/">templating framework</a>.
 
-The plugin is also fully extendable and has a number of <a href='http://docs.inboundnow.com/landing-pages/dev/core-hooks-filters'>actions, filters</a>, and hooks available for use. If a hook doesn't exist, simply ask and we can implement custom changes.
+The plugin is also fully extendable and has a number of <a href='http://docs.inboundnow.com/guide/landing-page-core-hooks-filters/'>actions, filters</a>, and hooks available for use. If a hook doesn't exist, simply ask and we can implement custom changes.
 
 <b>You can also follow us on <a href="https://github.com/inboundnow/landing-pages/">GitHub</a></b>
 
@@ -68,6 +68,9 @@ The plugin is also fully extendable and has a number of <a href='http://docs.inb
 4. Choose from a ton of pre-made templates, use your existing design, or design your own theme!
 
 == Changelog ==
+= 1.5.1 =
+* Misc bug fixes
+
 = 1.5.0 =
 * fixed field mapping bug
 * Added better compability for js conflicts

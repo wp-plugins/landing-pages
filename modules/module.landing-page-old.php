@@ -178,6 +178,11 @@ function lp_conversion_area($post = null, $content=null,$return=false, $doshortc
 		$content = do_shortcode($content);
 	}
 
+	if ($rebuild_attributes)
+	{
+		//$content = lp_rebuild_attributes( $content, $wrapper_class );
+	}
+
 
 	$content = apply_filters('lp_conversion_area_post',$content, $post);
 
@@ -192,7 +197,7 @@ function lp_conversion_area($post = null, $content=null,$return=false, $doshortc
 	}
 	else
 	{
-		return $content;
+		return do_shortcode($content);
 	}
 
 }

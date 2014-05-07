@@ -46,6 +46,7 @@ switch (is_admin()) :
     include_once('modules/module.install.php');
     include_once('modules/module.alert.php');
     include_once('modules/module.metaboxes.php');
+	include_once('modules/module.metaboxes-global.php');
     include_once('modules/module.landing-page.php');
     include_once('modules/module.load-extensions.php');
     include_once('modules/module.post-type.php');
@@ -100,11 +101,11 @@ function inbound_load_shared_landing_pages(){
   define('INBOUDNOW_SHARED','loaded');
 
   /* Singleton Shared Class Loads */
-  include_once('shared/inbound-shortcodes/inbound-shortcodes.php');  // Shared Shortcodes
-  include_once('shared/classes/menu.class.php');  // Inbound Marketing Menu
-  include_once('shared/classes/feedback.class.php');  // Inbound Feedback Form
-  include_once('shared/classes/debug.class.php');  // Inbound Debug & Scripts Class
-  include_once('shared/classes/compatibility.class.php');  // Inbound Compatibility Class
+  include_once('shared/shortcodes/inbound-shortcodes.php');  // Shared Shortcodes
+  include_once('shared/classes/class.menu.php');  // Inbound Marketing Menu
+  include_once('shared/classes/class.feedback.php');  // Inbound Feedback Form
+  include_once('shared/classes/class.debug.php');  // Inbound Debug & Scripts Class
+  include_once('shared/classes/class.compatibility.php');  // Inbound Compatibility Class
   include_once('shared/tracking/store.lead.php'); // Lead Storage from landing pages
   include_once('shared/classes/form.class.php');  // Mirrored forms
   include_once('shared/extend/inboundnow.extend.php');

@@ -79,22 +79,22 @@ class InboundShortcodes {
     wp_enqueue_script('jquery' );
     wp_enqueue_script('jquery-cookie', $final_path. 'shared/assets/global/js/jquery.cookie.js', array( 'jquery' ));
     wp_enqueue_script('jquery-total-storage', $final_path. 'shared/assets/global/js/jquery.total-storage.min.js', array( 'jquery' ));
-		wp_enqueue_style('inbound-shortcodes', $final_path.'shared/inbound-shortcodes/css/shortcodes.css');
+		wp_enqueue_style('inbound-shortcodes', $final_path.'shared/shortcodes/css/shortcodes.css');
 		wp_enqueue_script('jquery-ui-sortable' );
-		wp_enqueue_script('inbound-shortcodes-plugins', $final_path.'shared/inbound-shortcodes/js/shortcodes-plugins.js');
+		wp_enqueue_script('inbound-shortcodes-plugins', $final_path.'shared/shortcodes/js/shortcodes-plugins.js');
 
 		if (isset($post)&&post_type_supports($post->post_type,'editor')||isset($post)&&'wp-call-to-action' === $post->post_type) {
-			wp_enqueue_script('inbound-shortcodes', $final_path.'shared/inbound-shortcodes/js/shortcodes.js');
+			wp_enqueue_script('inbound-shortcodes', $final_path.'shared/shortcodes/js/shortcodes.js');
 			$form_id = (isset($_GET['post'])) ? $_GET['post'] : '';
 			wp_localize_script( 'inbound-shortcodes', 'inbound_shortcodes', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) , 'adminurl' => admin_url(), 'inbound_shortcode_nonce' => wp_create_nonce('inbound-shortcode-nonce') , 'form_id' => $form_id ) );
-			wp_enqueue_script('selectjs', $final_path.'shared/inbound-shortcodes/js/select2.min.js');
-			wp_enqueue_style('selectjs', $final_path.'shared/inbound-shortcodes/css/select2.css');
+			wp_enqueue_script('selectjs', $final_path.'shared/shortcodes/js/select2.min.js');
+			wp_enqueue_style('selectjs', $final_path.'shared/shortcodes/css/select2.css');
 		}
 
 		// Forms CPT only
 		if ((isset($post)&&'inbound-forms'=== $post->post_type)||( isset($_GET['post_type']) && $_GET['post_type']==='inbound-forms')) {
-			 wp_enqueue_style('inbound-forms-css', $final_path.'shared/inbound-shortcodes/css/form-cpt.css');
-			 wp_enqueue_script('inbound-forms-cpt-js', $final_path.'shared/inbound-shortcodes/js/form-cpt.js');
+			 wp_enqueue_style('inbound-forms-css', $final_path.'shared/shortcodes/css/form-cpt.css');
+			 wp_enqueue_script('inbound-forms-cpt-js', $final_path.'shared/shortcodes/js/form-cpt.js');
 			 wp_localize_script( 'inbound-forms-cpt-js', 'inbound_forms', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ), 'inbound_shortcode_nonce' => wp_create_nonce('inbound-shortcode-nonce'), 'form_cpt' => 'on' ) );
 		}
 
@@ -112,7 +112,7 @@ class InboundShortcodes {
 		  array_push($plugins_loaded, "leads");
 		}
 
-		wp_localize_script( 'inbound-shortcodes-plugins', 'inbound_load', array( 'image_dir' => $final_path.'shared/inbound-shortcodes/', 'inbound_plugins' => $plugins_loaded, 'pop_title' => 'Insert Shortcode' ));
+		wp_localize_script( 'inbound-shortcodes-plugins', 'inbound_load', array( 'image_dir' => $final_path.'shared/shortcodes/', 'inbound_plugins' => $plugins_loaded, 'pop_title' => 'Insert Shortcode' ));
 
 		if (isset($post)&&$post->post_type=='inbound-forms') {
 		  require_once( 'shortcodes-fields.php' );
@@ -130,7 +130,7 @@ class InboundShortcodes {
   static function frontend_loads() {
       include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
       $final_path = self::set_file_path();
-      wp_enqueue_style('inbound-shortcodes', $final_path.'shared/inbound-shortcodes/css/frontend-render.css');
+      wp_enqueue_style('inbound-shortcodes', $final_path.'shared/shortcodes/css/frontend-render.css');
   }
 
 // Currently off
@@ -157,7 +157,7 @@ class InboundShortcodes {
   static function add_rich_plugins( $plugins ) {
     include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
     $final_path = self::set_file_path();
-    $plugins['InboundShortcodes'] = $final_path.'shared/inbound-shortcodes/js/tinymce.js';
+    $plugins['InboundShortcodes'] = $final_path.'shared/shortcodes/js/tinymce.js';
     return $plugins;
   }
 
@@ -698,7 +698,7 @@ class InboundShortcodes {
                   <?php if( $shortcode->no_preview ) : ?>
                       <div id="inbound-shortcodes-nopreview"><?php _e('Shortcode has no preview', 'leads'); ?></div>
                   <?php else : ?>
-                      <iframe src='<?php echo $final_path . 'shared/inbound-shortcodes/'; ?>preview.php?sc=&post=<?php echo $_GET['post']; ?>' width="285" scrollbar='true' frameborder="0" id="inbound-shortcodes-preview"></iframe>
+                      <iframe src='<?php echo $final_path . 'shared/shortcodes/'; ?>preview.php?sc=&post=<?php echo $_GET['post']; ?>' width="285" scrollbar='true' frameborder="0" id="inbound-shortcodes-preview"></iframe>
                   <?php endif; ?>
               </div>
               <div class="clear"></div>

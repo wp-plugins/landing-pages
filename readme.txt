@@ -69,6 +69,10 @@ The plugin is also fully extendable and has a number of <a href='http://docs.inb
 
 == Changelog ==
 = 1.5.3 =
+* Impression tracking bug fix.
+* Bringing Inbound Tracking to All Posts/Pages
+
+= 1.5.2 =
 * Temporary fix for shortcodes disappearing from wordpress 3.8 to 3.9
 * Performance improvements on analytics and lead tracking
 

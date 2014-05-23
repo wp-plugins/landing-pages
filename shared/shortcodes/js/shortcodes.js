@@ -525,7 +525,7 @@
 					       setTimeout(function() {
 					                     jQuery("#insert_inbound_cta").select2("open");
 					               }, 500);
-					       jQuery("body").on('change', '#insert_inbound_cta', function () {
+					       jQuery("body").on('change', '#insert_inbound_cta, #inbound_shortcode_align', function () {
 					       	var cta_ids = jQuery("#insert_inbound_cta").select2("data");
 					       	var cta_val = jQuery("#insert_inbound_cta").select2("val");
 					       //	alert("Selected value is: "+jQuery("#insert_inbound_cta").select2("data"));
@@ -539,8 +539,9 @@
 
 					       	console.log(cta_id_array);
 					       	var final_ids = cta_id_array.join();
+					       	var align = jQuery('#inbound_shortcode_align').val();
 					       	setTimeout(function() {
-					       	jQuery("#_inbound_shortcodes_newoutput").html('[cta id="'+final_ids+'"]');
+					       jQuery("#_inbound_shortcodes_newoutput").html('[cta id="'+final_ids+'" align="'+align+'"]');
 					       	        }, 1000);
 					           });
 				}
@@ -918,6 +919,38 @@
 		jQuery(document).ready( function() {
 			jQuery('#inbound-shortcodes-popup').livequery( function() {
 				InboundShortcodes.load();
+			});
+			jQuery("body").on('click', '.new-inbound-shortcode', function () {
+				console.log('clciekd');
+
+				setTimeout(function() {
+				jQuery("#TB_ajaxContent .inbound-short-list").hide();
+				var length = jQuery(".inbound-short-list").length;
+				console.log(length);
+				if(length < 2){
+					//
+				}
+				var test = jQuery(".inbound-short-list").clone();
+				//jQuery("#TB_ajaxContent .inbound-short-list").remove();
+				var count = jQuery("#TB_ajaxContent .inbound-short-list").length;
+				console.log(count);
+				if (count > 1){
+					jQuery("#TB_ajaxContent .inbound-short-list:not(:first-child)").remove();
+				}
+				jQuery('.short-list-inbound').append(test);
+				jQuery("#TB_ajaxContent .inbound-short-list").show();
+				}, 100);
+			});
+			jQuery("body").on('click', '.launch-marketing-sc', function () {
+				var test = jQuery("#choose-inbound-shortcode").clone();
+
+				window.tb_remove();
+				var shortcode = jQuery(this).attr('data-launch-sc');
+
+				setTimeout(function() {
+				 tb_show( inbound_load.pop_title, inbound_load.image_dir + 'popup.php?popup=' + shortcode + '&width=' + 900 + "&path=" + inbound_load.image_dir);
+				        }, 500);
+
 			});
 			jQuery("body").on('click', '.inbound-shortcodes-insert-two', function () {
 				InboundShortcodes.insert_shortcode();

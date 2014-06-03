@@ -8,8 +8,6 @@ Tags: landing pages, inbound marketing, conversion pages, split testing, a b tes
 Requires at least: 3.8
 Tested up to: 3.9
 Stable Tag: 1.5.5
-Tested up to: 3.8
-Stable Tag: 1.5.5
 
 Create landing pages for your WordPress site. Monitor and improve conversion rates, run A/B split tests, customize your own templates and more.
 
@@ -74,16 +72,14 @@ The plugin is also fully extendable and has a number of <a href='http://docs.inb
 4. Choose from a ton of pre-made templates, use your existing design, or design your own theme!
 
 == Changelog ==
-= 1.5.5 =
-* Added events to lead tracking
-* Bug Fix: Marketing Button
-* Optimized CTA Tracking JS.
-* Expanded impression/conversion analytics to all post types. 
+= 1.5.6 =
+* Fix to insert marketing shortcode popup
 
 = 1.5.5 =
 * Added events to lead tracking
 * Bug Fix: Marketing Button
 * Optimized CTA Tracking JS.
+* Expanded impression/conversion analytics to all post types.
 
 = 1.5.4 =
 * Impression tracking bug fix.

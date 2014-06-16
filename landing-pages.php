@@ -113,6 +113,7 @@ function inbound_load_shared_landing_pages(){
 
 	include_once('shared/classes/class.templating-engine.php');  // Inbound Templating Engine Class
 	include_once('shared/classes/class.shortcodes.email-template.php'); //Inbound Email Templating Shortcodes Class
+	require_once('shared/classes/class.lead-fields.php');  
 	include_once('shared/tracking/store.lead.php'); // Lead Storage from landing pages
 
 	include_once('shared/extend/inboundnow.extend.php');

@@ -3,14 +3,14 @@
 Plugin Name: Landing Pages
 Plugin URI: http://www.inboundnow.com/landing-pages/
 Description: The first true all-in-one Landing Page solution for WordPress, including ongoing conversion metrics, a/b split testing, unlimited design options and so much more!
-Version:  1.5.6
+Version:  1.5.7
 Author: Inbound Now
 Author URI: http://www.inboundnow.com/
 Text Domain: landing-pages
 Domain Path: shared/languages/landing-pages/
 */
 
-define('LANDINGPAGES_CURRENT_VERSION', '1.5.6' );
+define('LANDINGPAGES_CURRENT_VERSION', '1.5.7' );
 define('LANDINGPAGES_URLPATH', WP_PLUGIN_URL.'/'.plugin_basename( dirname(__FILE__) ).'/' );
 define('LANDINGPAGES_PATH', WP_PLUGIN_DIR.'/'.plugin_basename( dirname(__FILE__) ).'/' );
 define('LANDINGPAGES_PLUGIN_SLUG', plugin_basename( dirname(__FILE__) ) );
@@ -38,7 +38,7 @@ switch (is_admin()) :
     include_once('modules/module.language-support.php');
     include_once('modules/module.javascript-admin.php');
     include_once('classes/class.activation.php');
-    //include_once('classes/class.activation.upgrade-routines.php');
+    include_once('classes/class.activation.upgrade-routines.php');
     include_once('modules/module.global-settings.php');
     include_once('modules/module.clone.php');
     include_once('modules/module.extension-updater.php');
@@ -105,6 +105,7 @@ function inbound_load_shared_landing_pages(){
 
 	/* Singleton Shared Class Loads */
 	include_once('shared/shortcodes/inbound-shortcodes.php');  // Shared Shortcodes
+	include_once('shared/classes/class.post-type.wp-lead.php'); 
 	include_once('shared/classes/class.menu.php');  // Inbound Marketing Menu
 	include_once('shared/classes/class.feedback.php');  // Inbound Feedback Form
 	include_once('shared/classes/class.debug.php');  // Inbound Debug & Scripts Class
@@ -122,7 +123,6 @@ function inbound_load_shared_landing_pages(){
 	include_once('shared/extend/inboundnow.global-settings.php'); // Inboundnow Global Settings
 	include_once('shared/assets/assets.loader.class.php');  // Load Shared CSS and JS Assets
 	include_once('shared/functions/global.shared.functions.php'); // Global Shared Utility functions
-	include_once('shared/functions/global.leads.cpt.php'); // Shared Lead functionality
 	include_once('shared/metaboxes/template.metaboxes.php');  // Shared Shortcodes
 
 }

@@ -52,7 +52,7 @@ array(
 <p>This is the final sentence or paragraph reassuring the visitor of the benefits of filling out the form and how their data will be safe.</p>'
          ),
 	array(
-           'label' => __( 'Call to Action Content' , 'landing-pages' ),
+           'label' => __( 'Conversion Area' , 'landing-pages' ),
            'description' => __( 'Place your call to action here.' , 'landing-page' ),
            'id' => "conversion-area-content",
            'type' => "wysiwyg",
@@ -79,7 +79,7 @@ array(
     array(
         'label' => __( 'Submit Button Background Color' , 'landing-pages' ),
         'description' => __( 'Submit Button Background Color' , 'landing-pages' ) ,
-        'id'  => __( 'submit-button-color' , 'landing-pages' ),
+        'id'  =>'submit-button-color',
         'type'  => 'colorpicker',
         'default'  => '5baa1e',
         'context'  => 'normal'

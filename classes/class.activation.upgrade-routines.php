@@ -21,10 +21,13 @@ if ( !class_exists('Landing_Pages_Activation_Update_Routines') ) {
 			));
 			
 			foreach ($landing_pages as $post) {
-				//echo 'post id:' . $post->ID;
-				//echo '<br>';
+			
 				/* for all variations loop through and migrate_data */				
 				( get_post_meta($post->ID,'lp-ab-variations', true) ) ? $variations = get_post_meta($post->ID,'lp-ab-variations', true) : $variations = array( '0' => '0' );
+				
+				if (!is_array($variations) && strlen($variations) > 1 ) {
+					$variations = explode(',',$variations);
+				}
 				
 				foreach ($variations as $key=>$vid) {					
 					
@@ -68,6 +71,10 @@ if ( !class_exists('Landing_Pages_Activation_Update_Routines') ) {
 				/* for all variations loop through and migrate_data */				
 				( get_post_meta($post->ID,'lp-ab-variations', true) ) ? $variations = get_post_meta($post->ID,'lp-ab-variations', true) : $variations = array( '0' => '0' );
 				
+				if (!is_array($variations) && strlen($variations) > 1 ) {
+					$variations = explode(',',$variations);
+				}
+				
 				foreach ($variations as $key=>$vid) {					
 					
 					($vid) ? $suffix = '-' . $vid : $suffix = '';
@@ -101,7 +108,7 @@ if ( !class_exists('Landing_Pages_Activation_Update_Routines') ) {
 			$templates_to_move = array('rsvp-envelope','super-slick');
 			chmod(LANDINGPAGES_UPLOADS_PATH, 0755);
 
-			$template_paths = lp_get_core_template_paths();
+			$template_paths = Landing_Pages_Load_Extensions::get_core_template_ids();
 			if (count($template_paths)>0)
 			{
 				foreach ($template_paths as $name)

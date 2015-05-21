@@ -1,8 +1,7 @@
 <?php
 
 /* ADMIN ONLY AB TESTING FUNCTIONS */
-if (is_admin())
-{
+if (is_admin()) {
 	include_once(LANDINGPAGES_PATH.'modules/module.ab-testing.metaboxes.php');
 
 	/**
@@ -11,8 +10,7 @@ if (is_admin())
 	 * @param  [type] $vid        [description]
 	 * @return [type]             [description]
 	 */
-	function lp_ab_unset_variation($variations,$vid)
-	{
+	function lp_ab_unset_variation($variations,$vid){
 			if(($key = array_search($vid, $variations)) !== false) {
 					unset($variations[$key]);
 			}
@@ -26,8 +24,7 @@ if (is_admin())
 	 * @param  [INT] $vid  [description]
 	 * @return [INT]
 	 */
-	function lp_ab_get_lp_active_status($post,$vid=null)
-	{
+	function lp_ab_get_lp_active_status($post,$vid=null) {
 		if ($vid==0)
 		{
 				$variation_status = get_post_meta( $post->ID , 'lp_ab_variation_status' , true);
@@ -93,11 +90,13 @@ if (is_admin())
 
 				//delete each meta value associated with variation
 				global $wpdb;
-				$data   =   array();
+				$data = array();
+				$post__ID =  (is_numeric($_GET['post'])) ? $_GET['post'] : '0';
+
 				$wpdb->query("
 					SELECT `meta_key`, `meta_value`
 					FROM $wpdb->postmeta
-					WHERE `post_id` = ".$_GET['post']."
+					WHERE `post_id` = ".$post__ID."
 				");
 
 				foreach($wpdb->last_result as $k => $v){
@@ -223,8 +222,7 @@ if (is_admin())
 
 	//disable this because it will populate all wp_editor isntances rather than targeted instances
 	//add_filter('the_editor_content', 'lp_ab_testing_the_editor_content');
-	function lp_ab_testing_the_editor_content($content)
-	{
+	function lp_ab_testing_the_editor_content($content) {
 		$current_variation_id = lp_ab_testing_get_current_variation_id();
 
 		if (isset($_REQUEST['post']))
@@ -929,8 +927,7 @@ function lp_ab_testing_alter_title_area( $content , $id = null)
 }
 
 add_action('lp_record_impression','lp_ab_testing_record_impression', 10, 3 );
-function lp_ab_testing_record_impression($post_id, $post_type = 'landing-page' , $variation_id = 0 )
-{
+function lp_ab_testing_record_impression($post_id, $post_type = 'landing-page' , $variation_id = 0 ) {
 
 	/* If Landing Page Post Type */
 	if ( $post_type == 'landing-page' ) {
@@ -954,9 +951,8 @@ function lp_ab_testing_record_impression($post_id, $post_type = 'landing-page' ,
 
 
 add_action('lp_launch_customizer_pre','lp_ab_testing_customizer_enqueue');
-function lp_ab_testing_customizer_enqueue($post)
-{
-	//echo 1; exit;
+function lp_ab_testing_customizer_enqueue($post) {
+
 	$permalink = get_permalink( $post->ID );
 	$randomstring = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 10);
 

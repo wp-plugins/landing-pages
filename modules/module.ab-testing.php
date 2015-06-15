@@ -48,8 +48,9 @@ if (is_admin()) {
 	add_action('init','lp_ab_testing_admin_init');
 	function lp_ab_testing_admin_init($hook)
 	{
-		if (!is_admin()||!isset($_GET['post']))
+		if (!is_admin()||!isset($_GET['post'])||!is_numeric($_GET['post'])) {
 			return;
+		}
 
 		$post = get_post($_GET['post']);
 

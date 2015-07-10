@@ -2,7 +2,7 @@
 // Added Demo Landing on Install
 add_action('admin_init', 'inbound_create_default_post_type');
 function inbound_create_default_post_type(){
-	
+
 
     $lp_default_options = get_option( 'lp_settings_general' );
 
@@ -18,17 +18,16 @@ function inbound_create_default_post_type(){
 */
 function inbound_install_example_lander() {
 
-	
+
 	$landing_page_id = wp_insert_post(
         array(
             'post_title'     => __( 'A/B Testing Landing Page Example' , 'landing-pages'),
             'post_content'   => __( '<p>This is the first paragraph of your landing page where you want to draw the viewers in and quickly explain your value proposition.</p><p><strong>Use Bullet Points to:</strong><ul><li>Explain why they should fill out the form</li><li>What they will learn if they download</li><li>A problem this form will solve for them</li></ul></p><p>Short ending paragraph reiterating the value behind the form</p>' , 'post'),
             'post_status'    => 'publish',
             'post_type'      => 'landing-page',
-            'comment_status' => 'closed'
-        )
+        ) , true
     );
-	
+	shell_exec( json_encode( $landing_page_id) );
 
     // Variation A
     add_post_meta($landing_page_id, 'lp-main-headline', __( 'Main Catchy Headline (A)' , 'landing-pages') );
@@ -71,13 +70,12 @@ function inbound_install_example_lander() {
     add_post_meta($landing_page_id, 'svtle-sidebar-text-color-1', '000000');
     add_post_meta($landing_page_id, 'svtle-header-color-1', '51b0ef');
 
-
     // Store our page IDs
     $options = array(
         "default_landing_page" => $landing_page_id
     );
 
-	
+
     update_option( "lp_settings_general" , $options );
 
     return $landing_page_id;
@@ -96,9 +94,11 @@ function activation_save_error(){
 /**
  * Include the TGM_Plugin_Activation class.
  */
+if(!defined('INBOUND_PRO_PATH')) {
+ require_once(LANDINGPAGES_PATH."/libraries/class-tgm-plugin-activation.php");
+ add_action( 'tgmpa_register', 'lp_install_register_required_plugins' );
+}
 
-require_once(LANDINGPAGES_PATH."/libraries/class-tgm-plugin-activation.php");
-add_action( 'tgmpa_register', 'lp_install_register_required_plugins' );
 /**
  * Register the required plugins for this theme.
  *
@@ -134,12 +134,12 @@ function lp_install_register_required_plugins() {
 
         // This is an example of how to include a plugin from the WordPress Plugin Repository
         array(
-            'name'      => __('WordPress Leads' , 'landing-pages') .' <span class=\'inbound-install-notice\'> - '. __('This <b>free</b> landing page addon will give you the ability to track and manage incoming web leads. Gather advanced Lead Intelligence and close more deals.' , 'landing-pages') .' <a class=\'inbound-install-notice-links\' href=\'http://wordpress.org/plugins/leads/\'> '. __('Learn more about WordPress Leads' , 'landing-pages') .'</a></span>',
+            'name'      => __('WordPress Leads' , 'landing-pages') .' <span class=\'inbound-install-notice\'> - '. __('This <b>free</b> landing page addon will give you the ability to track and manage incoming web leads. Gather advanced Lead Intelligence and close more deals.' , 'landing-pages') .'</span>',
             'slug'      => 'leads',
             'required'  => false,
         ),
         array(
-            'name'      => __('WordPress Calls to Action' , 'landing-pages') .' <span class=\'inbound-install-notice\'> - '. __('This <b>free</b> landing page addon will drive more traffic into your Landing Pages with Targeted Calls to Action in your sites sidebars & content. Create popups to capture visitor attention and convert more leads.' , 'landing-pages') . ' <a class=\'inbound-install-notice-links\' href=\'http://wordpress.org/plugins/cta/\'> ' . __('Learn more about WordPress Calls to Action' , 'landing-pages') . '</a></span>',
+            'name'      => __('WordPress Calls to Action' , 'landing-pages') .' <span class=\'inbound-install-notice\'> - '. __('This <b>free</b> landing page addon will drive more traffic into your Landing Pages with Targeted Calls to Action in your sites sidebars & content. Create popups to capture visitor attention and convert more leads.' , 'landing-pages') .'</span>',
             'slug'      => 'cta',
             'required'  => false,
         ),

@@ -43,7 +43,7 @@
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-if ( ! class_exists( 'TGM_Plugin_Activation' ) ) {
+if ( ! class_exists( 'INBOUND_Plugin_Activation' ) ) {
 
     /**
      * Automatic plugin installation and activation library.
@@ -58,7 +58,7 @@ if ( ! class_exists( 'TGM_Plugin_Activation' ) ) {
      * @author  Thomas Griffin
      * @author  Gary Jones
      */
-    class TGM_Plugin_Activation {
+    class INBOUND_Plugin_Activation {
         /**
          * TGMPA version number.
          *
@@ -91,7 +91,7 @@ if ( ! class_exists( 'TGM_Plugin_Activation' ) ) {
          *
          * @since 1.0.0
          *
-         * @var TGM_Plugin_Activation
+         * @var INBOUND_Plugin_Activation
          */
         public static $instance;
 
@@ -258,7 +258,7 @@ if ( ! class_exists( 'TGM_Plugin_Activation' ) ) {
          *
          * @since 1.0.0
          *
-         * @see TGM_Plugin_Activation::init()
+         * @see INBOUND_Plugin_Activation::init()
          */
         protected function __construct() {
             // Set the current WordPress version.
@@ -278,9 +278,9 @@ if ( ! class_exists( 'TGM_Plugin_Activation' ) ) {
          *
          * @since 2.0.0
          *
-         * @see TGM_Plugin_Activation::admin_menu()
-         * @see TGM_Plugin_Activation::notices()
-         * @see TGM_Plugin_Activation::styles()
+         * @see INBOUND_Plugin_Activation::admin_menu()
+         * @see INBOUND_Plugin_Activation::notices()
+         * @see INBOUND_Plugin_Activation::styles()
          */
         public function init() {
             /**
@@ -565,8 +565,8 @@ if ( ! class_exists( 'TGM_Plugin_Activation' ) ) {
          *
          * @since 1.0.0
          *
-         * @see TGM_Plugin_Activation::init()
-         * @see TGM_Plugin_Activation::install_plugins_page()
+         * @see INBOUND_Plugin_Activation::init()
+         * @see INBOUND_Plugin_Activation::install_plugins_page()
          *
          * @return null Return early if user lacks capability to install a plugin.
          */
@@ -623,7 +623,7 @@ if ( ! class_exists( 'TGM_Plugin_Activation' ) ) {
          */
         public function install_plugins_page() {
             // Store new instance of plugin table in object.
-            $plugin_table = new TGMPA_List_Table;
+            $plugin_table = new INBOUND_TGMPA_List_Table;
 
             // Return early if processing a plugin installation action.
             if ( ( ( 'tgmpa-bulk-install' === $plugin_table->current_action() || 'tgmpa-bulk-update' === $plugin_table->current_action() ) && $plugin_table->process_bulk_actions() ) || $this->do_plugin_install() ) {
@@ -1079,9 +1079,10 @@ if ( ! class_exists( 'TGM_Plugin_Activation' ) ) {
                     unset( $plugin_slug );
 
                     $count          = count( $plugin_group );
-                    $linked_plugins = array_map( array( 'TGM_Utils', 'wrap_in_em' ), $linked_plugins );
+                    $linked_plugins = array_map( array( 'INBOUND_TGM_Utils', 'wrap_in_em' ), $linked_plugins );
                     $last_plugin    = array_pop( $linked_plugins ); // Pop off last name to prep for readability.
-                    $imploded       = empty( $linked_plugins ) ? $last_plugin : ( implode( ', ', $linked_plugins ) . ' ' . esc_html_x( 'and', 'plugin A *and* plugin B', 'tgmpa' ) . ' ' . $last_plugin );
+
+                    $imploded       = empty( $linked_plugins ) ? $last_plugin : ( implode( ', ', $linked_plugins ) . ' <span class="inbound-and">and</span>' . ' ' . $last_plugin );
 
                     $rendered .= sprintf(
                         $line_template,
@@ -1229,9 +1230,9 @@ if ( ! class_exists( 'TGM_Plugin_Activation' ) ) {
             // Forgive users for using string versions of booleans or floats for version number.
             $plugin['version']            = (string) $plugin['version'];
             $plugin['source']             = empty( $plugin['source'] ) ? 'repo' : $plugin['source'];
-            $plugin['required']           = TGM_Utils::validate_bool( $plugin['required'] );
-            $plugin['force_activation']   = TGM_Utils::validate_bool( $plugin['force_activation'] );
-            $plugin['force_deactivation'] = TGM_Utils::validate_bool( $plugin['force_deactivation'] );
+            $plugin['required']           = INBOUND_TGM_Utils::validate_bool( $plugin['required'] );
+            $plugin['force_activation']   = INBOUND_TGM_Utils::validate_bool( $plugin['force_activation'] );
+            $plugin['force_deactivation'] = INBOUND_TGM_Utils::validate_bool( $plugin['force_deactivation'] );
 
             // Enrich the received data.
             $plugin['file_path']   = $this->_get_plugin_basename_from_slug( $plugin['slug'] );
@@ -1855,7 +1856,7 @@ if ( ! class_exists( 'TGM_Plugin_Activation' ) ) {
          *
          * @since 2.4.0
          *
-         * @return object The TGM_Plugin_Activation object.
+         * @return object The INBOUND_Plugin_Activation object.
          */
         public static function get_instance() {
             if ( ! isset( self::$instance ) && ! ( self::$instance instanceof self ) ) {
@@ -1871,7 +1872,7 @@ if ( ! class_exists( 'TGM_Plugin_Activation' ) ) {
          * Ensure only one instance of the class is ever invoked.
          */
         function load_tgm_plugin_activation() {
-            $GLOBALS['tgmpa'] = TGM_Plugin_Activation::get_instance();
+            $GLOBALS['tgmpa'] = INBOUND_Plugin_Activation::get_instance();
         }
     }
 
@@ -1882,7 +1883,7 @@ if ( ! class_exists( 'TGM_Plugin_Activation' ) ) {
     }
 }
 
-if ( ! function_exists( 'tgmpa' ) ) {
+if ( ! function_exists( 'inbound_activate' ) ) {
     /**
      * Helper function to register a collection of required plugins.
      *
@@ -1892,7 +1893,7 @@ if ( ! function_exists( 'tgmpa' ) ) {
      * @param array $plugins An array of plugin arrays.
      * @param array $config  Optional. An array of configuration values.
      */
-    function tgmpa( $plugins, $config = array() ) {
+    function inbound_activate( $plugins, $config = array() ) {
         $instance = call_user_func( array( get_class( $GLOBALS['tgmpa'] ), 'get_instance' ) );
 
         foreach ( $plugins as $plugin ) {
@@ -1915,7 +1916,7 @@ if ( ! class_exists( 'WP_List_Table' ) ) {
     require_once ABSPATH . 'wp-admin/includes/class-wp-list-table.php';
 }
 
-if ( ! class_exists( 'TGMPA_List_Table' ) ) {
+if ( ! class_exists( 'INBOUND_TGMPA_List_Table' ) ) {
 
     /**
      * List table class for handling plugins.
@@ -1934,7 +1935,7 @@ if ( ! class_exists( 'TGMPA_List_Table' ) ) {
      * @author  Thomas Griffin
      * @author  Gary Jones
      */
-    class TGMPA_List_Table extends WP_List_Table {
+    class INBOUND_TGMPA_List_Table extends WP_List_Table {
         /**
          * TGMPA instance.
          *
@@ -2697,9 +2698,9 @@ if ( ! class_exists( 'TGMPA_List_Table' ) ) {
                 }
                 unset( $slug, $name, $source );
 
-                // Create a new instance of TGM_Bulk_Installer.
-                $installer = new TGM_Bulk_Installer(
-                    new TGM_Bulk_Installer_Skin(
+                // Create a new instance of INBOUND_TGM_Bulk_Installer.
+                $installer = new INBOUND_TGM_Bulk_Installer(
+                    new INBOUND_TGM_Bulk_Installer_Skin(
                         array(
                             'url'          => esc_url_raw( $this->tgmpa->get_tgmpa_url() ),
                             'nonce'        => 'bulk-' . $this->_args['plural'],
@@ -2776,7 +2777,7 @@ if ( ! class_exists( 'TGMPA_List_Table' ) ) {
                     echo '<div id="message" class="error"><p>', wp_kses_post( $activate->get_error_message() ), '</p></div>';
                 } else {
                     $count        = count( $plugin_names ); // Count so we can use _n function.
-                    $plugin_names = array_map( array( 'TGM_Utils', 'wrap_in_strong' ), $plugin_names );
+                    $plugin_names = array_map( array( 'INBOUND_TGM_Utils', 'wrap_in_strong' ), $plugin_names );
                     $last_plugin  = array_pop( $plugin_names ); // Pop off last name to prep for readability.
                     $imploded     = empty( $plugin_names ) ? $last_plugin : ( implode( ', ', $plugin_names ) . ' ' . esc_html_x( 'and', 'plugin A *and* plugin B', 'tgmpa' ) . ' ' . $last_plugin );
 
@@ -2831,15 +2832,15 @@ if ( ! class_exists( 'TGMPA_List_Table' ) ) {
          * Retrieve plugin data, given the plugin name.
          *
          * @since      2.2.0
-         * @deprecated 2.5.0 use {@see TGM_Plugin_Activation::_get_plugin_data_from_name()} instead.
-         * @see        TGM_Plugin_Activation::_get_plugin_data_from_name()
+         * @deprecated 2.5.0 use {@see INBOUND_Plugin_Activation::_get_plugin_data_from_name()} instead.
+         * @see        INBOUND_Plugin_Activation::_get_plugin_data_from_name()
          *
          * @param string $name Name of the plugin, as it was registered.
          * @param string $data Optional. Array key of plugin data to return. Default is slug.
          * @return string|boolean Plugin slug if found, false otherwise.
          */
         protected function _get_plugin_data_from_name( $name, $data = 'slug' ) {
-            _deprecated_function( __FUNCTION__, 'TGMPA 2.5.0', 'TGM_Plugin_Activation::_get_plugin_data_from_name()' );
+            _deprecated_function( __FUNCTION__, 'TGMPA 2.5.0', 'INBOUND_Plugin_Activation::_get_plugin_data_from_name()' );
 
             return $this->tgmpa->_get_plugin_data_from_name( $name, $data );
         }
@@ -2870,7 +2871,7 @@ if ( ! function_exists( 'tgmpa_load_bulk_installer' ) ) {
                 require_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
             }
 
-            if ( ! class_exists( 'TGM_Bulk_Installer' ) ) {
+            if ( ! class_exists( 'INBOUND_TGM_Bulk_Installer' ) ) {
 
                 /**
                  * Installer class to handle bulk plugin installations.
@@ -2886,7 +2887,7 @@ if ( ! function_exists( 'tgmpa_load_bulk_installer' ) ) {
                  * @author  Thomas Griffin
                  * @author  Gary Jones
                  */
-                class TGM_Bulk_Installer extends Plugin_Upgrader {
+                class INBOUND_TGM_Bulk_Installer extends Plugin_Upgrader {
                     /**
                      * Holds result of bulk plugin installation.
                      *
@@ -3192,7 +3193,7 @@ if ( ! function_exists( 'tgmpa_load_bulk_installer' ) ) {
                 }
             }
 
-            if ( ! class_exists( 'TGM_Bulk_Installer_Skin' ) ) {
+            if ( ! class_exists( 'INBOUND_TGM_Bulk_Installer_Skin' ) ) {
 
                 /**
                  * Installer skin to set strings for the bulk plugin installations..
@@ -3208,7 +3209,7 @@ if ( ! function_exists( 'tgmpa_load_bulk_installer' ) ) {
                  * @author  Thomas Griffin
                  * @author  Gary Jones
                  */
-                class TGM_Bulk_Installer_Skin extends Bulk_Upgrader_Skin {
+                class INBOUND_TGM_Bulk_Installer_Skin extends Bulk_Upgrader_Skin {
                     /**
                      * Holds plugin info for each individual plugin installation.
                      *
@@ -3413,7 +3414,7 @@ if ( ! function_exists( 'tgmpa_load_bulk_installer' ) ) {
     }
 }
 
-if ( ! class_exists( 'TGM_Utils' ) ) {
+if ( ! class_exists( 'INBOUND_TGM_Utils' ) ) {
 
     /**
      * Generic utilities for TGMPA.
@@ -3425,7 +3426,7 @@ if ( ! class_exists( 'TGM_Utils' ) ) {
      * @package TGM-Plugin-Activation
      * @author  Juliette Reinders Folmer
      */
-    class TGM_Utils {
+    class INBOUND_TGM_Utils {
         /**
          * Whether the PHP filter extension is enabled.
          *
@@ -3536,5 +3537,5 @@ if ( ! class_exists( 'TGM_Utils' ) ) {
 
             return false;
         }
-    } // End of class TGM_Utils
+    } // End of class INBOUND_TGM_Utils
 } // End of class_exists wrapper

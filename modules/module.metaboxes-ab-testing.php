@@ -24,7 +24,7 @@ function lp_ab_stats_metabox() {
 		</style>
 		<div class="inside" style='margin-left:-8px;'>
 			<div id="bab-stat-box">
-			<?php if (isset($_GET['new_meta_key'])) { ?>
+			<?php if (isset($_GET['new_meta_key'])||is_numeric($_GET['new_meta_key'])) { ?>
 			<script type="text/javascript">
 			jQuery(document).ready(function($) {
 			   // This fixes meta data saves for cloned pages
@@ -170,8 +170,9 @@ function lp_ab_testing_add_tabs()
 	if ($post_type_is === "landing-page")
 	{
 		$current_variation_id = lp_ab_testing_get_current_variation_id();
-		if (isset($_GET['new_meta_key']))
-			$current_variation_id = $_GET['new_meta_key'];
+		if (isset($_GET['new_meta_key']) && is_numeric($_GET['new_meta_key'])) {
+			$current_variation_id = $_GET['new_meta_key'];	
+		}
 
 		echo "<input type='hidden' id='open_variation' value='{$current_variation_id}'>";
 

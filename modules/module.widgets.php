@@ -20,7 +20,7 @@ class LP_Widget_Conversion_Area extends WP_Widget
 		$control_ops = array( 'width' => 300, 'height' => 350, 'id_base' => 'id_lp_conversion_area_widget' );
 
 		/* Create the widget. */
-		$this->WP_Widget( 'id_lp_conversion_area_widget', __('Landing Pages: Conversion Area Widget', 'landing-pages'), $widget_ops, $control_ops );
+		parent::__construct( 'id_lp_conversion_area_widget', __('Landing Pages: Conversion Area Widget', 'landing-pages'), $widget_ops, $control_ops );
 	}
 
 	/**
